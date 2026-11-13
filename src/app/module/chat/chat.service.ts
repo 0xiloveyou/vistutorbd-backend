@@ -2,7 +2,11 @@ import httpStatus from "http-status";
 import config from "../../config";
 import { AppError } from "../../utils/AppError";
 import { prisma } from "../../lib/prisma";
-import { chatCompletion, visionCompletion } from "../../lib/openrouter";
+import {
+  chatCompletion,
+  speechCompletion,
+  visionCompletion,
+} from "../../lib/openrouter";
 import { KnowledgeService } from "../knowledge/knowledge.service";
 import type { IChatPayload } from "../../interfaces";
 
@@ -326,7 +330,7 @@ const analyzeImage = async (payload: {
     problem,
     confirmation:
       payload.lang === "bn"
-        ? "ছবিতে যা পড়েছি তা উপরে দেখুন। 맞으면 সমাধান চাইতে পারেন।"
+        ? "ছবিতে যা পড়েছি তা উপরে দেখুন। মিলে গেলে সমাধান চাইতে পারেন।"
         : "Please confirm the problem text above. If it is correct, ask me to solve it.",
     suggestions: related.results.map((result) => ({
       topicId: result.topicId,
@@ -336,4 +340,49 @@ const analyzeImage = async (payload: {
   };
 };
 
-export const ChatService = { ask, listSessions, getSession, analyzeImage };
+/**
+ * Removes Markdown/LaTeX so the speech model reads words, not dollar signs,
+ * backslashes and braces.
+ */
+const toSpeakableText = (text: string) =>
+  text
+    .replace(/\$\$?/g, " ")
+    .replace(/\\[a-zA-Z]+/g, " ")
+    .replace(/[{}^_]/g, " ")
+    .replace(/`{1,3}/g, " ")
+    .replace(/\*\*/g, "")
+    .replace(/#{1,6}\s?/g, "")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const speak = async (payload: {
+  text: string;
+  lang?: "en" | "bn";
+  format?: string;
+}) => {
+  // The free OpenRouter TTS model is English-only in practice and returns a
+  // silent frame for Bangla. The client uses the free browser voice instead.
+  if (payload.lang === "bn") {
+    throw new AppError(
+      httpStatus.UNPROCESSABLE_ENTITY,
+      "Bangla speech is generated on the device. Use the browser voice.",
+    );
+  }
+
+  const text = toSpeakableText(payload.text).slice(0, 4000);
+
+  if (!text) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Text to speak is required.");
+  }
+
+  return speechCompletion({ text, format: payload.format });
+};
+
+export const ChatService = {
+  ask,
+  listSessions,
+  getSession,
+  analyzeImage,
+  speak,
+};

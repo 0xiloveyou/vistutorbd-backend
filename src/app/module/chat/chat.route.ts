@@ -33,6 +33,18 @@ router.post(
   ChatController.analyzeImage,
 );
 
+router.post(
+  "/speech",
+  optionalAuth,
+  rateLimit({
+    namespace: "chat-speech",
+    limit: Math.max(20, config.chat_rate_limit_per_hour * 2),
+    windowSeconds: 60 * 60,
+  }),
+  validateRequest(ChatValidation.SpeechZodSchema),
+  ChatController.speak,
+);
+
 router.get(
   "/sessions",
   auth(Role.ADMIN, Role.MODERATOR, Role.USER),

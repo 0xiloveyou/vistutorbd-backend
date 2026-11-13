@@ -8,10 +8,11 @@ The companion answers from the platform's own knowledge base (RAG), then optiona
 | --- | --- | --- | --- |
 | POST | `/messages` | optional | Ask a question |
 | POST | `/image-problem` | optional | Read a photo of a problem |
+| POST | `/speech` | optional | Text-to-speech (free OpenRouter model) |
 | GET | `/sessions` | signed in | List the user's sessions |
 | GET | `/sessions/:id` | signed in | Session with messages |
 
-Both POST endpoints are rate limited per user/ IP (`CHAT_RATE_LIMIT_PER_HOUR`, default 30/hour). Image analysis uses about one third of that limit.
+Both POST endpoints are rate limited per user/ IP (`CHAT_RATE_LIMIT_PER_HOUR`, default 30/hour). Image analysis uses about one third of that limit. Speech allows twice the chat limit.
 
 ## Ask
 
@@ -74,6 +75,27 @@ PNG, JPEG or WebP; maximum encoded size 8 MB. Response:
 ```
 
 The model is instructed to transcribe only, never to solve. Vision requires `OPENROUTER_VISION_MODEL`; without it the endpoint returns `503`.
+
+## Speech
+
+```json
+{
+  "text": "A vector has both magnitude and direction.",
+  "lang": "en",
+  "format": "mp3"
+}
+```
+
+Returns the audio bytes directly with `Content-Type: audio/mpeg` (not JSON). `text` is capped at 4,000 characters and Markdown/LaTeX is stripped before synthesis. The route tries `OPENROUTER_TTS_MODELS` first, then `OPENROUTER_FALLBACK_TTS_MODELS`; the default free model is `fish-audio/s2.1-pro-free:free`.
+
+`lang: "bn"` returns `422` on purpose: the free OpenRouter model cannot speak Bangla and emits silence, so the client uses the device’s free `bn-BD` browser voice instead. Without a key or when every TTS model fails, the route returns `503`/`502` and the client falls back to the browser voice for English too.
+
+```bash
+curl -X POST http://localhost:5000/api/v1/chat/speech \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"Hello from the math tutor","lang":"en"}' \
+  --output voice.mp3
+```
 
 ## Sessions
 

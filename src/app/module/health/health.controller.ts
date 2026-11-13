@@ -28,6 +28,7 @@ const health = catchAsync(async (_req: Request, res: Response) => {
     openrouter: config.openrouter_api_key ? "configured" : "disabled",
     embeddings: config.embedding_provider,
     vision: config.openrouter_vision_model ? "configured" : "disabled",
+    voice: config.openrouter_tts_models.length ? "configured" : "disabled",
   };
 
   const healthy = database === "up";

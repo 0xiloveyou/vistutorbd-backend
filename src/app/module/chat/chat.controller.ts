@@ -27,6 +27,15 @@ const analyzeImage = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const speak = catchAsync(async (req: Request, res: Response) => {
+  const { audio, contentType } = await ChatService.speak(req.body);
+
+  res.setHeader("Content-Type", contentType);
+  res.setHeader("Content-Length", String(audio.length));
+  res.setHeader("Cache-Control", "private, max-age=3600");
+  res.status(httpStatus.OK).send(audio);
+});
+
 const listSessions = catchAsync(async (req: Request, res: Response) => {
   if (!req.user) {
     throw new AppError(httpStatus.UNAUTHORIZED, "Login required.");
@@ -60,4 +69,10 @@ const getSession = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-export const ChatController = { ask, analyzeImage, listSessions, getSession };
+export const ChatController = {
+  ask,
+  analyzeImage,
+  speak,
+  listSessions,
+  getSession,
+};

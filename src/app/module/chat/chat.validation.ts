@@ -24,4 +24,14 @@ const ImageProblemZodSchema = z.object({
   classBandId: z.string().trim().optional(),
 });
 
-export const ChatValidation = { ChatZodSchema, ImageProblemZodSchema };
+const SpeechZodSchema = z.object({
+  text: z.string().trim().min(1, "Text to speak is required.").max(4000),
+  lang: z.enum(["en", "bn"]).optional(),
+  format: z.enum(["mp3", "wav", "opus", "flac"]).optional(),
+});
+
+export const ChatValidation = {
+  ChatZodSchema,
+  ImageProblemZodSchema,
+  SpeechZodSchema,
+};

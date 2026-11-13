@@ -76,6 +76,23 @@ export default {
     process.env.OPENROUTER_EMBEDDING_MODEL ||
     process.env.EMBEDDING_MODEL ||
     "nvidia/nemotron-3-embed-1b:free",
+
+  // Free text-to-speech (OpenRouter /audio/speech). The primary model handles
+  // English; Bangla uses the browser's built-in voice from the client.
+  openrouter_tts_models: csv(
+    process.env.OPENROUTER_TTS_MODELS ||
+      process.env.OPENROUTER_TTS_MODEL ||
+      "fish-audio/s2.1-pro-free:free",
+  ),
+  openrouter_fallback_tts_models: csv(
+    process.env.OPENROUTER_FALLBACK_TTS_MODELS ||
+      "heygen/heygen-voice-1-turbo:free",
+  ),
+  openrouter_tts_voice: process.env.OPENROUTER_TTS_VOICE || "",
+  // Appends the OpenRouter auto-router to the chat chain so a free model is
+  // still tried when every explicitly configured model is unavailable.
+  openrouter_free_router_fallback:
+    (process.env.OPENROUTER_FREE_ROUTER_FALLBACK || "true") !== "false",
   embedding_provider: process.env.EMBEDDING_PROVIDER || "stub", // openrouter | local | stub
   embedding_dimensions: Number(process.env.EMBEDDING_DIMENSIONS || 384),
 

@@ -15,7 +15,7 @@ _Last updated: visitor analytics, six-hour email reports, contact API, topic sea
 | Topics | ✅ | Published reads, optional-auth progress/bookmark, CRUD with derived ids |
 | Visualizations | ✅ | Spec CRUD + public reads; renderer lives in the frontend |
 | Quiz | ✅ | Config, deterministic generation, numeric verification, attempts, template list |
-| Chat + RAG | ✅ | Grounded context, OpenRouter rewrite, fallback, image transcription, sessions, rate limit |
+| Chat + RAG | ✅ | Grounded context, OpenRouter rewrite, free auto-router fallback, image transcription, free TTS, sessions, rate limit |
 | Knowledge | ✅ | Ingest, local cosine search, topic reindex, chunk admin |
 | Learner state | ✅ | Bookmarks, progress, preferences |
 | Moderation | ✅ | Public report submission, editor queue + status updates |
@@ -52,6 +52,11 @@ _Last updated: visitor analytics, six-hour email reports, contact API, topic sea
 - Added full-text-style topic search via `GET /topics?q=…&classLevelId=…&page=…&limit=…`; both English and Bangla titles/summaries are matched, and the response keeps the pagination envelope.
 - Startup is now resilient: the HTTP server starts before seeding, `AUTO_SEED` retries with an actionable Atlas message instead of crashing, and `seedDatabaseIfEmpty()` no longer double-queries with `Promise.all` or re-seeds users that already exist.
 - Cron job added to `startCronJobs()`; no changes are required in the frontend for the email report.
+- Chat reliability: the model chain now always appends `openrouter/free` (disable with `OPENROUTER_FREE_ROUTER_FALLBACK=false`) and enforces a 75-second total budget, so a broken free model cannot hold the request for several minutes.
+- Added free voice output at `POST /api/v1/chat/speech`: OpenRouter’s `/audio/speech` with `fish-audio/s2.1-pro-free:free` (fallback `heygen/heygen-voice-1-turbo:free`), returning raw `audio/mpeg`. Text is stripped of Markdown/LaTeX first. Bangla returns `422` because the client uses the free browser `bn-BD` voice instead of the silent free-model output.
+- Added `OPENROUTER_TTS_MODELS`, `OPENROUTER_FALLBACK_TTS_MODELS`, `OPENROUTER_TTS_VOICE` and `OPENROUTER_FREE_ROUTER_FALLBACK`; health now reports `voice: configured`. Fixed a stray non-Bangla word in the Bangla photo-confirmation copy.
+- `npm run dev` now watches `.env` (`tsx watch --include .env`). A rotated `OPENROUTER_API_KEY` used to leave the running process holding the old, revoked key, so every model returned `User not found.` and chat silently degraded to `grounded-fallback` until a manual restart.
+- Diagnosed the live “Could not reach the server” report: several orphaned `tsx watch` / `next dev` instances were competing for ports 3000/3001/5000, so requests intermittently hit a restarting or half-bound process. Stopped the duplicates and left one backend (`5000`) and one frontend (`3000`).
 
 ## Verification
 
@@ -61,7 +66,12 @@ npm test                          # 12 pass
 npm run build                     # tsup bundle succeeds
 ```
 
+- `POST /chat/speech` with `lang: "en"` → `200 audio/mpeg` (≈98 KB for a test sentence); `lang: "bn"` → `422` by design.
+- `/health` reports `openrouter: configured`, `vision: configured`, `voice: configured`.
+
 > `AUTO_SEED=true` seeds automatically on startup. If MongoDB Atlas is unreachable, whitelist the machine’s public IP under **Atlas → Network Access** and the retry loop seeds without a restart. The catalog audit still finds 14 packs, 180 chapters, 238 topics and 325 visualizations.
+
+> **OpenRouter key rotation:** `npm run dev` watches `.env`, so saving a new key restarts the API automatically. If chat answers show `provider: "grounded-fallback"`, compare the key in `.env` with the running process — a revoked key produces `User not found.` for every model. The free tier allows 50 model requests per day (`GET /api/v1/key` shows the remaining count).
 
 > **Multi-IP NAT fix (2026-11-13, resolved):** some ISPs route different destinations through different outbound IPs. On this machine `api.ipify.org` reported `103.51.53.36`, `ipinfo.io` reported `103.51.53.37`, and `icanhazip.com` reported `103.51.53.38`; Atlas only accepted the whitelisted one, so shard `-00-00` connected but the primary `-00-01` failed TLS with `InternalError`, producing `ReplicaSetNoPrimary` / `Server selection timeout`. Whitelisting `103.51.53.0/24` in **Atlas → Network Access** fixed all three shards. Verify with `Resolve-DnsName` and a direct `prisma.$runCommandRaw({ hello: 1 })` against each shard. Seed and `prisma db push` both complete now: 4 users, 5 bands, 14 levels, 180 chapters, 238 topics, 1533 visualizations.
 

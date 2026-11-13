@@ -3,6 +3,8 @@ import { AppError } from "../utils/AppError";
 
 const OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1";
 const REQUEST_TIMEOUT_MS = 45_000;
+// Never keep a learner waiting through the whole fallback chain twice over.
+const CHAT_BUDGET_MS = 75_000;
 
 export type ChatMessage = {
   role: "system" | "user" | "assistant";
@@ -27,6 +29,12 @@ const chatModelChain = () => {
     ...config.openrouter_fallback_chat_models,
   ].filter(Boolean);
 
+  // `openrouter/free` is a router that always resolves to an available free
+  // model, so it is a safe final fallback when every pinned free model is down.
+  if (config.openrouter_free_router_fallback) {
+    models.push("openrouter/free");
+  }
+
   return [...new Set(models)];
 };
 
@@ -35,11 +43,12 @@ const requestCompletion = async (options: {
   messages: ChatMessage[];
   temperature?: number;
   maxTokens?: number;
+  timeoutMs?: number;
 }) => {
   const response = await fetch(`${OPENROUTER_BASE_URL}/chat/completions`, {
     method: "POST",
     headers: headers(),
-    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    signal: AbortSignal.timeout(options.timeoutMs ?? REQUEST_TIMEOUT_MS),
     body: JSON.stringify({
       model: options.model,
       messages: options.messages,
@@ -93,14 +102,22 @@ export const chatCompletion = async (options: {
   }
 
   const failures: string[] = [];
+  const startedAt = Date.now();
 
   for (const model of chain) {
+    const remaining = CHAT_BUDGET_MS - (Date.now() - startedAt);
+    if (remaining < 5_000) {
+      failures.push("chat time budget exhausted before this model ran");
+      break;
+    }
+
     try {
       return await requestCompletion({
         model,
         messages: options.messages,
         temperature: options.temperature,
         maxTokens: options.maxTokens,
+        timeoutMs: Math.min(REQUEST_TIMEOUT_MS, remaining),
       });
     } catch (error) {
       failures.push(
@@ -113,6 +130,124 @@ export const chatCompletion = async (options: {
   throw new AppError(
     502,
     "All AI models are busy right now. Please try again in a moment.",
+  );
+};
+
+const speechModelChain = () => {
+  const models = [
+    ...config.openrouter_tts_models,
+    ...config.openrouter_fallback_tts_models,
+  ].filter(Boolean);
+
+  return [...new Set(models)];
+};
+
+/**
+ * HeyGen requires one of its named voices; Fish Audio works with its default
+ * voice. Unknown models get no voice and use their provider default.
+ */
+const speechVoiceForModel = (model: string) => {
+  if (!config.openrouter_tts_voice) return undefined;
+  if (model.startsWith("heygen/")) return config.openrouter_tts_voice;
+  return undefined;
+};
+
+const readSpeechError = async (response: Response) => {
+  try {
+    const data = (await response.json()) as ChatResponse;
+    return (
+      data.error?.message ||
+      `OpenRouter speech request failed (${response.status}).`
+    );
+  } catch {
+    return `OpenRouter speech request failed (${response.status}).`;
+  }
+};
+
+const requestSpeech = async (options: {
+  model: string;
+  text: string;
+  format?: string;
+}) => {
+  const voice = speechVoiceForModel(options.model);
+  const response = await fetch(`${OPENROUTER_BASE_URL}/audio/speech`, {
+    method: "POST",
+    headers: headers(),
+    signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
+    body: JSON.stringify({
+      model: options.model,
+      input: options.text,
+      response_format: options.format ?? "mp3",
+      ...(voice ? { voice } : {}),
+    }),
+  });
+
+  const contentType = response.headers.get("content-type") || "";
+
+  if (!response.ok || contentType.includes("application/json")) {
+    const message = await readSpeechError(response);
+    throw new Error(message);
+  }
+
+  const audio = Buffer.from(await response.arrayBuffer());
+
+  // Some free models answer with a tiny silent frame instead of an error when
+  // they cannot speak the requested language.
+  if (audio.length < 1200) {
+    throw new Error("OpenRouter returned empty speech audio.");
+  }
+
+  return {
+    audio,
+    contentType: contentType || "audio/mpeg",
+    model: options.model,
+  };
+};
+
+/**
+ * Free text-to-speech via OpenRouter's OpenAI-compatible /audio/speech route.
+ * Tries OPENROUTER_TTS_MODELS first, then OPENROUTER_FALLBACK_TTS_MODELS.
+ */
+export const speechCompletion = async (options: {
+  text: string;
+  format?: string;
+}) => {
+  if (!config.openrouter_api_key) {
+    throw new AppError(
+      503,
+      "OPENROUTER_API_KEY is not configured on the backend.",
+    );
+  }
+
+  const chain = speechModelChain();
+
+  if (chain.length === 0) {
+    throw new AppError(
+      503,
+      "No OpenRouter speech models are configured. Set OPENROUTER_TTS_MODELS.",
+    );
+  }
+
+  const failures: string[] = [];
+
+  for (const model of chain) {
+    try {
+      return await requestSpeech({
+        model,
+        text: options.text,
+        format: options.format,
+      });
+    } catch (error) {
+      failures.push(
+        `${model}: ${error instanceof Error ? error.message : "unknown error"}`,
+      );
+    }
+  }
+
+  console.error("[openrouter] all speech models failed:", failures);
+  throw new AppError(
+    502,
+    "Voice is temporarily unavailable. Please try again in a moment.",
   );
 };
 

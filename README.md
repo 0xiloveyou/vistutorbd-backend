@@ -57,6 +57,7 @@ All variables live in `.env.example`; `.env` is intentionally left for the opera
 | Mail | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM` |
 | Redis | `REDIS_URL` or `REDIS_USER`/`REDIS_PASSWORD`/`REDIS_HOST`/`REDIS_PORT` |
 | OpenRouter | `OPENROUTER_API_KEY`, `OPENROUTER_CHAT_MODELS`, `OPENROUTER_FALLBACK_CHAT_MODELS`, `OPENROUTER_VISION_MODEL`, `OPENROUTER_EMBEDDING_MODEL` |
+| Free voice | `OPENROUTER_TTS_MODELS`, `OPENROUTER_FALLBACK_TTS_MODELS`, `OPENROUTER_TTS_VOICE`, `OPENROUTER_FREE_ROUTER_FALLBACK` |
 | Embeddings | `EMBEDDING_PROVIDER` (`openrouter` \| `local` \| `stub`), `EMBEDDING_MODEL`, `EMBEDDING_DIMENSIONS` |
 | Chat | `CHAT_RATE_LIMIT_PER_HOUR` |
 | Visitor reports | `VISITOR_REPORT_CRON`, `REPORT_TIMEZONE`, `CONTACT_EMAIL` |
@@ -67,6 +68,7 @@ Optional services degrade gracefully:
 - **SMTP missing** â†’ OTPs are printed to the backend console.
 - **Redis missing** â†’ OTP/session/rate-limit state uses an in-memory store.
 - **OpenRouter missing** â†’ chat returns a grounded extract from the knowledge base (`provider: "grounded-fallback"`).
+- **Voice** â†’ English answers use the free OpenRouter TTS model; Bangla uses the browser’s `bn-BD` voice. If TTS fails, the client falls back to the browser voice.
 - **Google missing** â†’ credential login still works; Google buttons are hidden by the frontend.
 
 ## Project structure
