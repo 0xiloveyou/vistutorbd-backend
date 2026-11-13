@@ -1,0 +1,63 @@
+[
+  {
+    "id": "seed-python-essentials",
+    "title": "Python Essentials for AI Work",
+    "date": "2026-10-04",
+    "category": "Python",
+    "tags": [
+      "Python",
+      "Basics",
+      "Functions"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [
+      {
+        "name": "Python docs",
+        "url": "https://docs.python.org/3/"
+      }
+    ],
+    "sections": [
+      {
+        "subtitle": "Lists, dicts, and comprehensions",
+        "description": "<p>Most AI glue code is data shaping: lists of documents, dictionaries of metadata, and comprehensions that transform one into the other.</p>\n<p>Prefer clear comprehensions over nested loops. Your future self will thank you.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "documents = [\n    {\"title\": \"LLM basics\", \"tokens\": 120},\n    {\"title\": \"RAG\", \"tokens\": 90},\n    {\"title\": \"Agents\", \"tokens\": 150},\n]\n\nlong_docs = [doc[\"title\"] for doc in documents if doc[\"tokens\"] > 100]\ntotal = sum(doc[\"tokens\"] for doc in documents)\n\nprint(\"long docs:\", long_docs)\nprint(\"total tokens:\", total)",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Functions and generators",
+        "description": "<p>Generators are useful for streaming batches without loading everything into memory. They are a natural fit for chunking text and iterating over datasets.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "def chunks(items, size):\n    for start in range(0, len(items), size):\n        yield items[start:start + size]\n\ntext = list(range(1, 13))\n\nfor batch in chunks(text, 4):\n    print(batch)",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "A mini pipeline",
+        "description": "<p>Small, composable functions are easier to test than one giant script. This pipeline cleans text, tokenizes it, and returns a structured result.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "python": {
+          "enabled": true,
+          "title": "Run a tiny text pipeline",
+          "code": "def clean(text):\n    return \" \".join(text.lower().split())\n\ndef pipeline(raw):\n    text = clean(raw)\n    tokens = text.split()\n    return {\"text\": text, \"tokens\": tokens, \"count\": len(tokens)}\n\nprint(pipeline(\"  Python   makes AI work  \"))",
+          "stdin": ""
+        }
+      }
+    ]
+  }
+]

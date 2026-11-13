@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bolt: Math Companion Robot (sample)</title>
+<style>
+/* ---------- Theme tokens (swap the palette by changing data-theme on <html>) ---------- */
+:root{--bg:#f4f6fb;--card:#fff;--ink:#1d2333;--muted:#5d667c;--line:#dfe3ef;
+  --accent:#5b5bd6;--accent-ink:#fff;--bot:#e8ebff;--botline:#4a47c4;--screen:#171c38;--glow:#7ef0c9;--blush:#ff9fb2}
+:root[data-theme=sunny]{--accent:#d97706;--bot:#fff0cf;--botline:#b45f06;--screen:#33240d;--glow:#ffe066}
+:root[data-theme=ocean]{--accent:#0284c7;--bot:#dbf3ff;--botline:#0b6e9e;--screen:#0a2638;--glow:#6ff0e6}
+@media (prefers-color-scheme:dark){:root{--bg:#11131b;--card:#1a1e2b;--ink:#eef0f8;--muted:#a1a9bf;--line:#2b3144;--bot:#d9deff}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Nunito","Segoe UI",system-ui,sans-serif;
+  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+main{max-width:760px;margin:0 auto;padding:28px 20px 40px}
+h1{font-size:28px;line-height:1.2;margin:0 0 6px}
+h2{font-size:19px;margin:0 0 12px}
+p{margin:0 0 12px;color:var(--muted);max-width:62ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:18px 0}
+.row{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:6px 0 18px}
+.grp{min-width:92px;padding:12px 16px;border:2px dashed var(--line);border-radius:14px;font-size:26px;text-align:center;transition:.2s}
+.grp.cmp-hl{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);transform:scale(1.05)}
+.op{font-size:28px;font-weight:800;color:var(--muted)}
+.ctl{display:flex;gap:8px;flex-wrap:wrap}
+button,select{font:inherit}
+.ctl button,select{background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:10px;padding:8px 14px;cursor:pointer}
+.ctl button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+button:focus-visible,select:focus-visible,#robot:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+pre{margin:0;padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:10px;overflow-x:auto;font-size:13px;line-height:1.5}
+.spacer{height:90vh}
+
+/* ---------- Robot ---------- */
+#robot{position:fixed;left:0;top:0;width:88px;height:106px;z-index:9999;cursor:pointer;touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;filter:drop-shadow(0 6px 7px rgba(0,0,0,.2));
+  transition:left 1s cubic-bezier(.45,.05,.25,1),top 1s cubic-bezier(.45,.05,.25,1),opacity .25s}
+#robot.nomove{transition:opacity .25s}
+#rsvg{width:100%;height:100%;overflow:visible;transition:transform .35s}
+#robot[hidden]{display:none}
+#bob{animation:float 3s ease-in-out infinite}
+#robot.walk #bob{animation:waddle .32s ease-in-out infinite}
+#tilt{transform-box:fill-box;transform-origin:50% 100%;transition:transform .3s}
+#arm{transform-origin:76px 78px;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.eye{transform-box:fill-box;transform-origin:center;animation:blink 4.6s infinite}
+.eyes-h,.eyes-s,.m-open,.m-flat,.m-sad,.q,.cheek{display:none}
+#robot[data-emo=happy] .eyes-n,#robot[data-emo=sad] .eyes-n{display:none}
+#robot[data-emo=happy] .eyes-h,#robot[data-emo=sad] .eyes-s,#robot[data-emo=happy] .cheek{display:inline}
+#robot[data-emo=sad] .m-smile,#robot[data-emo=confused] .m-smile,#robot[data-emo=think] .m-smile{display:none}
+#robot[data-emo=sad] .m-sad,#robot[data-emo=confused] .m-flat,#robot[data-emo=think] .m-flat{display:inline}
+#robot[data-emo=confused] .q{display:inline}
+#robot[data-emo=confused] #tilt{transform:rotate(-7deg)}
+#robot[data-emo=think] .bulb{animation:pulse .5s infinite alternate}
+#robot[data-talk=on] .m-smile,#robot[data-talk=on] .m-flat,#robot[data-talk=on] .m-sad{display:none}
+#robot[data-talk=on] .m-open{display:inline;transform-box:fill-box;transform-origin:center;animation:talk .22s infinite alternate}
+#robot.shake #tilt{animation:shake .5s}
+#robot.hop{animation:hop .6s}
+.bubble{position:absolute;bottom:calc(100% + 8px);left:0;width:max-content;min-width:56px;max-width:min(240px,72vw);
+  background:var(--card);color:var(--ink);border:2px solid var(--accent);border-radius:14px;padding:8px 12px;
+  font-weight:700;font-size:14px;line-height:1.35;opacity:0;transform:scale(.9);transform-origin:bottom left;
+  pointer-events:none;transition:opacity .2s,transform .2s}
+.bubble.show{opacity:1;transform:scale(1)}
+.bubble::after{content:"";position:absolute;top:100%;left:30px;border:7px solid transparent;border-top-color:var(--accent)}
+#robot.below .bubble{bottom:auto;top:calc(100% + 8px);transform-origin:top left}
+#robot.below .bubble::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:var(--accent)}
+#robot.right .bubble{left:auto;right:0;transform-origin:bottom right}
+#robot.right .bubble::after{left:auto;right:30px}
+
+/* ---------- Dock: rotate button, utility cluster, chat panel ---------- */
+:root{--dock-b:calc(16px + env(safe-area-inset-bottom,0px))}
+.fab{width:44px;height:44px;border-radius:50%;border:2px solid var(--accent);background:var(--card);color:var(--ink);
+  font-size:18px;display:grid;place-items:center;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+#rot{position:fixed;left:16px;bottom:var(--dock-b);z-index:10000;background:var(--accent);color:var(--accent-ink);font-size:22px}
+#rot span{display:block;transition:transform .5s}
+#rot.flip span{transform:rotate(180deg)}
+#util{position:fixed;left:16px;bottom:calc(var(--dock-b) + 54px);z-index:9999;display:none;flex-direction:column;gap:8px}
+#util.on{display:flex}
+#tmb{width:auto;min-width:44px;padding:0 10px;border-radius:22px;font-size:14px;font-weight:800}
+#panel{position:fixed;left:16px;bottom:calc(var(--dock-b) + 54px + 112px);z-index:9998;width:min(330px,calc(100vw - 32px));
+  height:min(400px,52vh);display:none;flex-direction:column;background:var(--card);border:2px solid var(--accent);
+  border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.25);overflow:hidden}
+#panel.open{display:flex}
+.ph{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--accent);color:var(--accent-ink);font-weight:800}
+.ph b{flex:1}
+.ph button{background:transparent;border:1px solid currentColor;color:inherit;border-radius:8px;padding:2px 8px;cursor:pointer}
+#msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.m{max-width:86%;padding:8px 12px;border-radius:14px;font-size:14px;line-height:1.4;white-space:pre-wrap}
+.m.bot{background:var(--bot);color:#1d2333;align-self:flex-start;border-bottom-left-radius:4px}
+.m.me{background:var(--accent);color:var(--accent-ink);align-self:flex-end;border-bottom-right-radius:4px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
+.chips button{font-size:12px;border:1.5px solid var(--accent);color:var(--ink);background:transparent;border-radius:14px;padding:3px 10px;cursor:pointer}
+.pf{display:flex;gap:6px;padding:8px;border-top:1px solid var(--line)}
+.pf input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;font:inherit;background:var(--bg);color:var(--ink)}
+.pf button{background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:0 14px;font-weight:800;cursor:pointer}
+
+@keyframes float{50%{transform:translateY(-5px)}}
+@keyframes waddle{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@keyframes talk{to{transform:scaleY(.4)}}
+@keyframes pulse{to{opacity:.35}}
+@keyframes shake{20%{transform:rotate(-9deg)}40%{transform:rotate(9deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(6deg)}}
+@keyframes hop{40%{transform:translateY(-22px)}70%{transform:translateY(0)}85%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<main>
+  <h1 id="h1">Bolt, your math companion</h1>
+  <p id="intro">Tap the robot at the bottom-left to chat. Start the visualization and Bolt walks across the page to point at each part. Use the round arrows to swap between Bolt and the page up/down/timer buttons.</p>
+  <label>Palette
+    <select id="pal"><option value="">Violet</option><option value="sunny">Sunny</option><option value="ocean">Ocean</option></select>
+  </label>
+
+  <section class="card">
+    <h2 id="h2">Sample visualization: 3 + 4</h2>
+    <div class="row">
+      <div class="grp" id="gA">🍎🍎🍎</div><span class="op">+</span>
+      <div class="grp" id="gB">🍎🍎🍎🍎</div><span class="op">=</span>
+      <div class="grp" id="gC">?</div>
+    </div>
+    <div class="ctl">
+      <button class="primary" id="go">▶ Start visualization</button>
+      <button id="wrong">Wrong answer demo</button>
+      <button id="conf">I didn’t understand</button>
+      <button id="snd" aria-label="Sound">🔊</button>
+      <button id="lng">EN / বাংলা</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Use it in your visualizations</h2>
+<pre>Companion.setContext({ vizId: "viz.play_nursery.addition.apples.v1", stepIndex: 0 });
+await Companion.moveTo("#gA");          // walks beside the element
+Companion.point("#gA");                 // arm aims at it
+Companion.emotion("happy");             // idle | happy | sad | confused | think
+Companion.say({ en: "Here are 3 apples.", bn: "এখানে ৩টি আপেল আছে।" });
+Companion.run(steps);                   // play a whole scripted walkthrough
+Companion.goHome();                     // back to the bottom-left corner</pre>
+  </section>
+  <div class="spacer"></div>
+</main>
+
+<!-- Companion: drop everything below into your site -->
+<div id="robot" data-emo="idle" data-talk="off" role="button" tabindex="0" aria-label="Bolt, math companion. Open chat">
+  <div class="bubble" id="bubble" role="status" aria-live="polite"></div>
+  <svg id="rsvg" viewBox="0 0 100 120" aria-hidden="true">
+    <ellipse cx="50" cy="116" rx="26" ry="4" fill="rgba(0,0,0,.18)"/>
+    <g id="bob"><g id="tilt">
+      <!-- body & legs -->
+      <rect x="28" y="72" width="44" height="32" rx="13" fill="var(--bot)" stroke="var(--botline)" stroke-width="3"/>
+      <circle cx="50" cy="88" r="6" fill="var(--glow)" stroke="var(--botline)" stroke-width="2"/>
+      <circle cx="38" cy="108" r="7" fill="var(--botline)"/><circle cx="62" cy="108" r="7" fill="var(--botline)"/>
+      <!-- left arm (rest) -->
+      <rect x="15" y="76" width="11" height="22" rx="5.5" fill="var(--bot)" stroke="var(--botline)" stroke-width="3"/>
+      <!-- head -->
+      <line x1="50" y1="20" x2="50" y2="9" stroke="var(--botline)" stroke-width="3" stroke-linecap="round"/>
+      <circle class="bulb" cx="50" cy="7" r="4.5" fill="var(--glow)" stroke="var(--botline)" stroke-width="2"/>
+      <circle cx="12" cy="44" r="5" fill="var(--botline)"/><circle cx="88" cy="44" r="5" fill="var(--botline)"/>
+      <rect x="15" y="20" width="70" height="50" rx="20" fill="var(--bot)" stroke="var(--botline)" stroke-width="3"/>
+      <rect x="22" y="27" width="56" height="36" rx="14" fill="var(--screen)"/>
+      <g id="look">
+        <g class="eyes-n"><ellipse class="eye" cx="38" cy="43" rx="5" ry="6.5" fill="var(--glow)"/><ellipse class="eye" cx="62" cy="43" rx="5" ry="6.5" fill="var(--glow)"/></g>
+        <g class="eyes-h" fill="none" stroke="var(--glow)" stroke-width="3.5" stroke-linecap="round"><path d="M33 46q5-9 10 0"/><path d="M57 46q5-9 10 0"/></g>
+        <g class="eyes-s" fill="none" stroke="var(--glow)" stroke-width="3.5" stroke-linecap="round"><path d="M33 41q5 7 10 3"/><path d="M57 44q5 4 10-3"/></g>
+      </g>
+      <circle class="cheek" cx="29" cy="53" r="4" fill="var(--blush)" opacity=".8"/><circle class="cheek" cx="71" cy="53" r="4" fill="var(--blush)" opacity=".8"/>
+      <path class="m-smile" d="M42 53q8 7 16 0" fill="none" stroke="var(--glow)" stroke-width="3" stroke-linecap="round"/>
+      <ellipse class="m-open" cx="50" cy="54" rx="5.5" ry="5" fill="var(--glow)"/>
+      <path class="m-flat" d="M44 55h12" stroke="var(--glow)" stroke-width="3" stroke-linecap="round"/>
+      <path class="m-sad" d="M42 58q8-7 16 0" fill="none" stroke="var(--glow)" stroke-width="3" stroke-linecap="round"/>
+      <text class="q" x="70" y="14" font-size="22" font-weight="800" fill="var(--accent)">?</text>
+      <!-- pointing arm (rotates toward the target) -->
+      <g id="arm"><rect x="71" y="74" width="11" height="24" rx="5.5" fill="var(--bot)" stroke="var(--botline)" stroke-width="3"/>
+        <circle cx="76.5" cy="99" r="5" fill="var(--accent)"/></g>
+    </g></g>
+  </svg>
+</div>
+
+<div id="panel" role="dialog" aria-label="Chat with Bolt">
+  <div class="ph"><b id="ptitle">Bolt</b><button id="plang" aria-label="Language">EN</button><button id="pclose" aria-label="Close">✕</button></div>
+  <div id="msgs" aria-live="polite"></div>
+  <div class="chips"><button id="chipConf"></button><button id="chipHint"></button></div>
+  <form class="pf" id="pform"><input id="pin" autocomplete="off"><button id="psend" type="submit"></button></form>
+</div>
+
+<div id="util" aria-label="Page tools">
+  <button class="fab" id="up" aria-label="Page up">▲</button>
+  <button class="fab" id="down" aria-label="Page down">▼</button>
+  <button class="fab" id="tmb" aria-label="Timer: tap to start or pause, double-tap to reset">⏱</button>
+</div>
+<button class="fab" id="rot" aria-label="Switch between companion and page tools"><span>⟳</span></button>
+
+<script>
+(() => {
+"use strict";
+/* ============ Config: point chatEndpoint at your backend (POST {message, lang, context} → {reply}) ============ */
+const CFG = { chatEndpoint: null, lang: "en", sound: true, name: "Bolt" };
+
+const UI = {
+  en: { hi: "Hi! I’m Bolt. Tap me to chat, or start a visualization and I’ll show you around.",
+        ph: "Ask me about math…", send: "Send", conf: "I didn’t understand", hint: "Give me a hint",
+        done: "All done! Want to try another one?", oops: "Oops, not quite. Let’s try again!",
+        none: "Start a visualization first, then ask me about a step.", thinking: "Let me think…",
+        fallback: "I’m in demo mode, so I can’t answer that yet. Connect me to your backend and I’ll use your lessons to help.",
+        hintTxt: "Try counting on your fingers: hold up 3, then add 4 more.", again: "No problem! Let’s go through that step again." },
+  bn: { hi: "হ্যালো! আমি বোল্ট। আমাকে ট্যাপ করে কথা বলো, অথবা ভিজ্যুয়ালাইজেশন শুরু করো।",
+        ph: "গণিত নিয়ে প্রশ্ন করো…", send: "পাঠাও", conf: "আমি বুঝিনি", hint: "একটা ইঙ্গিত দাও",
+        done: "শেষ! আরেকটা চেষ্টা করবে?", oops: "ইশ, ঠিক হয়নি। আবার চেষ্টা করি!",
+        none: "আগে ভিজ্যুয়ালাইজেশন শুরু করো, তারপর কোনো ধাপ নিয়ে জিজ্ঞেস করো।", thinking: "ভেবে দেখছি…",
+        fallback: "এখন ডেমো মোডে আছি, তাই এর উত্তর দিতে পারছি না। ব্যাকএন্ডের সাথে যুক্ত করলে তোমার পাঠ থেকে উত্তর দেব।",
+        hintTxt: "আঙুল দিয়ে গুনে দেখো: ৩টি আঙুল তোলো, তারপর আরও ৪টি যোগ করো।", again: "ঠিক আছে! ধাপটা আবার দেখাই।" }
+};
+const L = () => UI[CFG.lang];
+const $ = (s, r = document) => r.querySelector(s);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const robot = $("#robot"), bubble = $("#bubble"), arm = $("#arm"), svg = $("#rsvg");
+const RW = 88, RH = 106;
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+/* ============ Sound (tiny WebAudio blips, no files needed) ============ */
+let ac;
+function beep(f, d = .12, type = "sine") {
+  if (!CFG.sound) return;
+  try {
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.value = f; g.gain.value = .06;
+    o.connect(g); g.connect(ac.destination); o.start();
+    g.gain.exponentialRampToValueAtTime(.0001, ac.currentTime + d); o.stop(ac.currentTime + d);
+  } catch (e) {}
+}
+const SND = {
+  pop: () => beep(520, .08),
+  boop: () => beep(330, .12, "triangle"),
+  ding: () => { beep(880, .15); setTimeout(() => beep(1175, .2), 120); },
+  oops: () => { beep(300, .2, "sawtooth"); setTimeout(() => beep(220, .3, "sawtooth"), 160); }
+};
+
+/* ============ Position helpers ============ */
+let atHome = true, busy = false, mode = "companion", talkTimer, hideTimer;
+function homePos() {
+  const r = $("#rot").getBoundingClientRect();
+  return { x: 16, y: r.top - 8 - RH };   // sits just above the rotate button
+}
+function setPos(x, y, instant) {
+  robot.classList.toggle("nomove", !!instant);
+  robot.style.left = x + "px"; robot.style.top = y + "px";
+  if (instant) { void robot.offsetWidth; robot.classList.remove("nomove"); }
+  const cx = x + RW / 2;
+  robot.classList.toggle("below", y < 120);
+  robot.classList.toggle("right", cx > innerWidth * 0.6);
+}
+function goHomeInstant() { const h = homePos(); setPos(h.x, h.y, true); }
+
+/* ============ Companion API ============ */
+function emotion(e) { robot.dataset.emo = e || "idle"; }
+function say(text, ms = 3200) {
+  const t = typeof text === "string" ? text : (text[CFG.lang] || text.en);
+  clearTimeout(talkTimer); clearTimeout(hideTimer);
+  bubble.textContent = t; bubble.classList.add("show"); robot.dataset.talk = "on";
+  talkTimer = setTimeout(() => robot.dataset.talk = "off", Math.min(ms, 400 + t.length * 55));
+  if (ms > 0) hideTimer = setTimeout(() => bubble.classList.remove("show"), ms);
+}
+function hush() { bubble.classList.remove("show"); robot.dataset.talk = "off"; }
+const el = t => typeof t === "string" ? $(t) : t;
+
+async function moveTo(target) {
+  const e = el(target); if (!e) return null;
+  e.scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" });
+  await sleep(reduce ? 20 : 500);
+  const r = e.getBoundingClientRect();
+  let x = r.left - RW - 10;                           // stand to the left of the target
+  if (x < 8) x = r.right + 10;                        // not enough room: stand to the right
+  x = Math.max(8, Math.min(innerWidth - RW - 8, x));
+  const y = Math.max(8, Math.min(innerHeight - RH - 8, r.top + r.height / 2 - RH / 2));
+  atHome = false; robot.classList.add("walk");
+  setPos(x, y);
+  await sleep(reduce ? 20 : 1050);
+  robot.classList.remove("walk");
+  return r;
+}
+function point(target) {
+  const e = el(target); if (!e) return;
+  const t = e.getBoundingClientRect(), r = robot.getBoundingClientRect();
+  const dir = (t.left + t.width / 2) < (r.left + r.width / 2) ? -1 : 1;   // mirror the robot toward the target
+  svg.style.transform = `scaleX(${dir})`;
+  const px = dir === 1 ? r.left + r.width * .76 : r.left + r.width * .24, py = r.top + r.height * .65;
+  const dx = (t.left + t.width / 2 - px) * dir, dy = t.top + t.height / 2 - py;
+  arm.style.transform = `rotate(${Math.atan2(dy, dx) * 180 / Math.PI - 90}deg)`;
+}
+function unpoint() { arm.style.transform = "rotate(0deg)"; svg.style.transform = "scaleX(1)"; }
+async function goHome() {
+  unpoint(); const h = homePos(); atHome = false;
+  robot.classList.add("walk"); setPos(h.x, h.y);
+  await sleep(reduce ? 20 : 1050); robot.classList.remove("walk"); atHome = true; emotion("idle");
+}
+const hl = (t, on) => { const e = el(t); if (e) e.classList.toggle("cmp-hl", on); };
+
+/* ============ Scripted walkthrough (this is what your visualization player will call per step) ============ */
+let ctx = {}, curSteps = [], curIndex = -1;
+function setContext(c) { ctx = Object.assign(ctx, c); }
+async function runStep(i) {
+  const s = curSteps[i]; curIndex = i;
+  setContext({ stepIndex: i, narration: s.say });
+  await moveTo(s.t); emotion(s.emo || "happy"); hl(s.t, true); point(s.t);
+  if (s.snd) SND[s.snd]();
+  say(s.say, s.hold || 2800); if (s.after) s.after();
+  await sleep(s.hold || 2800);
+  hl(s.t, false);
+}
+async function run(steps) {
+  if (busy) return; busy = true; closePanel(); curSteps = steps;
+  for (let i = 0; i < steps.length; i++) await runStep(i);
+  unpoint(); await goHome(); emotion("happy"); say(L().done, 3000); SND.ding(); busy = false;
+}
+async function replay() {
+  if (busy) return;
+  if (curIndex < 0) { say(L().none, 3000); emotion("confused"); return; }
+  busy = true; closePanel(); say(L().again, 1800); emotion("happy"); await sleep(1500);
+  await runStep(curIndex); unpoint(); await goHome(); busy = false;
+}
+async function wrong() {
+  if (busy) return; busy = true; closePanel();
+  emotion("sad"); SND.oops(); say(L().oops, 2600);
+  robot.classList.add("shake"); await sleep(600); robot.classList.remove("shake");
+  await sleep(2200); emotion("idle"); busy = false;
+}
+
+/* ============ Chat ============ */
+const panel = $("#panel"), msgs = $("#msgs"), pin = $("#pin");
+function addMsg(who, text) {
+  const d = document.createElement("div"); d.className = "m " + who; d.textContent = text;
+  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+}
+function openPanel() { panel.classList.add("open"); hush(); if (!msgs.children.length) addMsg("bot", L().hi); setTimeout(() => pin.focus(), 50); }
+function closePanel() { panel.classList.remove("open"); }
+async function ask(message) {
+  if (CFG.chatEndpoint) {
+    try {
+      const res = await fetch(CFG.chatEndpoint, { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, lang: CFG.lang, context: ctx }) });
+      const data = await res.json(); return data.reply || L().fallback;
+    } catch (e) { return L().fallback; }
+  }
+  await sleep(600);
+  return /hint|ইঙ্গিত/i.test(message) ? L().hintTxt : L().fallback;
+}
+async function send(text) {
+  text = text.trim(); if (!text) return;
+  addMsg("me", text); emotion("think");
+  const wait = document.createElement("div"); wait.className = "m bot"; wait.textContent = L().thinking;
+  msgs.appendChild(wait); msgs.scrollTop = msgs.scrollHeight;
+  const reply = await ask(text); wait.remove(); addMsg("bot", reply);
+  emotion("happy"); robot.dataset.talk = "on"; setTimeout(() => { robot.dataset.talk = "off"; emotion("idle"); }, 1400);
+}
+$("#pform").addEventListener("submit", e => { e.preventDefault(); const v = pin.value; pin.value = ""; send(v); });
+$("#pclose").onclick = closePanel;
+$("#chipConf").onclick = () => { if (curIndex < 0) { addMsg("bot", L().none); } else { send(L().conf); replay(); } };
+$("#chipHint").onclick = () => send(L().hint);
+
+/* ============ Dock: rotate between companion and page tools ============ */
+async function setMode(m) {
+  mode = m; $("#rot").classList.toggle("flip", m === "tools");
+  if (m === "tools") {
+    closePanel(); if (!atHome) await goHome(); hush();
+    robot.hidden = true; $("#util").classList.add("on");
+  } else {
+    $("#util").classList.remove("on"); robot.hidden = false; goHomeInstant(); atHome = true;
+    robot.classList.add("hop"); setTimeout(() => robot.classList.remove("hop"), 650);
+    emotion("happy"); say(L().hi, 3200); SND.pop();
+  }
+}
+$("#rot").onclick = () => { if (!busy) setMode(mode === "companion" ? "tools" : "companion"); };
+$("#up").onclick = () => scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+$("#down").onclick = () => scrollTo({ top: document.documentElement.scrollHeight, behavior: reduce ? "auto" : "smooth" });
+let tSec = 0, tInt = null; const tb = $("#tmb");
+const fmt = s => String(Math.floor(s / 60)).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+tb.onclick = () => { if (tInt) { clearInterval(tInt); tInt = null; } else { tInt = setInterval(() => { tSec++; tb.textContent = fmt(tSec); }, 1000); tb.textContent = fmt(tSec); } };
+tb.ondblclick = () => { clearInterval(tInt); tInt = null; tSec = 0; tb.textContent = "⏱"; };
+
+/* ============ Robot interactions ============ */
+function toggleChat() { if (busy || mode !== "companion") return; panel.classList.contains("open") ? closePanel() : openPanel(); }
+robot.addEventListener("click", toggleChat);
+robot.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleChat(); } });
+if (!reduce) addEventListener("pointermove", e => {                // eyes follow the pointer
+  const r = robot.getBoundingClientRect(); if (robot.hidden) return;
+  const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2), d = Math.hypot(dx, dy) || 1;
+  const k = Math.min(1, d / 200) * 2.5;
+  $("#look").setAttribute("transform", `translate(${(dx / d * k).toFixed(2)} ${(dy / d * k).toFixed(2)})`);
+});
+addEventListener("resize", () => { if (atHome && !busy) goHomeInstant(); });
+
+/* ============ Language / labels ============ */
+function applyLang() {
+  const l = L();
+  pin.placeholder = l.ph; $("#psend").textContent = l.send; $("#chipConf").textContent = l.conf; $("#chipHint").textContent = l.hint;
+  $("#plang").textContent = CFG.lang === "en" ? "EN" : "বাং"; document.documentElement.lang = CFG.lang === "en" ? "en" : "bn";
+}
+function toggleLang() { CFG.lang = CFG.lang === "en" ? "bn" : "en"; applyLang(); }
+$("#plang").onclick = toggleLang; $("#lng").onclick = toggleLang;
+
+/* ============ Demo wiring ============ */
+const steps = [
+  { t: "#gA", emo: "happy", snd: "pop", say: { en: "Here are 3 apples.", bn: "এখানে ৩টি আপেল আছে।" } },
+  { t: "#gB", emo: "happy", snd: "pop", say: { en: "Now 4 more apples join them.", bn: "এবার আরও ৪টি আপেল যোগ হলো।" } },
+  { t: "#gC", emo: "happy", snd: "ding", say: { en: "Count them all: 7 apples! So 3 + 4 = 7.", bn: "সব গুনলে ৭টি আপেল! তাই ৩ + ৪ = ৭।" }, after: () => $("#gC").textContent = "7" }
+];
+$("#go").onclick = () => { $("#gC").textContent = "?"; setContext({ vizId: "viz.play_nursery.addition.apples.v1" }); run(steps); };
+$("#wrong").onclick = wrong;
+$("#conf").onclick = replay;
+$("#snd").onclick = e => { CFG.sound = !CFG.sound; e.currentTarget.textContent = CFG.sound ? "🔊" : "🔇"; };
+$("#pal").onchange = e => { e.target.value ? document.documentElement.dataset.theme = e.target.value : delete document.documentElement.dataset.theme; };
+
+/* ============ Public API ============ */
+window.Companion = { say, emotion, moveTo, point, unpoint, goHome, run, replay, setContext, wrong,
+  setLang: l => { CFG.lang = l; applyLang(); }, setSound: v => CFG.sound = !!v, config: CFG };
+
+applyLang(); goHomeInstant();
+setTimeout(() => { robot.classList.add("hop"); say(L().hi, 4200); SND.pop(); }, 600);
+})();
+</script>
+</body>
+</html>

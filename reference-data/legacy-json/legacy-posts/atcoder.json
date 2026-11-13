@@ -1,0 +1,408 @@
+[
+  {
+    "title": "Chessboard",
+    "date": "2025-08-16",
+    "category": "2D Array",
+    "tags": [
+      "AtCoder",
+      "Basic",
+      "C-abc296",
+      "abc296_b",
+      "B - Chessboard",
+      "Score - 200"
+    ],
+    "link": "https://atcoder.jp/contests/abc296/tasks/abc296_b",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Explanation",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Naming of chessboard cell : \n\n1. Files (Columns):\nThe vertical columns of squares are called files and are labeled from left to right (from White's perspective) with the letters a through h. \n\n2. Ranks (Rows):\nThe horizontal rows of squares are called ranks and are numbered from 1 to 8, starting from White's side of the board. \n\n3. Square Identification:\nTo name a square, you combine the letter of its file with the number of its rank. For example, the square in the bottom left corner for White is a1, while the corresponding square for Black is a8. \n\n\n        Chessboard \n\n  ___ __ __ __ __ __ __ __\n8 |_||_||_||_||_||_||_||_|\n7 |_||_||_||_||_||_||_||_|\n6 |_||_||_||_||_||_||_||_|\n5 |_||_||_||_||_||_||_||_|\n4 |_||_||_||_||_||_||_||_|\n3 |_||_||_||_||_||_||_||_|\n2 |_||_||_||_||_||_||_||_|\n1 |_||_||_||_||_||_||_||_|\n   a  b  c  d  e  f  g  h\n\n\n\n\nNaming of chessboard cell\n\n  ___ __ __ __ __ __ __ __\n8 |_||_||_||_||_||_||_||_|\n7 |_||_||_||_||_||_||_||_|\n6 |_||_||_||_||_||X||_||_| <<-- f6\n5 |_||_||_||_||_||_||_||_|\n4 |_||_||_||_||_||_||_||_|\n3 |_||X||_||_||_||_||_||_| <<-- b3\n2 |_||_||_||_||_||_||_||_|\n1 |_||_||_||_||_||_||_||_|\n   a  b  c  d  e  f  g  h\n\n\nSo, to figure out the problem, we have to use the \n                                                 >> row for Ranks\n                                                 >> column for Files \n\n\n\nx --->> (1 - 8) \ny --->> (a - h) \n\n\nx = i; ----------------->> used for Ranks\ny = j; ----------------->> used for Files\nz = (char)y + 97; ------>>Cherecter conversion for Files\n\n\ncout << z << x+1; --->> x+1 (Cause 0 base indexing)",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint x = 0, y= 0; // x used to denote (1 - 8) // y used to denote (a - h) \nchar z;\nchar c[8][8];\n\nfor(int i =7; i>=0; i--)\n   for(int j =0; j<8; j++)\n       cin>> c[i][j];\n\nfor(int i =0; i<8; i++)\n   for(int j =0; j<8; j++)\n       if(c[i][j] == '*'){x = i;y = j; break;}\n\nz = (char)y + 97;\ncout << z << x+1;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755323195780-mzr8lx"
+  },
+  {
+    "title": "Vacation Together",
+    "date": "2025-08-16",
+    "category": "2D Array",
+    "tags": [
+      "AtCoder",
+      "Basic",
+      "C-abc311",
+      "abc311_b",
+      "B - Vacation Together",
+      "Score - 200"
+    ],
+    "link": "https://atcoder.jp/contests/abc311/tasks/abc311_b",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Explanation of Code with Disclaimer",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "-->> Disclaimer:\n\nThis solution follows exactly the tutorial code from the official AtCoder editorial. That is the most optimal and clean approach for this problem. Any other solution would likely be more complex to implement and potentially more time-consuming in terms of both coding and execution.\n\n----------------------------------------------------------------------\n\nHere column wise consecutive max 'o' is a ->> 2 times\n\na->> 3 5      b ->> 3 3      max ->> a\n     xooox          oxo              oo\n     oooxx          oxo              oo\n     oooxo          oxo              oo\n\n   \n     \nStep follows: \n-> As we have to find out column-wise \n-> that's why we have to move the same column different row \n\n\n\nExplanation : \n            >> identifier &= c[j][i] == 'o'; \n            >> -->> &= ( And assignment operator used )\n            >> if ->> c[j][i] == 'o' is ture \n            >> then ->> identifier &= 1;\n            >> which means -> identifier = identifier & 1\n            \n       \n            \nand (&) operation expansion: \n\n-> true & true → true\n-> true & false → false\n-> false & anything → false\n\nSo, using -> identifier &= c[j][i] == 'o';\n    We ensure that each one has 'o' on the same day \n\n    \nNow follwing step: -->> check consecutive 'o' for all\n                   -->>(identifier)? maxContinuousValue++ : maxContinuousValue = 0; \n                   -->> using this ternary, we can ensure consecutive 'o' for all\n                   -->> (if True)? (then what) : (else what);",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n,d;\ncin >> n>>d;\nchar c[n][d];\nint total = 0, maxContinuousValue = 0;\n\nfor(int i=0; i<n; i++)\n   for(int j=0; j<d; j++)\n       cin>> c[i][j];\n\nfor(int i=0; i<d; i++){\n     int identifier = 1; // used to check everyone has holiday on the same day\n       for(int j=0; j<n; j++){identifier &= c[j][i] == 'o';}\n\n     (identifier)? maxContinuousValue++ : maxContinuousValue = 0; // validates >> then increase the max value if continuous //else >> set to 0\n     (total<maxContinuousValue)? total = maxContinuousValue : total+=0; // checks max holiday and assigns max value if needed\n}\n\ncout << total;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755321900246-ewwbdt"
+  },
+  {
+    "title": "Longest Segment",
+    "date": "2025-08-16",
+    "category": "Math",
+    "tags": [
+      "AtCoder",
+      "Basic",
+      "C-abc234",
+      "abc234_b",
+      "B - Longest Segment",
+      "Score - 200"
+    ],
+    "link": "https://atcoder.jp/contests/abc234/tasks/abc234_b",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "//------------------------>>> Length = √((x₂ - x₁)² + (y₂ - y₁)²)\n// ----------------------->>> 1st array >> x >> horizental distance from (0,0) \n// ----------------------->>> 2nd array >> y >> vertical distance from (0,0)\n\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncin >> n;\nint x[100],y[100];\ndouble length = 0.0,result = 0.0;\n\nfor(int i = 0; i<n; i++) cin>> x[i]>>y[i]; // 1st array >> x (horizental) | 2nd array >> y (vertical)\n\nfor(int i= 0; i<n; i++)\n    for(int j = i+1; j<n; j++){ // Length = √((x₂ - x₁)² + (y₂ - y₁)²)\n        length = (x[j] - x[i])*(x[j] -x[i])+(y[j]-y[i])*(y[j]-y[i]);\n        length = sqrt(length);\n        result = max(result, length);} // Longest Segment\n\ncout << fixed << setprecision(10) << result << endl; // to get rid of absolute or relative error\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755313815593-1ge1nm"
+  },
+  {
+    "title": "Pawn on a Grid",
+    "date": "2025-08-15",
+    "category": "2D Array",
+    "tags": [
+      "AtCoder",
+      "Basic",
+      "C-abc280",
+      "abc280_a",
+      "A - Pawn on a Grid",
+      "Score - 100"
+    ],
+    "link": "https://atcoder.jp/contests/abc280/tasks/abc280_a",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution 1",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint h,w;\ncin >> h>> w;\nchar a[h][w] = {};\nint piece = 0;\n\nfor(int i =0; i<h; i++)\n   for(int j = 0; j<w; j++)\n       cin >>a[i][j];\n\nfor(int i =0; i<h; i++)\n   for(int j = 0; j<w; j++)\n       if(a[i][j] == '#') piece++;\n\ncout<< piece;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 2",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint m,n, piece = 0;\ncin >> m>> n;\nchar a[m][n] = {};\n \ngetchar(); // used to get rid of buffer \n\nfor(int i=0; i<m ;i++){\n    for(int j=0;j<n;j++){\n       scanf(\"%c\", &a[i][j]);\n   }\ngetchar(); // used to get rid of buffer \n}\n\nfor(int i=0; i<m ;i++)\n    for(int j=0;j<n;j++)\n        if(a[i][j] == '#') piece++;\n\ncout << piece;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Problem with solution 2",
+        "description": "cin >> m>> n;\nchar a[m][n] = {};\n \ngetchar(); --------------------->> 1st getchar();\n\nfor(int i=0; i<m ;i++){\n    for(int j=0;j<n;j++){\n       scanf(\"%c\", &a[i][j]);\n   }\ngetchar(); ----------------------->> 2nd getchar();\n}\n\n---------------------------------------------------------------------------\n\nWe used -->> scanf(\"%c\") --> Builtin function of C -->> Sencitive for input buffer (problem)\n\n\n\nExplanation:\n\n1st:\ngetchar() after cin >> m >> n;\nWhen we input m and n, we press Enter.\nThat Enter key generates a newline character '\\n' in the input buffer.\nscanf(\"%c\", &a[i][j]); would read that '\\n' as a character, which is unwanted.\nSo, we use 1st getchar(); to consume the leftover '\\n'\n\n2nd:\ngetchar() inside the for-loop (after each row)\nWhile reading characters for a row, we usually press Enter after typing the row.\nThat Enter key again stays in the buffer.\nThe 2nd getchar(); removes this extra '\\n', so the next row reads correctly.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "cin >> m>> n;\nchar a[m][n] = {};\n \ngetchar(); --------------------->> 1st getchar();\n\nfor(int i=0; i<m ;i++){\n    for(int j=0;j<n;j++){\n       scanf(\"%c\", &a[i][j]);\n   }\ngetchar(); ----------------------->> 2nd getchar();\n}\n\n---------------------------------------------------------------------------\n\nWe used -->> scanf(\"%c\") --> Builtin function of C -->> Sencitive for input buffer (problem)\n\n\n\nExplanation:\n\n1st:\ngetchar() after cin >> m >> n;\nWhen we input m and n, we press Enter.\nThat Enter key generates a newline character '\\n' in the input buffer.\nscanf(\"%c\", &a[i][j]); would read that '\\n' as a character, which is unwanted.\nSo, we use 1st getchar(); to consume the leftover '\\n'\n\n2nd:\ngetchar() inside the for-loop (after each row)\nWhile reading characters for a row, we usually press Enter after typing the row.\nThat Enter key again stays in the buffer.\nThe 2nd getchar(); removes this extra '\\n', so the next row reads correctly.",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 3",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint m,n, piece = 0;\ncin >> m>> n;\nchar a[m][n] = {};\ncin.ignore(); // ignore newline after numbers\n\nfor(int i=0; i<m ;i++){\n    for(int j=0;j<n;j++){\n       cin.get(a[i][j]);\n   }\ncin.ignore(); // ignore newline at the end of each row\n}\n\nfor(int i=0; i<m ;i++)\n    for(int j=0;j<n;j++)\n        if(a[i][j] == '#') piece++;\n\ncout << piece;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755274339072-rbzlnn"
+  },
+  {
+    "title": "Spread",
+    "date": "2025-08-15",
+    "category": "String",
+    "tags": [
+      "AtCoder",
+      "Very Basic",
+      "C-abc329",
+      "abc329_a",
+      "A - Spread",
+      "Score - 100"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nchar a[100];\ncin.getline(a, 100);\nint x = strlen(a);\n\nfor(int i =0; i<x; i++)\n  if(i == x-1) cout << a[i];\n    else cout << a[i] << \" \";\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755266533836-vdsjqd"
+  },
+  {
+    "title": "Climbing Takahash",
+    "date": "2025-08-12",
+    "category": "Find number",
+    "tags": [
+      "AtCoder",
+      "Very Basic",
+      "C-abc235",
+      "abc235_b",
+      "B - Climbing Takahash",
+      "Score - 200"
+    ],
+    "link": "https://atcoder.jp/contests/abc235/tasks/abc235_b",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Sort Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncin >> n;\nint a[n] = {};\nint height = 0;\n\nfor(int i =0; i<n; i++)cin >> a[i];\n\nfor(int i = 0; i<n; i++)\nif(a[i]>=a[i+1]){height = a[i]; break;}\nelse if(a[i]<a[i+1]) height = a[i+1];\n\ncout << height;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Brought Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncin >> n;\nint a[n];\nint pre, next;\n\nfor( int i = 0;i<n; i++){\n    cin >> a[i];\n\n    if(i > 0) {\n      pre = a[i-1];\n      next = a[i];\n\n      if(next < pre || next == pre){\n        cout << a[i-1]; // if condition matched then print the previous one\n        break;\n      }\n    }\n    if(i == n-1) cout << a[n-1] << endl; // if condition not matched then print the last one\n}\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755015020711-f5x453"
+  },
+  {
+    "title": "Cut",
+    "date": "2025-08-12",
+    "category": "Arrange Number",
+    "tags": [
+      "AtCoder",
+      "Very Basic",
+      "C-abc368",
+      "abc368_a",
+      "A - Cut",
+      "Score - 100"
+    ],
+    "link": "https://atcoder.jp/contests/abc368/tasks/abc368_a",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "0 base indexing",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\n// 0 base indexing\ninitially >> 1   result>> 3     >> n-k\n             2            4        .   <--middle value \n             3            5        n-1 \n             4            1        0\n             5            2        n-k-1\n*/\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n,k;\ncin >> n>> k;\nint a[n];\n\nfor(int i = 0; i<n;i++) cin>> a[i];\nfor(int j= n-k; j<n; j++)cout << a[j]<< \" \";\nfor(int i = 0; i<n-k; i++) cout << a[i]<< \" \";\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "1 base indexing",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\n// 1 base indexing\ninitially >> 1   result>> 3     >> n-k+1\n             2            4        .   <--middle value \n             3            5        n\n             4            1        1\n             5            2        n-k\n*/\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n,k;\ncin >> n>>k;\nint a[n+1];\n\nfor(int i = 1; i<=n; i++) cin >>a[i];\nfor(int i = n-k+1; i<=n; i++) cout << a[i] << \" \";\nfor(int i = 1; i<=n-k; i++) cout << a[i] << \" \";\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754990095237-whsi48"
+  },
+  {
+    "title": "Who is missing?",
+    "date": "2025-08-12",
+    "category": "Find number",
+    "tags": [
+      "AtCoder",
+      "Basic",
+      "C-abc236",
+      "abc236_b",
+      "B - Who is missing?",
+      "Score - 200"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "Main array used as a frequency array.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/// In the name of ALLAH\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncin >> n;\nint a[n+1]={};\n\nfor(int i= 1;i<n*4;i++){\n    int x;\n    cin >> x;\n    a[x]++; // Main array used as a frequency array.\n}\n\nfor(int i= 1; i<=n; i++)\n    if(a[i]==3){cout << i; break;}\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754981515518-w8fuj5"
+  },
+  {
+    "title": "Achieve the Goal",
+    "date": "2025-08-04",
+    "category": "Very basic",
+    "tags": [
+      "AtCoder",
+      "very basic",
+      "C - abc151",
+      "abc151_b",
+      "B - Achieve the Goal",
+      "Rating - 800"
+    ],
+    "link": "https://atcoder.jp/contests/abc151/tasks/abc151_b",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n,k,m;\ncin >> n>> k>>m;\n\nint need;\nint heGot = 0;\n\nfor(int i =0; i<n-1; i++){ \nint x;\ncin >> x;\nheGot += x;\n}\n\nneed = (n*m) - heGot;\n\nif(need<0) cout << 0;// negative means alrady achived his goal\nelse if(need<=k) cout << need;\nelse cout << -1;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754315070531-mmd329"
+  },
+  {
+    "title": "Greedy Takahashi",
+    "date": "2025-08-04",
+    "category": "Greedy",
+    "tags": [
+      "AtCoder",
+      "Gready",
+      "C - abc149",
+      "abc149_b",
+      "B - Greedy Takahashi",
+      "Rating - 800"
+    ],
+    "link": "https://atcoder.jp/contests/abc149/tasks/abc149_b",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "-------------------- Admin's solution(from AtCoder) ------------------------\n\n#include <iostream>\nusing namespace std;\n\nint main(){\nlong long a, b, k;\ncin >> a >> b >> k;\n\nif(k <= a){\ncout << a - k << '␣' << b <<endl;\n}else if(k <= a+b){\ncout << 0 << '␣' << b - (k-a) <<endl;\n}else{\ncout << 0 << '␣' << 0 <<endl;\n}\n}\n\n----------------------------- Our solution --------------------------------\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nlong long int a,b,k;\ncin >> a>>b>>k;\nlong long int sum = a + b;\n\nif(sum>k){\n if(a<=k)cout <<0 << \" \" <<b - (k - a);\n else cout <<a - k << \" \" <<b;\n}\nelse cout << 0 << \" \" << 0;\n\nreturn 0;\n}\n\n\n----------------------------- Bad solution --------------------------------\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nlong long int a,b,k;\ncin >> a>>b>>k;\nlong long int sum = a + b;\n\nif(a==0 && b==0)cout <<a << \" \" <<b;\nelse if(k == 0)cout <<a << \" \" <<b;\nelse if(sum<=k)cout <<0 << \" \" <<0;\nelse{\n if(a<=k)cout <<0 << \" \" <<b - (k - a);\n else cout <<a - k << \" \" <<b;\n}\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation of bad solution with test case",
+        "description": "Bad solution cause -->> we used some extra if (which is good, but if those condition never happens, then it causes overhead(extra time))\n\nExplanation -- >> check the code section",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "if(a==0 && b==0)cout <<a << \" \" <<b; // --->> k has no imact on a & b's value\nelse if(k == 0)cout <<a << \" \" <<b;  // --->> if k is 0 then no changes on a & b's value\nelse if(sum<=k)cout <<0 << \" \" <<0;  // sum<=k -->> then nothing left -->> a = b = 0\n\nelse{ // else --->> ( sum > k)\n\n// let ->> a = 5 & k = 5 -->> a = 0 & b = b\n// let ->> a = 3, b = 7 & k = 7 --->> a = 0 & b = 3\n if(a<=k)cout <<0 << \" \" <<b - (k - a); \n\n\n else{ // else -->> (a < k)\n// let ->> a = 5 & k = 3 -->> a = 2 & b = b \n cout <<a - k << \" \" <<b; \n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754309500803-88j4bc"
+  }
+]

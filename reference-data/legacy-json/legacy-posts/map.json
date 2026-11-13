@@ -1,0 +1,140 @@
+[
+  {
+    "title": "Sign",
+    "date": "2025-12-23",
+    "category": "sign",
+    "tags": [
+      "sign",
+      "symbol"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Sign & Symbol",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "↑",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "↓",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "←",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "→",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Double",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "⇑",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "⇓",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "⇐",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "⇒",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1766464035351-0iog8y"
+  },
+  {
+    "title": "List of the highlighted classes for blog  ---->> (1st blog post of CPP DICTIONARY)",
+    "date": "2025-04-23",
+    "category": "Blog",
+    "tags": [
+      "highlight"
+    ],
+    "link": "",
+    "images": [
+      "images/map/1.png"
+    ],
+    "sections": [
+      {
+        "subtitle": "All highlighted tags.",
+        "description": "To get highlight text, write your description like this:\n\nex 1: --> This is a regular paragraph with <mark>important details</mark> highlighted.\nex 2: --> This is a regular paragraph with <span class='highlight'>important details</span> highlighted.\n\nHere, mark is built in a tag, and highlight is a class. \n\n\nThe following classes we'll be using in the blog to highlight text are given below: \n1. highlight\n2. hred\n3. hgreen\n4. hyellow\n5. hblue\n6. horange\n7. hindigo\n8. hviolet\n9. hwhite\n10. hgray",
+        "code": {
+          "label": "1st code of CPP DICTIONARY",
+          "code": "/// In the name of ALLAH\n\n#include<bits/stdc++.h>\nusing namespace std;\n\n\nint main(){\n\ncout << \"In the name of ALLAH\" << endl;\ncout << \"1st blog post code of CPP DICTIONARY\" << endl;\ncout << \"timestamp : --> 1745400234\" << endl;\n\nreturn 0;\n}",
+          "lang": "CPP"
+        }
+      }
+    ],
+    "consoleBlocks": [
+      "بِسْمِ ٱللَّٰهِ . In the name of Allah. Bismillah\n\n</CPPDICTIONARY>\n\nThe 1st blog post of CPP DICTIONARY. (started adding content for my blog w2)\n\nTIMESTAMP: -->> 1745400234 \n\n-----------------------------------------------------------\n\nTo get highlight text, write your description like this:\n\nex 1: --> This is a regular paragraph with <mark>important details</mark> highlighted.\nex 2: --> This is a regular paragraph with <span class='highlight'>important details</span> highlighted.\n\nHere, mark is built in tag, and highlight is a class. \n\n\nThe following classes we'll be using in the blog to highlight text are given below: \n1. highlight\n2. hred\n3. hgreen\n4. hyellow\n5. hblue\n6. horange\n7. hindigo\n8. hviolet\n9. hwhite\n10. hgray"
+    ],
+    "id": "1745402514725-mlx126"
+  }
+]

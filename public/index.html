@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Visual Lessons | VizTutorBD</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f1f5f9;color:#0f172a}
+
+  .vc{padding:24px 0 64px;background:linear-gradient(#f1f5f9,#e2e8f0);overflow:hidden}
+  .vc-wrap{max-width:none;margin:0 auto;padding:0 16px}
+  .vc h2{font-size:30px;margin:0 auto 6px;text-align:center}
+  .vc-sub{text-align:center;color:#64748b;margin:0 auto 30px}
+  .vc-wrap>h2,.vc-wrap>.vc-sub{max-width:820px}
+
+  /* --- the carousel itself --- */
+  .vc-carousel{position:relative;outline:none}
+  .vc-viewport{overflow:hidden;padding:18px 0 26px;touch-action:pan-y}
+  .vc-track{display:flex;gap:22px;transition:transform .55s cubic-bezier(.65,0,.25,1);will-change:transform}
+  .vc-slide{flex:0 0 auto;background:#111a2e;border-radius:22px;padding:14px;box-shadow:0 18px 50px #0f172a33;
+    opacity:.42;transform:scale(.92);filter:saturate(.6);cursor:pointer;
+    transition:opacity .5s,transform .5s,filter .5s}
+  .vc-slide.on{opacity:1;transform:none;filter:none;cursor:default}
+  .vc-head{display:flex;align-items:center;gap:10px;color:#e6edf7;padding:2px 6px 12px}
+  .vc-count{background:#1e293b;color:#38bdf8;font-weight:700;font-size:13px;padding:4px 10px;border-radius:999px}
+  .vc-head b{font-size:16px}
+  .vc-stage{border-radius:14px;overflow:hidden;background-color:#0b1220;
+    background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+    background-size:32px 32px}
+  .vc-stage svg{display:block;width:100%;height:auto}
+  .vc-stage svg text{font-family:"Segoe UI",system-ui,sans-serif}
+
+  .vc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;
+    border:0;background:#fff;color:#0f172a;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 6px 18px #0f172a30;
+    display:flex;align-items:center;justify-content:center;padding:0 0 4px}
+  .vc-arrow:hover{background:#38bdf8}
+  .vc-arrow.prev{left:6px}.vc-arrow.next{right:6px}
+
+  .vc-dots{display:flex;justify-content:center;gap:10px;margin:0 0 26px}
+  .vc-dots button{width:10px;height:10px;padding:0;border:0;border-radius:999px;background:#94a3b8;cursor:pointer;transition:.3s}
+  .vc-dots button.on{width:30px;background:#0ea5e9}
+
+  /* --- separate control panel --- */
+  .vc-panel{max-width:820px;margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;
+    padding:16px 18px;box-shadow:0 10px 30px #0f172a14;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;justify-content:space-between}
+  .vc-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;font-weight:700;margin-bottom:6px}
+  .vc-btns{display:flex;gap:8px;flex-wrap:wrap}
+  .vc-btns button,.vc-modes button{border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;padding:9px 14px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+  .vc-btns button:hover,.vc-modes button:hover{background:#e0f2fe;border-color:#38bdf8}
+  .vc-btns button.main{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+  .vc-btns button.main:hover{background:#0284c7}
+  .vc-modes{display:flex;gap:8px}
+  .vc-modes button.on{background:#0f172a;border-color:#0f172a;color:#fff}
+  .vc-info{flex:1 1 100%;display:flex;align-items:center;gap:12px;color:#64748b;font-size:13px}
+  .vc-prog{flex:1;height:5px;background:#e2e8f0;border-radius:5px;overflow:hidden}
+  .vc-prog i{display:block;height:100%;width:0;background:#0ea5e9}
+  @media(max-width:640px){.vc-arrow{width:38px;height:38px;font-size:22px}.vc-btns button{padding:8px 10px;font-size:13px}}
+</style>
+</head>
+<body>
+<main>
+
+  <section id="vc" class="vc" aria-label="Visual lessons">
+    <div class="vc-wrap">
+      <!-- carousel: only slides + side arrows -->
+      <div class="vc-carousel" id="vcCar" tabindex="0" aria-roledescription="carousel">
+        <button class="vc-arrow prev" id="aPrev" aria-label="Previous lesson">&#8249;</button>
+        <div class="vc-viewport" id="vcView"><div class="vc-track" id="vcTrack"></div></div>
+        <button class="vc-arrow next" id="aNext" aria-label="Next lesson">&#8250;</button>
+      </div>
+      <div class="vc-dots" id="vcDots"></div>
+
+      <!-- separate control panel -->
+      <div class="vc-panel">
+        <div>
+          <div class="vc-label">Playback</div>
+          <div class="vc-btns">
+            <button id="bPrev" aria-label="Previous lesson">⏮ Back</button>
+            <button id="bPlay" class="main" aria-label="Pause or play">⏸ Pause</button>
+            <button id="bRep"  aria-label="Watch again">⟲ Watch again</button>
+            <button id="bNext" aria-label="Next lesson">Next ⏭</button>
+          </div>
+        </div>
+        <div id="vcModeBox">
+          <div class="vc-label">Style</div>
+          <div class="vc-modes" id="vcModes"></div>
+        </div>
+        <div class="vc-info"><span id="vcInfo"></span><div class="vc-prog"><i id="vcFill"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+/* =====================================================================
+   HOW TO ADD A NEW VISUALIZATION LATER
+   Call registerVisual({
+     id:'my-lesson',
+     title:'My lesson title',
+     modes:[ { id:'art', label:'✏️ Line art', duration:20,            // seconds
+               frame:(t)=> '<svg inner markup for time t (0..duration)>' } ]  // frame(t) = SVG inner markup
+   });
+   frame(t) must be a pure function of time, so pause / replay / seek just work.
+   Add a 2nd mode (e.g. robot) and a toggle button appears automatically.
+   ===================================================================== */
+const VISUALS=[];
+const S={vi:0,mi:0,t:0,playing:false,manual:false,last:0,adv:null,busy:false,ready:false};
+window.registerVisual=v=>{VISUALS.push(v);if(S.ready) rebuild();};
+
+/* ---------- tiny helpers ---------- */
+const $=s=>document.querySelector(s);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const prog=(t,a,b)=>clamp((t-a)/(b-a));
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+const lerp=(a,b,k)=>a+(b-a)*k;
+const f=n=>Math.round(n*10)/10;
+function path(d,o={}){
+  const {stroke='#e2e8f0',w=2,fill='none',fo=1,op=1,draw=1}=o;
+  if(draw<=0) return '';
+  const dash=draw<1?` stroke-dasharray="1" stroke-dashoffset="${1-draw}"`:'';
+  return `<path d="${d}" pathLength="1" fill="${fill}" fill-opacity="${fo}" stroke="${stroke}" stroke-width="${w}" opacity="${op}" stroke-linejoin="round" stroke-linecap="round"${dash}/>`;
+}
+function txt(x,y,s,o={}){
+  const {size=18,fill='#e2e8f0',anchor='middle',op=1,weight=700}=o;
+  if(op<=0) return '';
+  return `<text x="${f(x)}" y="${f(y)}" font-size="${size}" fill="${fill}" text-anchor="${anchor}" opacity="${op}" font-weight="${weight}">${s}</text>`;
+}
+const D=(pts,m)=>'M'+pts.map(p=>m(p[0],p[1]).map(f).join(' ')).join('L')+'Z';
+const cap=(list,t)=>{let c=null;for(const e of list) if(e[0]<=t) c=e;return c;};
+function wrap(s,n){const out=[];let l='';for(const w of s.split(' ')){if((l+' '+w).trim().length>n){out.push(l);l=w;}else l=(l+' '+w).trim();}if(l)out.push(l);return out;}
+function typedPairs(lines,n){return lines.map(l=>{const k=clamp(n,0,l.length);n-=l.length;return [l.slice(0,k),l.slice(k)];});}
+
+/* bottom caption bar (used by line-art modes) */
+function captionBar(t,list){
+  const c=cap(list,t); if(!c) return '';
+  const lines=wrap(c[1],72), n=Math.floor((t-c[0])*45);
+  const h=lines.length*24+16, y0=472-h;
+  let s=`<rect x="30" y="${y0}" width="740" height="${h}" rx="12" fill="#020617" opacity=".75"/>`;
+  typedPairs(lines,n).forEach((p,i)=>{
+    if(!p[0]) return;
+    s+=`<text x="400" y="${y0+28+i*24}" font-size="18" font-weight="500" fill="#f1f5f9" text-anchor="middle">${p[0]}<tspan opacity="0">${p[1]}</tspan></text>`;
+  });
+  return s;
+}
+
+/* =====================================================================
+   VISUAL 1 : Pythagorean theorem  (line art  +  robot)
+   ===================================================================== */
+const CA='#fbbf24',CB='#4ade80',CC='#c4b5fd',CT='#38bdf8',INK='#e2e8f0';
+
+/* --- intro: triangle + squares on the sides (3-4-5) --- */
+const IP=(x,y)=>[260+30*x,285+30*y];
+const il=(x,y,s,o)=>{const p=IP(x,y);return txt(p[0],p[1]+5,s,o);};
+const TRI=[[0,0],[4,0],[0,-3]],SA=[[0,0],[0,-3],[-3,-3],[-3,0]],SB=[[0,0],[4,0],[4,4],[0,4]],SC=[[4,0],[0,-3],[3,-7],[7,-4]];
+function introScene(t,T){
+  let s='';
+  s+=txt(400,44,`Why does <tspan fill="${CA}">a²</tspan> + <tspan fill="${CB}">b²</tspan> = <tspan fill="${CC}">c²</tspan> ?`,{size:30});
+  const pSq=prog(t,...T.sq),pF=prog(t,...T.fill),pN=prog(t,...T.nums),pT=prog(t,...T.tri),pL=prog(t,...T.labels);
+  [[SA,CA],[SB,CB],[SC,CC]].forEach(([q,c],i)=>{
+    if(pF>0) s+=path(D(q,IP),{stroke:'none',w:0,fill:c,fo:.2*pF});
+    s+=path(D(q,IP),{stroke:c,w:2.5,draw:clamp(pSq*3-i)});
+  });
+  if(pF>0){
+    let g='';
+    for(let k=1;k<3;k++) g+=`M${IP(-k,0)}L${IP(-k,-3)}M${IP(-3,-k)}L${IP(0,-k)}`;
+    for(let k=1;k<4;k++) g+=`M${IP(k,0)}L${IP(k,4)}M${IP(0,k)}L${IP(4,k)}`;
+    for(let k=1;k<5;k++){
+      const a=[4-.8*k,-.6*k],b=[4+.6*k,-.8*k];
+      g+=`M${IP(a[0],a[1])}L${IP(a[0]+3,a[1]-4)}M${IP(b[0],b[1])}L${IP(b[0]-4,b[1]-3)}`;
+    }
+    s+=`<path d="${g}" stroke="#e2e8f0" stroke-width="1" opacity="${.28*pF}" fill="none"/>`;
+  }
+  if(pT>=1) s+=path(D(TRI,IP),{stroke:'none',w:0,fill:CT,fo:.4});
+  s+=path(D(TRI,IP),{stroke:INK,w:3,draw:pT});
+  s+=path(`M${IP(.5,0)}L${IP(.5,-.5)}L${IP(0,-.5)}`,{stroke:INK,w:1.5,op:pL});
+  s+=il(.5,-1.4,'a',{fill:CA,size:17,op:pL})+il(2,-.4,'b',{fill:CB,size:17,op:pL})+il(1.9,-1.1,'c',{fill:CC,size:17,op:pL});
+  s+=il(-1.5,-1.5,'a² = 9',{fill:CA,size:20,op:pN})+il(2,2,'b² = 16',{fill:CB,size:22,op:pN})+il(3.5,-3.5,'c² = 25',{fill:CC,size:22,op:pN});
+  return s;
+}
+
+/* --- proof: 4 triangles inside a big square of side a+b --- */
+const BX=110,BY=90,BU=36,Q=(x,y)=>[BX+BU*x,BY+BU*y];
+const BIG=[[0,0],[7,0],[7,7],[0,7]];
+const PIECES=[
+  {id:'TL',n:1,pts:[[0,0],[3,0],[0,4]],d:[0,3]},
+  {id:'TR',n:2,pts:[[3,0],[7,0],[7,3]],d:[0,0]},
+  {id:'BR',n:3,pts:[[7,3],[7,7],[4,7]],d:[-4,0]},
+  {id:'BL',n:4,pts:[[0,4],[0,7],[4,7]],d:[3,-4]}
+];
+const cen=p=>[(p[0][0]+p[1][0]+p[2][0])/3,(p[0][1]+p[1][1]+p[2][1])/3];
+function proofScene(t,T,robot){
+  let s='';
+  const pB=prog(t,...T.big);
+  s+=txt(BX+126,44,'The puzzle proof',{size:22,op:pB});
+  let g='';for(let k=1;k<7;k++) g+=`M${Q(k,0)}L${Q(k,7)}M${Q(0,k)}L${Q(7,k)}`;
+  s+=`<path d="${g}" stroke="#94a3b8" stroke-width="1" opacity="${.16*pB}" fill="none"/>`;
+  s+=path(D(BIG,Q),{stroke:INK,w:3,draw:pB});
+  s+=txt(BX+126,BY-10,'a + b',{op:pB,size:17});
+  s+=`<text transform="translate(${BX-14} ${BY+126}) rotate(-90)" font-size="17" font-weight="700" fill="${INK}" text-anchor="middle" opacity="${pB}">a + b</text>`;
+
+  // empty space, arrangement 1  (tilted square c²)
+  const c2=prog(t,...T.c2)*(1-prog(t,...T.c2out));
+  if(c2>0){
+    s+=path(D([[3,0],[7,3],[4,7],[0,4]],Q),{stroke:CC,w:2,fill:CC,fo:.45,op:c2});
+    const q=Q(3.5,3.5); s+=txt(q[0],q[1]+12,'c²',{size:38,fill:'#fff',op:c2});
+  }
+  // empty space, arrangement 2  (a² and b²)
+  const ab=prog(t,...T.ab);
+  if(ab>0){
+    s+=path(D([[0,0],[3,0],[3,3],[0,3]],Q),{stroke:CA,w:2,fill:CA,fo:.45,op:ab});
+    s+=path(D([[3,3],[7,3],[7,7],[3,7]],Q),{stroke:CB,w:2,fill:CB,fo:.45,op:ab});
+    let q=Q(1.5,1.5); s+=txt(q[0],q[1]+10,'a²',{size:32,fill:'#fff',op:ab});
+    q=Q(5,5); s+=txt(q[0],q[1]+12,'b²',{size:38,fill:'#fff',op:ab});
+  }
+  // the 4 triangles
+  const pTr=prog(t,...T.tris);
+  PIECES.forEach((p,i)=>{
+    const a=clamp(pTr*4-i); if(a<=0) return;
+    const w=T.mv[p.id], m=w?prog(t,...w):0, k=ease(m), moving=m>0&&m<1;
+    const dx=p.d[0]*k*BU, dy=p.d[1]*k*BU, c=cen(p.pts), q=Q(c[0],c[1]);
+    s+=`<g transform="translate(${f(dx)} ${f(dy)})" opacity="${a}">`
+      +path(D(p.pts,Q),{stroke:moving?'#fff':INK,w:moving?3.5:2,fill:CT,fo:moving?.8:.55})
+      +txt(q[0],q[1]+6,p.n,{size:18,fill:'#0b1220'})+'</g>';
+  });
+
+  if(!robot){
+    const L=[[T.big[1],`Big square side = <tspan fill="${INK}">a + b</tspan>`],
+             [T.c2[1],`Empty space (1) = <tspan fill="${CC}">c²</tspan>`],
+             [T.ab[1],`Empty space (2) = <tspan fill="${CA}">a²</tspan> + <tspan fill="${CB}">b²</tspan>`]];
+    L.forEach(([ts,str],i)=>{s+=txt(440,150+i*46,str,{size:22,anchor:'start',op:prog(t,ts-.8,ts)});});
+    const pc=prog(t,...T.concl);
+    if(pc>0) s+=`<rect x="430" y="262" width="340" height="84" rx="16" fill="${CT}" fill-opacity="${.14*pc}" stroke="${CT}" stroke-width="2" opacity="${pc}"/>`
+      +txt(600,316,`<tspan fill="${CA}">a²</tspan> + <tspan fill="${CB}">b²</tspan> = <tspan fill="${CC}">c²</tspan>`,{size:42,op:pc});
+  } else {
+    const pc=prog(t,...T.concl);
+    s+=txt(236,396,`<tspan fill="${CA}">a²</tspan> + <tspan fill="${CB}">b²</tspan> = <tspan fill="${CC}">c²</tspan>`,{size:36,op:pc});
+  }
+  return s;
+}
+
+/* --- cute robot --- */
+function robotSvg(t,hx,hy,talking,happy,rp,rv){
+  const bob=happy?-Math.abs(Math.sin(t*6))*12:Math.sin(t*2.2)*4;
+  const cx=rp[0],cy=rp[1]+bob;
+  const spd=Math.hypot(rv[0],rv[1]);
+  const tilt=clamp(rv[0]*.04,-14,14), th=tilt*Math.PI/180;   // leans into the flight direction
+  const blink=(t%3.8)>3.65?.12:1, mo=talking?4+Math.abs(Math.sin(t*17))*8:3;
+  // shoulder follows the (tilted) body
+  const ox=-36,oy=-20;
+  const sx=cx+ox*Math.cos(th)-oy*Math.sin(th), sy=cy+ox*Math.sin(th)+oy*Math.cos(th);
+  // arm only stretches when the hand is far away; when close it stays short
+  const dist=Math.hypot(hx-sx,hy-sy), sag=Math.min(50,dist*.45);
+  const mx=(sx+hx)/2,my=(sy+hy)/2+sag;
+  const flame=62+Math.sin(t*22)*5+clamp(spd/9,0,26);
+  const shR=clamp(30+(cy-170)*.07,26,48);
+  return `<g>
+  <ellipse cx="${f(cx)}" cy="410" rx="${f(shR)}" ry="7" fill="#000" opacity="${f(clamp(.34-(410-cy)*.0003,.15,.3))}"/>
+  <g transform="rotate(${f(tilt)} ${f(cx)} ${f(cy)})">
+  <path d="M${f(cx-12)} ${f(cy+36)}L${f(cx)} ${f(cy+flame)}L${f(cx+12)} ${f(cy+36)}Z" fill="#fb923c"/>
+  <path d="M${f(cx+36)} ${f(cy-20)}Q${f(cx+64)} ${f(cy)} ${f(cx+56)} ${f(cy+26)}" fill="none" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/>
+  <rect x="${f(cx-36)}" y="${f(cy-42)}" width="72" height="78" rx="16" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
+  <circle cx="${f(cx)}" cy="${f(cy-8)}" r="11" fill="#38bdf8" opacity="${f(.6+.4*Math.sin(t*4))}"/>
+  <rect x="${f(cx-8)}" y="${f(cy-52)}" width="16" height="12" fill="#94a3b8"/>
+  <line x1="${f(cx)}" y1="${f(cy-114)}" x2="${f(cx)}" y2="${f(cy-132)}" stroke="#94a3b8" stroke-width="4"/>
+  <circle cx="${f(cx)}" cy="${f(cy-137)}" r="7" fill="#f472b6"/>
+  <rect x="${f(cx-46)}" y="${f(cy-114)}" width="92" height="66" rx="22" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+  <rect x="${f(cx-35)}" y="${f(cy-104)}" width="70" height="46" rx="14" fill="#0f172a"/>
+  <ellipse cx="${f(cx-15)}" cy="${f(cy-86)}" rx="7" ry="${f(7*blink)}" fill="#38bdf8"/>
+  <ellipse cx="${f(cx+15)}" cy="${f(cy-86)}" rx="7" ry="${f(7*blink)}" fill="#38bdf8"/>
+  <rect x="${f(cx-9)}" y="${f(cy-72)}" width="18" height="${f(mo)}" rx="3" fill="#38bdf8"/>
+  <circle cx="${f(cx-27)}" cy="${f(cy-74)}" r="4" fill="#f472b6" opacity=".6"/><circle cx="${f(cx+27)}" cy="${f(cy-74)}" r="4" fill="#f472b6" opacity=".6"/>
+  </g>
+  <path d="M${f(sx)} ${f(sy)}Q${f(mx)} ${f(my)} ${f(hx)} ${f(hy)}" fill="none" stroke="#94a3b8" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="${f(hx)}" cy="${f(hy)}" r="12" fill="#fde68a" stroke="#f59e0b" stroke-width="3"/>
+  </g>`;
+}
+/* robot flies: its body drifts toward whatever the hand points at (smoothed, so it glides),
+   and the arm only stretches for the remaining distance */
+const HOME=[640,318];
+function robotPos(t,T){
+  let hx=0,hy=0;const N=7;
+  for(let j=0;j<N;j++){const p=handAt(T.hk,Math.max(0,t-j*.15));hx+=p[0];hy+=p[1];}
+  hx/=N;hy/=N;
+  let x=HOME[0]+.85*(hx-REST[0]), y=HOME[1]+.85*(hy-REST[1]);
+  x=clamp(x,70,740);
+  const minY=170+150*clamp((x-350)/70);          // stay out from under the speech bubble
+  y=clamp(y,minY,392);
+  return [x,y];
+}
+function handAt(k,t){
+  if(t<=k[0][0]) return [k[0][1],k[0][2]];
+  for(let i=0;i<k.length-1;i++){
+    const a=k[i],b=k[i+1];
+    if(t<=b[0]){const u=ease(prog(t,a[0],b[0]));return [lerp(a[1],b[1],u),lerp(a[2],b[2],u)];}
+  }
+  const l=k[k.length-1];return [l[1],l[2]];
+}
+function robotLayer(t,T,list){
+  const [hx,hy]=handAt(T.hk,t), c=cap(list,t);
+  const rp=robotPos(t,T), rq=robotPos(Math.max(0,t-.1),T);
+  const rv=[(rp[0]-rq[0])/.1,(rp[1]-rq[1])/.1];
+  let talking=false,bubble='';
+  if(c){
+    const lines=wrap(c[1],31),n=Math.floor((t-c[0])*28),total=lines.join('').length;
+    talking=n<total;
+    const h=lines.length*22+22,top=172-h;
+    const tx=clamp(rp[0]-10,510,750), tip=tx+clamp((rp[0]-tx)*.35,-40,40);
+    bubble=`<rect x="478" y="${top}" width="306" height="${h}" rx="14" fill="#f8fafc"/><path d="M${f(tx-13)} 171L${f(tx+13)} 171L${f(tip)} 198Z" fill="#f8fafc"/>`;
+    typedPairs(lines,n).forEach((p,i)=>{bubble+=`<text x="494" y="${top+28+i*22}" font-size="16" font-weight="600" fill="#0f172a">${p[0]}</text>`;});
+  }
+  return bubble+robotSvg(t,hx,hy,talking,t>=T.concl[0],rp,rv);
+}
+
+/* --- timelines (seconds) --- */
+const TA={tri:[.4,2.4],labels:[2.4,3.4],sq:[5,8],fill:[8,9.5],nums:[9.5,10.5],intro_out:[12.5,13.5],
+  big:[14,16],tris:[16,18.5],c2:[19,20],c2out:[21.4,22.2],
+  mv:{BL:[22.4,24],BR:[25,26.6],TL:[27.6,29.2]},ab:[30,31],concl:[33,34.5],end:38};
+const TR={tri:[.5,3],labels:[3,4.5],sq:[8,11],fill:[11,12.5],nums:[12.5,14],intro_out:[17,18.2],
+  big:[19,21],tris:[21,24],c2:[25,26],c2out:[28.8,29.8],
+  mv:{BL:[30,32],BR:[34,36],TL:[38,40]},ab:[41.2,42.4],concl:[46,47.5],end:52};
+
+/* robot hand path: [time, x, y] */
+const gp=(id,k)=>{const p=PIECES.find(x=>x.id===id),c=cen(p.pts);return Q(c[0]+p.d[0]*k,c[1]+p.d[1]*k);};
+const ptI=(x,y)=>{const p=IP(x,y);return [p[0]+16,p[1]+14];};
+const ptQ=(x,y)=>{const p=Q(x,y);return [p[0]+14,p[1]+12];};
+const REST=[556,360];
+TR.hk=[[0,...REST],[3.5,...REST],[4.5,...ptI(.5,-1.4)],[5.7,...ptI(2,-.4)],[6.9,...ptI(1.9,-1.1)],[8,...REST],
+  [11.5,...ptI(-1.5,-1.5)],[12.7,...ptI(2,2)],[13.9,...ptI(3.5,-3.5)],[15.2,...REST],
+  [26,...ptQ(3.5,3.5)],[28.5,...ptQ(3.5,3.5)],
+  [30,...gp('BL',0)],[32,...gp('BL',1)],[34,...gp('BR',0)],[36,...gp('BR',1)],[38,...gp('TL',0)],[40,...gp('TL',1)],
+  [41.5,...ptQ(1.5,1.5)],[43,...ptQ(5,5)],[45,...REST],[52,...REST]];
+
+/* captions: [start time, text] */
+const CAP_ART=[
+  [.3,'Every right triangle has two short sides (a and b) and one long side (c).'],
+  [5,'Build a square on each side. Count the little squares inside!'],
+  [9.6,'a² = 9, b² = 16, c² = 25  →  9 + 16 = 25 ✓   But does it ALWAYS work?'],
+  [14.2,"Let's prove it with a puzzle. Start with a big square of side a + b."],
+  [16.2,'Put 4 copies of the triangle inside, one in each corner.'],
+  [19,'The empty tilted square in the middle has side c, so its area is c².'],
+  [21.4,'Now slide the SAME 4 triangles to new spots. Nothing added, nothing removed.'],
+  [30,'Now the empty space is two squares: a² and b².'],
+  [33,'Same big square − same 4 triangles = same empty area. So a² + b² = c² !']
+];
+const CAP_BOT=[
+  [.5,"Hi! I'm Bolt 🤖 Let's find out why a² + b² = c²."],
+  [3,'This is a right triangle. It has short sides a and b, and a long side c.'],
+  [8,'Let me build a square on each side.'],
+  [11.2,'Count the tiles: a² is 9, b² is 16, c² is 25. And 9 + 16 = 25!'],
+  [15,"But does it ALWAYS work? Let's prove it with a puzzle!"],
+  [19,'Here is a big square with side a + b.'],
+  [21.5,'I will place 4 copies of the triangle in the corners.'],
+  [25,'See the empty tilted square in the middle? Its area is c²!'],
+  [28.8,'Now watch me slide the triangles around...'],
+  [30,'Triangle 4 hops up to the top right.'],
+  [34,'Triangle 3 slides to the left.'],
+  [38,'And triangle 1 drops down.'],
+  [41,'Look! The empty space is now a² and b²!'],
+  [44,'Same big square, same 4 triangles... so the empty spaces must be equal!'],
+  [47.5,'a² + b² = c² 🎉 Pythagoras was right!']
+];
+
+function pythFrame(T,robot,list){
+  return t=>{
+    let s=''; const fo=1-prog(t,...T.intro_out);
+    if(fo>0) s+=`<g opacity="${f(fo*100)/100}">${introScene(t,T)}</g>`;
+    if(t>=T.big[0]) s+=proofScene(t,T,robot);
+    return s+(robot?robotLayer(t,T,list):captionBar(t,list));
+  };
+}
+
+registerVisual({
+  id:'pythagoras',
+  title:'Why does a² + b² = c² ?',
+  modes:[
+    {id:'art',  label:'✏️ Line art',       duration:TA.end,frame:pythFrame(TA,false,CAP_ART)},
+    {id:'robot',label:'🤖 Robot explains', duration:TR.end,frame:pythFrame(TR,true, CAP_BOT)}
+  ]
+});
+
+/* =====================================================================
+   VISUAL 2 : 1 + 2 + ... + n  (Gauss trick) - shows how to add more lessons
+   ===================================================================== */
+const GN=6,GC=46,GX=400-3*GC,GY=88;
+const gx=c=>GX+(c-1)*GC,gy=r=>GY+(r-1)*GC;
+const GK=1.45,GOX=-170;           // robot mode: slower (x1.45) and figure shifted left to leave room for Bolt
+const CAP_G=[
+  [.3,'Add 1 + 2 + 3 + 4 + 5 + 6. Stack them as dots, one row for each number.'],
+  [5,'Make a second copy of the same staircase...'],
+  [6.8,'...and flip it upside down.'],
+  [9.5,'They fit together perfectly into a rectangle: 6 rows × 7 columns!'],
+  [12,'The rectangle has 6 × 7 = 42 dots and holds 2 copies, so one copy = 42 ÷ 2 = 21.'],
+  [15,'The trick: 1 + 2 + … + n = n × (n + 1) ÷ 2.']
+];
+const CAP_GB=[
+  [.2,"Hi, I'm Bolt! Let's add 1 + 2 + 3 + 4 + 5 + 6 super fast!"],
+  [1.5,'I stack dots: one row for 1, two for 2, and so on.'],
+  [4.8,'Now I make a second copy of the staircase...'],
+  [6.6,'...and flip it upside down!'],
+  [9.4,'Wow, they fit into a rectangle: 6 rows × 7 columns!'],
+  [11.8,'That is 6 × 7 = 42 dots, and it holds 2 copies.'],
+  [13.4,'So one copy = 42 ÷ 2 = 21. Easy!'],
+  [15,'The trick: 1 + 2 + … + n = n × (n + 1) ÷ 2 🎉']
+].map(c=>[c[0]*GK,c[1]]);
+function gaussFrame(robot){
+  const K=robot?GK:1, ox=robot?GOX:0, off=robot?250:280;
+  return real=>{
+    const t=real/K;
+    let s=txt(400,44,'Add 1 + 2 + 3 + 4 + 5 + 6 fast!',{size:28}), fig='';
+    let idx=0;
+    for(let r=1;r<=GN;r++)for(let c=1;c<=r;c++){
+      const a=prog(t,.6+idx*.11,.9+idx*.11);idx++;
+      if(a>0) fig+=`<circle cx="${f(gx(c))}" cy="${f(gy(r))}" r="${f(15*ease(a))}" fill="${CA}"/>`;
+    }
+    // flipped copy: rigid rotation by 180 degrees while sliding into place
+    const ci=[gx(3.5)+off,gy(3.5)],cf=[gx(4.5),gy(3.5)];
+    const pa=prog(t,5,6.3),k=ease(prog(t,6.8,9)),th=Math.PI*k;
+    const cc=[lerp(ci[0],cf[0],k),lerp(ci[1],cf[1],k)];
+    for(let r=1;r<=GN;r++)for(let c=1;c<=r;c++){
+      const rx=gx(c)-gx(3.5),ry=gy(r)-gy(3.5);
+      const x=cc[0]+rx*Math.cos(th)-ry*Math.sin(th),y=cc[1]+rx*Math.sin(th)+ry*Math.cos(th);
+      if(pa>0) fig+=`<circle cx="${f(x)}" cy="${f(y)}" r="${f(15*ease(pa))}" fill="${CT}"/>`;
+    }
+    const pr=prog(t,9.5,11);
+    fig+=path(`M${gx(1)-23} ${gy(1)-23}H${gx(7)+23}V${gy(6)+23}H${gx(1)-23}Z`,{stroke:INK,w:2.5,draw:pr});
+    const pl=prog(t,11,11.8);
+    fig+=txt(gx(4),70,'7',{size:20,op:pl})+txt(GX-44,gy(3.5)+7,'6',{size:20,op:pl});
+    s+=`<g transform="translate(${ox} 0)">${fig}</g>`;
+    const tx=robot?395:590, y1=robot?240:170, y2=robot?290:216;
+    s+=txt(tx,y1,'6 × 7 = 42 dots',{size:22,anchor:'start',op:prog(t,11.8,12.6)});
+    s+=txt(tx,y2,'42 ÷ 2 = <tspan fill="'+CA+'">21</tspan>',{size:26,anchor:'start',op:prog(t,13.5,14.3)});
+    s+=txt(robot?330:400,392,'1 + 2 + … + n = n × (n + 1) ÷ 2',{size:28,fill:CT,op:prog(t,15,16)});
+    return s+(robot?robotLayer(real,GT,CAP_GB):captionBar(t,CAP_G));
+  };
+}
+/* robot hand path for the Gauss lesson (times in lesson-seconds x GK) */
+const gk=(a,p)=>[a*GK,p[0],p[1]];
+const gpt=(c,r)=>[gx(c)+GOX+16,gy(r)+14];
+const gcx=gx(3.5)+250+GOX, gcf=gx(4.5)+GOX;
+const GT={concl:[15*GK,16*GK],end:19*GK};
+GT.hk=[gk(0,REST),gk(.5,REST),gk(.9,gpt(1,1)),gk(1.5,gpt(3,3)),gk(2.1,gpt(5,5)),gk(3,gpt(6,6)),
+  gk(3.8,gpt(1,6)),gk(4.6,REST),gk(5.4,[gcx+14,gy(3.5)+10]),gk(6.6,[gcx+14,gy(3.5)+10]),gk(9,[gcf+14,gy(3.5)+10]),
+  gk(9.6,[gx(1)-23+GOX,gy(1)-23]),gk(10.2,[gx(7)+23+GOX,gy(1)-23]),gk(10.7,[gx(7)+23+GOX,gy(6)+23]),gk(11.1,[gx(1)-23+GOX,gy(6)+23]),
+  gk(11.6,[gx(4)+GOX+14,82]),gk(12,[GX-44+GOX+16,gy(3.5)+14]),gk(12.8,[430,236]),gk(14,[430,284]),
+  gk(15.4,[140,374]),gk(17,REST),gk(19,REST)];
+registerVisual({
+  id:'gauss',
+  title:'Adding 1 + 2 + ... + n super fast',
+  modes:[
+    {id:'art',  label:'✏️ Line art',      duration:19,   frame:gaussFrame(false)},
+    {id:'robot',label:'🤖 Robot explains',duration:GT.end,frame:gaussFrame(true)}
+  ]
+});
+
+/* =====================================================================
+   VISUAL 3 : (a + b)^2 = a^2 + b^2 + 2ab   (square cut into 4 pieces)
+   ===================================================================== */
+const EX=90,EY=80,EU=38,EQ=(x,y)=>[EX+EU*x,EY+EU*y];   // a = 4 units, b = 3 units
+const ER=(x0,y0,x1,y1)=>[[x0,y0],[x1,y0],[x1,y1],[x0,y1]];
+const EK=1.45;
+const CAP_E=[
+  [.3,'(a + b)² means the area of a square whose side is a + b.'],
+  [3,'Cut each side into two parts, a and b, and draw lines across.'],
+  [5.4,'The big square splits into 4 pieces.'],
+  [7.6,'Top-left is a square with side a, so its area is a².'],
+  [9.6,'Bottom-right is a square with side b, so its area is b².'],
+  [11.6,'The two leftover rectangles are a × b each, so together they make 2ab.'],
+  [14.6,'Add all the pieces: (a + b)² = a² + b² + 2ab ✓'],
+  [17.6,'Check with a = 4, b = 3:  7² = 49  and  16 + 9 + 12 + 12 = 49 ✓']
+];
+const CAP_EB=[
+  [.3,"Hi, I'm Bolt! (a + b)² is the area of a square with side a + b."],
+  [3,'I cut each side into a and b, and draw two lines.'],
+  [5.4,'Look, 4 pieces!'],
+  [7.6,'The top-left square has side a, so its area is a².'],
+  [9.6,'The bottom-right square has side b, so its area is b².'],
+  [11.6,'These two rectangles are a × b each. Together: 2ab!'],
+  [14.6,'So (a + b)² = a² + b² + 2ab 🎉'],
+  [17.2,'Check: a = 4, b = 3 → 49 = 16 + 9 + 12 + 12. It works!']
+].map(c=>[c[0]*EK,c[1]]);
+function expandFrame(robot){
+  const K=robot?EK:1;
+  return real=>{
+    const t=real/K;
+    let s=txt(400,44,'What is <tspan fill="'+INK+'">(a + b)²</tspan> ?',{size:30});
+    const pB=prog(t,.4,1.8), pAB=prog(t,1.8,2.6)*(1-prog(t,4.6,5.2)), pS=prog(t,4.6,5.2), pL=prog(t,3,4.8);
+    let g='';for(let k=1;k<7;k++) g+=`M${EQ(k,0)}L${EQ(k,7)}M${EQ(0,k)}L${EQ(7,k)}`;
+    s+=`<path d="${g}" stroke="#94a3b8" stroke-width="1" opacity="${.16*pB}" fill="none"/>`;
+    s+=path(D(ER(0,0,7,7),EQ),{stroke:INK,w:3,draw:pB});
+    s+=txt(EQ(3.5,0)[0],EY-12,'a + b',{size:17,op:pAB});
+    s+=`<text transform="translate(${EX-14} ${EQ(0,3.5)[1]+6}) rotate(-90)" font-size="17" font-weight="700" fill="${INK}" text-anchor="middle" opacity="${f(pAB)}">a + b</text>`;
+    s+=txt(EQ(2,0)[0],EY-12,'a',{size:19,fill:CA,op:pS})+txt(EQ(5.5,0)[0],EY-12,'b',{size:19,fill:CB,op:pS});
+    s+=txt(EX-14,EQ(0,2)[1]+6,'a',{size:19,fill:CA,op:pS})+txt(EX-14,EQ(0,5.5)[1]+6,'b',{size:19,fill:CB,op:pS});
+    s+=path(`M${EQ(4,0)}L${EQ(4,7)}`,{stroke:INK,w:2.5,draw:clamp(pL*2)});
+    s+=path(`M${EQ(0,4)}L${EQ(7,4)}`,{stroke:INK,w:2.5,draw:clamp(pL*2-1)});
+    const piece=(r,c,a0,a1,label,size,cx,cy)=>{
+      const a=prog(t,a0,a1); if(a<=0) return '';
+      const q=EQ(cx,cy);
+      return path(D(ER(...r),EQ),{stroke:c,w:2,fill:c,fo:.42,op:a})+txt(q[0],q[1]+size*.35,label,{size,fill:'#fff',op:a});
+    };
+    s+=piece([0,0,4,4],CA,7.6,8.6,'a²',34,2,2);
+    s+=piece([4,4,7,7],CB,9.6,10.6,'b²',32,5.5,5.5);
+    s+=piece([4,0,7,4],CT,11.6,12.6,'ab',30,5.5,2);
+    s+=piece([0,4,4,7],CT,11.8,12.8,'ab',30,2,5.5);
+    const pc=prog(t,14.6,16);
+    const eq=`(a + b)² = <tspan fill="${CA}">a²</tspan> + <tspan fill="${CB}">b²</tspan> + <tspan fill="${CT}">2ab</tspan>`;
+    if(!robot){
+      s+=txt(440,150,`Top-left = <tspan fill="${CA}">a²</tspan>`,{size:22,anchor:'start',op:prog(t,7.8,8.6)});
+      s+=txt(440,196,`Bottom-right = <tspan fill="${CB}">b²</tspan>`,{size:22,anchor:'start',op:prog(t,9.8,10.6)});
+      s+=txt(440,242,`Two rectangles = <tspan fill="${CT}">ab + ab = 2ab</tspan>`,{size:22,anchor:'start',op:prog(t,12.6,13.4)});
+      if(pc>0) s+=`<rect x="420" y="268" width="360" height="84" rx="16" fill="${CT}" fill-opacity="${.14*pc}" stroke="${CT}" stroke-width="2" opacity="${pc}"/>`
+        +txt(600,320,eq,{size:28,op:pc});
+      s+=txt(600,382,`<tspan fill="${CA}">16</tspan> + <tspan fill="${CB}">9</tspan> + <tspan fill="${CT}">12 + 12</tspan> = 49 = 7²`,{size:20,op:prog(t,17.6,18.6)});
+      return s+captionBar(t,CAP_E);
+    }
+    s+=txt(223,396,eq,{size:26,op:pc});
+    return s+robotLayer(real,ET,CAP_EB);
+  };
+}
+/* robot hand path for the (a+b)^2 lesson */
+const ek=(a,p)=>[a*EK,p[0],p[1]];
+const pe=(x,y,dx=14,dy=12)=>{const p=EQ(x,y);return [p[0]+dx,p[1]+dy];};
+const ET={concl:[14.6*EK,16*EK],end:20.5*EK};
+ET.hk=[ek(0,REST),ek(.4,REST),ek(.5,pe(0,0,0,0)),ek(.9,pe(7,0,0,0)),ek(1.3,pe(7,7,0,0)),ek(1.7,pe(0,7,0,0)),
+  ek(2.4,[EQ(3.5,0)[0]+12,EY-4]),ek(3.1,pe(4,0,0,0)),ek(3.9,pe(4,7,0,0)),ek(4.2,pe(0,4,0,0)),ek(4.8,pe(7,4,0,0)),
+  ek(5.6,pe(3.5,3.5)),ek(7.6,pe(2,2)),ek(9.6,pe(5.5,5.5)),ek(11.6,pe(5.5,2)),ek(12.8,pe(2,5.5)),
+  ek(14.2,[170,376]),ek(16.2,[170,376]),ek(17.8,REST),ek(20.5,REST)];
+registerVisual({
+  id:'expand',
+  title:'Why does (a + b)² = a² + b² + 2ab ?',
+  modes:[
+    {id:'art',  label:'✏️ Line art',      duration:22,   frame:expandFrame(false)},
+    {id:'robot',label:'🤖 Robot explains',duration:ET.end,frame:expandFrame(true)}
+  ]
+});
+
+/* =====================================================================
+   VISUAL 4 : angles of a triangle add up to 180 degrees  (line art + robot)
+   ===================================================================== */
+const TK=1.45;                                  // robot mode is slower (x1.45)
+const TP=[[90,300],[400,300],[250,110]],TO=[250,366],TRAD=44;
+const TCOL=[CA,CB,CC],TNAME=['A','B','C'],idf=(x,y)=>[x,y];
+/* interior angle of each corner as a pie wedge: start angle s, sweep w (screen angles) */
+const TW=TP.map((p,i)=>{
+  const u=TP[(i+1)%3],w=TP[(i+2)%3];
+  const au=Math.atan2(u[1]-p[1],u[0]-p[0]),aw=Math.atan2(w[1]-p[1],w[0]-p[0]);
+  let d=aw-au;while(d>Math.PI)d-=2*Math.PI;while(d<=-Math.PI)d+=2*Math.PI;
+  return d>0?{s:au,w:d}:{s:aw,w:-d};
+});
+(function(){let acc=Math.PI;TW.forEach(w=>{
+  w.ts=acc;acc+=w.w;                              // target: wedges side by side on the straight line
+  let a=w.s;while(a-w.ts>Math.PI)a-=2*Math.PI;while(a-w.ts<-Math.PI)a+=2*Math.PI;w.s2=a;
+});})();
+function wedge(cx,cy,r,a0,sw){
+  const a1=a0+sw;
+  return `M${f(cx)} ${f(cy)}L${f(cx+r*Math.cos(a0))} ${f(cy+r*Math.sin(a0))}A${r} ${r} 0 ${sw>Math.PI?1:0} 1 ${f(cx+r*Math.cos(a1))} ${f(cy+r*Math.sin(a1))}Z`;
+}
+const MVT=[[5.4,7.4],[7.8,9.8],[10.2,12.2]];     // when each corner is torn off and moved
+const CAP_T=[
+  [.3,'Draw any triangle. It has three corners: A, B and C.'],
+  [2.2,'Colour the angle at each corner.'],
+  [4,'Now draw a straight line below it.'],
+  [5.4,'Tear off corner A and put its point on the line, on the left.'],
+  [7.8,'Now tear off corner B and put it right next to A.'],
+  [10.2,'Finally corner C. The three corners fit together perfectly!'],
+  [12.4,'Together they make a straight line, and a straight line is 180°.'],
+  [14.5,'So the three angles of ANY triangle always add up to 180° ✓'],
+  [16.6,'Check: 50° + 52° + 78° = 180° ✓']
+];
+const CAP_TB=[
+  [.4,"Hi, I'm Bolt! Let's see what the 3 angles of a triangle add up to."],
+  [2.2,'I colour each corner: A, B and C.'],
+  [4,'Here is a straight line.'],
+  [5.4,'I tear off corner A and put it on the line.'],
+  [7.8,'Corner B goes right next to it.'],
+  [10.2,'And corner C goes next to B.'],
+  [12.4,'Wow, they fill the whole straight line! A straight line is 180°.'],
+  [14.5,'So A + B + C = 180° 🎉 Always, for every triangle!'],
+  [16.8,'Here: 50° + 52° + 78° = 180°']
+].map(c=>[c[0]*TK,c[1]]);
+function angleFrame(robot){
+  const K=robot?TK:1;
+  return real=>{
+    const t=real/K;
+    let s=txt(400,44,'Angles of a triangle: <tspan fill="'+CA+'">A</tspan> + <tspan fill="'+CB+'">B</tspan> + <tspan fill="'+CC+'">C</tspan> = ?',{size:28});
+    const pT=prog(t,.4,2),pF=prog(t,2,3.5),pLn=prog(t,4,5.2),pSt=prog(t,12.4,13.4),pc=prog(t,14.5,15.8);
+    if(pT>=1) s+=path(D(TP,idf),{stroke:'none',w:0,fill:CT,fo:.14});
+    s+=path(D(TP,idf),{stroke:INK,w:3,draw:pT});
+    s+=txt(TP[0][0]-16,TP[0][1]+24,'A',{size:20,fill:CA,op:pF})+txt(TP[1][0]+16,TP[1][1]+24,'B',{size:20,fill:CB,op:pF})+txt(TP[2][0],TP[2][1]-12,'C',{size:20,fill:CC,op:pF});
+    s+=path('M100 366L400 366',{stroke:INK,w:3,draw:pLn});
+    s+=`<circle cx="250" cy="366" r="4" fill="${INK}" opacity="${pLn}"/>`;
+    for(let i=0;i<3;i++){
+      if(pF<=0) break;
+      const m=prog(t,...MVT[i]),k=ease(m);
+      const cx=lerp(TP[i][0],TO[0],k),cy=lerp(TP[i][1],TO[1],k),a0=lerp(TW[i].s2,TW[i].ts,k);
+      if(k>0) s+=path(wedge(TP[i][0],TP[i][1],TRAD,TW[i].s,TW[i].w),{stroke:TCOL[i],w:1.5,op:.3});
+      s+=path(wedge(cx,cy,TRAD,a0,TW[i].w),{stroke:(m>0&&m<1)?'#fff':TCOL[i],w:2,fill:TCOL[i],fo:.55,op:pF});
+      const mid=a0+TW[i].w/2;
+      s+=txt(cx+TRAD*.62*Math.cos(mid),cy+TRAD*.62*Math.sin(mid)+6,TNAME[i],{size:16,fill:'#0b1220',op:pF});
+    }
+    s+=path('M194 366A56 56 0 0 1 306 366',{stroke:INK,w:2.5,draw:pSt});
+    s+=txt(250,392,'180°',{size:20,op:pSt});
+    const eq=`<tspan fill="${CA}">A</tspan> + <tspan fill="${CB}">B</tspan> + <tspan fill="${CC}">C</tspan> = 180°`;
+    if(!robot){
+      s+=txt(440,150,'Tear off the three corners',{size:22,anchor:'start',op:prog(t,4.8,5.6)});
+      s+=txt(440,196,'They fit a straight line',{size:22,anchor:'start',op:prog(t,12,12.8)});
+      s+=txt(440,242,'Straight line = 180°',{size:22,anchor:'start',op:prog(t,12.6,13.4)});
+      if(pc>0) s+=`<rect x="430" y="262" width="340" height="84" rx="16" fill="${CT}" fill-opacity="${.14*pc}" stroke="${CT}" stroke-width="2" opacity="${pc}"/>`
+        +txt(600,316,eq,{size:34,op:pc});
+      s+=txt(600,382,`<tspan fill="${CA}">50°</tspan> + <tspan fill="${CB}">52°</tspan> + <tspan fill="${CC}">78°</tspan> = 180°`,{size:20,op:prog(t,16.6,17.6)});
+      return s+captionBar(t,CAP_T);
+    }
+    s+=txt(330,442,eq,{size:28,op:pc});
+    return s+robotLayer(real,TT,CAP_TB);
+  };
+}
+/* robot hand path for the triangle lesson (lesson-seconds x TK) */
+const tk=(a,p)=>[a*TK,p[0],p[1]];
+const hw=(i,k)=>{const a=lerp(TW[i].s2,TW[i].ts,k)+TW[i].w/2;
+  return [lerp(TP[i][0],TO[0],k)+TRAD*.62*Math.cos(a)+12,lerp(TP[i][1],TO[1],k)+TRAD*.62*Math.sin(a)+10];};
+const TT={concl:[14.5*TK,15.8*TK],end:19*TK};
+TT.hk=[tk(0,REST),tk(.4,REST),tk(.6,TP[0]),tk(1.1,TP[1]),tk(1.6,TP[2]),tk(2.1,[TP[2][0]+20,TP[2][1]+40]),
+  tk(2.5,hw(0,0)),tk(3,hw(1,0)),tk(3.5,hw(2,0)),tk(4.2,[100,366]),tk(5,[400,366]),
+  tk(5.4,hw(0,0)),tk(7.4,hw(0,1)),tk(7.8,hw(1,0)),tk(9.8,hw(1,1)),tk(10.2,hw(2,0)),tk(12.2,hw(2,1)),
+  tk(12.8,[194,356]),tk(13.4,[306,356]),tk(15,[475,440]),tk(17.2,[475,440]),tk(18.4,REST),tk(19,REST)];
+registerVisual({
+  id:'triangle-angles',
+  title:'Why do the angles of a triangle add up to 180°?',
+  modes:[
+    {id:'art',  label:'✏️ Line art',      duration:19,   frame:angleFrame(false)},
+    {id:'robot',label:'🤖 Robot explains',duration:TT.end,frame:angleFrame(true)}
+  ]
+});
+
+/* =====================================================================
+   VISUAL 5 : a^2 - b^2 = (a + b)(a - b)   (cut an L-shape, make a rectangle)
+   ===================================================================== */
+const DU=38,DX=90,DY=90,DQ=(x,y)=>[DX+DU*x,DY+DU*y];   // a = 5 units, b = 3 units
+const DK=1.45;
+const CAP_D=[
+  [.3,'Start with a big square of side a. Its area is a².'],
+  [3.4,'Cut a small square of side b out of one corner. Its area is b².'],
+  [5.8,'Throw it away. What is left is an L-shape with area a² − b².'],
+  [8.2,'Cut the L-shape into two rectangles (yellow and blue).'],
+  [10,'Rotate and slide the blue rectangle to the right of the yellow one.'],
+  [13.2,'The pieces now form ONE rectangle: length a + b, height a − b.'],
+  [15.5,'Same pieces, same area: a² − b² = (a + b)(a − b) ✓'],
+  [18,'Check with a = 5, b = 3:  25 − 9 = 16  and  8 × 2 = 16 ✓']
+];
+const CAP_DB=[
+  [.3,"Hi, I'm Bolt! Today: why a² − b² = (a + b)(a − b)."],
+  [2.2,'I draw a big square of side a. Its area is a².'],
+  [3.4,'Now I cut a small square, side b, from the corner.'],
+  [5.8,'I throw it away. The L-shape left has area a² − b².'],
+  [8.2,'I cut the L into two rectangles: yellow and blue.'],
+  [10,'Watch me rotate the blue one and slide it to the right...'],
+  [13.2,'One rectangle! Length a + b, height a − b.'],
+  [15.5,'So a² − b² = (a + b)(a − b) 🎉'],
+  [17.6,'Check: a = 5, b = 3 → 25 − 9 = 16 = 8 × 2. Yes!']
+].map(c=>[c[0]*DK,c[1]]);
+function diffFrame(robot){
+  const K=robot?DK:1;
+  return real=>{
+    const t=real/K;
+    let s=txt(400,44,'Why does <tspan fill="'+CA+'">a²</tspan> − <tspan fill="'+CB+'">b²</tspan> = (a + b)(a − b) ?',{size:28});
+    const pB=prog(t,.4,1.8),oSq=1-prog(t,9.8,10.6),pL=prog(t,1.8,2.6),pP=prog(t,2.4,3.2);
+    let g='';for(let k=1;k<5;k++) g+=`M${DQ(k,0)}L${DQ(k,5)}M${DQ(0,k)}L${DQ(5,k)}`;
+    s+=`<path d="${g}" stroke="#94a3b8" stroke-width="1" opacity="${.16*pB*oSq}" fill="none"/>`;
+    s+=path(D(ER(0,0,5,5),DQ),{stroke:INK,w:3,draw:pB,op:oSq});
+    s+=txt(DQ(2.5,0)[0],DY-12,'a',{size:19,fill:CA,op:pL*oSq});
+    s+=txt(DX-14,DQ(0,2.5)[1]+6,'a',{size:19,fill:CA,op:pL*oSq});
+    // piece 1 : top strip (stays)
+    const q1=DQ(2.5,1);
+    if(pP>0) s+=path(D(ER(0,0,5,2),DQ),{stroke:INK,w:2,fill:CA,fo:.4,op:pP});
+    // piece 2 : left block (rotates 90 degrees and slides to the right of the strip)
+    const mvp=ease(prog(t,10,13)),cx=lerp(1,6.5,mvp),cy=lerp(3.5,1,mvp),th=mvp*Math.PI/2,co=Math.cos(th),si=Math.sin(th);
+    const pts=[[-1,-1.5],[1,-1.5],[1,1.5],[-1,1.5]].map(p=>[cx+p[0]*co-p[1]*si,cy+p[0]*si+p[1]*co]);
+    const moving=mvp>0&&mvp<1;
+    if(pP>0){
+      s+=path(D(pts,DQ),{stroke:moving?'#fff':INK,w:moving?3.5:2,fill:CA,fo:.4,op:pP});
+      const pc2=prog(t,8.2,9.2);
+      if(pc2>0) s+=path(D(pts,DQ),{stroke:'none',w:0,fill:CT,fo:.5,op:pc2});
+      const q2=DQ(cx,cy);
+      s+=txt(q2[0],q2[1]+7,'2',{size:20,fill:'#fff',op:prog(t,8.6,9.4)});
+    }
+    s+=txt(q1[0],q1[1]+7,'a² − b²',{size:22,fill:'#fff',op:prog(t,7,7.8)*(1-prog(t,8.2,8.8))});
+    s+=txt(q1[0],q1[1]+7,'1',{size:20,fill:'#fff',op:prog(t,8.6,9.4)});
+    // the small b x b square: appears, then is thrown away
+    const bs=prog(t,3.5,4.5),rm=ease(prog(t,5.8,7.2));
+    if(bs*(1-rm)>0){
+      const q=DQ(3.5,3.5),qb=DQ(3.5,5),qr=DQ(5,3.5);
+      s+=`<g transform="translate(0 ${f(rm*1.8*DU)})" opacity="${bs*(1-rm)}">`
+        +path(D(ER(2,2,5,5),DQ),{stroke:CB,w:2,fill:CB,fo:.5})
+        +txt(q[0],q[1]+11,'b²',{size:32,fill:'#fff'})
+        +txt(qb[0],qb[1]+20,'b',{size:19,fill:CB})+txt(qr[0]+14,qr[1]+6,'b',{size:19,fill:CB})+'</g>';
+    }
+    // dimensions of the new rectangle
+    const pLb=prog(t,13.2,14.2);
+    s+=txt(DQ(4,0)[0],DY-12,'a + b',{size:17,op:pLb});
+    s+=`<text transform="translate(${DX-14} ${DQ(0,1)[1]+6}) rotate(-90)" font-size="17" font-weight="700" fill="${INK}" text-anchor="middle" opacity="${pLb}">a − b</text>`;
+    const pc=prog(t,15.5,17);
+    const eq=`<tspan fill="${CA}">a²</tspan> − <tspan fill="${CB}">b²</tspan> = <tspan fill="${CT}">(a + b)(a − b)</tspan>`;
+    if(!robot){
+      s+=txt(440,185,`Big square = <tspan fill="${CA}">a²</tspan>`,{size:22,anchor:'start',op:prog(t,2,2.8)});
+      s+=txt(440,225,`Cut out <tspan fill="${CB}">b²</tspan> → left <tspan fill="${CA}">a² − b²</tspan>`,{size:22,anchor:'start',op:prog(t,7,7.8)});
+      s+=txt(440,265,`Rearranged = <tspan fill="${CT}">(a + b)(a − b)</tspan>`,{size:22,anchor:'start',op:prog(t,13,13.8)});
+      if(pc>0) s+=`<rect x="420" y="285" width="360" height="70" rx="16" fill="${CT}" fill-opacity="${.14*pc}" stroke="${CT}" stroke-width="2" opacity="${pc}"/>`
+        +txt(600,328,eq,{size:24,op:pc});
+      s+=txt(600,388,`<tspan fill="${CA}">25</tspan> − <tspan fill="${CB}">9</tspan> = 16 = 8 × 2`,{size:20,op:prog(t,18,19)});
+      return s+captionBar(t,CAP_D);
+    }
+    s+=txt(240,400,eq,{size:26,op:pc});
+    return s+robotLayer(real,DT,CAP_DB);
+  };
+}
+/* robot hand path for the difference-of-squares lesson */
+const dk=(a,p)=>[a*DK,p[0],p[1]];
+const pdq=(x,y,dx=14,dy=12)=>{const p=DQ(x,y);return [p[0]+dx,p[1]+dy];};
+const DT={concl:[15.5*DK,17*DK],end:20*DK};
+DT.hk=[dk(0,REST),dk(.4,REST),dk(.6,pdq(0,0,0,0)),dk(1,pdq(5,0,0,0)),dk(1.4,pdq(5,5,0,0)),dk(1.8,pdq(0,5,0,0)),
+  dk(2.5,[DQ(2.5,0)[0]+12,DY-4]),dk(3.6,pdq(3.5,3.5)),dk(5.8,pdq(3.5,3.5)),dk(7.2,pdq(3.5,5.2)),
+  dk(7.7,pdq(2.5,1)),dk(8.6,pdq(1,3.5)),dk(10,pdq(1,3.5)),dk(13,pdq(6.5,1)),
+  dk(13.7,[DQ(4,0)[0]+12,DY-4]),dk(14.4,[DX-4,DQ(0,1)[1]+10]),dk(15.7,[440,404]),dk(17.6,[440,404]),dk(19,REST),dk(20,REST)];
+registerVisual({
+  id:'diff-squares',
+  title:'Why does a² − b² = (a + b)(a − b) ?',
+  modes:[
+    {id:'art',  label:'✏️ Line art',      duration:20,   frame:diffFrame(false)},
+    {id:'robot',label:'🤖 Robot explains',duration:DT.end,frame:diffFrame(true)}
+  ]
+});
+
+/* =====================================================================
+   CAROUSEL ENGINE  (slides slide sideways; the active slide animates itself)
+   ===================================================================== */
+const track=$('#vcTrack'),view=$('#vcView'),svgs=[],slides=[];
+const cur=()=>VISUALS[S.vi].modes[S.mi];
+const previewT=v=>v.modes[0].preview!=null?v.modes[0].preview:v.modes[0].duration*.9;
+
+function rebuild(){
+  track.innerHTML='';svgs.length=0;slides.length=0;
+  VISUALS.forEach((v,i)=>{
+    const sl=document.createElement('div');sl.className='vc-slide';
+    sl.innerHTML='<div class="vc-head"><span class="vc-count">'+(i+1)+' / '+VISUALS.length+'</span><b>'+v.title+'</b></div>'
+      +'<div class="vc-stage"><svg viewBox="0 0 800 480" role="img" aria-label="'+v.title+'"></svg></div>';
+    sl.onclick=()=>{if(i!==S.vi) go(i);};
+    track.appendChild(sl);slides.push(sl);svgs.push(sl.querySelector('svg'));
+  });
+  buildDots();buildModes();layout();renderAll();ui();
+}
+function layout(){
+  const w=view.clientWidth||800, sw=w<640?w*.88:Math.min(w*.62,760), gap=22;
+  slides.forEach((sl,i)=>{sl.style.flexBasis=sw+'px';sl.classList.toggle('on',i===S.vi);});
+  track.style.transform='translateX('+((w-sw)/2-S.vi*(sw+gap))+'px)';
+}
+function renderAll(){
+  VISUALS.forEach((v,i)=>{
+    const act=i===S.vi, m=act?cur():v.modes[0];
+    svgs[i].innerHTML=m.frame(act?Math.min(S.t,m.duration):previewT(v));
+  });
+  progress();
+}
+function render(){
+  const m=cur();
+  svgs[S.vi].innerHTML=m.frame(Math.min(S.t,m.duration));
+  progress();
+}
+function progress(){
+  const m=cur();
+  $('#vcFill').style.width=(clamp(S.t/m.duration)*100)+'%';
+  $('#vcInfo').textContent='Lesson '+(S.vi+1)+' of '+VISUALS.length+'  ·  '+Math.floor(S.t)+'s / '+Math.round(m.duration)+'s';
+}
+function ui(){$('#bPlay').textContent=S.playing?'⏸ Pause':'▶ Play';}
+function buildModes(){
+  const v=VISUALS[S.vi],box=$('#vcModes');box.innerHTML='';
+  $('#vcModeBox').style.display=v.modes.length>1?'':'none';
+  v.modes.forEach((m,i)=>{
+    const b=document.createElement('button');b.textContent=m.label;b.className=i===S.mi?'on':'';
+    b.onclick=()=>{S.mi=i;S.t=0;clearTimeout(S.adv);buildModes();render();if(!S.playing) play();};
+    box.appendChild(b);
+  });
+}
+function buildDots(){
+  const d=$('#vcDots');d.innerHTML='';
+  VISUALS.forEach((v,i)=>{
+    const b=document.createElement('button');b.title=v.title;b.setAttribute('aria-label',v.title);
+    b.className=i===S.vi?'on':'';b.onclick=()=>go(i);d.appendChild(b);
+  });
+}
+function tick(ts){
+  if(!S.playing) return;
+  S.t+=(ts-S.last)/1000;S.last=ts;
+  if(S.t>=cur().duration){S.t=cur().duration;S.playing=false;render();ui();onEnd();return;}
+  render();requestAnimationFrame(tick);
+}
+function play(){
+  if(S.playing) return;
+  clearTimeout(S.adv);S.manual=false;
+  if(S.t>=cur().duration) S.t=0;
+  S.playing=true;S.last=performance.now();ui();requestAnimationFrame(tick);
+}
+function pause(manual=true){S.playing=false;if(manual) S.manual=true;clearTimeout(S.adv);ui();}
+function onEnd(){clearTimeout(S.adv);S.adv=setTimeout(()=>{if(!S.manual) go(S.vi+1);},2200);}
+function go(i,auto=true){
+  if(S.busy||!VISUALS.length) return;
+  S.busy=true;clearTimeout(S.adv);S.playing=false;
+  S.vi=(i+VISUALS.length)%VISUALS.length;S.mi=0;S.t=0;
+  buildDots();buildModes();layout();renderAll();ui();
+  setTimeout(()=>{S.busy=false;if(auto) play();},560);   // wait for the slide animation
+}
+
+$('#bPlay').onclick=()=>S.playing?pause(true):play();
+$('#bRep').onclick=()=>{clearTimeout(S.adv);S.t=0;if(S.playing) render();else play();};
+$('#bNext').onclick=$('#aNext').onclick=()=>go(S.vi+1);
+$('#bPrev').onclick=$('#aPrev').onclick=()=>go(S.vi-1);
+$('#vcCar').onkeydown=e=>{if(e.key==='ArrowRight') go(S.vi+1);if(e.key==='ArrowLeft') go(S.vi-1);};
+let sx=null;
+view.addEventListener('pointerdown',e=>{sx=e.clientX;});
+view.addEventListener('pointerup',e=>{
+  if(sx===null) return; const dx=e.clientX-sx; sx=null;
+  if(Math.abs(dx)>50) go(S.vi+(dx<0?1:-1));
+});
+window.addEventListener('resize',layout);
+
+S.ready=true;rebuild();
+
+/* start when the carousel scrolls into view, pause when it leaves */
+new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    if(!S.manual&&!S.playing&&!S.busy){ S.t>=cur().duration?go(S.vi+1):play(); }
+  } else if(S.playing){ pause(false); }
+}),{threshold:.4}).observe($('#vcCar'));
+if(window.parent!==window){
+  const reportHeight=()=>window.parent.postMessage(
+    {type:'visual-lessons-height',height:document.documentElement.scrollHeight},
+    window.location.origin
+  );
+  const observer=new ResizeObserver(()=>requestAnimationFrame(reportHeight));
+  observer.observe(document.documentElement);
+  window.addEventListener('load',reportHeight);
+  window.addEventListener('resize',reportHeight);
+  reportHeight();
+}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,896 @@
+[
+  {
+    "title": "Full ASCII table",
+    "date": "2025-11-15",
+    "category": "ASCII",
+    "tags": [
+      "ascii table",
+      "ascii values",
+      "character ascii codes",
+      "alphanumeric ascii",
+      "printable ascii characters",
+      "ascii control characters",
+      "extended ascii table",
+      "unicode code points",
+      "character encoding standards",
+      "ascii to unicode mapping"
+    ],
+    "link": "a",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "ASCII table",
+        "description": "A computer understands only two states: on and off, represented by the binary digits 1 and 0. To bridge the gap between this binary world and human-readable text, a standardized mapping system was created. This system is the American Standard Code for Information Interchange, or ASCII.\n\nThe Purpose and Function of ASCII\nASCII serves as a universal translator between humans and machines. It assigns a unique numerical code to every character on a standard keyboard, including letters, digits, punctuation, and special control commands. This ensures that when you press the 'A' key on your keyboard, it is consistently stored and transmitted as the number 65 inside the computer, regardless of the computer's make or model. This standardization is crucial for reliable data storage, processing, and communication between different systems.\n\nThe Structure of the ASCII Table\nThe original ASCII standard uses 7 bits, which allows for 128 unique codes, numbered from 0 to 127. These codes are logically divided into two main groups.\n\nThe first 32 codes, from 0 to 31, are designated as Control Characters. These are non-printable commands originally designed to control hardware devices like teletype printers and terminals. For example, code 10 represents a Line Feed, which moves the cursor down, and code 13 represents a Carriage Return, which returns the cursor to the beginning of the line. Code 7 triggers an audible bell sound.\n\nCode 32 is the Space character, which is printable but invisible.\n\nThe remaining codes, from 33 to 126, are the Printable Characters. This segment contains the familiar set of characters used in everyday computing.\n\nCodes 48 to 57 represent the digits 0 through 9.\nCodes 65 to 90 represent the uppercase Latin letters A through Z.\nCodes 97 to 122 represent the lowercase Latin letters a through z.\n\nThe rest of the codes are filled with punctuation marks and common mathematical and typographical symbols.\n\nThe final code, 127, represents the DELETE control character.\n\nExtended ASCII: Beyond 127\nThe original 7-bit ASCII was soon extended to 8 bits, or one byte, in various proprietary and standardized ways. This allowed for an additional 128 codes, from 128 to 255. This upper range, often called Extended ASCII, was used to represent special characters, accented letters for non-English languages, and drawing symbols. Unlike the standard 0-127 range, the meanings of codes 128-255 were not universally consistent and depended on the specific character encoding used, such as ISO-8859-1 or the Windows-1252 code page.\n\nThe Practical Benefits of ASCII Knowledge\nUnderstanding ASCII provides a deeper insight into how computers operate. For programmers, it is essential for tasks involving character manipulation, string processing, and low-level data encoding. It explains why converting a lowercase letter to uppercase simply involves subtracting 32 from its ASCII value, and it is the foundational layer upon which modern, comprehensive encoding systems like Unicode are built.\n\nIn summary, the ASCII table is more than a historical artifact; it is the fundamental dictionary that defines how text is represented in the digital realm. Every piece of text in a program, every message sent over a network, and every document stored on a disk relies on the principles established by this simple yet powerful encoding standard.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\n----------------------------------->> ASCII table (0 to 255) <<----------------------------------------\n\n\nDec  Hex  Oct   Char        Dec  Hex  Oct   Char        Dec  Hex  Oct   Char        Dec  Hex  Oct   Char\n0    00   000   NUL         64   40   100   @           128  80   200   Ç           192  C0   300   À\n1    01   001   SOH         65   41   101   A           129  81   201   ü           193  C1   301   Á\n2    02   002   STX         66   42   102   B           130  82   202   é           194  C2   302   Â\n3    03   003   ETX         67   43   103   C           131  83   203   â           195  C3   303   Ã\n4    04   004   EOT         68   44   104   D           132  84   204   ä           196  C4   304   Ä\n5    05   005   ENQ         69   45   105   E           133  85   205   à           197  C5   305   Å\n6    06   006   ACK         70   46   106   F           134  86   206   å           198  C6   306   Æ\n7    07   007   BEL         71   47   107   G           135  87   207   ç           199  C7   307   Ç\n8    08   010   BS          72   48   110   H           136  88   210   ê           200  C8   310   È\n9    09   011   TAB         73   49   111   I           137  89   211   ë           201  C9   311   É\n10   0A   012   LF          74   4A   112   J           138  8A   212   è           202  CA   312   Ê\n11   0B   013   VT          75   4B   113   K           139  8B   213   ï           203  CB   313   Ë\n12   0C   014   FF          76   4C   114   L           140  8C   214   î           204  CC   314   Ì\n13   0D   015   CR          77   4D   115   M           141  8D   215   ì           205  CD   315   Í\n14   0E   016   SO          78   4E   116   N           142  8E   216   Ä           206  CE   316   Î\n15   0F   017   SI          79   4F   117   O           143  8F   217   Å           207  CF   317   Ï\n16   10   020   DLE         80   50   120   P           144  90   220   É           208  D0   320   Ð\n17   11   021   DC1         81   51   121   Q           145  91   221   æ           209  D1   321   Ñ\n18   12   022   DC2         82   52   122   R           146  92   222   Æ           210  D2   322   Ò\n19   13   023   DC3         83   53   123   S           147  93   223   ô           211  D3   323   Ó\n20   14   024   DC4         84   54   124   T           148  94   224   ö           212  D4   324   Ô\n21   15   025   NAK         85   55   125   U           149  95   225   ò           213  D5   325   Õ\n22   16   026   SYN         86   56   126   V           150  96   226   û           214  D6   326   Ö\n23   17   027   ETB         87   57   127   W           151  97   227   ù           215  D7   327   ×\n24   18   030   CAN         88   58   130   X           152  98   230   ÿ           216  D8   330   Ø\n25   19   031   EM          89   59   131   Y           153  99   231   Ö           217  D9   331   Ù\n26   1A   032   SUB         90   5A   132   Z           154  9A   232   Ü           218  DA   332   Ú\n27   1B   033   ESC         91   5B   133   [           155  9B   233   ø           219  DB   333   Û\n28   1C   034   FS          92   5C   134   \\           156  9C   234   £           220  DC   334   Ü\n29   1D   035   GS          93   5D   135   ]           157  9D   235   Ø           221  DD   335   Ý\n30   1E   036   RS          94   5E   136   ^           158  9E   236   ×           222  DE   336   Þ\n31   1F   037   US          95   5F   137   _           159  9F   237   ƒ           223  DF   337   ß\n\n32   20   040   Space       96   60   140   `           160  A0   240   á           224  E0   340   à\n33   21   041   !           97   61   141   a           161  A1   241   í           225  E1   341   á\n34   22   042   \"           98   62   142   b           162  A2   242   ó           226  E2   342   â\n35   23   043   #           99   63   143   c           163  A3   243   ú           227  E3   343   ã\n36   24   044   $           100  64   144   d           164  A4   244   ñ           228  E4   344   ä\n37   25   045   %           101  65   145   e           165  A5   245   Ñ           229  E5   345   å\n38   26   046   &           102  66   146   f           166  A6   246   ª           230  E6   346   æ\n39   27   047   '           103  67   147   g           167  A7   247   º           231  E7   347   ç\n40   28   050   (           104  68   150   h           168  A8   250   ¿           232  E8   350   è\n41   29   051   )           105  69   151   i           169  A9   251   ®           233  E9   351   é\n42   2A   052   *           106  6A   152   j           170  AA   252   ¬           234  EA   352   ê\n43   2B   053   +           107  6B   153   k           171  AB   253   «           235  EB   353   ë\n44   2C   054   ,           108  6C   154   l           172  AC   254   ¬           236  EC   354   ì\n45   2D   055   -           109  6D   155   m           173  AD   255   ­           237  ED   355   í\n46   2E   056   .           110  6E   156   n           174  AE   256   ®           238  EE   356   î\n47   2F   057   /           111  6F   157   o           175  AF   257   ¯           239  EF   357   ï\n\n48   30   060   0           112  70   160   p           176  B0   260   °           240  F0   360   ð\n49   31   061   1           113  71   161   q           177  B1   261   ±           241  F1   361   ñ\n50   32   062   2           114  72   162   r           178  B2   262   ²           242  F2   362   ò\n51   33   063   3           115  73   163   s           179  B3   263   ³           243  F3   363   ó\n52   34   064   4           116  74   164   t           180  B4   264   ´           244  F4   364   ô\n53   35   065   5           117  75   165   u           181  B5   265   µ           245  F5   365   õ\n54   36   066   6           118  76   166   v           182  B6   266   ¶           246  F6   366   ö\n55   37   067   7           119  77   167   w           183  B7   267   ·           247  F7   367   ÷\n56   38   070   8           120  78   170   x           184  B8   270   ¸           248  F8   370   ø\n57   39   071   9           121  79   171   y           185  B9   271   ¹           249  F9   371   ù\n58   3A   072   :           122  7A   172   z           186  BA   272   º           250  FA   372   ú\n59   3B   073   ;           123  7B   173   {           187  BB   273   »           251  FB   373   û\n60   3C   074   <           124  7C   174   |           188  BC   274   ¼           252  FC   374   ü\n61   3D   075   =           125  7D   175   }           189  BD   275   ½           253  FD   375   ý\n62   3E   076   >           126  7E   176   ~           190  BE   276   ¾           254  FE   376   þ\n63   3F   077   ?           127  7F   177   DEL         191  BF   277   ¿           255  FF   377   ÿ\n\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763186904564-a9fiod"
+  },
+  {
+    "title": "Subarray Substring Subsegment Subsequence Subset",
+    "date": "2025-10-27",
+    "category": "Subarray Subsequence",
+    "tags": [
+      "Subarray",
+      "Substring",
+      "Subsegment",
+      "Subsequence",
+      "Subset"
+    ],
+    "link": "",
+    "images": [
+      "adfadsfasdf/sdfasfs"
+    ],
+    "sections": [
+      {
+        "subtitle": "Subarray Substring Subsegment Subsequence Subset",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nSubarray / Substring/ Subsegment → continuous part\nSubsequence                      → skip allowed, order kept\nSubset                           → skip allowed, order doesn’t matter\n\n\nSubArray / Substring / SubSegment: continuous portion and in order\nSubSequence                      : not continuous but in order\nSubSet                           : not continuous, and order doesn’t matter\n\n\nNumber of subsets                               = 2^n       ( with-Empty set)\nNumber of subSequence                           = 2^n-1     ( Non-Empty  set)\nNumber of subArrays Or subStrings or subsegment = n*(n+1)/2 ( Non-Empty  set)\n\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Subarray Substring Subsegment Subsequence Subset visualization table",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n__________________________________________________________________________________\n| Term      | Used For       |Continuous| Order  | Skip  |        Example        |\n|           |                |          |Matters |Allowed|                       |\n| --------- | ---------------| ---------|--------| ------| ----------------------|\n|Subarray   | Array          |✅ Yes    |✅ Yes |❌ No  | [2,3] from [1,2,3,4]  |\n|Substring  | String         |✅ Yes    |✅ Yes |❌ No  | \"bc\" from \"abcd\"      |\n|Subsegment | Array / String |✅ Yes    |✅ Yes |❌ No  | [1,2,3] from [1,2,3,4]|\n|Subsequence| Array / String |❌ No     |✅ Yes |✅ Yes | [1,3,4] from [1,2,3,4]|\n|Subset     | Set            |❌ No     |❌ No  |✅ Yes | {1,4} from {1,2,3,4}  |\n----------------------------------------------------------------------------------\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "SubArray or SubSegment",
+        "description": "SubArray or SubSegment: A continuous portion or contiguous sequence \n                        within an array and in order.\n\n\nlet Example arr [] = {1,2,3,4,5}\n\nSubarray: \n\n{}           an empty array is a subarray\n{1,2}        contiguous part\n{2,3}        contiguous part\n{1,2,3,4,5}  main arr itself as a subarray\n{2}          single element \n\nNot Subarray:\n\n{2,4}  present in the array but not contiguous (next to each other)\n{5,4}  order is not the same as the main array\n\n\n\nNon-Empty subArray = n* (n+1)/2",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nNon-Empty subArray = n* (n+1)/2\n \nlet Example arrary [] = {1,2,3,4,5}\n\nStarting from 1:  Starting from 2 :  Starting from 3:  Starting from 4:  Starting from 5: \n\n{1}                \n{1,2}             {2}              \n{1,2,3}           {2,3}              {3}\n{1,2,3,4}         {2,3,4}            {3,4}             {4}\n{1,2,3,4,5}       {2,3,4,5}          {3,4,5}           {4,5}             {5}\n\nhere n = 5  ---->>  5* (5+1)/2 = 15\nTotal  = 15   (without empty array {} )     \n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Things to know about  Subarray or Subsegment",
+        "description": "• We can use curly brackets {} or square brackets [] to denote arrays.\n• Should be a contiguous subsequence of the parent array. \n  As a result, {1, 1} is not a valid subarray of the array {1, 2, 1}. \n  Since {2} in the middle is skipped, it is not a contiguous subsequence\n  anymore.\n• The full array itself is a subarray of itself.\n• An empty array is a subarray of any array.\n• Order of elements in the subarray should be the same as in the array.\n   As a result, {2, 1, 1} is not a subarray of {1, 2, 1}.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Substring",
+        "description": "Substring: A Substring is the same thing as a subarray \n           But in the context of strings.\n\n\nNon-Empty substring = n* (n+1)/2",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nFor instance, the substrings of the string \"apple\" would be:\n\nLength 1:  Length 2:  Length 3:  Length 4:  Length 5:   Length 0:\n\n\"a\",\n\"p\",       \"ap\",\n\"p\",       \"pp\",      \"app\",\n\"l\",       \"pl\",      \"ppl\",     \"appl\",\n\"e\"        \"le\"       \"ple\"      \"pple\"     \"apple\"     \"\"\n\nNon-Empty substring = n* (n+1)/2\nHere n = 5 -->> 5*(5+1)/2 = 15 (without \"\" cause we are not considering the empty string)\nTotal = 15\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Things to know about Substring",
+        "description": "• A substring is just a subarray that is made up of only characters.\n• You can use single ‘ or double quotes \" to denote substrings.\n• All the rules mentioned for subarrays also apply to substrings.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "SubSequence",
+        "description": "SubSequence: May not be contiguous, but maintain the relative order.\n\n\nFor instance. let, arr [] = {1,2,3,4,5}\n\nSubsequence: \n            {2,3,4} (valid cause in order)\n            {2,4}   (valid cause in order)\n            {1,2,5} (valid cause in order)\n\nNot sa ubsequence:\n\n{5,4}      (not following order (4 is before 5) )\n{1,2,5,3}  (not following order (3 is before 5) )\n\nNon-Empty SubSequence: 2^n - 1",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nNon-Empty SubSequence: 2^n - 1\n\nFor instance. let, arr [] =  {1,2,3}\n\nLength 1:   Length 2:    Length 3: \n\n{1}         {1,2}\n{2}         {2,3}\n{3}         {1,3}        {1,2,3}\n\nhere n = 3 --->> 2^3 - 1 = 7\nTotal  = 7 subsequences are possible.  \n                                    >>(for every element we have 2 options . \n                                       Either we can include or exclude) >> 2^n -1\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "SubSet",
+        "description": "SubSet: May not be contiguous and may not be in order \n         (duplicate not acceptable). A set is a subset of \n         another set if all its elements are contained \n         by that set.\n\nThis means neither contiguity nor ordering of elements matters.\n\nNumber of subsets  = 2^n \n\n\nFor instance, the subsets of the set  --->>  {1, 2, 3} \n\nAll subsets would be: ----->>  \n  \nLength 1   Length 2    Length 3    Length 0\n{1},       {1, 2},\n{2},       {1, 3},\n{3}        {2, 3},     {1, 2, 3}   {} or ∅\n \nHere n is 3 --> 2^3 = 8\nTotal = 8",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nFor instance, the subsets of the set  --->>  {1, 2, 3} \n\nAll subsets would be: ----->>  \n  \nLength 1   Length 2    Length 3    Length 0\n{1},       {1, 2},\n{2},       {1, 3},\n{3}        {2, 3},     {1, 2, 3}   {} or ∅\n \nHere n is 3 --> 2^3 = 8\nTotal = 8 \n\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Things to know about Subset",
+        "description": "• Subsets do not need to be contiguous. {1, 3} is a perfectly valid subset.\n• Subsets do not need to preserve element order. As a result, both {1, 2} \n  and {2, 1} represent the same subset. While listing the subsets of the set, \n  you can either write {1, 2} or {2, 1}, and it does not matter. But you cannot\n  list both at the same time since they are the same thing.\n\n• Note on Sets: Unlike arrays, strings, and sequences, sets do not allow\n                duplicate elements. As a result, {1, 2, 1} would not be a valid set.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nFor instance, the subsets of the set  --->>  {1, 2, 3} \n\nALL POSSIBLE SUBSETS:\n┌─────────────────┬──────────────────┐\n│ Valid Subsets   │ Invalid/Redundant│\n├─────────────────┼──────────────────┤\n│ ∅ (empty set)   │ {2, 1}           │\n│ {1}             │ (same as {1, 2}) │\n│ {2}             │                  │\n│ {3}             │ {1, 2, 1}        │\n│ {1, 2}          │ (duplicates)     │\n│ {1, 3}          │                  │\n│ {2, 3}          │ {3, 2, 1}        │\n│ {1, 2, 3}       │ (same as {1,2,3})│\n└─────────────────┴──────────────────┘\n\n\n\nPROPERTIES:\n          ● NON-CONTIGUOUS: {1, 3} ✓\n          ● ORDER-AGNOSTIC: {1, 2} ≡ {2, 1}\n          ● NO DUPLICATES: {1, 2, 1} ✗\n\n\nlet Universal Set U = {1, 2, 3}\n\n\n{1,2} {1,3} {2,3}\n |\\   / \\   /|\n | \\ /   \\ / |\n |  X     X  |\n | / \\   / \\ |\n{1}   {2}  {3}\n  \\    |   /\n   \\   |  /\n    \\  | /\n       ∅\n       ^\n       |\n       |\n   {1, 2, 3}\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n------>>  Subarray Substring Subsegment Subsequence Subset\n\n\n                ****************                \n            *       SubSet          *            \n         *                            *         \n      *            ********             *      \n    *          **            **           *    \n   *        *     SubSequence   *           *   \n  *       *                       *          *  \n *       *          *******        *          * \n*       *       **           **     *         *\n*      *       *                *    *        *\n*      *      *                  *   *        *\n*      *     *                   *   *        *\n*      *     *     SubArray/     *   *        *\n*      *     *     SubString/    *   *        *\n*      *     *     Subsegment    *   *        *\n*      *     *                   *   *        *\n*       *     *                  *   *        *\n *       *      *              *    *         * \n  *       *       *          *     *         *  \n   *        *        ******     *          *   \n    *          **             **          *    \n      *             *******             *      \n         *                            *         \n            *                       *            \n                ****************     \n\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1761544237871-x6nu6p"
+  },
+  {
+    "title": "Reverse the order of element in array",
+    "date": "2025-08-12",
+    "category": "Array",
+    "tags": [
+      "C",
+      "C++",
+      "Beginner",
+      "Array",
+      "Reverse order"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Reverse the order of element in array",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncout << \"Enter the size of the array: \";\ncin >> n;\nint a[n]= {};\n\nfor(int i = 0; i<n; i++) cin >> a[i]; // take input form the user // 0 base indexing used\n\nfor(int i = 0, j = n-1; i<j; i++, j--){ // reverse the order of element \n     int tempVariable = a[i]; // temporary variable used to swap the value between 2 index\n      a[i] = a[j];\n       a[j] = tempVariable;\n}\nfor(int i = 0; i<n; i++) cout << a[i] << \" \"; // print the output\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755016795630-ntcx9c"
+  },
+  {
+    "title": "Print an array in reverse order",
+    "date": "2025-08-12",
+    "category": "Array",
+    "tags": [
+      "C",
+      "C++",
+      "Beginner",
+      "Array",
+      "Reverse order"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Print an array in reverse order",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\nprintf(\"Enter the value of n : \");\ncin >> n;\nint a[n] = {};\n\ncout << \"Enter the array: \";\nfor(int i = n-1;i>=0;i--)cin >> a[i];\nfor(int i = 0; i<n;i++)cout << a[i] << \" \";\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755015390685-wmyhh9"
+  },
+  {
+    "title": "Frequency array ||  Histogram || Count array || Counting array",
+    "date": "2025-08-12",
+    "category": "Frequency array",
+    "tags": [
+      "C",
+      "C++",
+      "Frequency array",
+      "Histogram",
+      "Count array",
+      "Counting array",
+      "Map",
+      "Key value Pair"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Frequency array ||  Histogram || Count array || Counting array",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "A frequency array is known as a histogram, a count array, or a counting array. It's a data structure that stores the frequency (number of occurrences) of each element in a dataset.\n\nHow it works:\nInitialization: The frequency array is typically initialized with zeros.\nMapping: The index of the frequency array corresponds to a unique element in the input dataset.\nCounting: The value stored at that index in the frequency array represents the number of times that corresponding element appears in the input dataset.\n\nWhy mapping? -->> cause it works like an actual map function.\nlike -->> pair of (key & it's value)\nMapping means representing data through another data set.\n\n\n// Example integer array = 1 4 1 1 1 3 2 4 4 3\n\n// Here Frequency >> 1 appears 4 times in the array\n                     2 appears 1 time  in the array\n                     3 appears 2 times in the array\n                     4 appears 3 times in the array\n\nSo now we can say >>\n                   key -> 1    value -> 4\n                   key -> 2    value -> 1\n                   key -> 3    value -> 2\n                   key -> 4    value -> 3\n\n\nIn code: (here we assigned manually, but in real programming we will calculate them using loops)\n\nint a[5]; // size is (max value's number + 1) -->> Cause 0 base indexing in C & C++ (so be careful)\n// here max value is 4 -->> size will be ->> 5\n\n\na[1] = 4;\na[2] = 1;\na[3] = 2;\na[4] = 3;\n\n------------------------------------------------------------------\n\n// Example string = \"meow me now\"\n\n// Here Frequency >> 'm' appears 2 times in the string\n                     'e' appears 2 times in the string\n                     'o' appears 2 times in the string\n                     'w' appears 2 times in the string\n                     'n' appears 1 time  in the string\n\n// So now we can say >>\n//    key -> 'm' (12th index)    value -> 2\n//    key -> 'e' (4th index)     value -> 2\n//    key -> 'o' (14th index)    value -> 2\n//    key -> 'w' (22th index)    value -> 2\n//    key -> 'n' (13th index)    value -> 1\n\n// In code: (assigned manually, but in real programming we will calculate using loops)\n\nint a[26]; // 26 letters,  //  -->> 0 base indexing. So\n\n\na[4]  = 2; // 'e'\na[12] = 2; // 'm'\na[13] = 1; // 'n'\na[14] = 2; // 'o'\na[22] = 2; // 'w'",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Frequency array for Integer Value",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncout << \"Enter the size of the Integer array : \"\ncin >> n;\nint a[n+1] = {};\n\ncout << \"Enter total \"<< n << \" numbers between \"\n    << 1 << \"  &  \" << n << endl;\n\nfor(int i = 0; i<n; i++){\n   int x;\n   cin >> x;\n   a[x]++;\n}\nfor(int i =1; i<=n; i++)cout << \"Key \"<< i<< \"  \"<< \"&\"\n                     <<\"  \"<< \"value \"   << a[i] <<endl;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Frequency array for Character Value",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncout << \"Enter String size: \";\ncin >> n;\nchar c[n] = {};\nint a[26] = {};\nchar c1;\n\nscanf(\"%c\", &c1);// c1 used to handle buffer\ncout << \"Enter any string: \";\ngets(c);\n\nint l = strlen(c);\nfor(int i = 0; i<l; i++){\n   c[i] = tolower(c[i]); // small letter conversion\n   int x = (int)c[i];\n   if(x>96 && x<123){ //ascii value --> 97 to 122 (small letter a to z)\n      x -= 97;\n      a[x]++;\n   }\n}\n\ncout << endl;\n\nfor(int i =0; i<26; i++){\nif(a[i]>0){\nchar z = (char)i  + 'a';\ncout << \"Key \"<< z << \"  \"<< \"&\"\n         <<\"  \"<< \"value \" << a[i] <<endl;\n}\n}\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755013405095-k5ku03"
+  },
+  {
+    "title": "Sum of all Column of a Matrix",
+    "date": "2025-08-12",
+    "category": "Matrix",
+    "tags": [
+      "C",
+      "C++",
+      "Beginner",
+      "Matrix",
+      "2d Matrix",
+      "Sum of column"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Sum of all Column of a Matrix",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint m,n;\ncin >> m>>n;\nint a[m][n] = {};\nint sumOfColumn[n] = {};\n\nfor(int i=0; i<m; i++)\n   for(int j = 0; j<n; j++)\n      cin >> a[i][j];\n\nfor(int i=0; i<n; i++)\n   for(int j = 0; j<m; j++)\n       sumOfColumn[i] += a[j][i];\n\nfor(int i =0; i<n; i++) cout << sumOfColumn[i] << \" \";\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754995113198-bx2z7l"
+  },
+  {
+    "title": "Sum of all row of a Matrix",
+    "date": "2025-08-12",
+    "category": "Matrix",
+    "tags": [
+      "C",
+      "C++",
+      "Beginner",
+      "Matrix",
+      "2d Matrix",
+      "Sum of row"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Sum of all row of a Matrix",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint m,n;\ncin >> m>>n;\nint a[m][n] = {};\nint sumOfRow[m] = {};\n\nfor(int i=0; i<m; i++)\n   for(int j = 0; j<n; j++)\n      cin >> a[i][j];\n\nfor(int i=0; i<m; i++)\n   for(int j = 0; j<n; j++)\n      sumOfRow[i] += a[i][j];\n\nfor(int i =0; i<n; i++)cout << sumOfRow[i]<< \" \";\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754994977160-qktgd7"
+  },
+  {
+    "title": "Matrix",
+    "date": "2025-08-12",
+    "category": "Matrix",
+    "tags": [
+      "C",
+      "C++",
+      "Beginner",
+      "Matrix",
+      "2d Matrix",
+      "Grid visualization"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Matrix",
+        "description": "In C & C++ programming, a matrix is typically represented using a two-dimensional array. A two-dimensional array is essentially an array of arrays, forming a grid-like structure with rows and columns.\n\n\nDeclared:\nint matrix[rows][columns]; // Declaration\n\n\nDeclared and initialized manually:\n\n// 2 by 3 matrix \nint matrix[2][3] = { {1, 4, 2}, {3, 6, 8} }; // Declaration and Initialization",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Declared:\nint matrix[rows][columns]; // Declaration\n\n\nDeclared and initialized manually:\n\n// 2 by 3 matrix \nint matrix[2][3] = { {1, 4, 2}, {3, 6, 8} }; // Declaration and Initialization",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "User input in Matrix & Print & Grid Visualization",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/// In the name of ALLAH\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint m,n;\ncin >> m>>n;\nint a[m][n] = {};\n\n// User input\nfor(int i=0; i<m; i++)\n   for(int j = 0; j<n; j++)\n      cin >> a[i][j];\ncout << endl << endl;\n\n// Grid Visualization\nfor(int i=0; i<m; i++){\n   for(int j = 0; j<n; j++){\n      cout << \"(\" << i << \",\" << j << \")\" << \" \";\n   }\n   cout << endl;\n}\ncout << endl << endl;\n\n// Print\nfor(int i=0; i<m; i++){\n   for(int j = 0; j<n; j++){\n      cout << a[i][j];\n   }\n   cout << endl;\n}\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754994583120-vxu29c"
+  },
+  {
+    "title": "Matrix vector multiplication",
+    "date": "2025-08-12",
+    "category": "Matrix",
+    "tags": [
+      "C",
+      "C++",
+      "Beginner",
+      "Matrix",
+      "2d Matrix",
+      "Matrix multiplication",
+      "Grid visualization"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Matrix vector multiplication",
+        "description": "If we have matrix A of size m × n and matrix B of size n × p,\nthen the product C = A × B will be of size -->> m × p\n\n\nCalculation for each element : \n\n                k=0\n-->> C[i][j] =   ∑  A[i][k]×B[k][j]\n                n−1 \n\n\n\nHow it works:\n1. Dimensions check – The number of columns in A (n) must equal the number of rows in B (n).\n\n2. Triple loop:\n   The outer two loops go through each element of result C[i][j].\n   Innermost loop calculates the sum of products for that position.\n\n3. Initialization of C to zero is important; otherwise, it will contain garbage values.\n\n\nExample input :\n\n/* -->> input 1 \n2 3 \n1\n1 2 3\n4 5 6\n7\n8\n9\n*/\n\n/* -->> input 2 \n2 2\n2 \n1 5\n6 3\n*/",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    int m, n, p;\n\n    // Input sizes\n    cout << \"Enter rows and columns of A: \";\n    cin >> m >> n;  // A is m x n\n    cout << \"As B matrix's row number needs to be same as A matrix's column number.\\nSo only enter columns of B: \";\n    cin >> p;       // B is n x p\n\n    // let ->>  A --> m × n  &  B -->> n × p\n    // Product C = A*B -->> size will be -->> m × p ( m by p matrix)\n    int A[m][n], B[n][p], C[m][p];\n\n    // Input matrix A\n    cout << \"Enter elements of matrix A:\\n\";\n    for (int i = 0; i < m; i++)\n        for (int j = 0; j < n; j++)\n            cin >> A[i][j];\n\n    // Input matrix B\n    cout << \"Enter elements of matrix B:\\n\";\n    for (int i = 0; i < n; i++)\n        for (int j = 0; j < p; j++)\n            cin >> B[i][j];\n\n\n    // Matrix multiplication\n    // As Product C = A*B -->> size will be -->> m × p\n    // So to store product matrix >> we used i & j >> for row & column c[i][j]\n    // As A's column == B's row\n    // A[i][k] to get A's column || B[k][j] to get B's row\n    for (int i = 0; i < m; i++)\n        for (int j = 0; j < p; j++)\n            for (int k = 0; k < n; k++)\n                C[i][j] += A[i][k] * B[k][j];\n\n\n    // Output result\n    cout << \"Result matrix C:\\n\";\n    for (int i = 0; i < m; i++) {\n        for (int j = 0; j < p; j++) {\n            cout << C[i][j] << \" \";\n        }\n        cout << endl;\n    }\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Visualization grid of Matrix multiplication",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Visualization grid of matrix mulitplication\n\nA[2][2]\na(0,0)  a(0,1)\na(1,0)  a(1,1)\n\n column\n    ^\n ------\n|00|01|\n------- > row\n|10|11|\n-------\n\n\nB[2][3]\nb(0,0)  b(0,1)  b(0,2)\nb(1,0)  b(1,1)  b(0,2)\n\n column\n    ^\n----------\n|00|01|02|\n---------- > row\n|10|11|12|\n----------\n\n\nA*B = C  -->> C[2][3]\n\n\nMultiplication:\nc(0,0) = a(0,0)*b(0,0) + a(0,1)*b(1,0)\nc(0,1) = a(0,0)*b(0,1) + a(0,1)*b(1,1)\nc(0,2) = a(0,0)*b(0,2) + a(0,1)*b(1,2)\n\nc(1,0) = a(1,0)*b(0,0) + a(1,1)*b(1,0)\nc(1,1) = a(1,0)*b(0,1) + a(1,1)*b(1,1)\nc(1,2) = a(1,0)*b(0,2) + a(1,1)*b(1,2)\n\n\n -->> C[2][3]\n\n                     column 1                          column 2                          column 3\n-->> row 1  a(0,0)*b(0,0) + a(0,1)*b(1,0)   a(0,0)*b(0,1) + a(0,1)*b(1,1)    (0,0)*b(0,2) + a(0,1)*b(1,2) \n-->> row 2  a(1,0)*b(0,0) + a(1,1)*b(1,0)   a(1,0)*b(0,1) + a(1,1)*b(1,1)    (1,0)*b(0,2) + a(1,1)*b(1,2) \n\n\n\nResult: -->> C[2][3]\n\nC[2][3]\nc(0,0)   c(0,1)   c(0,2)\nc(1,0)   c(1,1)   c(1,2)\n\n column\n    ^\n----------\n|00|01|02|\n---------- > row \n|10|11|12|\n----------",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754993657388-kw3ds0"
+  },
+  {
+    "title": "Wrong format specifier in C",
+    "date": "2025-08-08",
+    "category": "Format specifier",
+    "tags": [
+      "C",
+      "Wrong format specifier"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Wrong format specifier in C",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <math.h>\n#include <stdio.h>\n\nint main() {\n\n    int x,t;\n    scanf(\"%ld %ld\", &x,&t);\n    printf(\"%d %d\", x,t);\n\n/*\n    %ld takes (64-bit) value, but when storing into an int type(32-bit), it truncates the value.\n    That's why we get the wrong value.\n    10000000000567 9  -->> input\n    1316135479 9     --->> output\n*/\n\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754652052551-n0d2g0"
+  },
+  {
+    "title": "Intersection between to coordinate",
+    "date": "2025-08-08",
+    "category": "Intersection",
+    "tags": [
+      "C++",
+      "Intersection",
+      "Coordinate"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Intersection between to coordinate",
+        "description": ">> intersection of to cordinate\n\n find out the interseciton of this i & c\n\n   1    2    3      4c2    5i1   6    7    8    9    10 \n             i1     c1     i2                   c2\n\n  c -> 4,9 or 9,4\n  i -> 3,5 or 5,3 \n\nif(r1<l2 || r2<l1) -->> \" no intersection \"\nelse \" intersection \"\n\n\nsmall value is left & big value is right >> same for both one\n\nl1 is min & r1 is max (so sort the value if needed)\nl2 is min & r2 is max (so sort the value if needed)",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Case 1 –> l1–r1 inside l2–r2\nCase 2 –> l2–r2 inside l1–r1\nCase 3 –> l1 starts inside l2 and ends after r2\nCase 4 –> l2 starts inside l1 and ends after r1\nCase 5 –> l1–r1 before l2\nCase 6 –> l2–r2 before l1\n\n\n\nCase 1 –> l1–r1 inside l2–r2\n\n l2-------------------------------r2\n        l1----------------r1\n\n2 5 3 7    5 2 7 3\n1 4 6 8    4 1 8 6\n\n\n\n\n\nCase 2 –> l2–r2 inside l1–r1\n\n        l2----------------r2\n l1--------------------------------r1\n\n4 6 5 7    6 4 7 5\n1 3 2 8    3 1 8 2\n\n\n\n\nCase 3 –> l1 starts inside l2 and ends after r2\n\n l2----------------------r2\n                    l1--------r1\n\n 3 20 17 23     20 3 17 23\n -12 -3 -4 5    -3 -12 5 -4   \n\n\n\n\nCase 4 –> l2 starts inside l1 and ends after r1\n\n        l2----------------------r2\n l1--------r1\n \n 5 33 -20 7  33 5 7 -20\n \n\n\n\nCase 5 –> l1–r1 before l2\n\n l2----------------------r2\n               l1--------r1\n\n 0 10 7 10      10 0 10 7\n-13 -4 -6 -4   -13 -4 -4 -6\n\n\n\n\nCase 6 –> l2–r2 before l1 \n\n l2----------------------r2\n l1--------r1\n\n4 8 6 10         8 4 10 6\n12 16 14 18      16 12 18 14",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Test case",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Case 1 –> l1–r1 inside l2–r2\n2 5 3 7\n5 2 7 3\n1 4 6 8\n4 1 8 6\n100 300 200 400\n300 100 400 200\n500 900 700 800\n900 500 800 700\n-2 -5 -3 -7\n-5 -2 -7 -3\n-1 -4 -6 -8\n-4 -1 -8 -6\n-100 -300 -200 -400\n-300 -100 -400 -200\n-500 -900 -700 -800\n-900 -500 -800 -700\n3 -5 2 -4\n-5 3 -4 2\n-1 4 -2 5\n4 -1 5 -2\n7 -3 4 -6\n-3 7 -6 4\n-8 5 -1 6\n5 -8 6 -1\n150 -350 200 -450\n-350 150 -450 200\n-600 900 -700 800\n900 -600 800 -700\n250 -150 400 -300\n-150 250 -300 400\n-800 500 -900 700\n500 -800 700 -900\n\nCase 2 –> l2–r2 inside l1–r1\n4 6 5 7\n6 4 7 5\n1 3 2 8\n3 1 8 2\n200 400 300 500\n400 200 500 300\n600 800 700 900\n800 600 900 700\n-4 -6 -5 -7\n-6 -4 -7 -5\n-1 -3 -2 -8\n-3 -1 -8 -2\n-200 -400 -300 -500\n-400 -200 -500 -300\n-600 -800 -700 -900\n-800 -600 -900 -700\n-4 6 -5 7\n6 -4 7 -5\n1 -3 2 -8\n-3 1 -8 2\n9 -2 5 -6\n-2 9 -6 5\n-4 8 -7 3\n8 -4 3 -7\n-200 400 -300 500\n400 -200 500 -300\n600 -800 700 -900\n-800 600 -900 700\n300 -100 500 -200\n-100 300 -200 500\n-700 800 -900 600\n800 -700 600 -900\n\nCase 3 –> l1 starts inside l2 and ends after r2\n2 5 8 9\n5 2 9 8\n1 4 6 7\n4 1 7 6\n120 250 300 400\n250 120 400 300\n500 650 700 800\n650 500 800 700\n-2 -5 -8 -9\n-5 -2 -9 -8\n-1 -4 -6 -7\n-4 -1 -7 -6\n-120 -250 -300 -400\n-250 -120 -400 -300\n-500 -650 -700 -800\n-650 -500 -800 -700\n2 -5 8 -9\n-5 2 -9 8\n-1 4 -6 7\n4 -1 7 -6\n6 -3 9 -4\n-3 6 -4 9\n-8 5 -1 7\n5 -8 7 -1\n120 -250 300 -400\n-250 120 -400 300\n500 -650 700 -800\n-650 500 -800 700\n250 -150 400 -350\n-150 250 -350 400\n-900 800 -700 600\n800 -900 600 -700\n\nCase 4 –> l2 starts inside l1 and ends after r1\n3 6 4 8\n6 3 8 4\n1 5 2 7\n5 1 7 2\n150 350 200 400\n350 150 400 200\n500 750 600 800\n750 500 800 600\n-3 -6 -4 -8\n-6 -3 -8 -4\n-1 -5 -2 -7\n-5 -1 -7 -2\n-150 -350 -200 -400\n-350 -150 -400 -200\n-500 -750 -600 -800\n-750 -500 -800 -600\n3 -6 4 -8\n-6 3 -8 4\n-1 5 -2 7\n5 -1 7 -2\n7 -2 6 -4\n-2 7 -4 6\n-8 4 -1 5\n4 -8 5 -1\n150 -350 200 -400\n-350 150 -400 200\n500 -750 600 -800\n-750 500 -800 600\n250 -100 400 -200\n-100 250 -200 400\n-800 600 -700 500\n600 -800 500 -700\n\nCase 5 –> l1–r1 before l2–r2\n1 3 5 7\n3 1 7 5\n9 11 13 15\n11 9 15 13\n100 200 300 400\n200 100 400 300\n500 600 700 800\n600 500 800 700\n-1 -3 -5 -7\n-3 -1 -7 -5\n-9 -11 -13 -15\n-11 -9 -15 -13\n-100 -200 -300 -400\n-200 -100 -400 -300\n-500 -600 -700 -800\n-600 -500 -800 -700\n1 -3 5 -7\n-3 1 -7 5\n-9 11 -13 15\n11 -9 15 -13\n8 -4 6 -2\n-4 8 -2 6\n-10 12 -14 16\n12 -10 16 -14\n100 -200 300 -400\n-200 100 -400 300\n-500 600 -700 800\n600 -500 800 -700\n300 -100 500 -200\n-100 300 -200 500\n-900 700 -800 600\n700 -900 600 -800\n\nCase 6 –> l2–r2 before l1–r1\n4 8 6 10\n8 4 10 6\n12 16 14 18\n16 12 18 14\n200 400 300 500\n400 200 500 300\n600 800 700 900\n800 600 900 700\n-4 -8 -6 -10\n-8 -4 -10 -6\n-12 -16 -14 -18\n-16 -12 -18 -14\n-200 -400 -300 -500\n-400 -200 -500 -300\n-600 -800 -700 -900\n-800 -600 -900 -700\n4 -8 6 -10\n-8 4 -10 6\n-12 16 -14 18\n16 -12 18 -14\n7 -3 5 -1\n-3 7 -1 5\n-9 11 -13 15\n11 -9 15 -13\n200 -400 300 -500\n-400 200 -500 300\n-600 800 -700 900\n800 -600 900 -700\n250 -150 400 -350\n-150 250 -350 400\n-900 700 -800 600\n700 -900 600 -800",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n       Solution\n       \n        Sort\n   For L, take the maximum \n   For ,R take the minimum\n\n*/\n\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint l1,r1,l2,r2;\ncin >> l1>>r1>>l2>>r2;\n\nif(l1>r1){\nint temp = l1;\nl1 = r1; r1 = temp;\n}\nif(l2>r2){\nint temp = l2;\nl2 = r2; r2 = temp;\n}\n\nif(r1<l2 || r2<l1)cout << \"no intersection\";\nelse{\nif(l1>l2){\n  if(r1<r2)cout << l1 <<\" \"<< r1;\n  else cout<< l1 << \" \"<< r2;\n}\nelse{\n  if(r1<r2)cout << l2 << \" \"<< r1;\n  else cout<< l2 << \" \"<< r2;\n}\n}\n\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754646593722-6j8zzi"
+  },
+  {
+    "title": "How Absolute error occurs",
+    "date": "2025-08-06",
+    "category": "Absolute error",
+    "tags": [
+      "C",
+      "C++",
+      "Absolute error"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "How Absolute error occurs",
+        "description": "Let us take r --->> 1 < r <= 10^10\nLet us take Pi = 3.141655, although we took 6 digits after the decimal \n\n    >> Pi * r^2 = Area of a circle\n\n    >> 3.141655 * (10^10) = 3.1431416550000 ( didn't squre but already we got 4 0s at the end. which cause absulute error)\n    >> 3.141655 * (10^10)^2 = 3.141655e+20 ( you can see how many 0s we got . So use the actual value of pi. You can search on the CP\n                                             Dictionary page on how we use pi value instead of declaring manually)",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Let us take r --->> 1 < r <= 10^10\nLet us take Pi = 3.141655, although we took 6 digits after the decimal \n\n    >> 3.141655 * (10^10)^2 = 14165500 >> last 2 digits got 00, but the actual value of pi is different, that's why we get absolute error\n\n    >> 3.141655 * (10^10) = 3.1431416550000 ( didn't squre but already we got 4 0s at the end. which cause absulute error)\n    >> 3.141655 * (10^10)^2 = 3.141655e+20 ( you can see how many 0s we got . So use the actual value of pi. You can search on the CP\n                                             Dictionary page on how we use pi value instead of declaring manually)",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754474234777-yyznyf"
+  },
+  {
+    "title": "Multiple ways to get vaule of Pi in C",
+    "date": "2025-08-06",
+    "category": "Pi",
+    "tags": [
+      "C",
+      "Pi"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Multiple ways to get vaule of Pi in C & C++",
+        "description": "In C programming, the value of Pi (approximately 3.14159) can be obtained using several methods:\n\n\n1. Using the M_PI macro from <math.h>\n2. Calculating Pi using trigonometric functions.\n3. Defining Pi as a constant.\n\n\n1. This is the most common and convenient way. You need to include the <math.h> header and, on some systems, define _USE_MATH_DEFINES before including it to ensure these constants are available.\n\n2. You can calculate Pi using functions like asin() or atan() or acos(). \nFor example, \nasin(1.0) returns (π/2), so multiplying by 2 gives (π). \natan(1.0) returns (π/4). So multiplying by 4 gives (π).\nacos(-1.0) returns (π).\nacos(0.0) returns (π/2). so multiplying by 2 gives (π).\n\n\n3. You can define Pi as a constant using #define or a const variable.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "--------------- way 1 --------------------\n\n    #define _USE_MATH_DEFINES // Required on some systems for M_PI\n    #include <math.h>\n    #include <stdio.h>\n\n    int main() {\n        double pi_value = M_PI;\n        printf(\"Value of Pi: %lf\\n\", pi_value);\n        return 0;\n    }\n\n\n--------------- way 2 --------------------\n\n    #include <math.h>\n    #include <stdio.h>\n\n    int main() {\n\n        double pi_asin  = 2 * asin(1.0);\n        double pi_atan  = 4 * atan(1.0);\n        double pi_acos  =     acos(-1.0);\n        double pi_acos0 = 2 * acos(0.0);\n\n        printf(\"Pi using asin: %lf\\n\", pi_asin);\n        printf(\"Pi using atan: %lf\\n\", pi_atan);\n        printf(\"Pi using acos: %lf\\n\", pi_acos);\n        printf(\"Pi using acos: %lf\\n\", pi_acos0);\n        return 0;\n    }\n\n\n--------------- way 3 --------------------\n\n    #define PI_DEFINE 3.14159265358979323846\n    #include <stdio.h>\n\n    int main() {\n        const double PI_CONST = 3.14159265358979323846;\n        printf(\"Pi using define: %lf\\n\", PI_DEFINE);\n        printf(\"Pi using const: %lf\\n\", PI_CONST);\n        return 0;\n    }",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754465674712-vvbkne"
+  },
+  {
+    "title": "Power function Scientific notation problem in C++",
+    "date": "2025-08-06",
+    "category": "Power fucntion",
+    "tags": [
+      "C",
+      "C++",
+      "scientific notation",
+      "problem"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Power function Scientific notation problem in C++ with solution",
+        "description": "In C code, you can see the result is normal, but in C++, when we are using the cout function, it gives us scientific notation. To get rid of it, we used a fixed function before it.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "---------------------- c code ->> no problem --------------------\n#include <math.h>\n#include <stdio.h>\n\nint main() {\ndouble c = pow(9,100);\nprintf(\"%lf\", c);\n\nreturn 0;\n}\n\n------------------- c++ code ->> using cout fucnion -->> scientific notation --------------------\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\ndouble c = pow(9,100);\ncout << fixed<< c;\n\nreturn 0;\n}\n\n--------------------- using fixed function before cout to get rid of it -----------------------\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\ndouble c = pow(9,100); \ncout << fixed<< c; //  ------>> fixed  (no scientific notation -->> actual vauel\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754463513664-6asfa9"
+  },
+  {
+    "title": "Power Funcion Problem in C",
+    "date": "2025-08-05",
+    "category": "Pow",
+    "tags": [
+      "C",
+      "pow",
+      "Power function"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Power Funcion Problem in C",
+        "description": "Pow(a,b) -->> (power function return type is double) \n\nSometimes it can cause trouble. so you can use your own code or manage it correctly using double type or type cast to int to get rid of it",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "int n; cin >>n;\nint pow = 1;\nfor(int i=1; i<=n;i++){\n    pow *= n;}\ncout << pow;",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754387863135-qsn9va"
+  },
+  {
+    "title": "Zero-padding of printf fucntion in C",
+    "date": "2025-08-05",
+    "category": "Zero padding",
+    "tags": [
+      "C",
+      "Zero padding",
+      "Format specifier"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Zero-padding of printf fucntion in C",
+        "description": "The format specifier %03d in C's printf function is used to print an integer with a minimum width of 3 digits, padding with leading zeros if the number has fewer than 3 digits.\n\nHere's a breakdown:\n%: Introduces a format specifier.\n0: This is a flag that indicates zero-padding. If the number of digits is less than the specified width, leading zeros will be used for padding instead of spaces (which is the default behavior if no flag is specified or if a space flag is used).\n2: This specifies the minimum field width. The output will occupy at least 3 character positions.\nd: This is the conversion specifier for a signed decimal integer.\n\nExplanation of Output:\nFor num1 (value 5), since it's a single digit and the minimum width is 3 with zero-padding, it prints 005.\nFor num2 (value 124), it already has 3 digits, so no padding is needed, and it prints 124.\nFor num3 (value 1236), it exceeds the minimum width of 3, so the entire number 1236 is printed without truncation. The 03 only guarantees a minimum width, not a maximum.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <stdio.h>\n\nint main() {\n    int num1 = 5;\n    int num2 = 12;\n    int num3 = 123;\n\n    printf(\"Number 1: %03d\\n\", num1); // Output: 005\n    printf(\"Number 2: %03d\\n\", num2); // Output: 124\n    printf(\"Number 3: %03d\\n\", num3); // Output: 1236 (width is exceeded, so it prints the full number)\n\n    return 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754386985392-afjjbf"
+  },
+  {
+    "title": "Precision loss program in c (aI)",
+    "date": "2025-08-05",
+    "category": "Precision loss",
+    "tags": [
+      "C",
+      "Precision loss"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "float vs double precision loss",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "int x = 3.8;\nprint (\"%d\", x) // precision loss? (.8)",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754386430088-w1gydr"
+  },
+  {
+    "title": "Leap year program in C",
+    "date": "2025-08-05",
+    "category": "Beginner Problem",
+    "tags": [
+      "C",
+      "Leap Year"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Condition & Code",
+        "description": "---->> A year is a leap year if:\n\n1. It is divisible by 400\nOR\n2. It is divisible by 4 but NOT divisible by 100",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <stdio.h>\n\nint main() {\n    int year;\n\n    // Prompt the user to enter a year\n    printf(\"Enter a year: \");\n    scanf(\"%d\", &year);\n\n    // Check for leap year conditions\n    // A year is a leap year if:\n    // 1. It is divisible by 400\n    // OR\n    // 2. It is divisible by 4 but NOT divisible by 100\n    if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {\n        printf(\"%d is a leap year.\\n\", year);\n    } else {\n        printf(\"%d is not a leap year.\\n\", year);\n    }\n\n    return 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754386337760-a6y7ty"
+  },
+  {
+    "title": "variable declaration , initialization and overwrite in c",
+    "date": "2025-08-05",
+    "category": "Variable",
+    "tags": [
+      "C",
+      "Variable",
+      "Declaration",
+      "Initialization",
+      "Overwrite",
+      "Reassign Value"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Variable Declaration\nint age; // Declares an integer variable named 'age'\nfloat price; // Declares a floating-point variable named 'price'\nchar initial; // Declares a character variable named 'initial'\n\n\n\nVariable Initialization\nint count = 10; // Declares and initializes 'count' with the value 10\ndouble pi = 3.14159; // Declares and initializes 'pi' with the value 3.14159\nchar grade = 'A'; // Declares and initializes 'grade' with the character 'A'\n\n\n\nVariables can also be declared and initialized separately:\nint quantity; // Declaration\nquantity = 50; // Initialization\n\n\n\nVariable Overwriting (Assignment)\nint score = 100; // Declaration and initialization\nscore = 95; // Overwrites 'score' with the new value 95\nscore = score + 5; // Overwrites 'score' with its current value plus 5 (results in 100)",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754385951230-6uo3by"
+  },
+  {
+    "title": "Division by zero",
+    "date": "2025-08-05",
+    "category": "Division by zero",
+    "tags": [
+      "C",
+      "division by zero",
+      "error",
+      "overflow"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <stdio.h>\n\nint main() {\n    int numerator = 10;\n    int denominator = 0;\n\n    if (denominator == 0) {\n        printf(\"Error: Division by zero is not allowed.\\n\");\n    } else {\n        int result = numerator / denominator;\n        printf(\"Result: %d\\n\", result);\n    }\n\n    double float_numerator = 10.0;\n    double float_denominator = 0.0;\n\n    // Floating-point division by zero\n    double float_result = float_numerator / float_denominator;\n    printf(\"Floating-point result: %f\\n\", float_result); // Will print \"inf\" or similar\n\n    return 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754385521193-7xhgxr"
+  },
+  {
+    "title": "Double problem in C (type casting)",
+    "date": "2025-04-26",
+    "category": "Double Precision Problem",
+    "tags": [
+      "c",
+      "double",
+      "precision loss",
+      "explicit type casting",
+      "type casting",
+      "problem"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Problem 1",
+        "description": "Here we don't get the actual answer because of integer division and then assign to c (type double)",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "// ---->> problem 1\n\nint a = 11;\nint b = 5;\ndouble c = a/b;\n\nprintf(\"%lf\", c);\n\n/*\nnot the actual output cause first we did integer division(a/b)(type of a & b both >> integer).\nThen we assigned that value to the C variable(type double)\noutput = 2.000000\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Problem 2",
+        "description": "Here, type casting(explicit) is done, but later on, integer division is used. That's why not working. If we had done the type casting before the integer division, then it would have worked.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "// ---->> problem 2\n\nint a = 11;\nint b = 5;\ndouble c = (double) (a/b);\n\n\n/*\nHere, type casting(explicit) is done, but later on, integer division\nThat's why not working \nIf we had done the type casting before the integer division, then it would have worked.\n\nOutput = 2.000000;\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Problem 3",
+        "description": "Here we tried to fix the previous problem and made another problem. We made a precedence mistake. Look, the division operator has high precedence.\n\n1. integer division (a/b)\n2. Then * multiply with 1.00\nThat's why the same problem occurs. We don't get the accurate result.\n\n--->>\nFor the 1st case, as * and / both have the same precedence. But the compiler does it left to right.\n\n---->>> In programming, operator precedence determines the order in which operators are evaluated in an expression.\nLeft-to-right associativity means that operators with the same precedence are evaluated from left to right in the expression.\n\n2nd case\nWe use () to do the a/b or integer division first",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "//----->> Problem 3\n\n// --->> way 1\n\nint a = 11;\nint b = 5;\ndouble c = a/b*1.0;\n\n// --->> way 2\n\nint a = 11;\nint b = 5;\ndouble c = 1.00*(a/b);\n\n/*\nFor both cases.\nHere we tried to fix the previous problem and made another problem.\nWe made a precedence mistake. \n\n1. 1st do integer division (a/b)\n2. Then * multiply with 1.00\n\nFor the 1st case, as * and / both have the same precedence. But the compiler does it left to right.\n\n---->>> In programming, operator precedence determines the order in which operators are evaluated in an expression. \nLeft-to-right associativity means that operators with the same precedence are evaluated from left to right in the expression.\n\nFor the 2nd case,\nWe use () to do the a/b or integer division first. \n\nThat's why the same problem occurs. We don't get the accurate result.\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Multiple solution to get rid of it",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "//--------->> Multiple solution\n\n// --->> way 1\n\nint a = 11;\nint b = 5;\ndouble c = a/(b*1.0);\n\n// --->> way 2\n\nint a = 11;\nint b = 5;\ndouble c = 1.00*a/b;\n// as left-to-right precision count\n// no need to use (1.00*a)\n\n// --->> way 3\n\nint a = 11;\nint b = 5;\ndouble c = (double)a/b;\n// explicit type-casting\n// actual value of a will not change\n// change will only occur when assigning value to c\n\n// --->> way 4\nint a = 11;\nint b = 5;\ndouble c = a/(double)b;\n// explicit type-casting\n// actual value of b will not change\n// change will only occur when assigning a value to c\n\n// --->> way 5\n\n// use one double operand\ndouble a = 11.0;\nint b = 5;\ndouble c = a/b;\n\n// --->> way 6\n\n// use one double operand\nint a = 11;\ndouble b = 5.0;\ndouble c = a/b;",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753447690162-i1lpj1"
+  },
+  {
+    "title": "Double problem in C",
+    "date": "2025-04-25",
+    "category": "Double Precision Problem",
+    "tags": [
+      "c",
+      "double",
+      "precision",
+      "problem"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "By default double output",
+        "description": "By default, it prints 6 digits after the decimal.\n\nIn C, double is a data type used to store double-precision floating-point numbers. It occupies 8 bytes (64 bits) of memory and can represent a wide range of values, from approximately 1.7E-308 to 1.7E+308, with about 15-16 decimal digits of precision.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "double large_num = 873382.456484783547395745;\nprintf(\"%lf\", large_num);\n\n// Output = 873382.456485\n\nwhich is not the accurate answer. Because of auto precision. \n\n--->>> By default, it prints 6 digits after the decimal.",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Problem 1",
+        "description": "Here we can see that output has only 6 digit precision . we don't get the actual value. by degault it prints 6 digit the decimal . which means 6 digit precision by default.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "double pi = 3.141592653589793;\nprintf(\"%lf\", pi);\n\n/*\noutput = 3.141593\n*/\n\n// precision loss",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution of problem 1",
+        "description": "We have to use %0.xlf you wanna print. -->> like >> %0.xlf\nHere x is the digit number of precision\nlike >> %0.12lf >> to print 12 numbers after the decimal.\n\nIf we don't define the number of digits, sometimes we get an absolute error. Later on, we'll be discussing it(check the cpp dictionary page).",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "double pi = 3.141592653589793;\nprintf(\"%0.12lf\", pi);\n\n/*\noutput = 3.141592653590\n*/\n\n----> %0.12lf -->> means 12 digit precision after the floating point",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753446061644-wznnuk"
+  }
+]

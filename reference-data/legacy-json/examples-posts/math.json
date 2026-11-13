@@ -1,0 +1,57 @@
+[
+  {
+    "id": "seed-math-linear-algebra",
+    "title": "Linear Algebra You Actually Need for AI",
+    "date": "2026-10-02",
+    "category": "Math",
+    "tags": [
+      "Linear Algebra",
+      "Vectors",
+      "Matrices"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [
+      {
+        "name": "3Blue1Brown linear algebra",
+        "url": "https://www.3blue1brown.com/topics/linear-algebra"
+      }
+    ],
+    "sections": [
+      {
+        "subtitle": "Vectors and dot products",
+        "description": "<p>A vector is a direction and a magnitude. The <span style=\"color:#facc15;font-weight:600\">dot product</span> measures how much two vectors point in the same direction.</p>\n<p>Cosine similarity normalizes that dot product by both magnitudes, giving a score between -1 and 1.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "import math\n\na = [0.9, 0.4]\nb = [0.7, 0.6]\n\ndot = sum(x * y for x, y in zip(a, b))\nnorm_a = math.sqrt(sum(x * x for x in a))\nnorm_b = math.sqrt(sum(y * y for y in b))\ncosine = dot / (norm_a * norm_b)\n\nprint(\"dot:\", round(dot, 3))\nprint(\"cosine similarity:\", round(cosine, 3))",
+          "js": "",
+          "java": ""
+        },
+        "visualization": {
+          "enabled": true,
+          "title": "Dot product as alignment",
+          "html": "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<style>\n  body { margin: 0; padding: 14px; background: #0b0b0b; color: #e5e7eb; font-family: \"Segoe UI\", system-ui, sans-serif; }\n  svg { width: 100%; height: 240px; }\n  .axis { stroke: #374151; stroke-width: 1; }\n  .a { stroke: #22d3ee; stroke-width: 3; }\n  .b { stroke: #fca5a5; stroke-width: 3; }\n  .lbl { fill: #cbd5e1; font-size: 12px; }\n</style>\n</head>\n<body>\n<svg viewBox=\"0 0 420 240\">\n  <line class=\"axis\" x1=\"40\" y1=\"200\" x2=\"390\" y2=\"200\" />\n  <line class=\"axis\" x1=\"40\" y1=\"200\" x2=\"40\" y2=\"20\" />\n  <line class=\"a\" x1=\"40\" y1=\"200\" x2=\"300\" y2=\"80\" />\n  <line class=\"b\" x1=\"40\" y1=\"200\" x2=\"260\" y2=\"150\" />\n  <text class=\"lbl\" x=\"305\" y=\"76\">a</text>\n  <text class=\"lbl\" x=\"265\" y=\"146\">b</text>\n  <text class=\"lbl\" x=\"50\" y=\"214\">small angle → high similarity</text>\n</svg>\n</body>\n</html>",
+          "url": ""
+        }
+      },
+      {
+        "subtitle": "Matrices are transformations",
+        "description": "<p>A matrix-vector product transforms a vector into a new space. Every neural network layer is a matrix multiplication followed by a non-linearity.</p>\n<p>Shape discipline prevents most bugs: an <code>(m, n)</code> matrix times an <code>(n,)</code> vector produces an <code>(m,)</code> vector.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "matrix = [\n    [1, 2],\n    [3, 4],\n]\nvector = [5, 6]\n\nresult = [\n    sum(row[i] * vector[i] for i in range(len(vector)))\n    for row in matrix\n]\n\nprint(result)",
+          "js": "",
+          "java": ""
+        }
+      }
+    ]
+  }
+]

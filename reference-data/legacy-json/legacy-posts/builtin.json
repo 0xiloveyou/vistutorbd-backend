@@ -1,0 +1,1046 @@
+[
+  {
+    "title": "What is function signature in C (AI)",
+    "date": "2025-08-05",
+    "category": "Function Signature",
+    "tags": [
+      "C",
+      "Funcion Signature"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [],
+    "namedLinks": [],
+    "id": "1754385341716-vepyij"
+  },
+  {
+    "title": "Array in C",
+    "date": "2025-06-04",
+    "category": "Array",
+    "tags": [
+      "c",
+      "array"
+    ],
+    "link": "",
+    "images": [
+      "images/built-in/3.png"
+    ],
+    "sections": [
+      {
+        "subtitle": "Array in C",
+        "description": "In C, an array is a collection of similar data items stored in contiguous memory locations. It is a fundamental data structure used to store multiple values of the same type under a single variable name."
+      },
+      {
+        "subtitle": "Declaration",
+        "description": "Arrays are declared using the following syntax:\n\n-->> dataType arrayName[arraySize];\n\ndataType: Specifies the type of elements the array will store (e.g., int, float, char).\narrayName: The name given to the array variable.\narraySize: The number of elements the array can hold, specified within square brackets.",
+        "consoleBlock": {
+          "c": "-->> dataType arrayName[arraySize];",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        } 
+      },
+      {
+        "subtitle": "Array index",
+        "description": "In programming, index refers to the position of an element within a data structure such as an array.\n\nIn both C and C++, zero-based indexing is used. This means that indexing starts from 0. So, for an array of size n, the valid indices range from 0 to n - 1.\n\nint arr[5]; // An array of size 5\n\nindex --> 0, 1, 2, 3, 4\n\nThe indices for arr are:\narr[0]\narr[1]\narr[2]\narr[3]\narr[4]\n\nThis concept is important to understand to avoid common errors like accessing out-of-bound elements.",
+        "consoleBlock": {
+          "c": "int arr[5]; // An array of size 5\n\nindex --> 0, 1, 2, 3, 4\n\nThe indices for arr are:\narr[0]\narr[1]\narr[2]\narr[3]\narr[4]",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Multiple case discusion for Initialization & Assigning value into an array.",
+        "description": "",
+        "consoleBlock": {
+          "c": "1. Arrays can be initialized during declaration:\n-->> int numbers[5] = {1, 2, 3, 4, 5};\n\n\n2. If the size is not explicitly specified, the compiler can infer it from the number of initializers:\n\nint numbers[] = {1, 2, 3, 4, 5}; // size is 5\n//Here, the compiler automatically sets size 5 after the declaration\n\n\n3. Define size, then assign value one by one:\n\nint array[2]; // total size is 3 (from 0 to 2)\n\narray[0] = 10; // assign value 10 to the 0th index\narray[1] = 10; // assign value 10 to the 1th index\narray[2] = 10; // assign value 10 to the 2th index\n\n4. Assign through various operations & access the array value, and then assign:\n\nint array[3];\nint a = 5;\n\narray[0] = 4;\narray[1] = a;\narray[2] = array[0];\narray[3] = (array[0] + array[1])*3;\n\n5. Pass size and take value from users:\n\nint n;\nscanf(\"%d\", &n);\n\nint array[n];\n\nfor(int i=0; i<n; i++){\n  scanf(\"%d\", &array[i]);\n}\n\n6. single step following way 5:\n\nint array[1]; // total size is 2\n\nscanf(\"%d%d\", &array[0], &array[1]);\n\n7. Take input using a variable related to way 6:\n\nint a= 0, b = 1;\nint array[1]; // total size is 2\n\nscanf(\"%d%d\", &array[a], &array[b]);",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Multiple ways for Accessing Elements from an array",
+        "description": "Array elements are accessed using their index, which starts from 0 for the first element. The last element has an index of arraySize - 1",
+        "consoleBlock": {
+          "c": "1. One by One:\n\nint x[2] = {4,6};\n\nprintf(\"%d\", x[0]);\nprintf(\"%d\", x[1]);\n\n\n2. Using a variable :\n\nint x[2] = {4,6};\nint a = 0, b= 1;\n\nprintf(\"%d\", x[a]);\nprintf(\"%d\", x[b]);\n\n\n3. Using a loop:\n\nint x[2] = {4,6};\n\nfor(int i =0; i<n; i++){\n printf(\"%d\", a[i]);\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Types of Arrays",
+        "description": "One-dimensional arrays: A single list of elements.\n\nMultidimensional arrays: Arrays with more than one dimension, such as 2D arrays (matrices) and 3D arrays.C supports multidimensional arrays, which are arrays of arrays. They are useful for representing tables, matrices, and other structures with multiple dimensions.",
+        "consoleBlock": {
+          "c": "int matrix[3][4]; // A 2D array (3 rows, 4 columns)\nfloat cube[2][3][5]; // A 3D array",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Key Characteristics",
+        "description": "Fixed Size: Once declared, the size of an array cannot be changed.\nContiguous Memory: Elements are stored in adjacent memory locations.\nIndex-based Access: Elements are accessed using numerical indices.\nArrays and Functions:\nArrays can be passed to functions by passing the array name as an argument. The function definition must include square brackets to indicate that it is receiving an array."
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753421769423-kg6jcd"
+  },
+  {
+    "title": "Hello world!",
+    "date": "2025-04-23",
+    "category": "Hello world!",
+    "tags": [
+      "begainer",
+      "basic",
+      "hello world",
+      "print message"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Hello world!",
+        "description": "Place the string (Hello World!) inside the printf function. \n\nprintf() is a built-in function --> >printf(\"\"); \n\n>> use to print any String.\n\n\nIn C programming, a string is a sequence of characters, such as letters, numbers, or symbols, that are grouped together to represent text. Unlike some other programming languages that have a dedicated \"string\" data type, C represents strings as arrays of characters that are terminated by a null character (\\0).\n\n>> We use \"\" when writing a string \n-->> like that -->>  \"place your string here\";",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main(){\n\nprintf(\"Hello World!\");\n\nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753419998692-0ocu2q"
+  },
+  {
+    "title": "Assignment operator in C",
+    "date": "2025-04-27",
+    "category": "Assignment Operator",
+    "tags": [
+      "c",
+      "assignment operator"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Assignment operator in C",
+        "description": "In programming, an assignment operator is used to assign a value to a variable. \n\nThe most common assignment operator is the equal sign (=). \nOther assignment operators, like +=, -=, *=, and /=, are shortcuts for combining an arithmetic operation with assignment. \n\nFor example, x += 10 is shorthand for x = x + 10."
+      },
+      {
+        "subtitle": "Basic (=) Assignment Operators in C",
+        "description": "Basic Assignment Operator (=):\n\nThe = operator assigns the value on the right-hand side to the variable on the left-hand side.\n\nFor example, int x = 10; assigns the value 10 to the variable x.\nThe left-hand side of the assignment must be an l-value, which is a location in memory that can be assigned a value (like a variable).\nThe right-hand side can be a value, another variable, or an expression that evaluates to a value."
+      },
+      {
+        "subtitle": "All Compound (+=) Assignment Operators in C",
+        "description": "Compound Assignment Operators:\nThese operators combine an arithmetic operation with assignment.\n\n\nExamples include:\n+=: Adds a value to a variable and assigns the result: x += 5 is the same as x = x + 5.\n-=: Subtracts a value from a variable and assigns the result: x -= 3 is the same as x = x - 3.\n*=: Multiplies a variable by a value and assigns the result: x *= 2 is the same as x = x * 2.\n/=: Divides a variable by a value and assigns the result: x /= 4 is the same as x = x / 4.\n%=: Calculates the modulo (remainder) of a variable divided by a value and assigns the result: x %= 3 is the same as x = x % 3.\n\nThese compound operators are often used for efficiency and readability, especially when updating a variable's value repeatedly.",
+        "consoleBlock": {
+          "c": "#include <iostream>\n\nint main() {\n\nint num = 10;\n\n// Basic assignment\nint BasicNum = num; // BasicNum is now equals 10\n\n// Compound assignment\nnum += 5; // num is now 15 (same as num = num + 5)\nnum *= 2; // num is now 30 (same as num = num * 2)\nnum /= 2; // num is now 15 (same as num = num / 2)\nnum %= 2 // num is now 1 (same as num = num % 2)\nnum -= 1 // num is now 0 (same as num = num - 1)\n\nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753419454975-npv4lb"
+  },
+  {
+    "title": "Boolean in C (part 1)",
+    "date": "2025-04-28",
+    "category": "Boolean",
+    "tags": [
+      "boolean",
+      "bool",
+      "true",
+      "false"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Boolean  in C",
+        "description": "In C, the bool type represents boolean values, which can be either true or false. To use bool, you need to include the header file. Before the introduction of bool in C99, integers were used to represent boolean values, where 0 was false and any non-zero value was true.",
+        "consoleBlock": {
+          "c": "#include <stdbool.h>\n#include <stdio.h>\n\nint main() {\n  bool is_true = true;\n  bool is_false = false;\n\n  printf(\"True: %d\\n\", is_true);\n  printf(\"False: %d\\n\", is_false);\n\n  if (is_true) {\n    printf(\"This is true.\\n\");\n  }\n\n  if (!is_false) {\n    printf(\"This is also true.\\n\");\n    // !false == true\n  }\n  return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Key points about Boolean  in C",
+        "description": "Attach the header file first -->>  #include <stdbool.h>\n\ntrue is equivalent to  --->> 1\nfalse is equivalent to --->> 0\nWhen printing a bool value using printf, it will be displayed as ---->>  1 or 0.\n\nBoolean variables are commonly used in conditional statements and loops.\n\nThe size of a bool variable is typically -->>  1 byte."
+      },
+      {
+        "subtitle": "Multiple use cases of bool with example",
+        "description": "",
+        "consoleBlock": {
+          "c": "--->> Various use cases of bool (part 1) with example\n\nbool a = true;\nbool b = false;\nprintf(\"%d\\n%d\", a, b);\n// a= 1, b = 0\n\n--------------------------------------------------------\n\nbool a1 = 1;\nbool b1 = 0;\nprintf(\"%d\\n%d\", a1, b1);\n// a1= 1, b1 = 0\n\n--------------------------------------------------------\n\n\nbool c = (5>1);\n// bool c (5== 5);\nprintf(\"%d\", c);\n// c = 1 or c>0\n\n--------------------------------------------------------\n\nbool cc (5 == 5);\nprintf(\"%d\", cc);\n// cc = 1\n\n--------------------------------------------------------\n\nbool d = 20;\nbool e = 0;\n// 0 means false\n// 0<x = true\nprintf(\"a = %d\\n b = %d\", d,e);\n// d>=0 , e=0\n\n--------------------------------------------------------\n\nint f = 20;\nint g = 0;\nbool isEqual = (f == g);\nprintf(\"%d\", isEqual);\n// isEqual = 0\n\n--------------------------------------------------------\n\nint h = 20;\nint i = 0;\nbool condition  = (h == i  || h<i);\nprintf(\"%d\", condition);\n// condition = 0 -->>  h!= i & h!< i = 0\n\n--------------------------------------------------------\n\nbool akm = 1;\nif(akm) printf(\"as akm =1 . it will be print\");\n\n--------------------------------------------------------\n\nint l = 20, m = 30;\nbool meow = ( l < m);\nif(meow) printf(\"as l is < than m so it will be print\");\n\n----------------------------------------------------------\n\n// direct true false pass to condition check block\nif(true)printf(\"gonna print\");\nif(false)printf(\"not gonna print\");",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753419098124-y3i9gd"
+  },
+  {
+    "title": "Comments in C",
+    "date": "2025-04-25",
+    "category": "Comment",
+    "tags": [
+      "c",
+      "comment",
+      "multiline comment"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Comments in C",
+        "description": "Comments in C are explanatory statements added to the code to enhance readability and understanding. The compiler ignores these comments during the compilation process.\n\n\nC supports two types of comments:\n1. Single-line\n2. Multi-line."
+      },
+      {
+        "subtitle": "Single-line comments",
+        "description": "These begin with // and continue until the end of the line.",
+        "consoleBlock": {
+          "c": "// This is a single-line comment\n    int x = 10; // This comment explains the variable declaration",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Multi-line comments",
+        "description": "These begin with /* and end with */, and can span multiple lines.",
+        "consoleBlock": {
+          "c": "/*\n     This is a multi-line comment.\n     It can be used to explain a block of code\n     or provide more detailed information.\n*/\n    int y = 20;",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "Comments cannot be nested. They are treated as a single white-space character and can appear wherever white-space is allowed. They are useful for explaining code, making it more readable, and preventing the execution of code during testing."
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753418262125-qxqute"
+  },
+  {
+    "title": "Format Specifiers in C",
+    "date": "2025-04-25",
+    "category": "Format Specifiers",
+    "tags": [
+      "c",
+      "format specifiers",
+      "length modifiers",
+      "floating point variations",
+      "special specifiers",
+      "floating point modifiers"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Format Specifiers in C",
+        "description": "Format specifiers in C are special tokens used with printf() and scanf() functions to specify:\n\n--> The type of data being input/output\n--> How the data should be formatted\n\nThey always begin with a % symbol followed by a format character.\n\n\nUsing the correct format specifier is crucial for accurate data input and output. Mismatched specifiers can lead to unexpected behavior or errors. For instance, using %d to print a float will result in incorrect output."
+      },
+      {
+        "subtitle": "Basic Format Specifiers",
+        "description": "%c - Single character\n%d or %i - Signed decimal integer\n%f - Floating-point number (float)\n%lf - Double-precision floating-point number (double)\n%Lf - Long double-precision floating-point number\n%s - String of characters (null-terminated)\n%p - Pointer address (in hexadecimal)\n%x or %X - Hexadecimal integer (lowercase/uppercase)\n%o - Octal integer\n%u - Unsigned decimal integer\n\n\n\n\nSpecifier\tUsed For\t          Example (printf)\t  Example (scanf)\n%c\t        Single character\t  printf(\"%c\", 'A');\t  scanf(\"%c\", &ch);\n%d/%i\t        Signed integer\t          printf(\"%d\", -42);\t  scanf(\"%d\", &num);\n%f\t        Float\t                  printf(\"%f\", 3.14);\t  scanf(\"%f\", &f);\n%lf\t        Double\t                  printf(\"%lf\", 3.14);    scanf(\"%lf\", &d);\n%Lf\t        Long double\t          printf(\"%Lf\", 3.14);\t  scanf(\"%Lf\", &ld);\n%s\t        String\t                  printf(\"%s\", str);\t  scanf(\"%s\", str);\n%p\t        Pointer address\t          printf(\"%p\", &x);\t  -\n%x/%X\t        Hexadecimal integer\t  printf(\"%x\", 255);\t  scanf(\"%x\", &hex);\n%o\t        Octal integer\t          printf(\"%o\", 64);\t  scanf(\"%o\", &oct);\n%u\t        Unsigned integer\t  printf(\"%u\", 100);\t  scanf(\"%u\", &unum);",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n    /* ========== %c - Single character ========== */\n    // Purpose: Read/print a single character\n    char c;\n    printf(\"Enter a character: \");\n    scanf(\"%c\", &c);       // Input: 'A'\n    printf(\"You entered: %c\\n\\n\", c);  // Output: 'A'\n\n    /* ========== %d/%i - Signed integer ========== */\n    // Purpose: Read/print signed decimal integer\n    int num;\n    printf(\"Enter an integer: \");\n    scanf(\"%d\", &num);     // Input: -42\n    printf(\"Decimal: %d, Integer format: %i\\n\\n\", num, num);  // Output: -42, -42\n\n    /* ========== %f - Float ========== */\n    // Purpose: Read/print floating-point number\n    float f;\n    printf(\"Enter a float: \");\n    scanf(\"%f\", &f);       // Input: 3.14\n    printf(\"Float: %f\\n\\n\", f);  // Output: 3.140000\n\n    /* ========== %lf - Double ========== */\n    // Purpose: Read/print double-precision floating-point\n    double d;\n    printf(\"Enter a double: \");\n    scanf(\"%lf\", &d);      // Input: 3.1415926535\n    printf(\"Double: %lf\\n\\n\", d);  // Output: 3.141593\n\n    /* ========== %s - String ========== */\n    // Purpose: Read/print null-terminated string\n    char str[20];\n    printf(\"Enter a string: \");\n    scanf(\"%s\", str);      // Input: \"Hello\"\n    printf(\"String: %s\\n\\n\", str);  // Output: Hello\n\n    /* ========== %p - Pointer ========== */\n    // Purpose: Print pointer address\n    int x = 10;\n    printf(\"Pointer address: %p\\n\\n\", (void*)&x);  // Output: 0x7ffc...\n\n    /* ========== %x/%X - Hexadecimal ========== */\n    // Purpose: Print hexadecimal representation\n    printf(\"Hex (lower): %x\\n\", 255);  // Output: ff\n    printf(\"Hex (upper): %X\\n\\n\", 255);  // Output: FF\n\n    /* ========== %o - Octal ========== */\n    // Purpose: Print octal representation\n    printf(\"Octal: %o\\n\\n\", 64);  // Output: 100\n\n    /* ========== %u - Unsigned integer ========== */\n    // Purpose: Print unsigned decimal\n    unsigned int u = 4294967295;\n    printf(\"Unsigned: %u\\n\\n\", u);  // Output: 4294967295\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Length Modifiers",
+        "description": "%hd - Short integer\n%ld - Long integer\n%lld - Long long integer (signed)\n%lu - Unsigned long integer\n%llu - Unsigned long long integer\n%zu - Size_t (unsigned integer type for sizes)\n\n\n\n\nSpecifier\t Used For\t            Example\n%hd\t         Short integer\t            printf(\"%hd\", (short)5);\n%ld\t         Long integer\t            printf(\"%ld\", 1000000L);\n%lld\t         Long long integer\t    printf(\"%lld\", 1LL<<40);\n%lu\t         Unsigned long\t            printf(\"%lu\", 1000000UL);\n%llu\t         Unsigned long long\t    printf(\"%llu\", 1ULL<<40);\n%zu\t         size_t (for sizes)\t    printf(\"%zu\", sizeof(int));",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n    /* ========== %hd - Short integer ========== */\n    // Purpose: Read/print short integer\n    short sh;\n    printf(\"Enter a short number: \");\n    scanf(\"%hd\", &sh);     // Input: 32767\n    printf(\"Short: %hd\\n\\n\", sh);  // Output: 32767\n\n    /* ========== %ld - Long integer ========== */\n    // Purpose: Read/print long integer\n    long l;\n    printf(\"Enter a long number: \");\n    scanf(\"%ld\", &l);      // Input: 2147483647\n    printf(\"Long: %ld\\n\\n\", l);  // Output: 2147483647\n\n    /* ========== %lld - Long long integer ========== */\n    // Purpose: Read/print long long integer\n    long long ll;\n    printf(\"Enter a long long number: \");\n    scanf(\"%lld\", &ll);    // Input: 9223372036854775807\n    printf(\"Long long: %lld\\n\\n\", ll);  // Output: 9223372036854775807\n\n    /* ========== %lu - Unsigned long ========== */\n    // Purpose: Print unsigned long\n    unsigned long ul = 4294967295UL;\n    printf(\"Unsigned long: %lu\\n\\n\", ul);  // Output: 4294967295\n\n    /* ========== %zu - size_t ========== */\n    // Purpose: Print size_t type (used for sizes)\n    size_t sz = sizeof(int);\n    printf(\"Size of int: %zu bytes\\n\\n\", sz);  // Output: 4 (typically)\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Floating-Point Variations",
+        "description": "%e or %E - Scientific notation (lowercase/uppercase 'e')\n%g or %G - Uses %e/%E or %f depending on value (shorter representation)\n%a or %A - Hexadecimal floating-point (C99)\n\n\nSpecifier\tUsed For\t             Example\n%e/%E\t        Scientific notation\t     printf(\"%e\", 1000.0);\n%g/%G\t        Auto-choose %f or %e\t     printf(\"%g\", 0.0001);\n%a/%A\t        Hexadecimal float (C99)\t     printf(\"%a\", 256.0);",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n    /* ========== %e/%E - Scientific notation ========== */\n    // Purpose: Print float/double in scientific notation\n    double sci = 123456.789;\n    printf(\"Scientific (lower): %e\\n\", sci);  // Output: 1.234568e+05\n    printf(\"Scientific (upper): %E\\n\\n\", sci);  // Output: 1.234568E+05\n\n    /* ========== %g/%G - Smart float representation ========== */\n    // Purpose: Automatically chooses %f or %e/%E for shorter output\n    printf(\"Smart (lower): %g\\n\", 0.000012345);  // Output: 1.2345e-05\n    printf(\"Smart (upper): %G\\n\", 123.456);      // Output: 123.456\n    printf(\"Smart (upper): %G\\n\\n\", 123456.789); // Output: 123457\n\n    /* ========== %a/%A - Hexadecimal float ========== */\n    // Purpose: Print float/double in hexadecimal scientific notation\n    printf(\"Hex float (lower): %a\\n\", 256.0);  // Output: 0x1p+8\n    printf(\"Hex float (upper): %A\\n\\n\", 256.0);  // Output: 0X1P+8\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Special Specifiers",
+        "description": "%n - Stores number of characters written so far (doesn't print anything)\n%% - Prints a percent sign\n\n\n\nSpecifier\tUsed For\t                Example\n%n\t        Store # of chars printed\tprintf(\"Hi%n\", &count);\n%%\t        Print % symbol\t                printf(\"100%%\");",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n    /* ========== %n - Character count ========== */\n    // Purpose: Stores count of characters printed so far\n    int count;\n    printf(\"Hello%n World!\\n\", &count);\n    printf(\"Characters before %%n: %d\\n\\n\", count);  // Output: 5\n\n    /* ========== %% - Percent sign ========== */\n    // Purpose: Print a literal percent character\n    printf(\"Success rate: 100%%\\n\\n\");  // Output: Success rate: 100%\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Format Specifier Syntax",
+        "description": "The full syntax is: %[flags][width][.precision][length]specifier\n\n\nCommon Flags:\n- - Left-justify\n+ - Force sign (+ or -)\n- Space for positive numbers\n0 - Pad with zeros\n# - Alternate form (e.g., 0x for hex, decimal point for floats)\n\n\nWidth & Precision\n%10s : Minimum width of 10 chars\n%.2f : 2 decimal places\n%10.3f : 10 width with 3 decimals",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n    /* ========== Flags and Width ========== */\n    // Left-justify, width 10\n    printf(\"Left-aligned: |%-10s|\\n\", \"Hello\");  // Output: |Hello     |\n    \n    // Force sign\n    printf(\"Always show sign: %+d\\n\", 25);       // Output: +25\n    \n    // Zero padding, width 5\n    printf(\"Zero-padded: %05d\\n\", 7);            // Output: 00007\n    \n    // Alternate form (hex with 0x)\n    printf(\"Hex with 0x: %#x\\n\", 15);            // Output: 0xf\n    \n    // Floating point with 2 decimal places\n    printf(\"Two decimals: %.2f\\n\", 3.14159);     // Output: 3.14\n    \n    // Scientific notation with width 10, 3 decimal places\n    printf(\"Scientific: %10.3e\\n\", 1234.56);     // Output:  1.235e+03\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Key Differences Between printf() and scanf()",
+        "description": "For floating-point numbers:\n\nprintf(): %f works for both float and double\nscanf(): Must use %f for float, %lf for double\n\n\nFor strings:\nscanf(\"%s\") stops at whitespace\nUse fgets() for strings with spaces\n\n\nSafety:\nAlways specify maximum width for strings in scanf():",
+        "consoleBlock": {
+          "c": "char str[100]; \nscanf(\"%99s\", str);  // Reads max 99 chars + null terminator\n// here you can see that I set max 99\n// Cause the last 100th index is reserved for the null character --->> '\\0'",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753416206954-wyux3s"
+  },
+  {
+    "title": "Implicit Type Casting in C",
+    "date": "2025-05-23",
+    "category": "Implicit Type Casting",
+    "tags": [
+      "c",
+      "implicit",
+      "type Casting"
+    ],
+    "link": "",
+    "images": [
+      "images/built-in/1.png",
+      "images/built-in/2.png"
+    ],
+    "sections": [
+      {
+        "subtitle": "Implicit Type Casting in C",
+        "description": "Implicit type casting in C, also known as automatic type conversion or type coercion, is a process where the compiler automatically converts a value from one data type to another without requiring explicit instructions from the programmer.\n\n\nThis conversion typically occurs when: \n 1. Assigning a value of a smaller data type to a variable of a larger data type\n 2. Performing operations involving operands of different data types\n 3. Passing arguments to functions\n\n\nImplicit type casting aims to simplify coding and ensure type compatibility during operations, but it's crucial to understand the rules of type promotion to avoid unexpected behavior or potential data loss in certain scenarios (e.g., when converting a larger type to a smaller type, which would require explicit casting)."
+      },
+      {
+        "subtitle": "1. Assigning Smaller to Larger Data Type ( Example 1)",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n    // Example 1: char to int conversion\n    char letter = 'B';  // ASCII value 66\n    int ascii_value = letter;  // Implicit conversion from char to int\n    printf(\"Char '%c' to int: %d\\n\", letter, ascii_value);\n    \n    // Example 2: int to double conversion\n    int count = 100;\n    double precise_count = count;  // Implicit conversion from int to double\n    printf(\"Int %d to double: %.2f\\n\", count, precise_count);\n    \n    // Example 3: float to double conversion\n    float temperature = 23.5f;\n    double precise_temp = temperature;  // Implicit conversion from float to double\n    printf(\"Float %.1f to double: %.1lf\\n\", temperature, precise_temp);\n    \n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation of Example 1",
+        "description": "char to int conversion\n\nchar letter = 'B';  // ASCII value 66\nint ascii_value = letter;\n\nA char is being assigned to an int variable\nCharacters in C are represented by their ASCII values (66 for 'B')\nThe compiler automatically promotes the 1-byte char to a 4-byte int\n\nOutput shows the ASCII value of 'B'\n\n-------------------------------------------------------------\n\nint to double conversion\n\nint count = 100;\ndouble precise_count = count;\n\nAn int is being assigned to a double variable\nThe integer value is automatically converted to floating-point representation\nNo loss of precision occurs in this case\n\nOutput shows the same value but now as a floating-point number\n\n------------------------------------------------------------------------\n\nfloat to double conversion\n\nfloat temperature = 23.5f;\ndouble precise_temp = temperature;\n\nA float is being assigned to a double variable\nThis is a widening conversion (32-bit to 64-bit floating point)\nThe value remains the same but with potential for more precision\n\nOutput shows the same value but stored in a higher-precision format"
+      },
+      {
+        "subtitle": "Assigning Smaller to Larger Data Type ( Example 2)",
+        "description": "",
+        "consoleBlock": {
+          "c": "short a = 200;\nshort b = 300;\nint result = a * b;\nprintf(\"%d\", result);\n\n/*\noutput :- 60000\n*/",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation of Example 2",
+        "description": "short Limitations:\n\nshort is a 16-bit signed integer (range: -32,768 to 32,767).\n200 * 300 = 60,000 exceeds short's max value (32,767).\n\n\nWhat Happens?\nC implicitly promotes short to int before multiplication.\na * b becomes int * int → No overflow because int (usually 32-bit) can hold 60,000.\nResult stored in int result correctly.\n\n\nWhy No Overflow?\nInteger Promotion Rule: Smaller types (char, short) are automatically promoted to int in expressions."
+      },
+      {
+        "subtitle": "Assigning Smaller to Larger Data Type ( Example 3) -->> Complex ---> Do it youself --> Brainstorm",
+        "description": "",
+        "consoleBlock": {
+          "c": "int x = 50000;\nlong y = x * x;\nprintf(\"%ld\", y);\n\n/*\nOutput :--->>  -1794967296  // Garbage (overflow)\n*/\n\nFind out why it happeded?",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation of Example 3",
+        "description": "--->>> int Overflow in Intermediate Calculation (Before Assignment to long)  \n\n\n\nProblem:\nx * x = 50000 * 50000 = 2,500,000,000 (2.5 billion).\n2.5 billion ➜ overflows int ➜ incorrect result before it's even assigned to y.\nEven though y is a long int, the overflow already occurred in x * x. (Before assigned to long y, Overfows happend)\nint (32-bit) max = 2,147,483,647 → Overflows before assignment to long.\n\n\nWhy?\nC does not auto-promote int to long in arithmetic.\nx * x is evaluated as int * int → Overflows first, then assigned to long y (too late!).\n\n\nExpectation:\nYou might be thinking why the C compiler doesn't use implicit like example 2.\n\n--> C promotes short to int automatically.\n--> C does not promote int to long int during the multiplication.\n\n\nKey Rule in C:-\nIn C, integer promotions happen only up to int or unsigned int during expression evaluation, not beyond that.\n\n\n✅ Rule 1: Promote small types (e.g., char, short) to int\nThis is part of the \"usual arithmetic conversions\".\nThis is why short * short becomes int * int.\n\n❌ Rule 2: No automatic promotion from int to long int\nC does not automatically promote int to a larger type like long or long long during arithmetic.\nSo x * x is done entirely as int * int — and overflows if the result is too large\n\nC tries to minimize surprises and keep type conversions predictable. Automatically promoting int to long or long long might change performance or precision unexpectedly in normal code, so it leaves that decision to you, the programmer."
+      },
+      {
+        "subtitle": "Solution of Example 3 ( Force promotion with explicit casting )",
+        "description": "So we can fix it by using Explicit type conversion. (Force promotion with explicit casting)\n\nway 1:\nlong int y = (long int)x * x;\n\nway 2:\nint x = 50000;\nlong z = x;\nlong y = z * z;\nprintf(\"%ld\", y);\n\nway 3:\nlong int y = 1l * x * x;\n\nhere 1l means -->> long x = 1;\nso the expression becomes -->> long int y = 1 * x * x;",
+        "consoleBlock": {
+          "c": "So we can fix it by using Explicit type conversion. (Force promotion with explicit casting)\n\nway 1:\nlong int y = (long int)x * x;\n\nway 2:\nlong int y = 1l * x * x;\n\nhere 1l means -->> long x = 1;\nso the expression becomes -->> long int y = 1 * x * x;",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "( Example 4) -->> Complex ---> Do it youself --> Brainstorm",
+        "description": "",
+        "consoleBlock": {
+          "c": "int numerator = 5;\nint denominator = 2;\nfloat result = numerator / denominator;\nprintf(\"%f\", result);\n\n/*\nOutput : 2.000000  // Not 2.5! (truncated)\n*/",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation of Example 4",
+        "description": "Mixed float and int Division (Truncation)\n\nWhat Went Wrong?\nnumerator / denominator is int / int → truncates to 2 (integer division).\nOnly after truncation is the result converted to float (2.0)."
+      },
+      {
+        "subtitle": "Solution of Example 4 ( Force promotion with explicit casting )",
+        "description": "Fix: Promote one operand to float:\n\nKey Rule:\nC does not auto-promote int to float in division unless one operand is floating-point.\n\n\nYou can follow this: \n\nExample\t Operation\t        Issue\t                         Implicit Rule\t                  Fix\n1\t short * short → int\tNo overflow (promotion)\t         Small types → int\t          Automatic\n2\t int * int → long\tOverflow (no promotion)\t         No int → long auto-promotion\t  Explicit cast\n3\t int / int → float\tTruncation (integer division)\t No int → float auto-promotion\t  Cast one operand",
+        "consoleBlock": {
+          "c": "--- way 1\nfloat result = (float)numerator / denominator;  // float / int → float\n\n\n--- way 2\nint numerator = 5;\nfloat numerator1 = numerator;\nint denominator = 2;\nfloat result = numerator1 / denominator;\nprintf(\"%f\", result);\n\n\n--- way 3\nfloat result = 1.0*numerator / denominator;\n\n--- way 4\nfloat result = numerator / (1.0*denominator);\n\n--- way 5\nfloat result = 1.0f* numerator / denominator;\n\nhere 1.0f means --->> float x = 1.0;\n//  the expression becomes -->> 1.0*numerator / denominator;\n\n/*\nOutput: 2.500000 (correct).\n*/",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "2. Operations with Different Data Types (Example 1)",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n    // Example 1: int and float operation\n    int items = 5;\n    float price = 12.99;\n    float total = items * price;  // 'items' converted to float before multiplication\n    printf(\"Total price: $%.2f\\n\", total);\n    \n    // Example 2: char and int operation\n    char initial = 'C';  // ASCII 67\n    int offset = 3;\n    char new_char = initial + offset;  // 'initial' promoted to int, result converted back to char\n    printf(\"'%c' + %d = '%c'\\n\", initial, offset, new_char);\n    \n    // Example 3: mixed float and double\n    float radius = 5.5f;\n    double pi = 3.1415926535;\n    double area = pi * radius * radius;  // 'radius' converted to double\n    printf(\"Area of circle: %.10lf\\n\", area);\n    \n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation of Example 1",
+        "description": "int and float operation:\n\nint items = 5;\nfloat price = 12.99;\nfloat total = items * price;\n\n\nitems is an integer (5) and price is a float (12.99)\nBefore multiplication, the compiler automatically converts items to float (5.0)\nThe multiplication is then performed as float × float\nResult (64.95) is stored in the float variable total\n\nOutput: Total price: $64.95\n\n\nchar and int operation:\n\nchar initial = 'C';  // ASCII 67\nint offset = 3;\nchar new_char = initial + offset;\n\n\ninitial is a char ('C' with ASCII value 67)\noffset is an integer (3)\nBefore addition, initial is promoted to int (67)\nThe addition is performed as int + int (67 + 3 = 70)\nResult is converted back to char (ASCII 70 = 'F')\n\nOutput: 'C' + 3 = 'F'\n\n\n\nmixed float and double:\n\nfloat radius = 5.5f;\ndouble pi = 3.1415926535;\ndouble area = pi * radius * radius;\nradius is a float (5.5)\n\n\npi is a double (higher precision than float)\nBefore multiplication, radius is promoted to double (5.5 becomes 5.5 as double)\nAll calculations are done in double precision\nResult is stored in the double variable area\n\nOutput shows higher precision: Area of circle: 95.0331777715\n\n\n\n\nKey Points:\n\nType Promotion Hierarchy: In mixed-type expressions, values are converted to the \"higher\" type:\nchar → int → float → double\n\n\nArithmetic Conversions:\nIf either operand is double, the other is converted to double\nElse if either operand is float, the other is converted to float\nElse integer promotions are applied (chars/shorts become ints)\n\nAssignment Conversions: When assigning to a variable, the result is converted to the variable's type\n\nNo Data Loss: These are widening conversions that preserve the original value\n\n\n\noutput:\nTotal price: $64.95\n'C' + 3 = 'F'\nArea of circle: 95.0331777715"
+      },
+      {
+        "subtitle": "3. Passing Arguments to Functions  (Example 1)",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\n// Function expecting double parameter\nvoid print_cube(double num) {\n    printf(\"Cube of %.2f is %.2f\\n\", num, num * num * num);\n}\n\n// Function expecting long parameter\nvoid print_bits(long value) {\n    printf(\"Binary of %ld: \", value);\n    for (int i = sizeof(long) * 8 - 1; i >= 0; i--) {\n        printf(\"%d\", (value >> i) & 1);\n    }\n    printf(\"\\n\");\n}\n\nint main() {\n    // Example 1: int to double conversion\n    int side = 4;\n    print_cube(side);  // Implicit conversion from int to double\n    \n    // Example 2: char to long conversion\n    char byte = 'A';  // ASCII 65\n    print_bits(byte);  // Implicit conversion from char to long\n    \n    // Example 3: float to double conversion\n    float amount = 12.5f;\n    print_cube(amount);  // Implicit conversion from float to double\n    \n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation of Example 1",
+        "description": "Function:\n\nprint_cube(double num)\n\nvoid print_cube(double num) {\n    printf(\"Cube of %.2f is %.2f\\n\", num, num * num * num);\n}\n\nTakes a double parameter\nPrints the number and its cube with 2 decimal places precision\n\n\n\nprint_bits(long value)\n\nvoid print_bits(long value) {\n    printf(\"Binary of %ld: \", value);\n    for (int i = sizeof(long) * 8 - 1; i >= 0; i--) {\n        printf(\"%d\", (value >> i) & 1);\n    }\n    printf(\"\\n\");\n}\nTakes a long parameter\nPrints the binary representation of the number by examining each bit\nWorks by shifting and masking bits from most significant to least significant\n\n\n\n\nMain Function:\n\nint to double conversion\n\nint side = 4;\nprint_cube(side);  // Implicit conversion from int to double\n\nside is an int (4)\nprint_cube() expects a double\nCompiler automatically converts int to double (4 → 4.0)\n\nOutput: Cube of 4.00 is 64.00\n\n\n\nchar to long conversion\n\nchar byte = 'A';  // ASCII 65\nprint_bits(byte);  // Implicit conversion from char to long\n\nbyte is a char ('A' with ASCII value 65)\nprint_bits() expects a long\nCompiler promotes char to long (65 → 65L)\n\nOutput shows binary representation of 65 (depends on system, typically 64-bit)\n\n\n\nfloat to double conversion\n\nfloat amount = 12.5f;\nprint_cube(amount);  // Implicit conversion from float to double\n\namount is a float (12.5)\nprint_cube() expects a double\nCompiler promotes float to double (12.5f → 12.5)\n\nOutput: Cube of 12.50 is 1953.12\n\n\n\n\nKey Points:\n\nAutomatic Conversion: The compiler automatically converts arguments to match the function's parameter types when possible.\n\nType Promotion Rules:\n--> Smaller types (char, short, int, float) are promoted to larger types (long, double)\n--> No loss of precision occurs in these widening conversions\n\nBinary Representation:\n--> The print_bits() function shows how values are represented in memory\n--> The conversion from char to long preserves the value but stores it in a larger space\n\nFloating-Point Precision:\nThe conversion from float to double maintains the value but with higher precision\n\nOutput Differences:\n--> Integer values show exact representations (4 → 4.00)\n--> Floating-point values may show more precise results (12.5 cubed is actually 1953.125)\n\n\n\nOutput:\nCube of 4.00 is 64.00\nBinary of 65: 0000000000000000000000000000000000000000000000000000000001000001\nCube of 12.50 is 1953.12\n(Note: The exact binary output depends on your system's long size and endianness)"
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753380443435-u59we5"
+  },
+  {
+    "title": "Increment and Decrement Operators in C (Pre and Post Variations)",
+    "date": "2025-05-24",
+    "category": "Increment & Decrement",
+    "tags": [
+      "c",
+      "increment",
+      "decrement",
+      "pre increment",
+      "post increment",
+      "pre decrement",
+      "post decrement"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Increment and Decrement Operators in C",
+        "description": "In C programming, increment (++) and decrement (--) operators are unary operators that increase or decrease the value of a variable by one, respectively. These operators are fundamental in various programming scenarios, such as loops, array traversals, and pointer arithmetic."
+      },
+      {
+        "subtitle": "Increment Operator (++)",
+        "description": "The increment operator increases the value of its operand by one. It can be used in two forms:\n\n-->> Pre-increment (++x): Increments the value before it's used in an expression.\n-->> Post-increment (x++): Increments the value after it's used in an expression."
+      },
+      {
+        "subtitle": "Decrement Operator (--)",
+        "description": "The decrement operator decreases the value of its operand by one. Similar to the increment operator, it has two forms:\n\n-->> Pre-decrement (--x): Decrements the value before it's used in an expression.\n-->> Post-decrement (x--): Decrements the value after it's used in an expression."
+      },
+      {
+        "subtitle": "Pre-Increment (++x)",
+        "description": "In pre-increment, the variable is incremented first, and then the updated value is used in the expression.",
+        "consoleBlock": {
+          "c": "-->>> Pre-Increment (++x) \n\n#include <stdio.h>\n\nint main() {\n    int x = 10;\n    int y = ++x;\n    printf(\"x = %d, y = %d\\n\", x, y);\n    return 0;\n}\n\n/*\noutput >> x = 11, y = 11\n*/\n\n>>> Explanation: x is incremented to 11, and then y is assigned the value of x, which is 11.",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        } 
+      },
+      {
+        "subtitle": "Post-Increment (x++)",
+        "description": "In post-increment, the current value of the variable is used in the expression, and then the variable is incremented.",
+        "consoleBlock": {
+          "c": "---->> Post-Increment (x++)\n\n#include <stdio.h>\n\nint main() {\n    int x = 10;\n    int y = x++;\n    printf(\"x = %d, y = %d\\n\", x, y);\n    return 0;\n}\n\n/*\noutput >> x = 11, y = 10\n*/\n\n>>>>> Explanation: y is assigned the current value of x (10), and then x is incremented to 11.",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Pre-Decrement (--x)",
+        "description": "In pre-decrement, the variable is decremented first, and then the updated value is used in the expression.",
+        "consoleBlock": {
+          "c": "--->> Pre-Decrement (--x)\n\n#include <stdio.h>\n\nint main() {\n    int x = 10;\n    int y = --x;\n    printf(\"x = %d, y = %d\\n\", x, y);\n    return 0;\n}\n\n/*\noutput >> x = 11, y = 10\n*/\n\n>>>> Explanation: x is decremented to 9, and then y is assigned the value of x, which is 9.",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Post-Decrement (x--)",
+        "description": "In post-decrement, the current value of the variable is used in the expression, and then the variable is decremented.",
+        "consoleBlock": {
+          "c": "--->> Post-Decrement (x--)\n\n#include <stdio.h>\n\nint main() {\n    int x = 10;\n    int y = x--;\n    printf(\"x = %d, y = %d\\n\", x, y);\n    return 0;\n}\n/*\noutput >> x = 9, y = 10\n*/\n\n>>>> Explanation: y is assigned the current value of x (10), and then x is decremented to 9.",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "--->> Complex problem --->> Brainstorm --->> Give it a shot --->> Do it yourself",
+        "description": "What's the value of total? Find it out.\n\nint x=10,y=7,z=12;\nint total = (x--)+(y++*3)+(++z)+(y++)+(--x*3)+(--z)+(z*3)-(--y*3);\n\nprintf(\"%d\", total);",
+        "consoleBlock": {
+          "c": "--->> Complex problem --->> Brainstorm --->> Give it a shot --->> Do it yourself\n\n\n----->> What's the value of total? Find it out.\n\n\n#include<stdio.h>\n\nint main(){\n\nint x=10,y=7,z=12;\nint total = (x--)+(y++*3)+(++z)+(y++)+(--x*3)+(--z)+(z*3)-(--y*3);\n\nprintf(\"%d\", total);\n\nreturn 0;\n}\n\n\n\n/*\nOutput: 100\n*/\n\n\n----> Explanation\n\n1. (x--)\nUse x = 10, then decrement it → x = 9\nResult: 10\n2. (y++ * 3)\nUse y = 7, then increment it → y = 8\nResult: 7 * 3 = 21\n3. (++z)\nIncrement z = 12 to 13, then use it\nResult: 13\n4. (y++)\nUse y = 8, then increment it → y = 9\nResult: 8\n5. (--x * 3)\nDecrement x = 9 to 8, then use it\nResult: 8 * 3 = 24\n6. (--z)\nDecrement z = 13 to 12, then use it\nResult: 12\n7. (z * 3)\nUse current z = 12\nResult: 12 * 3 = 36\n8. (--y * 3)\nDecrement y = 9 to 8, then use it\nResult: 8 * 3 = 24\n--->> total = 10 + 21 + 13 + 8 + 24 + 12 + 36 - 24\n= 100",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753367740699-8whd8f"
+  },
+  {
+    "title": "Input Function in C",
+    "date": "2025-04-25",
+    "category": "Input",
+    "tags": [
+      "c",
+      "input"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Standard Input Function in C – scanf()",
+        "description": "In C, the standard input function reads data from the standard input stream, which is usually the keyboard. The most commonly used standard input function is scanf(). It reads formatted input from the user."
+      },
+      {
+        "subtitle": "The scanf() function takes two types of arguments:",
+        "description": "1. Format string\n2. Addresses of variables"
+      },
+      {
+        "subtitle": "Format string:",
+        "description": "Specifies the format of the input to be read. It includes format specifiers that begin with a percent sign (%). Some common format specifiers are:\n%d: for integers\n%f: for floating-point numbers\n%c: for characters\n%s: for strings"
+      },
+      {
+        "subtitle": "Addresses of variables:",
+        "description": "Specifies where the input data should be stored in memory. The address of a variable is obtained using the ampersand (&) operator.",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n  int age;\n  float gpa;\n  char name[50];\n\n  printf(\"Enter your name: \");\n  scanf(\"%s\", name);\n\n  printf(\"Enter your age: \");\n  scanf(\"%d\", &age);\n\n  printf(\"Enter your GPA: \");\n  scanf(\"%f\", &gpa);\n\n  printf(\"Name: %s\\n\", name);\n  printf(\"Age: %d\\n\", age);\n  printf(\"GPA: %.2f\\n\", gpa);\n\n  return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "In this example, scanf() is used to read a string, an integer, and a floating-point number from the user. The input values are stored in the variables name, age, and gpa, respectively. The printf() function then displays the stored values.\nOther input functions in C include getchar(), which reads a single character, and fgets(), which reads a line of text. However, scanf() is the most versatile function for reading formatted input."
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753366742929-c03654"
+  },
+  {
+    "title": "Loop in C",
+    "date": "2025-05-30",
+    "category": "Loop",
+    "tags": [
+      "c",
+      "loop",
+      "for loop",
+      "while loop",
+      "do while loop"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Loop in C",
+        "description": "In C programming, loops are control flow statements that allow a block of code to be executed repeatedly.\n\nC offers three main types of loops:\n1. for\n2. while\n3. do while"
+      },
+      {
+        "subtitle": "For Loop",
+        "description": "The for loop is typically used when the number of iterations is known in advance.\n\nIts structure consists of three parts:\n1. initialization\n2. condition\n3. update\n\nInitialization: Executed only once at the beginning of the loop.\nCondition: Evaluated before each iteration. The loop continues as long as the condition is true.\nUpdate: Executed after each iteration, often used to increment or decrement a loop counter.",
+        "consoleBlock": {
+          "c": "--->> For loop Structure\n\nfor (initialization; condition; update) {\n// Code to be executed\n}\n\n//---------------------------------------------------\n\n--->> For loop\nfor (int i = 0; i < 5; i++) {\nprintf(\"For loop: %d\\n\", i);\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "While Loop",
+        "description": "The while loop executes a block of code as long as a given condition is true.\n\nInitialization: Executed only once at the beginning of the loop.\nCondition: Evaluated before each iteration. If true, the loop body is executed.\nUpdate: Executed inside while block, often used to increment or decrement a loop counter.",
+        "consoleBlock": {
+          "c": "--->> While loop structure\n\nInitialization\nwhile (condition) {\n// Code to be executed\nUpdate\n}\n\n//-------------------------------------------\n\n--->> While loop\nint j = 0;\nwhile (j < 5) {\nprintf(\"While loop: %d\\n\", j);\nj++;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Do While Loop",
+        "description": "The do...while loop is similar to the while loop, but it executes the code block at least once before checking the condition.\n\nInitialization: Executed only once at the beginning of the loop.\nCondition: Evaluated after each iteration. The loop continues as long as the condition is true.\nUpdate: Executed inside while block, often used to increment or decrement a loop counter.",
+        "consoleBlock": {
+          "c": "---->> Do...while loop structure\n\nInitialization\ndo {\n// Code to be executed\nUpdate\n} while (condition);\n\n//---------------------------------------------\n\n---->> Do...while loop\n\nint k = 0;\ndo {\nprintf(\"Do...while loop: %d\\n\", k);\nk++;\n} while (k < 5);",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "While Loop & Do While Loop without Initialization & Update",
+        "description": "For this case, we often pass a variable or a Boolean value. Then we can check the condition.",
+        "consoleBlock": {
+          "c": "---->> while loop without initialization & update\n\nwhile (condition) {\n// Code to be executed\n}\n\n//------------------------------------------------------\n\n---->> do..while loop without initialization & update\ndo {\n// Code to be executed\n} while (condition);",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Nested Loops",
+        "description": "In C programming, a nested loop refers to a loop placed inside another loop. The inner loop executes completely for each iteration of the outer loop. This structure is commonly used when dealing with multi-dimensional data or when an action needs to be repeated multiple times in a structured manner.\n\nAny type of loop (for, while, or do-while) can be nested within another loop of any type.\n\nNested loops are often used for tasks such as:\n1. Iterating over 2D arrays: Accessing elements in rows and columns.\n2. Printing patterns: Creating shapes or sequences of characters.\n3. Solving matrix problems: Performing calculations on matrices.\n4. Generating tables: Creating multiplication tables or other tabular data.",
+        "consoleBlock": {
+          "c": "---->> nested loop\n\n#include <stdio.h>\n\nint main() {\nfor (int i = 0; i < 3; i++) { // Outer loop\n   for (int j = 0; j < 2; j++) { // Inner loop\n         printf(\"i = %d, j = %d\\n\", i, j);\n    }\n}\n\nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Loop Control Statements (Break & Continue)",
+        "description": "1. break: Terminates the loop immediately.\n2. continue: Skips the current iteration and moves to the next one.\n\nIn C programming, break and continue are control flow statements used within loops (for, while, do-while) to alter the normal execution flow.\n\nBreak Statement:\nThe break statement terminates the innermost loop it is enclosed within. When encountered, the program execution jumps to the statement immediately following the loop. It can also be used in switch statements to exit the case block.\n\nIn this example, the loop will terminate when i equals 5, and the output will be: 0 1 2 3 4 Loop terminated.\n\n\nContinue Statement:\nThe continue statement skips the remaining code within the current iteration of the loop and proceeds to the next iteration. It does not terminate the loop but rather jumps to the loop's update expression (in for loops) or condition check (in while and do-while loops).\n\nIn this example, the loop will skip even numbers, and the output will be: 1 3 5 7 9 Loop completed.\n\n\nKey Differences:\n1. break terminates the loop entirely, while continue only skips the current iteration.\n2. break can be used in switch statements, while continue is specific to loops.\n3. break transfers control to the statement after the loop, while continue transfers control to the loop's update or condition check.",
+        "consoleBlock": {
+          "c": "---->> break example \n\n#include <stdio.h>\n\nint main() {\n    for (int i = 0; i < 10; i++) {\n        if (i == 5) {\n            break; // Exit the loop when i is 5\n        }\n        printf(\"%d \", i);\n    }\n    printf(\"\\nLoop terminated.\\n\");\n\nreturn 0;\n}\n\n\n//----------------------------------------------------------\n\n---->> ontinue example\n\n#include <stdio.h>\n\nint main() {\n    for (int i = 0; i < 10; i++) {\n        if (i % 2 == 0) {\n            continue; // Skip even numbers\n        }\n        printf(\"%d \", i);\n    }\n    printf(\"\\nLoop completed.\\n\");\n\nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753366215728-jly5bd"
+  },
+  {
+    "title": "Last digit using modulus",
+    "date": "2025-04-27",
+    "category": "Modulus",
+    "tags": [
+      "c",
+      "mode",
+      "modulus"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Extract last digit of a number",
+        "description": "Using the modulus operator, we can find out the last digit of a number.",
+        "consoleBlock": {
+          "c": "int n;\nscanf(\"%d\", &n); // n = 7362 : wxyz\n\nint z = n%10; // z = 2 (get the last digit)\nn = n/10; // divide by 10 to remove the last digit. now n = 736\n\nint y = n%10; // y = 6 (get the new last digit)\nn = n/10; // divide by 10 to remove the last digit. now n = 73\n\nint x = n%10; // x = 3 (get the new last digit)\nn = n/10; // divide by 10 to remove the last digit. now n = 7\n\nint w = n%10; // w = 7 (get the final digit)\n\n\n/*\n\nExtracted digits of 7362 as:\n\nw = 7 (thousands place)\nx = 3 (hundreds place)\ny = 6 (tens place)\nz = 2 (ones place)\n\n*/",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753365322762-du1u5s"
+  },
+  {
+    "title": "Output Function in C",
+    "date": "2025-04-25",
+    "category": "Output",
+    "tags": [
+      "c",
+      "output"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Standard Output Function in C – printf()",
+        "description": "In C, standard output refers to the stream of data that programs write to, typically displayed on the console. Several functions facilitate output operations, with printf being the most versatile and commonly used."
+      },
+      {
+        "subtitle": "printf()",
+        "description": "This function prints formatted output to the standard output stream (stdout). It allows for the inclusion of variables, escape sequences, and format specifiers to control the appearance of the output.",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n    \n    int main() {\n        int num = 10;\n        printf(\"The number is: %d\\n\", num);\n        printf(\"Hello, world!\\n\");\n        return 0;\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "putchar()",
+        "description": "This function outputs a single character to stdout.",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n    \n    int main() {\n        char ch = 'A';\n        putchar(ch); \n        putchar('\\n');\n        return 0;\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "puts()",
+        "description": "This function outputs a string to stdout, automatically appending a newline character at the end",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n    \n    int main() {\n        char str[] = \"Hello, World!\";\n        puts(str);\n        return 0;\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "fprintf()",
+        "description": "While primarily used for file output, fprintf can also write to stdout by specifying it as the output stream.",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n    \n    int main() {\n        int num = 20;\n        fprintf(stdout, \"The number is: %d\\n\", num);\n        return 0;\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "",
+        "description": "These functions provide different levels of control and convenience for outputting data in C programs. printf is suitable for complex formatting, putchar for single characters, puts for simple strings, and fprintf for directing output to specific streams, including stdout."
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753364942823-wjg58h"
+  },
+  {
+    "title": "Statement in C",
+    "date": "2025-04-25",
+    "category": "Statements",
+    "tags": [
+      "c",
+      "statements"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Statement in c language",
+        "description": "Statement: A statement in C programming is a command that instructs the computer to perform a specific action. It is the fundamental building block of a C program, and every program consists of a sequence of statements that are executed in a specific order."
+      },
+      {
+        "subtitle": "There are different types of statements in C",
+        "description": ""
+      },
+      {
+        "subtitle": "Expression statements",
+        "description": "These are the most common type of statement and consist of an expression followed by a semicolon. They are used to evaluate an expression and optionally assign its value to a variable.",
+        "consoleBlock": {
+          "c": "int x = 5;  // Declaration statement\n    x = x + 10; // Assignment statement\n    printf(\"%d\", x); // Function call statement",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Compound statements",
+        "description": "Also known as blocks, these statements group multiple statements together within curly braces {}. They are used to create a sequence of actions that are treated as a single unit.",
+        "consoleBlock": {
+          "c": "{\n        int x = 5;\n        int y = 10;\n        int sum = x + y;\n        printf(\"The sum is: %d\\n\", sum);\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Selection statements",
+        "description": "These statements allow the program to make decisions based on certain conditions. The most common selection statements are if, else if, and switch.",
+        "consoleBlock": {
+          "c": "int age = 20;\n    if (age >= 18) {\n        printf(\"You are eligible to vote.\\n\");\n    } else {\n        printf(\"You are not eligible to vote yet.\\n\");\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Iteration statements",
+        "description": "These statements allow the program to repeat a block of code multiple times. The most common iteration statements are for, while, and do-while.",
+        "consoleBlock": {
+          "c": "for (int i = 0; i < 10; i++) {\n        printf(\"The value of i is: %d\\n\", i);\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Jump statements",
+        "description": "These statements allow the program to jump to a different part of the code. The most common jump statements are break, continue, and goto.",
+        "consoleBlock": {
+          "c": "for (int i = 0; i < 10; i++) {\n        if (i == 5) {\n            break; // Exit the loop when i is 5\n        }\n        printf(\"The value of i is: %d\\n\", i);\n    }",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Labeled statements",
+        "description": "These statements are used to mark a specific location in the code with a label, which can then be used by goto statements.",
+        "consoleBlock": {
+          "c": "start:\n    printf(\"This is the start of the code.\\n\");\n    // ... some code ...\n    goto start; // Jump back to the start label",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Declaration statements",
+        "description": "These statements are used to declare variables, which are named storage locations that can hold data.",
+        "consoleBlock": {
+          "c": "int age;         // Declare an integer variable named age\n    float salary;    // Declare a floating-point variable named salary\n    char name[50];   // Declare a character array (string) named name",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753364598650-8xt0ee"
+  },
+  {
+    "title": "Syntax in C",
+    "date": "2025-04-25",
+    "category": "Syntax",
+    "tags": [
+      "c",
+      "syntax",
+      "formating"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Syntax in C",
+        "description": "Syntax : The syntax of C programming refers to the set of rules that govern how code statements are structured. These rules dictate the correct way to write code so that the compiler can understand and execute it. C syntax includes keywords, operators, punctuation, identifiers, and comments. It is case-sensitive, and most statements end with a semicolon. Whitespace is used to improve readability, but it is required for keywords and identifiers."
+      },
+      {
+        "subtitle": "Key elements of C syntax",
+        "description": "Header Files:\nThese are files containing declarations of functions and macros, typically included at the beginning of a C source file using the #include directive (e.g., #include <stdio.h>).\n\n\nmain() Function:\nEvery C program must contain a main() function, which serves as the entry point for program execution.\n\n\nStatements and Semicolons:\nIndividual instructions or expressions in C are called statements, and most statements must be terminated with a semicolon (;).\n\n\nCurly Braces {}:\nThese are used to define code blocks, such as the body of functions or control flow statements (e.g., if, for, while).\n\n\nVariables and Data Types:\nVariables are declared with a specific data type (e.g., int, float, char) to define the type of data they will store.\n\n\nComments:\nComments are used to add explanatory notes within the code and are ignored by the compiler. Single-line comments start with //, while multi-line comments are enclosed within /* */.\n\n\nKeywords:\nC has a set of reserved words (keywords) with predefined meanings that cannot be used as identifiers (e.g., if, else, while, for, return).\n\n\nIdentifiers:\nThese are names given to variables, functions, and other user-defined items. They must follow specific naming rules (e.g., starting with a letter or underscore, no special characters except underscore).\n\n\nTokens:\nA C program is composed of various tokens, which are the smallest individual units of a program, including keywords, identifiers, constants, string literals, and operators.",
+        "consoleBlock": {
+          "c": "#include <stdio.h> // Header file inclusion\n\nint main() { // Main function definition\n    printf(\"Hello, World!\\n\"); // Statement to print text, ends with a semicolon\n    return 0; // Return statement\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753361183906-4ztvhh"
+  },
+  {
+    "title": "Variable in C",
+    "date": "2025-04-25",
+    "category": "Variable",
+    "tags": [
+      "c",
+      "variable"
+    ],
+    "link": "",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Variable in c",
+        "description": "In C, a variable is a named storage location in the computer's memory that can hold a value. It's like a container that can store data, which can be modified during program execution. Each variable has a specific data type that determines the kind of values it can hold, such as integers, floating-point numbers, or characters."
+      },
+      {
+        "subtitle": "Keep in mind when using a variable",
+        "description": "1. Declaration\n2. Initialization\n3. Data Types\n4. Naming Rules\n5. Scope"
+      },
+      {
+        "subtitle": "Declaration",
+        "description": "Before using a variable, it must be declared, specifying its data type and name.",
+        "consoleBlock": {
+          "c": "int age;          // Declares an integer variable named 'age'\nfloat salary;     // Declares a floating-point variable named 'salary'\nchar initial;     // Declares a character variable named 'initial'",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Initialization",
+        "description": "Variables can be initialized at the time of declaration or later in the program.",
+        "consoleBlock": {
+          "c": "int age = 30;     // Declares and initializes 'age' to 30\nfloat salary;\nsalary = 50000.00; // Initializes 'salary' to 50000.00",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Data Types",
+        "description": "Data types in C can be broadly classified into the following categories: \n\n\nBasic (Primary) Data Types:\nThese are the fundamental data types built into the C language.\n\n int: Used to store whole numbers (integers).\n char: Used to store single characters.\n float: Used to store single-precision floating-point numbers (numbers with decimal points).\n double: Used to store double-precision floating-point numbers, offering higher precision than float.\n void: A special type indicating the absence of a value, often used with functions that don't return a value or as a generic pointer   \n type.\n\n\nDerived Data Types:\nThese are constructed from the basic data types.\n\n Arrays: Collections of elements of the same data type, stored in contiguous memory locations.\n Pointers: Variables that store memory addresses of other variables.\n Functions: Blocks of code designed to perform a specific task, which can return a value of a certain data type or void.\n\n\nUser-Defined Data Types:\nThese are defined by the programmer using keywords provided by C.\n\n Structures (struct): Collections of variables of different data types grouped under a single name.\n Unions (union): Similar to structures, but all members share the same memory location, allowing only one member to hold a value at  \n a time.\n Enumerations (enum): Sets of named integer constants, improving code readability.\n\n\nData Type Qualifiers:\nC also provides qualifiers that modify the basic data types:\n signed: Specifies that a variable can hold both positive and negative values (default for int, char).\n unsigned: Specifies that a variable can only hold non-negative values.\n short: Reduces the memory size of an int.\n long: Increases the memory size of an int or double.",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n#include <stdbool.h> // Required for boolean type\n\nint main() {\n    // Primitive Data Types\n    int integerVar = 10;\n    float floatVar = 3.14f;\n    double doubleVar = 3.14159265359;\n    char charVar = 'A';\n    bool boolVar = true; // Requires <stdbool.h>\n\n    // Integer modifiers (examples)\n    short shortVar = 100;\n    long longVar = 1234567890;\n    unsigned int unsignedIntVar = 4294967295; //max value for 32 bit unsigned int\n\n    // Outputting primitive types\n    printf(\"Integer: %d\\n\", integerVar);\n    printf(\"Float: %f\\n\", floatVar);\n    printf(\"Double: %lf\\n\", doubleVar);\n    printf(\"Character: %c\\n\", charVar);\n    printf(\"Boolean: %d\\n\", boolVar); // Prints 1 for true, 0 for false\n    printf(\"Short: %hi\\n\", shortVar);\n    printf(\"Long: %li\\n\", longVar);\n    printf(\"Unsigned Integer: %u\\n\", unsignedIntVar);\n\n    // Derived Data Types (example - array)\n    int arrayVar[5] = {1, 2, 3, 4, 5};\n    printf(\"Array Element: %d\\n\", arrayVar[0]);\n\n    // User-defined data type (example - struct)\n    struct MyStruct {\n        int member1;\n        char member2[20];\n    };\n\n    struct MyStruct structVar = {10, \"Hello\"};\n    printf(\"Struct Member 1: %d\\n\", structVar.member1);\n    printf(\"Struct Member 2: %s\\n\", structVar.member2);\n\n    // Void (used as a return type or a pointer)\n    void *voidPtr; //Example of a void pointer (can point to any data type)\n    int x = 10;\n    voidPtr = &x;\n    // Accessing the value through a void pointer is not directly possible, you need casting\n    printf(\"Value of x using void pointer (unsafe): %d\\n\", *(int*)voidPtr);\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Naming Rules",
+        "description": "In C, variable names (also known as identifiers) must follow specific rules: they can only contain letters, digits, and underscores (_), must start with a letter or an underscore, are case-sensitive, cannot contain spaces or special characters, and cannot be a reserved keyword. \n\n\nValid Variable Names:\n Letters, digits, and underscores: myVariable, count1, _value, name_of_student are all valid. \n Start with a letter or underscore: _temp, data1, student_name are valid. \n\n\nInvalid Variable Names:\n Starting with a digit: 1variable is invalid.\n Containing spaces: my variable is invalid.\n Containing special characters: my.variable, student! are invalid.\n Being a keyword: int, float, return are invalid. \n\nAdditional Considerations:\n Case sensitivity: myVariable and myvariable are treated as different variables. \n No strict length limit: While there's no strict limit, excessively long names (over 31 characters) might cause issues in some compilers. \n Descriptive names: It's good practice to use descriptive names that clearly indicate the variable's purpose. \n Consistency: Following consistent naming conventions throughout a project improves readability and maintainability. \n Keywords: Keywords are reserved words in C and cannot be used as variable names.",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n  // Valid variable names\n  int age = 30;\n  float salary = 50000.50;\n  char initial = 'A';\n  int num_students = 25;\n  float _average_score = 85.7;\n\n  // Invalid variable names (examples)\n  // int 123number;  // Starts with a digit\n  // int my variable; // Contains a space\n  // int int; // Uses a keyword\n  // int my$variable; // Contains a special character\n\n  printf(\"Age: %d\\n\", age);\n  printf(\"Salary: %.2f\\n\", salary);\n  printf(\"Initial: %c\\n\", initial);\n  printf(\"Number of students: %d\\n\", num_students);\n  printf(\"Average score: %.2f\\n\", _average_score);\n\n  return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Scope",
+        "description": "The scope of a variable defines where it can be accessed within the program.\nLocal variables: declared inside a block of code (e.g., a function) and are only accessible within that block.\nGlobal variables: declared outside any function and are accessible throughout the program.",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint globalVar = 100; // Global variable\n\nint main() {\n    int localVar = 50; // Local variable\n\n    printf(\"Global variable: %d\\n\", globalVar);\n    printf(\"Local variable: %d\\n\", localVar);\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1753360793593-2d8xg9"
+  }
+]

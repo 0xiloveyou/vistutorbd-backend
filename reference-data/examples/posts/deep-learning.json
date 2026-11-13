@@ -1,0 +1,57 @@
+[
+  {
+    "id": "seed-dl-forward-pass",
+    "title": "A Neural Network Forward Pass in 20 Lines",
+    "date": "2026-10-16",
+    "category": "Neural Networks",
+    "tags": [
+      "Neural Networks",
+      "Forward Pass",
+      "Activation"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [
+      {
+        "name": "TensorFlow Playground",
+        "url": "https://playground.tensorflow.org/"
+      }
+    ],
+    "sections": [
+      {
+        "subtitle": "Neurons are weighted sums",
+        "description": "<p>A neuron multiplies its inputs by weights, adds a bias, and passes the result through an activation function. A layer is just many neurons evaluated in parallel.</p>\n<p>The <span style=\"color:#22d3ee;font-weight:600\">forward pass</span> is the process of turning inputs into predictions.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "import math\n\ndef sigmoid(x):\n    return 1 / (1 + math.exp(-x))\n\ninputs = [1.0, 0.5, -0.2]\nweights = [\n    [0.2, -0.4, 0.7],\n    [0.5, 0.1, -0.3],\n    [0.1, 0.8, 0.2],\n    [-0.6, 0.2, 0.4],\n]\nbias = [0.1, -0.2, 0.0, 0.3]\n\nhidden = []\nfor row, b in zip(weights, bias):\n    z = sum(x * w for x, w in zip(inputs, row)) + b\n    hidden.append(sigmoid(z))\n\nprint(\"hidden activations:\", [round(value, 3) for value in hidden])",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Activation functions",
+        "description": "<p>Without a non-linearity, stacked layers collapse into a single linear transformation. <span style=\"color:#facc15\">ReLU</span> keeps positive values and zeros the rest. <span style=\"color:#a855f7\">Sigmoid</span> squashes values into 0–1.</p>\n<p>The choice of activation affects gradient flow, not just the output range.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "import math\n\ndef relu(x):\n    return max(0.0, x)\n\ndef sigmoid(x):\n    return 1 / (1 + math.exp(-x))\n\nfor x in [-2, -0.5, 0, 0.5, 2]:\n    print(f\"x={x:>4}  relu={relu(x):>4}  sigmoid={sigmoid(x):.3f}\")",
+          "js": "",
+          "java": ""
+        },
+        "visualization": {
+          "enabled": true,
+          "title": "A small feed-forward network",
+          "html": "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<style>\n  body { margin: 0; padding: 12px; background: #0b0b0b; color: #e5e7eb; font-family: \"Segoe UI\", system-ui, sans-serif; }\n  svg { width: 100%; height: 300px; }\n  .lbl { fill: #9ca3af; font-size: 11px; }\n  .node { fill: #111827; stroke: #6366f1; stroke-width: 2; }\n  .edge { stroke: #374151; stroke-width: 1.4; }\n</style>\n</head>\n<body>\n<svg viewBox=\"0 0 700 300\">\n  <g class=\"edge\">\n    <line x1=\"120\" y1=\"70\" x2=\"330\" y2=\"60\" /><line x1=\"120\" y1=\"70\" x2=\"330\" y2=\"120\" />\n    <line x1=\"120\" y1=\"70\" x2=\"330\" y2=\"180\" /><line x1=\"120\" y1=\"70\" x2=\"330\" y2=\"240\" />\n    <line x1=\"120\" y1=\"150\" x2=\"330\" y2=\"60\" /><line x1=\"120\" y1=\"150\" x2=\"330\" y2=\"120\" />\n    <line x1=\"120\" y1=\"150\" x2=\"330\" y2=\"180\" /><line x1=\"120\" y1=\"150\" x2=\"330\" y2=\"240\" />\n    <line x1=\"120\" y1=\"230\" x2=\"330\" y2=\"60\" /><line x1=\"120\" y1=\"230\" x2=\"330\" y2=\"120\" />\n    <line x1=\"120\" y1=\"230\" x2=\"330\" y2=\"180\" /><line x1=\"120\" y1=\"230\" x2=\"330\" y2=\"240\" />\n    <line x1=\"330\" y1=\"60\" x2=\"570\" y2=\"110\" /><line x1=\"330\" y1=\"60\" x2=\"570\" y2=\"190\" />\n    <line x1=\"330\" y1=\"120\" x2=\"570\" y2=\"110\" /><line x1=\"330\" y1=\"120\" x2=\"570\" y2=\"190\" />\n    <line x1=\"330\" y1=\"180\" x2=\"570\" y2=\"110\" /><line x1=\"330\" y1=\"180\" x2=\"570\" y2=\"190\" />\n    <line x1=\"330\" y1=\"240\" x2=\"570\" y2=\"110\" /><line x1=\"330\" y1=\"240\" x2=\"570\" y2=\"190\" />\n  </g>\n  <g>\n    <circle class=\"node\" cx=\"120\" cy=\"70\" r=\"22\" /><circle class=\"node\" cx=\"120\" cy=\"150\" r=\"22\" /><circle class=\"node\" cx=\"120\" cy=\"230\" r=\"22\" />\n    <circle class=\"node\" cx=\"330\" cy=\"60\" r=\"22\" /><circle class=\"node\" cx=\"330\" cy=\"120\" r=\"22\" /><circle class=\"node\" cx=\"330\" cy=\"180\" r=\"22\" /><circle class=\"node\" cx=\"330\" cy=\"240\" r=\"22\" />\n    <circle class=\"node\" cx=\"570\" cy=\"110\" r=\"22\" /><circle class=\"node\" cx=\"570\" cy=\"190\" r=\"22\" />\n  </g>\n  <g class=\"lbl\">\n    <text x=\"95\" y=\"32\">input</text><text x=\"300\" y=\"22\">hidden</text><text x=\"545\" y=\"72\">output</text>\n    <text x=\"104\" y=\"74\">x1</text><text x=\"104\" y=\"154\">x2</text><text x=\"104\" y=\"234\">x3</text>\n    <text x=\"562\" y=\"114\">y1</text><text x=\"562\" y=\"194\">y2</text>\n  </g>\n</svg>\n</body>\n</html>",
+          "url": ""
+        }
+      }
+    ]
+  }
+]

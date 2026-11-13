@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Missing Number",
+    "date": "2025-08-12",
+    "category": "Find missing number",
+    "tags": [
+      "C",
+      "C++",
+      "Beginner"
+    ],
+    "link": "https://cses.fi/problemset/task/1083",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Best way (without Frequency)",
+        "description": "As n-1 number will be given so  -->> Missing number = Sum - Total",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\nlong long int n;\ncin >> n;\nlong long int sum = ((n*(n+1))/2);\n\nlong long int total = 0;\nn -=1; // As n-1 number will be given\nwhile(n--){\n   int x;\n   cin >> x;\n   total += x;\n}\ncout << sum - total; // sum - total = missing number\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Including with Frequency (Histogram || Count array)",
+        "description": "Calculaing frequency using main array.",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncin >> n;\nint a[n+1] = {};\n\nfor(int i = 1; i<n; i++){\n    int x;\n    cin >> x;\n    a[x] = x; // calculaing frequency using main array\n}\n\nfor(int i = 1; i<=n; i++)\n    if(a[i] != i){cout << i;break;}\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1754979893386-rhzsfg"
+  }
+]

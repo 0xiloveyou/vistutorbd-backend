@@ -1,0 +1,507 @@
+// Math Learning Platform — MongoDB schema (skeleton)
+// -----------------------------------------------------------------------------
+// Prisma ORM 6.19 is pinned because Prisma 7+ has no stable MongoDB connector.
+// Apply schema changes with `npm run db:push` (MongoDB does not use migrations).
+//
+// Conventions
+// - Every translatable text field is a LocalizedText composite: { en, bn }.
+// - Lesson blocks are embedded composite types (LessonBlock) because they are
+//   always read together with their Topic.
+// - Reference ids (categoryId, chapterId, topicId, userId, ...) are stored as
+//   plain strings. There are deliberately no Prisma relations: MongoDB relation
+//   support is restrictive and the service layer already does explicit lookups.
+//   This mirrors the existing repository style.
+// -----------------------------------------------------------------------------
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Shared composite types
+// ---------------------------------------------------------------------------
+
+type LocalizedText {
+  en String
+  bn String
+}
+
+type LessonBlock {
+  id          String
+  type        String // text | formula | example | visualization | callout | quiz
+  order       Int
+  title       LocalizedText?
+  body        LocalizedText?
+  formula     String?
+  vizId       String?
+  audioText   LocalizedText?
+  companion   String? // companion action key, e.g. "point"
+}
+
+// ---------------------------------------------------------------------------
+// Enums
+// ---------------------------------------------------------------------------
+
+enum Role {
+  ADMIN
+  MODERATOR
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum AuthProvider {
+  GOOGLE
+  CREDENTIAL
+}
+
+enum ContentStatus {
+  DRAFT
+  REVIEW
+  PUBLISHED
+  ARCHIVED
+}
+
+enum VisualizationKind {
+  STATIC
+  ANIMATED
+  STEPPER
+  SLIDER_GRAPH
+  SCENE
+}
+
+enum KnowledgeKind {
+  CONCEPT
+  WORKED_EXAMPLE
+  MISCONCEPTION
+  FORMULA
+  HINT
+  GLOSSARY
+  STEP
+}
+
+enum QuestionMode {
+  MCQ
+  TYPED
+}
+
+enum TimeMode {
+  UNLIMITED
+  BASIC
+  MEDIUM
+  HARD
+  CUSTOM
+}
+
+enum ChatRole {
+  SYSTEM
+  USER
+  ASSISTANT
+}
+
+enum ReportStatus {
+  OPEN
+  REVIEWING
+  RESOLVED
+  DISMISSED
+}
+
+// ---------------------------------------------------------------------------
+// Accounts
+// ---------------------------------------------------------------------------
+
+model User {
+  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  email              String       @unique
+  password           String?
+  googleId           String?
+  authProvider       AuthProvider @default(CREDENTIAL)
+  emailVerified      Boolean      @default(false)
+  role               Role         @default(USER)
+  status             UserStatus   @default(ACTIVE)
+  needPasswordChange Boolean      @default(false)
+  imageUrl           String       @default("")
+
+  // Learner preferences
+  preferredLang      String  @default("en") // en | bn
+  preferredTheme     String  @default("indigo") // palette token id
+  classBandId        String?
+  classLevelId       String?
+  companionEnabled   Boolean @default(false)
+  soundEnabled       Boolean @default(true)
+
+  isDeleted          Boolean   @default(false)
+  deletedAt          DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}
+
+// ---------------------------------------------------------------------------
+// Taxonomy: class band -> class level -> category -> chapter -> topic
+// ---------------------------------------------------------------------------
+
+model ClassBand {
+  id        String         @id @map("_id") // PLAY_NURSERY | C1_5 | C6_8 | C9_10 | C11_12
+  name      LocalizedText
+  style     Json // { companionRequired, tone, defaultDifficulty, ... }
+  order     Int            @default(0)
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@map("class_bands")
+}
+
+model ClassLevel {
+  id        String       @id @map("_id") // play | nursery | class-1 ... class-12
+  bandId    String
+  name      LocalizedText
+  order     Int          @default(0)
+  isActive  Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@index([bandId])
+  @@map("class_levels")
+}
+
+model Category {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  classLevelId String
+  parentId     String?
+  slug         String
+  title        LocalizedText
+  summary      LocalizedText?
+  icon         String       @default("")
+  order        Int          @default(0)
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@unique([classLevelId, slug])
+  @@index([parentId])
+  @@map("categories")
+}
+
+model Chapter {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  categoryId    String
+  classLevelId  String
+  classBandId   String
+  slug          String
+  title         LocalizedText
+  summary       LocalizedText?
+  order         Int          @default(0)
+  prerequisites String[]
+  status        ContentStatus @default(DRAFT)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@unique([categoryId, slug])
+  @@index([classLevelId])
+  @@index([classBandId])
+  @@map("chapters")
+}
+
+model Topic {
+  id               String       @id @default(auto()) @map("_id") @db.ObjectId
+  chapterId        String
+  categoryId       String
+  classLevelId     String
+  classBandId      String
+  slug             String       @unique
+  title            LocalizedText
+  summary          LocalizedText
+  lesson           LessonBlock[]
+  visualizationIds String[]
+  knowledgeStatus  String       @default("PENDING") // PENDING | INDEXING | READY | FAILED
+  difficulty       Int          @default(1)
+  status           ContentStatus @default(DRAFT)
+  createdBy        String?
+  updatedBy        String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([chapterId])
+  @@index([categoryId])
+  @@index([classBandId])
+  @@index([status])
+  @@map("topics")
+}
+
+// ---------------------------------------------------------------------------
+// Visualizations (spec data only — the player lives in the frontend)
+// ---------------------------------------------------------------------------
+
+model Visualization {
+  id           String            @id @default(auto()) @map("_id") @db.ObjectId
+  vizId        String            @unique // viz.<band>.<subject>.<chapter>.<topic>.<variant>.vN
+  kind         VisualizationKind
+  renderer     String // number-line | matrix-grid | function-graph | ...
+  engine       String // pure engine function id
+  title        LocalizedText
+  summary      LocalizedText?
+  inputs       Json
+  spec         Json // frames/steps or engine parameters
+  tags         String[]
+  concepts     String[]
+  prerequisites String[]
+  difficulty   Int               @default(1)
+  classBandIds String[]
+  version      Int               @default(1)
+  aiContext    String            @default("")
+  status       ContentStatus     @default(DRAFT)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([kind])
+  @@index([status])
+  @@map("visualizations")
+}
+
+// ---------------------------------------------------------------------------
+// Knowledge base for RAG
+// ---------------------------------------------------------------------------
+
+model KnowledgeChunk {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  topicId        String?
+  chapterId      String?
+  categoryId     String?
+  classBandId    String?
+  vizId          String?
+  stepIndex      Int?
+  lang           String        @default("en") // en | bn
+  text           String
+  embedding      Float[]
+  embeddingModel String        @default("")
+  kind           KnowledgeKind @default(CONCEPT)
+  contentHash    String        @default("")
+  isActive       Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([topicId])
+  @@index([chapterId])
+  @@index([classBandId])
+  @@index([kind])
+  @@map("knowledge_chunks")
+}
+
+// ---------------------------------------------------------------------------
+// Questions, quiz configuration and attempts
+// ---------------------------------------------------------------------------
+
+model QuestionTemplate {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  topicId        String?
+  chapterId      String?
+  classBandId    String?
+  key            String   @unique
+  title          LocalizedText
+  generator      String // registry key, e.g. addition.singleDigit
+  paramsSchema   Json
+  numberRange    Json
+  difficultyMin  Int      @default(1)
+  difficultyMax  Int      @default(5)
+  answerCheck    Json
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([classBandId])
+  @@map("question_templates")
+}
+
+model Question {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  topicId     String?
+  chapterId   String?
+  templateId  String?
+  difficulty  Int          @default(1)
+  mode        QuestionMode @default(MCQ)
+  prompt      LocalizedText
+  options     Json // [{ id, label: LocalizedText, correct }]
+  answer      String
+  explanation LocalizedText?
+  seed        String       @default("")
+  status      ContentStatus @default(DRAFT)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([topicId])
+  @@index([chapterId])
+  @@map("questions")
+}
+
+model QuizConfig {
+  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String
+  chapterId          String
+  timeMode           TimeMode     @default(UNLIMITED)
+  customSeconds      Int          @default(0)
+  answerMode         QuestionMode @default(MCQ)
+  difficulty         Int          @default(1)
+  numberRange        Json?
+  companionSlapstick Boolean      @default(false)
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@unique([userId, chapterId])
+  @@map("quiz_configs")
+}
+
+model QuizAttempt {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String
+  chapterId      String
+  configSnapshot Json
+  answers        Json
+  score          Int      @default(0)
+  total          Int      @default(0)
+  durationSec    Int      @default(0)
+  createdAt      DateTime @default(now())
+
+  @@index([userId])
+  @@index([chapterId])
+  @@map("quiz_attempts")
+}
+
+// ---------------------------------------------------------------------------
+// Learner state
+// ---------------------------------------------------------------------------
+
+model Bookmark {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String
+  topicId   String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, topicId])
+  @@index([userId])
+  @@map("bookmarks")
+}
+
+model Progress {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String
+  topicId       String
+  isRead        Boolean  @default(false)
+  lastVizId     String?
+  lastStepIndex Int      @default(0)
+  updatedAt     DateTime @updatedAt
+  createdAt     DateTime @default(now())
+
+  @@unique([userId, topicId])
+  @@index([userId])
+  @@map("progress")
+}
+
+// ---------------------------------------------------------------------------
+// Chat + companion + moderation
+// ---------------------------------------------------------------------------
+
+model ChatSession {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String?
+  title     String   @default("New chat")
+  lang      String   @default("en")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionId String
+  role      ChatRole
+  content   String
+  vizId     String?
+  stepIndex Int?
+  imageUrl  String?
+  createdAt DateTime @default(now())
+
+  @@index([sessionId])
+  @@map("chat_messages")
+}
+
+model Companion {
+  id        String       @id @default(auto()) @map("_id") @db.ObjectId
+  key       String       @unique
+  name      LocalizedText
+  assets    Json
+  states    String[]
+  isActive  Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  @@map("companions")
+}
+
+// ---------------------------------------------------------------------------
+// Community forum — posts with image links, tags, comments and AI hand-off
+// ---------------------------------------------------------------------------
+
+model ForumPost {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorId    String?
+  authorName  String   @default("Anonymous")
+  isAnonymous Boolean  @default(true)
+  title       String
+  body        String
+  imageUrl    String   @default("")
+  tags        String[]
+  status      String   @default("PUBLISHED") // PUBLISHED | HIDDEN
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([authorId])
+  @@map("forum_posts")
+}
+
+model ForumComment {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  postId      String
+  authorId    String?
+  authorName  String   @default("Anonymous")
+  isAnonymous Boolean  @default(true)
+  body        String
+  createdAt   DateTime @default(now())
+
+  @@index([postId])
+  @@map("forum_comments")
+}
+
+model ModerationReport {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  reportedBy String?
+  targetType String // chat_message | topic | visualization | question
+  targetId   String
+  reason     String
+  details    String       @default("")
+  status     ReportStatus @default(OPEN)
+  reviewedBy String?
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+
+  @@index([status])
+  @@index([targetType])
+  @@map("moderation_reports")
+}

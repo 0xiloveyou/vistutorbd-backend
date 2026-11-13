@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Editor</title>
+  <link rel="shortcut icon" href="images/Logo/cpp-dictionary1.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/editor.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="menu">
+      <div class="item">
+        <a href="#" class="link">
+          <span> ☰ DICTIONARY </span>
+          <svg viewBox="0 0 360 360"><path d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/></svg>
+        </a>
+        <div class="submenu">
+          <div class="submenu-item"><a href="atcoder.html" class="submenu-link">ATCODER</a></div>
+          <div class="submenu-item"><a href="builtin.html" class="submenu-link">BUILT IN</a></div>
+          <div class="submenu-item"><a href="CF_NewCommers.html" class="submenu-link">CODEFORCES NEW</a></div>
+          <div class="submenu-item"><a href="codeforces.html" class="submenu-link">CODEFORCES</a></div>
+          <div class="submenu-item"><a href="codechef.html" class="submenu-link">CODECHEF</a></div>
+          <div class="submenu-item"><a href="cpp-dictionary.html" class="submenu-link">CPP DICTIONARY</a></div>
+          <div class="submenu-item"><a href="cses.html" class="submenu-link">CSES</a></div>
+          <!-- <div class="submenu-item"><a href="cyber-security.html" class="submenu-link">CYBER SECURITY</a></div> -->
+          <div class="submenu-item"><a href="dsa&algo.html" class="submenu-link">DSA & ALGO</a></div>
+          <!-- <div class="submenu-item"><a href="games.html" class="submenu-link">GAMES</a></div> -->
+          <div class="submenu-item"><a href="hackerrank.html" class="submenu-link">HACKERRANK</a></div>
+          <!-- <div class="submenu-item"><a href="leet.html" class="submenu-link">LEET</a></div> -->
+          <div class="submenu-item"><a href="leetcode.html" class="submenu-link">LEETCODE</a></div>
+          <div class="submenu-item"><a href="lightoj.html" class="submenu-link">LIGHTOJ</a></div>
+          <div class="submenu-item"><a href="map.html" class="submenu-link">MAP</a></div>
+          <!-- <div class="submenu-item"><a href="math.html" class="submenu-link">MATH</a></div> -->
+          <!-- <div class="submenu-item"><a href="puzzle.html" class="submenu-link">PUZZLE</a></div> -->
+          <div class="submenu-item"><a href="spoj.html" class="submenu-link">SPOJ</a></div>
+          <div class="submenu-item"><a href="timeus.html" class="submenu-link">TIMEUS</a></div>
+          <div class="submenu-item"><a href="uva-uhant.html" class="submenu-link">UVA</a></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <a href="index.html">Home</a>
+      <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+  </div>
+
+  <div class="editor-container">
+     <h2>Add new blogs into CPP DICTIONARY</h2>
+
+    <select id="targetFile" required>
+      <option value="">---- Select Target Page ----</option>
+      <option value="atcoder">AtCoder</option>
+      <option value="aizu">AIZU</option>
+      <option value="builtin">Built In</option>
+      <option value="cpp-dictionary">CPP Dictionary</option>
+      <option value="codeforces">Codeforces</option>
+      <option value="CF_NewCommers">Codeforces NewCommers</option>
+      <option value="cses">CSES</option>
+      <option value="codechef">CodeChef</option>
+      <option value="dsa&algo"> DSA & ALGO </option>
+      <option value="hackerrank"> HackerRank </option>
+      <option value="leetcode"> LeetCode </option>
+      <option value="lightoj"> LightOJ </option>
+      <option value="map">Map</option>
+      <option value="math">Math</option>
+      <option value="spoj">Spoj</option>
+      <option value="timeus">Timeus</option>
+      <option value="uva-uhant">UVA UHant</option>
+    </select>
+
+    <input type="text" id="title" placeholder="Post Title" required />
+    <input type="date" id="date" required />
+    <input type="text" id="tags" placeholder="Tags (comma-separated)" required />
+    <input type="text" id="category" placeholder="Category (e.g., recursion, dp)" required />
+    <input type="url" id="link" placeholder="Optional Link (https://...)" />
+
+    <!-- Named Link Inputs -->
+    <div id="linkInputs"></div>
+    <button class="akm" type="button" id="addNamedLink">Add Another Named Link</button>
+
+    <!-- Image Section -->
+    <div id="imageInputs">
+      <input type="url" class="image-url" placeholder="Optional Image URL (https://...)" />
+    </div>
+    <button class="akm" type="button" id="addImage">Add Another Image</button>
+
+    <!-- Section Content -->
+    <div id="sections" class="section-list"></div>
+    <button class="akm" type="button" id="addSection">Add Section</button>
+
+    <!-- Save -->
+    <button class="akm" type="button" id="savePost">Save to Blog</button>
+
+    <!-- Preview -->
+    <div class="preview-container" id="preview"></div>
+  </div>
+
+<script src="js/editor.js"></script>
+<script>
+  const sectionContainer = document.getElementById("sections");
+  const previewContainer = document.getElementById("preview");
+
+  function toggleTheme() {
+    const isDark = document.body.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }
+
+  function updatePreview() {
+    const title = document.getElementById("title").value.trim();
+    const date = document.getElementById("date").value.trim();
+    const category = document.getElementById("category").value.trim();
+    const tags = document.getElementById("tags").value.trim().split(',').map(tag => tag.trim()).filter(Boolean);
+    const link = document.getElementById("link").value.trim();
+    const images = [...document.querySelectorAll(".image-url")].map(img => img.value.trim()).filter(Boolean);
+
+    let html = `<h2>${title}</h2><p><strong>Date:</strong> ${date} | <strong>Category:</strong> ${category}</p>`;
+    if (tags.length) html += `<p><strong>Tags:</strong> ${tags.join(", ")}</p>`;
+    if (link) html += `<p><a href="${link}" target="_blank">Open Link</a></p>`;
+
+    // Named Links
+    const namedLinks = [];
+    document.querySelectorAll(".named-link-block").forEach(block => {
+      const name = block.querySelector(".link-name").value.trim();
+      const url = block.querySelector(".link-url").value.trim();
+      if (url) namedLinks.push({ name: name || "Open Link", url });
+    });
+    if (namedLinks.length) {
+      html += `<ul>`;
+      namedLinks.forEach(({ name, url }) => {
+        html += `<li><a href="${url}" target="_blank">${name}</a></li>`;
+      });
+      html += `</ul>`;
+    }
+
+    images.forEach(img => html += `<img src="${img}" style="max-width:100%; margin-top:10px;" />`);
+
+    // Preview sections
+    document.querySelectorAll(".section").forEach(section => {
+      const subtitle = section.querySelector(".subtitle").value.trim();
+      const desc = section.querySelector(".description").value.trim();
+      const highlightedDesc = desc.replace(/==(.+?)==/g, '<mark>$1</mark>');
+
+      if (subtitle) html += `<h3>${subtitle}</h3>`;
+      if (desc) html += `<p>${highlightedDesc}</p>`;
+
+      // Console blocks
+      const consoleBlocks = {
+        c: section.querySelector(".console-c").value.trim(),
+        cpp: section.querySelector(".console-cpp").value.trim(),
+        go: section.querySelector(".console-go").value.trim(),
+        py: section.querySelector(".console-py").value.trim(),
+        js: section.querySelector(".console-js").value.trim(),
+        java: section.querySelector(".console-java").value.trim()
+      };
+
+      Object.entries(consoleBlocks).forEach(([lang, content]) => {
+        if (content) {
+          html += `<pre class="console-window-preview"><strong>${lang.toUpperCase()} Console:</strong>\n${content}</pre>`;
+        }
+      });
+    });
+
+    previewContainer.innerHTML = html;
+  }
+
+  document.getElementById("addSection").addEventListener("click", function () {
+    const sectionDiv = document.createElement("div");
+    sectionDiv.className = "editor-section section";
+    sectionDiv.innerHTML = `
+      <input type="text" placeholder="Subtitle (optional)" class="subtitle" oninput="updatePreview()" />
+      <textarea placeholder="Description (optional)" class="description" oninput="updatePreview()"></textarea>
+
+      <h4>Console Blocks</h4>
+      <textarea placeholder="C Console Block" class="console-c" oninput="updatePreview()"></textarea>
+      <textarea placeholder="C++ Console Block" class="console-cpp" oninput="updatePreview()"></textarea>
+      <textarea placeholder="Go Console Block" class="console-go" oninput="updatePreview()"></textarea>
+      <textarea placeholder="Python Console Block" class="console-py" oninput="updatePreview()"></textarea>
+      <textarea placeholder="JavaScript Console Block" class="console-js" oninput="updatePreview()"></textarea>
+      <textarea placeholder="Java Console Block" class="console-java" oninput="updatePreview()"></textarea>`;
+    sectionContainer.appendChild(sectionDiv);
+  });
+
+  document.getElementById("addImage").addEventListener("click", function () {
+    const imageInputs = document.getElementById("imageInputs");
+    const newInput = document.createElement("input");
+    newInput.type = "url";
+    newInput.className = "image-url";
+    newInput.placeholder = "Optional Image URL (https://...)";
+    newInput.addEventListener("input", updatePreview);
+    imageInputs.appendChild(newInput);
+  });
+
+  document.getElementById("addNamedLink").addEventListener("click", function () {
+    const linkInputs = document.getElementById("linkInputs");
+    const div = document.createElement("div");
+    div.className = "named-link-block";
+    div.innerHTML = `
+      <input type="text" placeholder="Link Name (e.g., Code Link)" class="link-name" />
+      <input type="url" placeholder="https://example.com" class="link-url" oninput="updatePreview()" />
+    `;
+    linkInputs.appendChild(div);
+  });
+
+  document.getElementById("savePost").addEventListener("click", async function () {
+    const target = document.getElementById("targetFile").value.trim();
+    const title = document.getElementById("title").value.trim();
+    const date = document.getElementById("date").value.trim();
+    const category = document.getElementById("category").value.trim();
+    const tags = document.getElementById("tags").value.split(",").map(tag => tag.trim());
+    const link = document.getElementById("link").value.trim();
+    const images = Array.from(document.querySelectorAll(".image-url")).map(input => input.value.trim()).filter(Boolean);
+
+    if (!target || !title || !date || !category) {
+      alert("Please fill all required fields.");
+      return;
+    }
+
+    const sections = [];
+    document.querySelectorAll(".section").forEach(section => {
+      const subtitle = section.querySelector(".subtitle").value.trim();
+      const description = section.querySelector(".description").value.trim();
+      const consoleBlock = {
+        c: section.querySelector(".console-c").value.trim(),
+        cpp: section.querySelector(".console-cpp").value.trim(),
+        go: section.querySelector(".console-go").value.trim(),
+        py: section.querySelector(".console-py").value.trim(),
+        js: section.querySelector(".console-js").value.trim(),
+        java: section.querySelector(".console-java").value.trim()
+      };
+
+      if (subtitle || description || Object.values(consoleBlock).some(v => v)) {
+        sections.push({ subtitle, description, consoleBlock });
+      }
+    });
+
+    const namedLinks = [];
+    document.querySelectorAll(".named-link-block").forEach(block => {
+      const name = block.querySelector(".link-name").value.trim();
+      const url = block.querySelector(".link-url").value.trim();
+      if (url) namedLinks.push({ name: name || "Open Link", url });
+    });
+
+    const blogPost = { title, date, category, tags, link, images, sections, namedLinks };
+
+    try {
+      const res = await fetch(`/api/posts/${target}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(blogPost)
+      });
+
+      if (res.ok) {
+        alert("Blog post saved!");
+        location.reload();
+      } else {
+        throw new Error("Failed to save.");
+      }
+    } catch (e) {
+      alert("Error saving post.");
+      console.error(e);
+    }
+  });
+
+  document.querySelectorAll("input, textarea, select").forEach(el =>
+    el.addEventListener("input", updatePreview)
+  );
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  }
+</script>
+</body>
+</html>

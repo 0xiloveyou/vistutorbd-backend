@@ -1,0 +1,49 @@
+[
+  {
+    "id": "seed-cv-convolution",
+    "title": "Convolutional Layers: Seeing with Filters",
+    "date": "2026-10-06",
+    "category": "Computer Vision",
+    "tags": [
+      "CNN",
+      "Convolution",
+      "Vision"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [
+      {
+        "name": "CS231n CNN notes",
+        "url": "https://cs231n.github.io/convolutional-networks/"
+      }
+    ],
+    "sections": [
+      {
+        "subtitle": "A kernel slides across the image",
+        "description": "<p>A convolution applies a small <span style=\"color:#facc15;font-weight:600\">kernel</span> to every local patch of an image. The kernel learns to detect edges, textures, or other patterns.</p>\n<p>Weight sharing is the key: the same kernel is reused across the whole image.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "visualization": {
+          "enabled": true,
+          "title": "A 3×3 kernel produces one output value",
+          "html": "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<style>\n  body { margin: 0; padding: 18px; background: #0b0b0b; color: #e5e7eb; font-family: \"Segoe UI\", system-ui, sans-serif; }\n  h3 { margin: 0 0 12px; color: #fca5a5; font-size: 16px; }\n  .grid { display: grid; gap: 4px; margin-bottom: 8px; }\n  .cell { height: 38px; min-width: 38px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 12px; background: #111827; border: 1px solid #374151; color: #e5e7eb; }\n  .kernel .cell { background: #1e1b4b; border-color: #6366f1; color: #c7d2fe; }\n  .out .cell { background: #052e16; border-color: #22c55e; color: #bbf7d0; }\n  .arrow { color: #6b7280; font-size: 16px; margin: 4px 0; }\n  .hint { color: #9ca3af; font-size: 12px; }\n</style>\n</head>\n<body>\n<h3>Input 4×4 → kernel 3×3 → output</h3>\n<p class=\"hint\">Input patch</p>\n<div class=\"grid\" style=\"grid-template-columns:repeat(4,38px)\">\n  <div class=\"cell\">1</div><div class=\"cell\">2</div><div class=\"cell\">3</div><div class=\"cell\">0</div>\n  <div class=\"cell\">0</div><div class=\"cell\">1</div><div class=\"cell\">2</div><div class=\"cell\">3</div>\n  <div class=\"cell\">3</div><div class=\"cell\">2</div><div class=\"cell\">1</div><div class=\"cell\">0</div>\n  <div class=\"cell\">1</div><div class=\"cell\">0</div><div class=\"cell\">1</div><div class=\"cell\">2</div>\n</div>\n<div class=\"arrow\">↓</div>\n<p class=\"hint\">Kernel</p>\n<div class=\"grid kernel\" style=\"grid-template-columns:repeat(3,38px)\">\n  <div class=\"cell\">1</div><div class=\"cell\">0</div><div class=\"cell\">-1</div>\n  <div class=\"cell\">1</div><div class=\"cell\">0</div><div class=\"cell\">-1</div>\n  <div class=\"cell\">1</div><div class=\"cell\">0</div><div class=\"cell\">-1</div>\n</div>\n<div class=\"arrow\">↓</div>\n<p class=\"hint\">Output value</p>\n<div class=\"grid out\" style=\"grid-template-columns:38px\"><div class=\"cell\">-4</div></div>\n</body>\n</html>",
+          "url": ""
+        }
+      },
+      {
+        "subtitle": "Pooling and channels",
+        "description": "<p>Channels let a layer learn multiple feature maps. Pooling reduces spatial size and makes the representation more robust to small shifts.</p>\n<p>Modern vision models often use strided convolutions instead of explicit pooling, but the idea is the same: compress space while keeping useful signal.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "image = [\n    [1, 2, 3, 0],\n    [0, 1, 2, 3],\n    [3, 2, 1, 0],\n    [1, 0, 1, 2],\n]\nkernel = [\n    [1, 0, -1],\n    [1, 0, -1],\n    [1, 0, -1],\n]\n\ndef convolve(image, kernel):\n    size = len(kernel)\n    output = []\n    for row in range(len(image) - size + 1):\n        output_row = []\n        for col in range(len(image[0]) - size + 1):\n            total = 0\n            for kr in range(size):\n                for kc in range(size):\n                    total += image[row + kr][col + kc] * kernel[kr][kc]\n            output_row.append(total)\n        output.append(output_row)\n    return output\n\nfor row in convolve(image, kernel):\n    print(row)",
+          "js": "",
+          "java": ""
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+{
+    "title": "",
+    "date": "",
+    "category": "",
+    "tags": [
+      "binary-serch",
+      "algorithm",
+      "dsa"
+    ],
+    "link": "",
+    "images": [
+      "fa sdfas"
+    ],
+    "sections": [
+      {
+        "subtitle": "",
+        "description": "",
+        "code": {
+          "label": "",
+          "code": "",
+          "lang": "c"
+        },
+        "consoleBlock": ""
+      },
+      {
+        "subtitle": "",
+        "description": "",
+        "code": {
+          "label": "",
+          "code": "",
+          "lang": "c"
+        },
+        "consoleBlock": ""
+      }
+    ],
+    "namedLinks": [
+      {
+        "name": "",
+        "url": ""
+      },
+      {
+        "name": "",
+        "url": ""
+      }
+    ],
+    "id": ""
+  }

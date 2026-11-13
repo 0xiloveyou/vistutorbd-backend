@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Leet</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"/>
+</head>
+<body>
+
+  <!DOCTYPE html>
+<html>
+<body>
+
+<h1>The mark element</h1>
+
+<p>Do not forget to buy <mark>milk</mark> today.</p>
+
+</body>
+</html>
+
+  <!-- All layout and components are reused from problem.html -->
+  <!-- The only change is this custom fetchPosts() for Leet posts -->
+
+  <script>
+    async function fetchPosts() {
+      try {
+        const res = await fetch("/api/leet");
+        return await res.json();
+      } catch (e) {
+        console.error("Error fetching leet posts:", e);
+        return [];
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>

@@ -1,0 +1,2302 @@
+[
+  {
+    "title": "Minimize Number",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "P. Minimize Number",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/P",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n   \nint n,ans = 0;\ncin >> n;\nlong int a[n];\n \nfor(int i = 0; i < n; i++)cin >> a[i];\n\nint mn = 1000000;\n \nfor(int i = 0; i < n; i++){\n    if(a[i]%2 == 1){ return cout << 0 << endl, 0; }\n    else{\n         int divTime = 0;\n         while((a[i] % 2) == 0 ){\n                a[i] /= 2;\n                divTime++; \n         }\n    mn = min(mn,divTime);\n   }\n \n}\n \ncout << mn << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763305494061-sklupk"
+  },
+  {
+    "title": "Fibonacci",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "O. Fibonacci",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/O",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main() {\n\nint n;\ncin >> n;\n \nlong long a[51];\na[1] = 0;\na[2] = 1;\n \nfor (int i = 3; i <= n; i++) a[i] = a[i-1] + a[i-2];\n    \ncout << a[n] << endl;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763304498717-pww4ks"
+  },
+  {
+    "title": "Check Code",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "N. Check Code",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/N",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint a, b;\ncin >> a >> b;\nstring s;\ncin >> s;\n \n// Length must be exactly a + b + 1\nif (s.size() != a + b + 1) return cout << \"No\" << endl, 0;\n \nfor(int i = 0; i < s.size(); i++){\n   if(i == a){ if (s[i] != '-') return cout << \"No\" << endl, 0; } \n                               //check ath position has '-' or not \n                              // 0 base indexing \n     \n   else { if( !isdigit(s[i]) ) return cout << \"No\" << endl, 0;}\n}\n\ncout << \"Yes\" << endl; \n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763304331983-neehof"
+  },
+  {
+    "title": "Replace MinMax",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "M. Replace MinMax",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/M",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n,mn = 10e5+1,mx = -10e5-1,mxI = 0,mnI = 0;\ncin >> n;\nint a[n];\n \nfor(int i = 0; i < n; i++) cin >> a[i];\n\nfor(int i = 0; i < n; i++){\n   (mn > a[i])? (mn = a[i], mnI = i) : 0;\n   (mx < a[i])? (mx = a[i], mxI = i) : 0;\n}\n\na[mnI] = mx;\na[mxI] = mn;\n \nfor(auto u : a) cout << u << \" \";\ncout << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763303698630-nnmycn"
+  },
+  {
+    "title": "Max Subarray",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "L. Max Subarray",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/L",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Subarray Explanation",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nAssuming we have an array A.\n\nA = [1, 2, 3, 4] -->> N = 4\n\n\nLoops for the subarray :\n\nfor (int i = 0; i < N; i++) {             // subarray start\n    for (int j = i; j < N; j++) {        // subarray end\n        for (int k = i; k <= j; k++) { // elements inside subarray\n            cout << A[k];\n        }\n    }\n}\n\n\n\nSo:\n    i = start index\n    j = end index\n    k = prints the actual subarray between i to j\n\nGrid Representation of all the subarrays (i vs j)\nMarked which k values are included.\n\n\nArray: [1] [2] [3] [4] \nIndex:  0   1   2   3\n\nNow table:\n\ni = 0\n     j = 0 → k = [0]          → [1]\n     j = 1 → k = [0 1]        → [1 2]\n     j = 2 → k = [0 1 2]      → [1 2 3]\n     j = 3 → k = [0 1 2 3]    → [1 2 3 4]\n\ni = 1 \n     j = 1 → k = [1]          → [2]\n     j = 2 → k = [1 2]        → [2 3]\n     j = 3 → k = [1 2 3]      → [2 3 4]\n\ni = 2\n     j = 2 → k = [2]          → [3]\n     j = 3 → k = [2 3]        → [3 4]\n\ni = 3\n     j = 3 → k = [3]          → [4]\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution With Explanation",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nFor a = [1, 6, 3, 7]\n\nNow, \n    for i = 0 & j = 3 ( 0th index to 3rd -->> total 4 subarray )\n\nSubarray [1] → max = 1\nSubarray [1 6] → max = 6\nSubarray [1 6 3] → max = 6\nSubarray [1 6 3 7] → max = 7\n\nLikewise, we are gonna find the max element from all the subarrays.\n\n\n*/\n\n\n#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint t;\ncin >> t;\n\nwhile(t--){\n\n   int n;\n   cin >> n;\n   int a[n];\n \n   for(int i = 0; i < n; i++) cin >> a[i];\n \n   for(int i = 0; i < n; i++){ // i defins subArray starting point\n     for(int j = i; j < n; j++){ // j defins subArray Ending point\n         int mx = -10000000;\n         for(int k = i; k <= j; k++){ // k print elements inside subarray\n            (mx < a[k])? mx = a[k] : 0; \n         }                         \n                                  \n          cout << mx << \" \";\n         }\n    }\n\n    cout << endl;\n}\n \n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763301718760-lcvnc3"
+  },
+  {
+    "title": "Sum Digits",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "K. Sum Digits",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/K",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong long int n, len, sum = 0;\ncin >> n;\n\nstring s;\ncin >> s;\nlen = s.size();\n \nfor(int i = 0; i < len; i++) sum += (s[i] - '0');\ncout << sum << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763300328919-u0gd6v"
+  },
+  {
+    "title": "Lucky Array",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "J. Lucky Array",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/J",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n,min = 10e5+1, ans = 0; // 10e5 = pow(10,5) = 1 * 100000\ncin >> n;\nint a[n];\n \nfor(int i = 0; i < n; i++) { cin >> a[i]; if(min > a[i]) min = a[i]; }\nfor(int i = 0; i < n; i++) (a[i] == min)? ans++ : 0;\n\n(ans%2 == 1)? cout << \"Lucky\" << endl : cout << \"Unlucky\" << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763299176263-ggzeku"
+  },
+  {
+    "title": "Smallest Pair",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers Arrays I. Smallest Pair Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/I",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n   \nint t;\ncin >> t;\n \nwhile(t--){\n \nint n,min = 10e6+1; // constrain >> 1 ≤  i < j  ≤ N    // ------>> i < j\n                   // - 10^6 ≤ Ai ≤ 10^6 >> n numbers\ncin >> n;\nint a[n+1];\n\nfor(int i = 1; i < n+1; i++) cin >> a[i];\n\nfor(int i = 1; i < n; i++)\n  for(int j = i+1; j < n+1; j++)\n     if( min > (a[i] + a[j] + j - i) ) min = (a[i] + a[j] + j - i);\n \ncout << min << endl;\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763298795294-xbcioq"
+  },
+  {
+    "title": "Sorting",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "H. Sorting",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/H",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Bubble sort Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    \n    int N;\n    if (!(cin >> N)) return 0;\n    vector<int> a(N);\n    for (int i = 0; i < N; ++i) cin >> a[i];\n\n    // Bubble sort\n    for (int i = 0; i < N; ++i) {\n        bool swapped = false;\n        for (int j = 0; j + 1 < N - i; ++j) {\n            if (a[j] > a[j+1]) {\n                swap(a[j], a[j+1]);\n                swapped = true;\n            }\n        }\n        if (!swapped) break; // array is already sorted\n    }\n\n    for (int i = 0; i < N; ++i) {\n        if (i) cout << ' ';\n        cout << a[i];\n    }\n    cout << '\\n';\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Selection sort Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(nullptr);\n    \n    int N;\n    if (!(cin >> N)) return 0;\n    vector<int> a(N);\n    for (int i = 0; i < N; ++i) cin >> a[i];\n\n    // Selection sort\n    for (int i = 0; i < N; ++i) {\n        int minIdx = i;\n        for (int j = i+1; j < N; ++j) {\n            if (a[j] < a[minIdx]) minIdx = j;\n        }\n        swap(a[i], a[minIdx]);\n    }\n\n    for (int i = 0; i < N; ++i) {\n        if (i) cout << ' ';\n        cout << a[i];\n    }\n    cout << '\\n';\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763298484336-e4m1z7"
+  },
+  {
+    "title": "Palindrome Array",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "G. Palindrome Array",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/G",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\nlong int a[n];\n \nfor(int i = 0; i < n; i++) cin >> a[i];\nfor(int i = 0, j = n-1; i < j; i++, j--) if(a[i] != a[j]) return cout << \"NO\" <<endl, 0;\n                                       // if element doesn't match then print \"NO\" \n                                      // & terminate the program \n\ncout << \"YES\" << endl; \n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763297858622-d73or7"
+  },
+  {
+    "title": "Reversing",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "F. Reversing",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/F",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\nlong int a[n];\n \nfor(int i = 0; i < n; i++) cin >> a[i];\nfor(int i = n-1; i >= 0; i--) cout << a[i] << \" \";\n\ncout << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763297593959-ndlasi"
+  },
+  {
+    "title": "Lowest Number",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "E. Lowest Number",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/E",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include<stdio.h>\n \nint main(){\n \nint n,max;\nscanf(\"%d\", &n);\nint array[n];\n \nfor(int i = 0; i < n; i++) scanf(\"%d\", &array[i]);\n\nint min = array[0];\nint index = 1;\nfor(int i = 1; i < n-1; i++){\n    max = array[i];\n    if(min > max){\n                  min = max;\n                  index = i+1;\n    }\n}\nprintf(\"%d %d\",min, index);\n \nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763297492518-l85n60"
+  },
+  {
+    "title": "Positions in array",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "D. Positions in array",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/D",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\nint a[n];\n \nfor(int i = 0; i < n; i++) cin >> a[i];\nfor(int i = 0; i < n; i++) (a[i] <= 10)? (void) (cout << \"A[\" << i <<\"] = \" << a[i] << endl) : (void) 0;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763297158671-4q5dvj"
+  },
+  {
+    "title": "Replacement",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "C. Replacement",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/C",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\nint a[n];\n\nfor(int i=0; i<n; i++) cin >> a[i];\n\nfor(int i = 0; i<n; i++)\n   if      (a[i] > 0) a[i] = 1;\n   else if (a[i] < 0) a[i] = 2;\n\nfor(int i = 0; i < n; i++)cout << a[i] << \" \";\ncout << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763296941439-bu7pfh"
+  },
+  {
+    "title": "Searching",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "B. Searching",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/B",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong long int n,x,found = 0;\ncin >> n;\nlong long int a[n];\n \nfor(int i = 0; i < n; i++) cin >> a[i];\n\ncin >> x;\n\nfor(int i = 0; i < n; i++) if(a[i] == x) return  cout<< i << endl, 0; \n                                       // if found then print and terminate the program \n\ncout << -1 << endl; // if not found then it will execute\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763296722029-n6tgd4"
+  },
+  {
+    "title": "Summation",
+    "date": "2025-11-16",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "A. Summation",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/A",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong long int n, sum = 0;\ncin >> n;\n \nfor(int i = 0; i < n; i++){ long int x; cin >> x; sum += x; }\ncout << abs(sum) << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763296442445-wy6q05"
+  },
+  {
+    "title": "Three Numbers",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "Z. Three Numbers",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/Z",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint k,s,ans = 0;\ncin >> k >> s;\n\nfor(int i = 0; i <= s; i++)\n   for(int j = 0; j <= s; j++)\n     for(int l = 0; l <= s; l++)\n       (i+j+l == s)? ans++ : 0;\n \ncout << ans << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763213388285-feu7jd"
+  },
+  {
+    "title": "Easy Fibonacci",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "Y. Easy Fibonacci",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/Y",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n,l = 0,r = 1;\ncin >> n;\n \nif(n == 1) cout << 0 << endl;\nelse if(n == 2) cout << 0 << \" \" << 1 << endl;\nelse{\n     cout << 0 << \" \" << 1 << \" \";\n\n     for(int i = 2; i < n; i++){\n        int x = l + r;\n        cout << x << \" \";\n        l = r; \n        r = x; \n     }\ncout << endl;\n} \n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763213065149-2v8rx3"
+  },
+  {
+    "title": "Convert To Decimal 2",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "X. Convert To Decimal 2",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/X",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Decimal to binary conversion",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nConvert a decimal number to binary\n\n----->> (13)d = ( )b ?\n\n\n2 | 13\n   ----\n   2 | 6   - 1   (remainder is 1)\n      ----\n      2 | 3  - 0   (remainder is 0)\n         ----\n         2 | 1 - 1   (remainder is 1)\n            ----\n               0 - 1   (remainder is 1)\n\nNow,\n    We get (1101) as the Binary of 13 \n    ---->> (1101)b = (13)d\n\n*/\n\n\n  // ------>> Decimal to binary conversion\n // ------>> Binary calculation \n// ------>> convert decimal number to binary\n\n\n#include <bits/stdc++.h>\nusing namespace std;\n\nvector<int> a;\n\nvoid BinaryConversion(int n){\n\n  int i = 0;\n\n  while(n){ //---->> if(left == 0) break;\n\n    int remainder = n%2;\n    a.push_back(remainder);\n    n /= 2;\n    i++;\n }\n\n}\n\nint main(){\n\nint n;\ncin >> n;\n\nBinaryConversion(n);\nfor (auto it = a.rbegin(); it != a.rend(); ++it) cout << *it;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nlong long int BinaryConversion(long long int n){\n  long long int i = 0;\n    while(n){\n           int remainder = n%2;\n           (remainder == 1)? i++ : 0;\n           n/=2;\n    }\n  return i;\n}\n \nint main(){\n \nint t;\ncin >> t;\n \nwhile(t--){\n \nlong long int n, one, ans = 0;\ncin >> n;\n\none = BinaryConversion(n);\n \nfor(int i = 0; i < one; i++) ans += pow(2,i);\ncout << ans << endl;\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763212813036-x6ct9f"
+  },
+  {
+    "title": "Shape3",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "W. Shape3",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/W",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n,x = 1,y;\ncin >> n;\n\ny = 2*n -1;\n \nfor(int i = 1; i <= n; i++){\n  for(int j = n-i; j > 0; j--) cout << \" \";\n    for(int k = 1; k <= x; k++) cout << \"*\";\n      cout << endl; \n        x += 2;}\n \nfor(int i = 1; i <= n; i++){\n  for(int j = 0; j < i-1; j++) cout << \" \";\n    for(int k = 1; k <= y; k++) cout << \"*\";\n      cout << endl; \n        y -= 2;}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763210835684-z4pi0j"
+  },
+  {
+    "title": "PUM",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "V. PUM",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/V",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n,x = 1;\ncin >> n;\n \nfor(int i = 1; i <= n; i++){\n  int cnt = 1;\n  for(int j = x; 1 ; j++, x++){\n      cout << j << \" \";\n      if(cnt == 3){cout << \"PUM\" << endl; x += 2; break;}\n      cnt++;\n  } \n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763210573492-4xynv8"
+  },
+  {
+    "title": "Some Sums",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "U. Some Sums",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/U",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n, a, b, sum = 0;\ncin >> n >> a >> b;\n\n(a>b)? (void) swap(a,b) : (void) 0;\n \nfor(int i = 1; i <= n; i++){\n\n  int digitSum = 0, x = i;\n\n  while(x){\n          int last = x%10;\n          x /= 10;\n          digitSum += last;\n  }\n  if(digitSum > a-1 && digitSum < b+1) sum += i;\n}\n\ncout << sum << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763209849796-3zryn2"
+  },
+  {
+    "title": "Shape2",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "T. Shape2",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/T",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n,x = 1;\ncin >> n;\n \nfor(int i = 1; i <= n; i++){\n  for(int j = n-i; j > 0; j--) cout << \" \";\n    for(int k = 1; k <= x; k++) cout << \"*\";\n      cout << endl; \n        x += 2; }\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763209563076-kvz2of"
+  },
+  {
+    "title": "Sum of Consecutive Odd Numbers",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "S. Sum of Consecutive Odd Numbers",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/S",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint t;\ncin >> t;\n \nwhile(t--){\n\nint l,r, sum = 0;\ncin >> l >> r;\n\n(l>r)? (void) swap(l,r) : (void) 0;\n \n// excluding X and Y >> that why i = l + 1\nfor(int i=l+1; i<r; i++)(i%2 == 1)? sum += i : 0;\n\ncout << sum << endl;\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763209372504-xa2u92"
+  },
+  {
+    "title": "Sequence of Numbers and Sum",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "R. Sequence of Numbers and Sum",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/R",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nwhile(1){\n\nint l,r,numOfTerms, sum;\ncin >> l >> r;\n\nif(l <= 0 || r <= 0)break; // if any number is 0 or < than 0 -->> terminate\n(l>r)? (void) swap(l,r) : (void) 0; // swam small and big value if need\n \nnumOfTerms = r - l + 1;\nsum = numOfTerms*(l+r)/2;\n \nfor(int i = l; i <= r; i++) cout << i << \" \";\n\ncout << \"sum =\" << sum << endl;\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763205764040-5dki3h"
+  },
+  {
+    "title": "Digits",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "Q. Digits",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/Q",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\nvector<string> v(n);\n \nfor(int i = 0; i < n; i++) cin >> v[i];\n\nfor(auto u: v){\n\n  string s = u;\n  int len = s.size();\n\n  for(int i = len-1; i >= 0; i--){\n    cout << s[i] << \" \";\n  }\n  cout << endl;\n}\n\ncout << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763205410512-d55b5w"
+  },
+  {
+    "title": "Shape1",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "P. Shape1",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/P",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\n\nfor(int i = n; i >= 1; i--){\n  for(int j = i; j > 0; j--){\n      cout << \"*\";\n  }\ncout << endl;\n}\n\ncout << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763205144784-qfmgcn"
+  },
+  {
+    "title": "Pyramid",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "O. Pyramid",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/O",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\n\nfor(int i = 1; i <= n; i++){\n  for(int j = 0; j < i; j++){\n       cout << \"*\";\n  }\n  cout << endl;\n}\n\ncout << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763204943910-5l5kw4"
+  },
+  {
+    "title": "Numbers Histogram",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "N. Numbers Histogram",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/N",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\n    char c;\n    cin >> c;\n\n    int n;\n    cin >> n;\n    int a[n];\n\n    for (int i = 0; i < n; i++) cin >> a[i];\n\n    for (int i = 0; i < n; i++) {\n        for (int j = 1; j <= a[i]; j++) {\n            cout << c;\n        }\n        cout << endl;\n    }\n\n    cout << endl;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763204800552-6z8a3l"
+  },
+  {
+    "title": "Lucky Numbers",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "M. Lucky Numbers",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/M",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint a,b;\ncin >> a >> b;\n \nif (a > b)swap(a, b);\n \nint i = a,flag = 0;\n \nwhile(i <= b){\n \n   int j = i,cnt = 1;\n \n   while(j){\n        int last = j%10;\n        if(!(last == 4 || last == 7)){ cnt = 0; break; }        \n        j/=10;\n   }\n   (cnt)? (void)(flag = 1, cout << i << \" \") : (void) 0;\n   i++;\n}\n \n(flag)? (void)(cout << endl) : (void) (cout << -1 << endl);\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763204420295-d07d4p"
+  },
+  {
+    "title": "GCD",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "L. GCD",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/L",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint a,b;\ncin >> a >> b;\n \ncout << gcd(a,b) << endl; // gcd(value1, value2) -->> built-in function \n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763204164871-7g6b52"
+  },
+  {
+    "title": "Divisors",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "K. Divisors",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/K",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\n\nint a[n+1] = {};\n \nfor(int i = 1; i <= n/2; i++) (n%i == 0)? (a[i] = 1, a[n/i] = 1) : 0;\nfor(int i = 1; i <= n; i++) (a[i])? void (cout << i << endl) : (void) 0;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763204024359-vcqje8"
+  },
+  {
+    "title": "Primes from 1 to n",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "J. Primes from 1 to n",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/J",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\n\nfor(int i = 2; i <= n; i++){\n\n  int x = 0;\n  for(int j = 2; j < i; j++){ if(i%j == 0) {x++; break;} } \n                                                       // 1 is not prime\n                                                      // so start j from 2\n  (x) ? (void) 0 : (void)(cout << i << \" \");\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763203788703-db4xpr"
+  },
+  {
+    "title": "Palindrome",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "I. Palindrome",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/I",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n,t, reverse = 0;\ncin >> n;\n\nt = n;\n\nwhile(t>0){\n           int last = t%10;\n           t/=10;\n           reverse = reverse*10 + last;\n}\n \ncout << reverse << endl;\n\nif(n == reverse)cout << \"YES\" << endl;\nelse cout << \"NO\";\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763203524284-xwk56n"
+  },
+  {
+    "title": "One Prime",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "H. One Prime",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/H",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\n\nfor(int i = 2; i < n; i++) if(n%i == 0) return cout << \"NO\", 0;\n                           // if n is divisible by any number below n \n                          // then it prints \"NO\" and ends the program by       \n                         // returning 0 \ncout << \"YES\";\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763197826807-430joc"
+  },
+  {
+    "title": "Factorial",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "G. Factorial",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/G",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n\n    int t;\n    scanf(\"%d\", &t);\n\n    while(t--) { \n\n        int n;\n        scanf(\"%d\", &n);\n\n        long long fac = 1; // if n == 0 case handled\n \n        for(int i = 1; i <= n; i++)fac *= i;\n   \n        printf(\"%lld\\n\", fac);\n    }\n\n    return 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763197084607-tzf8x9"
+  },
+  {
+    "title": "Multiplication table",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "F. Multiplication table",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/F",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint n;\ncin >> n;\n\nfor(int i=1; i<=12; i++) cout << n << \" * \" << i << \" = \" << n*i << endl;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763196624309-6iqu8t"
+  },
+  {
+    "title": "Max",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "E. Max",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/E",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include<stdio.h>\n \nint main(){\n \nlong n, temp, max;\nscanf(\"%d\", &n);\n \nfor(int i = 1; i<=n; i++){\n        long x;\n        scanf(\"%ld\", &x);\n\n        if(i==1) max = x; // identify max element when taking input\n        else{\n            a = x;\n            if(max<a)max = a;\n        }\n}\nprintf(\"%ld\", max);\n \nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763196483341-inqhpg"
+  },
+  {
+    "title": "Fixed Password",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "D. Fixed Password",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/D",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include<stdio.h>\n \nint main(){\n \n \nfor(int i = 1; i > 0; i++){\n   int n;\n   scanf(\"%d\", &n);\n\n   if(n == 1999){ printf(\"Correct\"); break; }\n   else printf(\"Wrong\\n\");\n}\n \nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763195880793-5kc9ay"
+  },
+  {
+    "title": "Even, Odd, Positive and Negative",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "C. Even Odd Positive and Negative",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/C",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\n    int n,Even = 0, Odd = 0, Positive = 0, Negative = 0;\n    cin >> n;\n\n    for (int i = 0; i < n; i++){\n\n        int x;\n        cin >> x;\n\n        if (x == 0) Even++;\n        else if(x > 0){\n                       Positive++;\n                       if (x % 2 == 0)Even++;\n                       else Odd++;\n        } \n        else { // x < 0\n             Negative++;\n             if ((-x) % 2 == 0) Even++;\n             else Odd++;\n        }\n    }\n\n    cout << \"Even: \"     << Even     << endl;\n    cout << \"Odd: \"      << Odd      << endl;\n    cout << \"Positive: \" << Positive << endl;\n    cout << \"Negative: \" << Negative << endl;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763195527457-o8lo0j"
+  },
+  {
+    "title": "Even Numbers",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "B. Even Numbers",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/B",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n \nint main() {\n \nint n;\ncin >> n;\n\nif(n == 1) cout << -1 << endl;\nelse for(int i = 2; i <= n; i+=2) cout << i << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763195003288-rqqi7r"
+  },
+  {
+    "title": "1 to N",
+    "date": "2025-11-15",
+    "category": "Loops",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Loops",
+      "A. 1 to N",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219432/problem/A",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include<stdio.h>\n \nint main(){\n \nint n;\nscanf(\"%d\", &n);\n \nfor(int i = 1; i <= n; i++) printf(\"%d\\n\", i);\n\nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763194808045-vxm8jc"
+  },
+  {
+    "title": "Hard Compare",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "Z. Hard Compare",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/Z",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \ndouble a,b,c,d;\ncin >> a >> b >> c >> d;\n(b * log(a) > d * log(c)) ? cout << \"YES\" << endl \n                          : cout << \"NO\"  << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Explanation",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nWhy are we using logarithms:\n\nLogarithm is monotonic: bigger input → bigger log.\nSo comparing logs is equivalent to comparing the original powers.\nAvoids overflow, because we never compute huge numbers directly.\n\nExample: \n\nCompare 2^16 vs 4^8\n\nStep 1: Take logs\n16 * log(2)  ?  8 * log(4)\n\nStep 2: Approximate logs (base 10)\nlog(2) ≈ 0.3010\nlog(4) = log(2^2) = 2 * 0.3010 = 0.6020\n\nStep 3: Multiply by exponents\n16 * log(2) ≈ 16 * 0.3010 = 4.816\n8 * log(4)  ≈ 8 * 0.6020 = 4.816\n\nStep 4: Compare\n16 * log(2) = 8 * log(4) → 2^16 = 4^8\n\nStep 5: Store in variable\ndouble left = 16 * log(2);   // 4.816\ndouble right = 8 * log(4);   // 4.816\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763102588631-5nyzun"
+  },
+  {
+    "title": "The last 2 digits",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "Y. The last 2 digits",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/Y",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "Steps to Confront the problem:-\n\n1. Truncate numbers:\n   We are taking the last two digits of each number:\n                                               >> a' = a % 100\n                                               >> b' = b % 100\n                                               >> c' = c % 100\n                                               >> d' = d % 100\n\n2. Multiply:\n           >> prod = a' * b' * c' * d'\n\n3. Truncate product:\n   Take the last two digits of the result:\n                                     >> ans = prod % 100\n\n4. Print with leading zero if needed:\n                                   >> printf(\"%02d\", ans);\n                                   >> %02 ensures the 2-digit all the time",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nlast_two_digits(a * b * c * d) = last_two_digits(a^w * b^x * c^y * d^z)\n\n*/\n\n#include <bits/stdc++.h>\nusing namespace std;\n\nint last(int a) {  //---->> last digit\n\n    int r, l;\n\n    l = a % 10;\n    a /= 10;\n    r = (a % 10) * 10 + l;\n\nreturn r;\n}\n\nint cutOff(int a) {\n\n    int r = last(a);\n\nreturn r;\n}\n\nint main() {\n\n    long int a[4];\n    long int ans = 1;\n\n    for (int i = 0; i < 4; i++) cin >> a[i];\n    for (int i = 0; i < 4; i++) a[i] = last(a[i]);\n    for (int i = 0; i < 4; i++) ans *= a[i];\n\n    ans = cutOff(ans);\n    printf(\"%02d\", ans);\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763101233239-0xvwy8"
+  },
+  {
+    "title": "Two intervals",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "X. Two intervals",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/X",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Explanation",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n             Solution\n       \n Sort ascending order >> l(min) & r(max)\n\n       For L, take the maximum \n       For R, take the minimum\n \n*/\n\n/*\n\nCase 1 –> l1–r1 inside l2–r2\nCase 2 –> l2–r2 inside l1–r1\nCase 3 –> l1 starts inside l2 and ends after r2\nCase 4 –> l2 starts inside l1 and ends after r1\nCase 5 –> l1–r1 before l2\nCase 6 –> l2–r2 before l1\n \n \n \nCase 1 –> l1–r1 inside l2–r2\n \n l2-------------------------------r2\n        l1----------------r1\n \n2 5 3 7    5 2 7 3\n1 4 6 8    4 1 8 6\n \n \n \n \n \nCase 2 –> l2–r2 inside l1–r1\n \n        l2----------------r2\n l1--------------------------------r1\n \n4 6 5 7    6 4 7 5\n1 3 2 8    3 1 8 2\n \n \n \n \nCase 3 –> l1 starts inside l2 and ends after r2\n \n l2----------------------r2\n                    l1--------r1\n \n 3 20 17 23     20 3 17 23\n -12 -3 -4 5    -3 -12 5 -4   \n \n \n \n \nCase 4 –> l2 starts inside l1 and ends after r1\n \n        l2----------------------r2\n l1--------r1\n \n 5 33 -20 7  33 5 7 -20\n \n \n \n \nCase 5 –> l1–r1 before l2\n \n l2----------------------r2\n               l1--------r1\n \n 0 10 7 10      10 0 10 7\n-13 -4 -6 -4   -13 -4 -4 -6\n \n \n \n \nCase 6 –> l2–r2 before l1 \n \n l2----------------------r2\n l1--------r1\n \n4 8 6 10         8 4 10 6\n12 16 14 18      16 12 18 14\n\n*/\n\n/*\n--------------–> No intersection case  <--------------\n--------------–>  ( l2<r1 || r2<l1  )  <--------------\n\n \n1: (r1 < l2):\n\n l1-----r1\n             l2----------r2\n\n4 8 10 15\n3 5 6 9\n\n\n\n2: (r2 < l1):\n\n             l1----------r1\n l2-----r2\n      \n\n10 15 4 8 \n7 12 3 5\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 1",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint l1,r1,l2,r2;\ncin >> l1 >> r1 >> l2 >> r2;\n\nif ( r1<l2 || r2<l1 ) cout << -1 << endl;\nelse{\n     if(l1>l2){\n              if (r1<r2) cout << l1 << \" \" << r1;\n              else       cout << l1 << \" \" << r2;\n     } \n     else{\n          if (r1<r2) cout << l2 << \" \" << r1;\n          else       cout << l2 << \" \" << r2;\n     }\n}\n\nreturn 0;\n}\n\n/*\n--------------–> No intersection case  <--------------\n--------------–>  ( l2<r1 || r2<l1  )  <--------------\n\n \n1: (r1 < l2):\n\n l1-----r1\n             l2----------r2\n\n\n2: (r2 < l1):\n\n             l1----------r1\n l2-----r2\n      \n\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 2",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\nint l1,r1,l2,r2;\ncin >> l1 >> r1 >> l2 >> r2;\n\n// Check if segments don't overlap at all\n// which means no intersection\nif (r1 < l2 || r2 < l1) cout << -1 << endl;\nelse{\n      // intersection is max from(l1, l2) and min from (r1, r2)\n      int start = max(l1, l2);\n      int end = min(r1, r2);\n      cout << start << \" \" << end << endl;\n    }\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [
+      {
+        "name": "Explanation on CP Dictionary",
+        "url": "Intersection between to coordinate"
+      }
+    ],
+    "id": "1763098709930-bg1m85"
+  },
+  {
+    "title": "Mathematical Expression",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "W. Mathematical Expression",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/W",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a,b,c,p = 0,m = 0,i = 0,ans = 0;\nchar s,q;\ncin>> a >> s >> b >> q >> c;\n \n \nif     (s=='+') p = 1;\nelse if(s=='-') m = 1;\nelse            i = 1;\n \n \nif(p)      ans = a+b;\nelse if(m) ans = a-b;\nelse       ans = a*b;\n \nif(ans == c) cout << \"Yes\";\nelse         cout << ans;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763092166718-95aopt"
+  },
+  {
+    "title": "Comparison",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "V. Comparison",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/V",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint a,b,s = 0,v = 0,e = 0;\nchar c;\ncin >> a >> c >> b;\n \nif     (c=='<') s=1;\nelse if(c=='>') v=1;\nelse            e=1;\n \nif(s){\n   if(a<b)cout << \"Right\";\n   else   cout << \"Wrong\";\n}\nelse if(v){\n   if(a>b)cout << \"Right\";\n   else   cout << \"Wrong\";\n}\nelse{\n   if(a==b)cout << \"Right\";\n   else    cout << \"Wrong\";\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763091931927-pfdzkf"
+  },
+  {
+    "title": "Float or int",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "U. Float or int",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/U",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nfloat a;\ncin >> a;\n\nint b = a;\n \nif (a - b == 0)cout << \"int\"  << \" \" << b;\nelse           cout << \"float\"<< \" \" << b << \" \" << a-b;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763091680415-5zpkky"
+  },
+  {
+    "title": "Sort Numbers",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "T. Sort Numbers",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/T",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a[3];\nlong int mx, mn, sum = 0;\n \nfor(int i = 0; i<3;i++){\n   cin >> a[i];\n   sum += a[i];\n   if (i == 0){\n              mx = a[i];\n              mn = a[i];\n   }\n   else{\n       if (mx < a[i]) mx = a[i];\n       if (mn > a[i]) mn = a[i];\n   } \n}\n \ncout << mn        << endl \n     << sum-mx-mn << endl \n     << mx        << endl << endl;\n\nfor(int i=0; i<3; i++) cout << a[i] << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763091467272-173902"
+  },
+  {
+    "title": "Interval",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "S. Interval",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/S",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \ndouble x;\ncin >> x;\n \nif      (x>=0 && x<=25)  cout << \"Interval [0,25]\";\nelse if (x>25 && x<=50)  cout << \"Interval (25,50]\";\nelse if (x>50 && x<=75)  cout << \"Interval (50,75]\";\nelse if (x>75 && x<=100) cout << \"Interval (75,100]\";\nelse                     cout << \"Out of Intervals\";\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763091162787-hrbg0x"
+  },
+  {
+    "title": "Age in Days",
+    "date": "2025-11-14",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "R. Age in Days",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/R",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a;\ncin >> a;\n \nint x,y,z;\n \nx = a/365;\na = a - (x*365);\ny = a/30;\na = a - (y*30);\nz = a;\n \ncout << x << \" \" << \"years\"  << endl;\ncout << y << \" \" << \"months\" << endl;\ncout << z << \" \" << \"days\"   << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763089765172-dvvqzh"
+  },
+  {
+    "title": "Coordinates of a Point",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "Q. Coordinates of a Point",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/Q",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Visualization ascii art",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\n               \n\n                          Y-Positive Axis\n                                 ↑\n                                 |\n                                 |        \n                                 |\n                                 |        \n                                 |      \n                                 |         \nX-Negative Axis ← _______________|___________________ → X-Positive Axis\n                                 |          \n                                 |       \n                                 |        \n                                 |      \n                                 |       \n                                 |\n                                 ↓\n                           Y-Negative Axis\n\n\n                     Y+\n                     ↑\n                     |\n                     |        \n                     |        \n                     |      \n                     |         \n X- ← _______________|___________________→ X+\n                     |          \n                     |       \n                     |        \n                     |      \n                     |       \n                     |\n                     ↓\n                     Y-\n\n                     Y+\n                     ↑\n                     |\n                     |        \n          X- Y+      |     X+ Y+    \n                     |      \n                     |         \n X- ← _______________|___________________→ X+\n                     |          \n                     |       \n                     |        \n          X- Y-      |     X+ Y-  \n                     |       \n                     |\n                     ↓\n                     Y-\n\n\n                     Y+\n                     ↑\n                     |\n                     |        \n                     |     (Origem)      \n                     |      (0, 0)     \n                     |  (x = 0, y = 0)       \n X- ← _______________●___________________→ X+\n                     |          \n                     |       \n                     |        \n                     |      \n                     |       \n                     |\n                     ↓\n                     Y-\n\n\n\n                      Y+\n                      ↑\n                      |\n                      |        \n                      |        \n        (Eixo X)      |       (Eixo X)\n     (x ≠ 0, y = 0)   |    (x ≠ 0, y = 0)   \n X- ← ______●_________|___________●________→ X+\n                      |          \n                      |       \n                      |        \n                      |      \n                      |       \n                      |\n                      ↓\n                      Y-\n\n\n                     Y+\n                     ↑\n                     |\n                     |        \n                     ●     (Eixo Y)       \n                     |  (x = 0, y ≠ 0)       \n                     |         \n X- ← _______________|___________________→ X+\n                     |          \n                     |       \n                     |        \n                     |     (Eixo Y) \n                     ●  (x = 0, y ≠ 0)    \n                     |\n                     ↓\n                     Y-\n\n\n           Y-axis\n              ↑\n              |\n     Q2       |       Q1\n     ●        |        ●\n   (-,+)      |      (+,+)\n              |         \n______________|_________________ → X-axis\n              |          \n      Q3      |       Q4\n       ●      |        ●\n     (-,-)    |      (+,-)\n              |       \n              |\n              ↓\n             \n               \n            Y-axis\n               ↑\n               |\n     Q2        |       Q1\n     ●         |        ●\n(x < 0, y > 0) | (x > 0, y > 0)\n               |         \n_______________|__________________ → X-axis\n               |          \n      Q3       |       Q4\n       ●       |        ●\n(x < 0, y < 0) | (x > 0, y < 0)\n               |       \n               |\n               ↓\n             \n\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \ndouble x,y;\ncin >> x >> y;\n \nif     ( x == 0 && y == 0 ) cout << \"Origem\";\nelse if( x == 0 || y == 0 ){\n                            if(x == 0) cout << \"Eixo Y\";\n                            else       cout << \"Eixo X\";\n}\nelse{\n     if     ( x>0 && y>0 ) cout << \"Q1\";\n     else if( x<0 && y>0 ) cout << \"Q2\";\n     else if( x<0 && y<0 ) cout << \"Q3\";\n     else                  cout << \"Q4\";\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763053976301-etdy2v"
+  },
+  {
+    "title": "First digit !",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "P. First digit !",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/P",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nchar c[4];\nscanf(\"%s\", c);\n \nint x = c[0] - '0';\n \nif(x%2==0)cout<< \"EVEN\";\nelse cout << \"ODD\";\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763050752004-fi0gp3"
+  },
+  {
+    "title": "Calculator",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "O. Calculator",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/O",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a,b;\nchar c;\ncin >> a >> c >> b;\n \nif     ( c == '+' ) cout << a+b;\nelse if( c == '-' ) cout << a-b;\nelse if( c == '*' ) cout << a*b;\nelse                cout << a/b;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763050589437-180oqt"
+  },
+  {
+    "title": "Char",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "N. Char",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/N",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution 1",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    char x;\n    cin >> x;\n\n    if (isupper(x))\n        x = tolower(x);\n    else\n        x = toupper(x);\n\n    cout << x;\n    return 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 2",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nchar c,x;\ncin >> x;\n \nint z, y = x;\n \nif(y>64 && y<91)z = 1;\nelse z = 2;\n \nif(z==1){\n   int p = y - 65;\n   c = 97+p;\n}\n\nif(z==2){\n   int p = y - 97;\n   c = 65+p;\n}\n \ncout << c;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Beginner mistakes",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "// if( z = 1 ) mistake >>  then always else condition will be execute\n                        // or grbage value will be print\n\n// if( z = 1 ) assignment operation is not valid \n// if( z == 1 ) >> valid comparison check\n\nif(z==1){\n   int p = y - 65;\n   c = 97+p;\n}\nif(z==2){\n  int p = y - 97;\n  c = 65+p;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763050275886-ayf26n"
+  },
+  {
+    "title": "Capital or Small or Digit",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "M. Capital or Small or Digit",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/M",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nchar x;\ncin >> x;\n \nint y = x;\n \nif( y>47 && y<58 )cout << \"IS DIGIT\";\nelse {\n   cout << \"ALPHA\" << endl;\n\n   if(y>64 && y<91)cout << \"IS CAPITAL\";\n   else cout << \"IS SMALL\";\n}\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763048243056-9slbnx"
+  },
+  {
+    "title": "The Brothers",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "L. The Brothers",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/L",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nstring a,b,c,d;\ncin >> a >> b;\ncin >> c >> d;\n \nif(b == d) cout<< \"ARE Brothers\";\nelse cout <<\"NOT\";\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763047782686-am25nz"
+  },
+  {
+    "title": "Max and Min",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "K. Max and Min",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/K",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a,b,c;\ncin >> a >> b >> c;\n \nlong double mx, mn;\n \nif(a>=b && a>=c) mx = a;\nelse if(b>c && b>a) mx = b;\nelse mx = c;\n \n \nif(a<=b && a<=c) mn = a;\nelse if(b<a && b<c) mn = b;\nelse mn = c;\n \ncout << mn << \" \" << mx;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Beginner mistakes ( Don't handle equal condition )",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a,b,c;\ncin >> a >> b >> c;\n \nlong double mx, mn;\n \nif(a>b && a>c) mx = a;\nelse if(b>c && b>a) mx = b;\nelse mx = c;\n \n \nif(a<b && a<c) mn = a;\nelse if(b<a && b<c) mn = b;\nelse mn = c;\n \ncout << mn << \" \" << mx;\n \nreturn 0;\n}\n\n/*\n\nNOW check WITH those TEST cases. \n\ntest case 1 : \n\n0 0 1\n1 1\n\n--------\n\ntest case 2: \n\n1 1 0\n1 1\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763047541033-bxwao8"
+  },
+  {
+    "title": "Multiples",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "J. Multiples",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/J",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a,b;\ncin >> a >> b;\n\nif( (a%b== 0) || (b%a== 0) )cout << \"Multiples\";\nelse cout << \"No Multiples\";\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763046740231-vqa3in"
+  },
+  {
+    "title": "Welcome for you with Conditions",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "I. Welcome for you with Conditions",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/I",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nint a,b;\ncin >> a>> b;\n \nif(b>a) cout <<\"No\";\nelse cout<<\"Yes\";\n\n/*\n\n2nd way :\n\nif (A >= B) cout << \"Yes\";\nelse cout << \"No\";\n\n*/\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763046501385-trk2w7"
+  },
+  {
+    "title": "Two numbers",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "H. Two numbers",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/H",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong int a,b,f,c,r;\ncin >> a >> b;\n\ndouble x = (1.00*a)/b;\nf = floor(x);\nc = ceil(x);\nr = round(x);\n \ncout << \"floor \" << a << \" \" << \"/\"<<\" \" << b << \" \" << \"=\" <<\" \" << f << endl;\ncout << \"ceil \"  << a << \" \" << \"/\"<<\" \" << b << \" \" << \"=\" <<\" \" << c << endl;\ncout << \"round \" << a << \" \" << \"/\"<<\" \" << b << \" \" << \"=\" <<\" \" << r << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763046126778-4kkd6l"
+  },
+  {
+    "title": "Summation from 1 to N",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "G. Summation from 1 to N",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/G",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "",
+        "description": "“Inclusive” means including both ends.\n\n\nFrom 1 to n inclusive:\n                     >> That means:\n                     >> 1, 2, 3, …, n (both 1 and n are included)\n\nGauss' formula for summing 1 to x\nSummation of 1 to n >>> (x*(x+1))/2",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong long int x;\ncin >> x;\n\ncout << (x*(x+1))/2; // Gauss formula for summing 1 to x\n                    // Summation of 1 to n >>> (x*(x+1))/2\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763045787547-52yaxu"
+  },
+  {
+    "title": "Digits Summation",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "F. Digits Summation",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/F",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong long int a,b;\ncin >> a >> b;\n \ncout << (a%10 + b%10);\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763045311525-6kcw2d"
+  },
+  {
+    "title": "Area of a Circle",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "E. Area of a Circle",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/E",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution 1 using C",
+        "description": "",
+        "consoleBlock": {
+          "c": "#include <stdio.h>\n\nint main() {\n\n    double pi = 3.141592653;\n    double r;               // use double\n    scanf(\"%lf\", &r);       // use %lf for double\n\n    double ans = r * r * pi;\n    printf(\"%.9lf\\n\", ans); // .9lf ensures the precision\n                           //fixed-size floating point \n\nreturn 0;\n}",
+          "cpp": "",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 2 using C++",
+        "description": "#include <iomanip> → allows the use of setprecision.\n\nfixed → ensures it prints a fixed number of digits after the decimal.\n\nsetprecision(9) → prints exactly 9 digits after the decimal. Fixed-size floating point",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include <iostream>\n#include <iomanip>  // for setprecision\nusing namespace std;\n\nint main() {\n    double R;\n    cin >> R;\n    \n    const double PI = 3.141592653;\n    double area = PI * R * R;\n    \n    cout << fixed << setprecision(9) << area << endl; //fixed-size floating point  \n    \n    return 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763018194016-d9tmu2"
+  },
+  {
+    "title": "Difference",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "D. Difference",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/D",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main(){\n \nlong long int a,b,c,d;\ncin >> a>> b >> c >> d;\n\ncout << \"Difference = \"<< ((a*b) - (c*d));\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763017373447-b6hlat"
+  },
+  {
+    "title": "Simple Calculator",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "C. Simple Calculator",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/C",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main() {\n \nlong long int x,y;\ncin >> x >> y;\n\ncout << x << \" + \"<< y << \" = \" << x+y << endl;\ncout << x << \" * \"<< y << \" = \" << x*y << endl;\ncout << x << \" - \"<< y << \" = \" << x-y << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763017146661-vr9b5j"
+  },
+  {
+    "title": "Basic Data Types",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "B. Basic Data Types",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/B",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main() {\n \nint a;\n  long long b;\n    char c;\n      float d;\n        double e;\n \ncin >> a \n     >> b \n       >> c \n         >> d \n           >> e;\n\ncout << a << endl \n       << b << endl \n         << c << endl \n          << d << endl \n            << e << endl;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763016939158-gitj9p"
+  },
+  {
+    "title": "Say Hello With C++",
+    "date": "2025-11-13",
+    "category": "Data type - Conditions",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Data type - Conditions",
+      "A. Say Hello With C++",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219158/problem/A",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n \nint main() {\n \nstring x;\ncin >> x;\ncout << \"Hello, \"<< x;\n \nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1763016618087-jvvwl0"
+  },
+  {
+    "title": "Count",
+    "date": "2025-08-15",
+    "category": "Strings",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Strings",
+      "E. Count",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219856/problem/E",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "ASCII table for digits & conversion:\n\nCharacter\tASCII value\t    (int)char - 48 || char - '0' >> Conversion to digit\n\n'0'\t        48\t            -->> 48 - 48 = 0 \n'1'\t        49\t            -->> 49 - 48 = 1\n'2'        \t50\t            -->> 50 - 48 = 2\n'3'\t        51\t            -->> 51 - 48 = 3\n'4'\t        52\t            -->> 52 - 48 = 4\n'5'\t        53\t            -->> 53 - 48 = 5\n'6'\t        54\t            -->> 54 - 48 = 6\n'7'\t        55\t            -->> 55 - 48 = 7\n'8'\t        56\t            -->> 56 - 48 = 8\n'9'\t        57\t            -->> 57 - 48 = 9",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 1",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nchar c[1000001];\ngets(c); // C function used\nint x, l = strlen(c);\nlong long sum = 0;\n\nfor(int i=0; i<l; i++){\n   x = c[i] - '0'; // Implicit type conversion\n   sum += x;\n}\n\ncout << sum;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 2",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nchar c[1000001]; // S (1 ≤ |S| ≤ 10^6) // Extra 1 is for null character -> '\\0'\ncin.getline(c,1000001);\nint x, l = strlen(c);\nlong long sum = 0;\n\nfor(int i=0; i<l; i++){\n   x = (int)c[i] - 48;\n   sum += x;\n}\n\ncout << sum;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755276733675-d7na5f"
+  },
+  {
+    "title": "Mirror Array",
+    "date": "2025-08-15",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "W. Mirror Array",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/W",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "Actual                   Mirror\n\n1   2   3   4      |      4   3   2   1\n5   6   7   8      |      8   7   6   5\n9   10  11  12     |      12  11  10  9\n13  14  15  16     |      16  15  14  13",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\n    Actual                   Mirror\n\n1   2   3   4      |      4   3   2   1\n5   6   7   8      |      8   7   6   5\n9   10  11  12     |      12  11  10  9\n13  14  15  16     |      16  15  14  13\n\n\n*/\n\n#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint m,n;\ncin >> m>>n;\nint a[m][n]={};\n\nfor(int i=0; i<m; i++)\n  for(int j=0; j<n; j++)\n      cin >> a[i][j];\n\nfor(int i=0; i<m; i++){\n  for(int j=n-1; j>=0; j--){\n      cout<< a[i][j] << \" \";\n  } cout << endl;\n}\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755272057153-meslnw"
+  },
+  {
+    "title": "Matrix",
+    "date": "2025-08-15",
+    "category": "Arrays",
+    "tags": [
+      "Codeforces",
+      "Newcomers",
+      "Arrays",
+      "T. Matrix",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/group/MWSDmqGsZm/contest/219774/problem/T",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Explanation",
+        "description": "Assuming a 4×4 matrix: -->> (m by n matrix) >> 4 by 4\n\n+        -\n   +  -  \n   -  +  \n-        +\n\n(Here + = primary diagonal, - = secondary diagonal.)\n\n\nlet : \ni = row number\nj = column number\nn = matrix size\n\n\n\nPrimary Diagonal:\nRule:\n     i == j\n\n(Works for both 0-based and 1-based indexing, but the meaning changes slightly.)\n\n\n\n\n\nSecondary Diagonal:\nRule:\n     i + j == n - 1   (0-based indexing)\n     i + j == n + 1   (1-based indexing)\n\n\n\n\n\nIndexing\tDirection\t Primary (+) rule\t   Secondary (−) rule\n0-based\t        top → bottom\t i == j\t                   i + j == n - 1\n0-based\t        bottom → top\t i == j\t                   i + j == n - 1\n1-based\t        top → bottom\t i == j\t                   i + j == n + 1\n1-based\t        bottom → top\t i == j\t                   i + j == n + 1\n\n\n\n\nIndexing       Primary (+) sequence\t                Secondary (−) sequence\n0-based\t       a[0][0], a[1][1], a[2][2], a[3][3]\ta[0][3], a[1][2], a[2][1], a[3][0]\n1-based\t       a[1][1], a[2][2], a[3][3], a[4][4]\ta[1][4], a[2][3], a[3][2], a[4][1]",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "Assuming a 4×4 matrix: -->> (m by n matrix) >> 4 by 4\n\n+        -\n   +  -  \n   -  +  \n-        +\n\n(Here + = primary diagonal, - = secondary diagonal.)\n\n\nlet : \ni = row number\nj = column number\nn = matrix size\n\n\n\nPrimary Diagonal:\nRule:\n     i == j\n\n(Works for both 0-based and 1-based indexing, but the meaning changes slightly.)\n\n\n\n\n\nSecondary Diagonal:\nRule:\n     i + j == n - 1   (0-based indexing)\n     i + j == n + 1   (1-based indexing)\n\n\n\n\n\nIndexing\tDirection\t Primary (+) rule\t   Secondary (−) rule\n0-based\t        top → bottom\t i == j\t                   i + j == n - 1\n0-based\t        bottom → top\t i == j\t                   i + j == n - 1\n1-based\t        top → bottom\t i == j\t                   i + j == n + 1\n1-based\t        bottom → top\t i == j\t                   i + j == n + 1\n\n\n\n\nIndexing       Primary (+) sequence\t                Secondary (−) sequence\n0-based\t       a[0][0], a[1][1], a[2][2], a[3][3]\ta[0][3], a[1][2], a[2][1], a[3][0]\n1-based\t       a[1][1], a[2][2], a[3][3], a[4][4]\ta[1][4], a[2][3], a[3][2], a[4][1]",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n;\ncin >> n;\nint a[n][n]={};\nint primary = 0,secondary = 0,difference = 0;\n\nfor(int i=0; i<n; i++)\n  for(int j=0; j<n; j++)\n      cin >> a[i][j];\n\nfor(int i=0; i<n; i++)\n    primary += a[i][i];\n\nfor(int i=0, j=n-1; i<n; i++, j--)\n     secondary += a[i][j];\n\ndifference = primary - secondary;\ndifference = abs(difference);\ncout << difference;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755270898745-3zo8x5"
+  }
+]

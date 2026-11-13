@@ -1,0 +1,61 @@
+[
+  {
+    "id": "seed-mlops-fastapi",
+    "title": "Deploy an AI Model with FastAPI",
+    "date": "2026-09-29",
+    "category": "MLOps",
+    "tags": [
+      "FastAPI",
+      "Deployment",
+      "API"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [
+      {
+        "name": "FastAPI docs",
+        "url": "https://fastapi.tiangolo.com/"
+      }
+    ],
+    "sections": [
+      {
+        "subtitle": "The request lifecycle",
+        "description": "<p>A production model is a service. A request arrives, gets validated, is transformed into model input, and returns a structured response.</p>\n<p>Latency, error handling, and observability matter as much as model quality.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "visualization": {
+          "enabled": true,
+          "title": "Inference request lifecycle",
+          "html": "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<style>\n  body { margin: 0; padding: 18px; background: #0b0b0b; color: #e5e7eb; font-family: \"Segoe UI\", system-ui, sans-serif; }\n  h3 { margin: 0 0 14px; color: #fca5a5; font-size: 16px; }\n  .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }\n  .box { background: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #cbd5e1; }\n  .box strong { display: block; color: #a5b4fc; margin-bottom: 3px; }\n  .arrow { color: #6b7280; font-size: 18px; }\n</style>\n</head>\n<body>\n<h3>Request → prediction → response</h3>\n<div class=\"flow\">\n  <div class=\"box\"><strong>Request</strong>JSON body</div>\n  <div class=\"arrow\">→</div>\n  <div class=\"box\"><strong>Validate</strong>Pydantic schema</div>\n  <div class=\"arrow\">→</div>\n  <div class=\"box\"><strong>Predict</strong>model inference</div>\n  <div class=\"arrow\">→</div>\n  <div class=\"box\"><strong>Respond</strong>typed JSON</div>\n</div>\n</body>\n</html>",
+          "url": ""
+        }
+      },
+      {
+        "subtitle": "A minimal API",
+        "description": "<p>FastAPI turns a Python function into an HTTP endpoint. Pydantic validates the request body before your model code runs.</p>\n<p>The runnable example below is a dependency-free mock of the prediction function.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "from fastapi import FastAPI\nfrom pydantic import BaseModel\n\napp = FastAPI()\n\nclass Request(BaseModel):\n    text: str\n\n@app.post(\"/predict\")\ndef predict(request: Request):\n    return {\"label\": \"positive\", \"score\": 0.92}",
+          "js": "",
+          "java": ""
+        },
+        "python": {
+          "enabled": true,
+          "title": "Run the prediction function",
+          "code": "def predict(text):\n    positive = [\"good\", \"great\", \"love\", \"excellent\"]\n    negative = [\"bad\", \"hate\", \"poor\", \"awful\"]\n    words = text.lower().split()\n    score = sum(word in positive for word in words) - sum(\n        word in negative for word in words\n    )\n    label = \"positive\" if score >= 0 else \"negative\"\n    return {\"label\": label, \"score\": round(abs(score) / max(len(words), 1), 2)}\n\nfor text in [\"I love this model\", \"This is awful\"]:\n    print(text, \"->\", predict(text))",
+          "stdin": ""
+        }
+      },
+      {
+        "subtitle": "Production checklist",
+        "description": "<p>Before shipping: <span style=\"color:#facc15\">input validation</span>, timeouts, structured logs, a health endpoint, and a rollback plan.</p>\n<p>Also track prediction quality over time. A model can drift even when the code does not change.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py"
+      }
+    ]
+  }
+]

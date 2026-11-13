@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATH</title>
+  <link rel="stylesheet" href="css/dsa&algo.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"/>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="menu">
+      <div class="item">
+        <a href="#" class="link">
+          <span> ☰ DICTIONARY </span>
+          <svg viewBox="0 0 360 360" xml:space="preserve">
+            <g id="SVGRepo_iconCarrier">
+              <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
+              c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,
+              10.606,4.393s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"></path>
+            </g>
+          </svg>
+        </a>
+        <div class="submenu">
+          <div class="submenu-item"><a href="cpp-dictionary.html" class="submenu-link"> CPP DICTIONARY </a></div>
+          <div class="submenu-item"><a href="solution.html" class="submenu-link"> SOLUTION </a></div>
+          <div class="submenu-item"><a href="dsa&algo.html" class="submenu-link"> DSA & ALGO </a></div>
+        </div>
+      </div>
+    </div>
+
+        
+
+    <div>
+      <a href="index.html">Home</a>
+      <a href="editor.html">Editor</a>
+      <button id="toggleReadingMode">📖 Reading Mode</button>
+      <button id="fullscreenToggle" class="fullscreen-btn">🖥 Fullscreen</button>
+      <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    </div>
+  </div>
+
+  <div class="sidebar-toggle-btn" onclick="toggleSidebar()"> ☰ </div>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search blog content..." onkeyup="searchPosts()" />
+    <button class="clear-search" onclick="clearSearch()">×</button>
+    <select id="sortSelect" onchange="sortPosts(this.value)">
+      <option value="">Sort By</option>
+      <option value="date-desc">Date: Newest First</option>
+      <option value="date-asc">Date: Oldest First</option>
+      <option value="title-asc">Title: A-Z</option>
+      <option value="title-desc">Title: Z-A</option>
+    </select>
+    <select id="tagFilter" onchange="filterByTag(this.value)">
+      <option value="">Filter by Tag</option>
+    </select>
+  </div>
+
+  
+  
+  <div class="main-container">
+
+
+    <div class="sidebar" id="sidebar">
+      <h2>Categories</h2>
+      <ul id="categoryList"></ul>
+    </div>
+
+    <div class="content" id="blogPosts"></div>
+
+    
+    <div class="floating-toc collapsed" id="floatingToc">
+      <div class="toc-header" onclick="toggleToc()">
+        📋 In This Post
+        <span class="arrow" id="tocArrow">▶</span>
+      </div>
+      <ul id="tocList" class="toc-list"></ul>
+    </div>
+    
+    
+
+    <div id="codeModal" class="code-modal">
+      <div class="code-modal-content">
+        <button id="closeCodeModal" class="modal-close">✖</button>
+        <button id="copyCodeModal" class="modal-copy">📋 Copy</button>
+        <pre><code id="modalCode"></code></pre>
+      </div>
+    </div>
+    <button id="exitReadingModeBtn" class="reading-exit-btn" style="display: none;">❌ Exit</button>
+  </div>
+    
+  
+
+
+  <div class="pagination" id="pagination"></div>
+
+  <div class="scroll-buttons">
+    <span id="dateTime" class="datetime-label"></span>
+        <button onclick="scrollToTop(); document.getElementById('blogPosts').scrollIntoView({behavior: 'smooth'})">↑ Top</button>
+    <button onclick="scrollToBottom(); document.getElementById('pagination').scrollIntoView({behavior: 'smooth'})">↓ Bottom</button>
+  </div>
+
+
+  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+  <script src="js/math.js"></script>
+
+  <script>
+ window.onload = () => {
+  applySavedTheme();      // Apply saved theme
+  updateDateTime();       // Your existing functions
+  renderBlogs();          // Load blog content
+};
+  </script>
+
+  <style>
+    .blog-image {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 5px;
+    }
+    .image-container {
+      text-align: center;
+    }
+  </style>
+
+
+</body>
+</html>

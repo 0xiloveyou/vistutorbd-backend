@@ -1,0 +1,311 @@
+:root {
+  --bg-light: #f4f4f4;
+  --bg-dark: #121212;
+  --text-light: #000;
+  --text-dark: #eee;
+  --preview-bg-light: #f9f9f9;
+  --preview-bg-dark: #1e1e1e;
+  --console-bg-dark: #000;
+  --console-text-dark: #0f0;
+  --input-light: #fff;
+  --input-dark: #222;
+  --input-border-light: #ccc;
+  --input-border-dark: #555;
+  --primary: #0a3cff;
+  --primary-hover: #072dc1;
+  --submenu-hover-bg: #ccb804;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.editor-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.editor-container input,
+.editor-container textarea,
+.editor-container select,
+.editor-container button {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid var(--input-border-light);
+  border-radius: 6px;
+  background-color: var(--input-light);
+  color: var(--text-light);
+}
+
+body.dark .editor-container input,
+body.dark .editor-container textarea,
+body.dark .editor-container select {
+  background-color: var(--input-dark);
+  color: var(--text-dark);
+  border-color: var(--input-border-dark);
+}
+
+.editor-section,
+.console-window-block {
+  border: 1px solid var(--input-border-light);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: var(--preview-bg-light);
+}
+
+body.dark .editor-section,
+body.dark .console-window-block {
+  background: var(--preview-bg-dark);
+  border-color: var(--input-border-dark);
+}
+
+.console-window-preview {
+  background-color: var(--console-bg-dark);
+  color: var(--console-text-dark);
+  font-family: monospace;
+  padding: 10px;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  height: 150px;
+  border-radius: 8px;
+}
+
+.preview-container {
+  margin-top: 40px;
+  padding: 20px;
+  border: 2px solid var(--primary);
+  border-radius: 12px;
+  background: var(--preview-bg-light);
+}
+
+body.dark .preview-container {
+  background: var(--preview-bg-dark);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background: #222;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+
+.navbar a {
+  color: #fff;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.navbar button {
+  padding: 6px 12px;
+  background-color: var(--primary);
+  border: none;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  background-color: var(--primary-hover);
+}
+
+.toggle-theme {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#imageInputs input {
+  margin-bottom: 10px;
+}
+/* menu code  */
+.menu {
+font-size: 16px;
+line-height: 1.6;
+color: #fcfcfc;
+width: fit-content;
+display: flex;
+list-style: none;
+}
+
+.menu a {
+text-decoration: none;
+color: inherit;
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+}
+
+.menu .link {
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+padding: 12px 36px;
+border-radius: 16px;
+overflow: hidden;
+transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu .link::after {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #0a3cff;
+z-index: -1;
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu .link svg {
+width: 14px;
+height: 14px;
+fill: #000000;
+transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.menu .item {
+position: relative;
+}
+
+.menu .item .submenu {
+display: flex;
+flex-direction: column;
+align-items: center;
+position: absolute;
+top: 100%;
+border-radius: 0 0 16px 16px;
+left: 0;
+width: 100%;
+overflow: hidden;
+border: 1px solid #cccccc;
+background-color: purple;
+opacity: 100;
+visibility: hidden;
+transform: translateY(-12px);
+transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+z-index: 1;
+pointer-events: none;
+list-style: none;
+}
+
+.menu .item:hover .submenu {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+pointer-events: auto;
+border-top: transparent;
+border-color: #0a3cff;
+}
+
+.menu .item:hover .link {
+color: #ffffff;
+border-radius: 16px 16px 0 0;
+}
+
+.menu .item:hover .link::after {
+transform: scaleX(1);
+transform-origin: right;
+}
+
+.menu .item:hover .link svg {
+fill: #ffffff;
+transform: rotate(-180deg);
+}
+
+.submenu .submenu-item {
+width: 100%;
+transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.submenu .submenu-link {
+display: block;
+padding: 12px 24px;
+width: 100%;
+position: relative;
+text-align: center;
+transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.submenu .submenu-item:last-child .submenu-link {
+border-bottom: none;
+}
+
+.submenu .submenu-link::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+transform: scaleX(0);
+width: 100%;
+height: 100%;
+background-color: #ccb804;
+z-index: -1;
+transform-origin: left;
+transition: transform 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.submenu .submenu-link:hover:before {
+transform: scaleX(1);
+transform-origin: right;
+}
+
+.submenu .submenu-link:hover {
+color: #ffffff;
+}
+
+/* button color  */
+div .akm{
+  background-color: gray;
+}
+
+
+
+/* for description field  */
+.editable-block {
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  padding: 10px;
+  min-height: 100px;
+  border-radius: 6px;
+  color: var(--text-color);
+}
+
+
+/*new added <<------- problem her -------------<<<<<<    ---<<<<    problem her */
+
+.console-window-preview {
+  background-color: var(--console-bg-dark);
+  color: var(--console-text-dark);
+  font-family: monospace;
+  padding: 10px;
+  margin-top: 10px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  height: 150px;
+  border-radius: 8px;
+}

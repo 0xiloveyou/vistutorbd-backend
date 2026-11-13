@@ -1,0 +1,48 @@
+[
+  {
+    "id": "seed-ml-gradient-descent",
+    "title": "Gradient Descent, Explained Visually",
+    "date": "2026-10-18",
+    "category": "ML Foundations",
+    "tags": [
+      "Optimization",
+      "Gradient Descent",
+      "Loss"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [],
+    "sections": [
+      {
+        "subtitle": "Loss is the landscape",
+        "description": "<p>A model is a function with parameters. The <span style=\"color:#fca5a5;font-weight:600\">loss</span> measures how wrong its predictions are. Training is the search for parameters that make the loss small.</p>\n<p>Gradient descent walks downhill by following the negative gradient.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "visualization": {
+          "enabled": true,
+          "title": "A point walking down a loss curve",
+          "html": "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<style>\n  body { margin: 0; background: #0b0b0b; color: #e5e7eb; font-family: \"Segoe UI\", system-ui, sans-serif; }\n  canvas { display: block; width: 100%; height: 320px; }\n  .legend { display: flex; gap: 16px; padding: 0 18px 16px; font-size: 12px; color: #9ca3af; }\n  .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; }\n</style>\n</head>\n<body>\n<canvas id=\"c\" width=\"720\" height=\"340\"></canvas>\n<div class=\"legend\">\n  <span><i class=\"sw\" style=\"background:#fca5a5\"></i>loss curve</span>\n  <span><i class=\"sw\" style=\"background:#22d3ee\"></i>current point</span>\n</div>\n<script>\n  const canvas = document.getElementById(\"c\");\n  const ctx = canvas.getContext(\"2d\");\n  const w = canvas.width;\n  const h = canvas.height;\n  const pad = 34;\n\n  function f(x) { return (x - 3) * (x - 3) + 2; }\n  function toX(x) { return pad + (x / 6) * (w - pad * 2); }\n  function toY(y) { return h - pad - (y / 12) * (h - pad * 2); }\n\n  const points = [];\n  let x = 0.4;\n  for (let i = 0; i < 14; i++) {\n    points.push(x);\n    x = x - 0.32 * (2 * (x - 3));\n  }\n\n  let step = 0;\n\n  function draw() {\n    ctx.clearRect(0, 0, w, h);\n    ctx.strokeStyle = \"#1f2937\";\n    ctx.lineWidth = 1;\n    for (let i = 0; i <= 6; i++) {\n      const gx = toX(i);\n      ctx.beginPath();\n      ctx.moveTo(gx, pad);\n      ctx.lineTo(gx, h - pad);\n      ctx.stroke();\n    }\n\n    ctx.strokeStyle = \"#fca5a5\";\n    ctx.lineWidth = 3;\n    ctx.beginPath();\n    for (let i = 0; i <= 300; i++) {\n      const px = toX((i / 300) * 6);\n      const py = toY(f((i / 300) * 6));\n      if (i === 0) ctx.moveTo(px, py);\n      else ctx.lineTo(px, py);\n    }\n    ctx.stroke();\n\n    const px = toX(points[step]);\n    const py = toY(f(points[step]));\n    ctx.fillStyle = \"#22d3ee\";\n    ctx.beginPath();\n    ctx.arc(px, py, 7, 0, Math.PI * 2);\n    ctx.fill();\n\n    ctx.fillStyle = \"#e5e7eb\";\n    ctx.font = \"13px monospace\";\n    ctx.fillText(\"step \" + step, pad, 22);\n\n    step = (step + 1) % points.length;\n  }\n\n  draw();\n  setInterval(draw, 420);\n</script>\n</body>\n</html>",
+          "url": ""
+        }
+      },
+      {
+        "subtitle": "The update rule",
+        "description": "<p>At each step, compute the gradient and move in the opposite direction. The <span style=\"color:#facc15;font-weight:600\">learning rate</span> decides how far you move.</p>\n<p>Too small: training crawls. Too large: the loss bounces or diverges.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "python": {
+          "enabled": true,
+          "title": "Run gradient descent",
+          "code": "def loss(x):\n    return (x - 3) ** 2 + 2\n\ndef gradient(x):\n    return 2 * (x - 3)\n\nx = 0.4\nlearning_rate = 0.32\n\nfor step in range(12):\n    x = x - learning_rate * gradient(x)\n    print(f\"step {step:02d}  x={x:6.3f}  loss={loss(x):6.3f}\")",
+          "stdin": ""
+        }
+      },
+      {
+        "subtitle": "Learning rate",
+        "description": "<p>A learning rate is a <span style=\"color:#93c5fd\">hyperparameter</span>, not something the model learns from the gradient itself. Schedules, warmup, and adaptive optimizers all change how the step size behaves over time.</p>\n<p>When training is unstable, inspect the loss curve before changing the architecture.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py"
+      }
+    ]
+  }
+]

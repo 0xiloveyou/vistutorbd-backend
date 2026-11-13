@@ -1,0 +1,55 @@
+[
+  {
+    "id": "seed-nlp-tokenization",
+    "title": "Tokenization: How Text Becomes Numbers",
+    "date": "2026-10-09",
+    "category": "NLP",
+    "tags": [
+      "Tokenization",
+      "BPE",
+      "NLP"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [
+      {
+        "name": "tiktoken",
+        "url": "https://github.com/openai/tiktoken"
+      }
+    ],
+    "sections": [
+      {
+        "subtitle": "Word, character, and subword tokens",
+        "description": "<p>Word tokens are intuitive but explode in size. Character tokens are tiny but produce long sequences. <span style=\"color:#facc15;font-weight:600\">Subword</span> tokenization sits in between.</p>\n<p>Byte-pair encoding learns frequent character pairs and merges them into tokens.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "visualization": {
+          "enabled": true,
+          "title": "Subword tokenization",
+          "html": "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<style>\n  body { margin: 0; padding: 18px; background: #0b0b0b; color: #e5e7eb; font-family: \"Segoe UI\", system-ui, sans-serif; }\n  h3 { margin: 0 0 14px; color: #fca5a5; font-size: 16px; }\n  .tokens { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 18px; }\n  .token { background: #111827; border: 1px solid #374151; border-radius: 6px; padding: 8px 10px; font-family: monospace; color: #a7f3d0; }\n  .hint { color: #9ca3af; font-size: 12px; margin: 0 0 4px; }\n</style>\n</head>\n<body>\n<h3>Subword tokenization</h3>\n<p class=\"hint\">\"unbelievable\" can become:</p>\n<div class=\"tokens\"><span class=\"token\">un</span><span class=\"token\">believ</span><span class=\"token\">able</span></div>\n<p class=\"hint\">\"tokenization\" can become:</p>\n<div class=\"tokens\"><span class=\"token\">token</span><span class=\"token\">ization</span></div>\n<p class=\"hint\">Rare words get split. Common words stay whole.</p>\n</body>\n</html>",
+          "url": ""
+        }
+      },
+      {
+        "subtitle": "A tiny tokenizer",
+        "description": "<p>Real tokenizers are trained on a corpus and shipped as a vocabulary plus merge rules. This example only shows the idea.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "text = \"AI learning hub is unbelievable\"\n\nprint(\"words:\", text.split())\nprint(\"characters:\", list(text.replace(\" \", \"\")))\nprint(\"lowercase:\", text.lower().split())",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Why BPE wins",
+        "description": "<p>BPE keeps common words intact and breaks rare words into reusable pieces. That gives a <span style=\"color:#93c5fd\">bounded vocabulary</span> without losing the ability to represent new text.</p>\n<p>It also means token counts are not word counts. Always measure with the tokenizer you actually use.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py"
+      }
+    ]
+  }
+]

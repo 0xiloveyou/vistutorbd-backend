@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BUILT IN </title>
+  <link rel="shortcut icon" href="images/Logo/cpp-dictionary1.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/dsa&algo.css" />
+
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="menu">
+      <div class="item">
+  <a href="#" class="link">
+    <span> ☰ </span>
+    <img src="images/Logo/cpp-dictionary1.png" alt="Logo" class="nav-logo" />
+  </a>
+        <div class="submenu">
+            <div class="submenu-item"><a href="atcoder.html" class="submenu-link">ATCODER</a></div>
+            <div class="submenu-item"><a href="builtin.html" class="submenu-link">BUILT IN</a></div>
+            <div class="submenu-item"><a href="CF_NewCommers.html" class="submenu-link">CODEFORCES NEW</a></div>
+            <div class="submenu-item"><a href="codeforces.html" class="submenu-link">CODEFORCES</a></div>
+            <div class="submenu-item"><a href="codechef.html" class="submenu-link">CODECHEF</a></div>
+            <div class="submenu-item"><a href="cpp-dictionary.html" class="submenu-link">CPP DICTIONARY</a></div>
+            <div class="submenu-item"><a href="cses.html" class="submenu-link">CSES</a></div>
+            <div class="submenu-item"><a href="hackerrank.html" class="submenu-link">HACKERRANK</a></div>
+            <div class="submenu-item"><a href="leetcode.html" class="submenu-link">LEETCODE</a></div>
+            <div class="submenu-item"><a href="lightoj.html" class="submenu-link">LIGHTOJ</a></div>
+            <div class="submenu-item"><a href="spoj.html" class="submenu-link">SPOJ</a></div>
+            <div class="submenu-item"><a href="timeus.html" class="submenu-link">TIMEUS</a></div>
+            <div class="submenu-item"><a href="uva-uhant.html" class="submenu-link">UVA</a></div>
+         </div>
+      </div>
+    </div>
+
+        
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search blog content..." onkeyup="searchPosts()" />
+    <button class="clear-search" onclick="clearSearch()">×</button>
+    <select id="sortSelect" onchange="sortPosts(this.value)">
+      <option value="">Sort By</option>
+      <option value="date-desc">Date: Newest First</option>
+      <option value="date-asc">Date: Oldest First</option>
+      <option value="title-asc">Title: A-Z</option>
+      <option value="title-desc">Title: Z-A</option>
+    </select>
+    <select id="tagFilter" onchange="filterByTag(this.value)">
+      <option value="">Filter by Tag</option>
+    </select>
+  </div>
+
+    <div class="icon">
+      <a href="index.html">
+    <img src="images/logo/Home icon.png" alt="Home" width="30">
+      </a>
+      <!-- <a href="editor.html">Editor</a> -->
+      <button id="lightningToggle" title="Lightning Mode">⚡</button>
+      <button class="theme-toggle" onclick="toggleTheme()">🔆⇄🌙</button>
+    </div>
+  </div>
+
+  <div class="sidebar-toggle-btn" onclick="toggleSidebar()"> ☰ </div>
+
+
+
+  
+  
+  <div class="main-container">
+
+
+    <div class="sidebar" id="sidebar">
+      <h2>Categories</h2>
+      <ul id="categoryList"></ul>
+    </div>
+
+    <div class="content">
+      <div id="blogPosts"></div>
+    </div>
+
+
+<div class="scroll-buttons">
+  <span id="dateTime" class="datetime-label"></span>
+  <div class="but">
+   <button onclick="scrollUp()">↑</button>
+<button onclick="scrollDown()">↓</button>
+  </div>
+</div>
+
+
+  <div class="pagination-container">
+  <div id="pagination"></div>
+</div>
+  
+  <script src="js/dsa&algo.js"></script>
+
+</body>
+</html>

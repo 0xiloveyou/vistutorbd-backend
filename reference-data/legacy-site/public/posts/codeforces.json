@@ -1,0 +1,131 @@
+[
+  {
+    "title": "Bear and Big Brother",
+    "date": "2026-01-02",
+    "category": "implementation",
+    "tags": [
+      "Codeforces",
+      "Codeforces Round 405 (rated Div. 2)",
+      "based on VK Cup 2017 Round 1",
+      "A. Bear and Big Brother",
+      "implementation",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/problemset/problem/791/A",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/// بسم الله الرحمن الرحيم\n\n#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\n       int l,b, y = 0;\n       cin >> l >> b;\n\n       while(1){\n         l *= 3;\n         b *= 2;\n         y++;\n         if(l>b){ cout << y << endl; break; }\n       }\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution discusion",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\nEach year, Limak’s weight triples(3x), and Bob’s weight doubles(2x).\n\nWe count the number of years until Limak’s weight \nbecomes greater than Bob’s (l > b)\n\n\nlet, l = 2 & b = 3\n\nnow : \n\nYear 0:   Limak: ||                  Bob: |||\nYear 1:   Limak: ||||||              Bob: ||||||\nYear 2:   Limak: ||||||||||||||||    Bob: ||||||||||||\n\nWe can see Limak overtakes Bob in Year 2\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1767358690829-r6t1ba"
+  },
+  {
+    "title": "Watermelon",
+    "date": "2026-01-01",
+    "category": "Math",
+    "tags": [
+      "Codeforces",
+      "Codeforces Beta Round 4 (Div. 2 Only)",
+      "Codeforces Beta Round",
+      "A. Watermelon",
+      "brute force",
+      "math",
+      "Rating - 800"
+    ],
+    "link": "https://codeforces.com/problemset/problem/4/A",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/// بسم الله الرحمن الرحيم\n\n#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n\n       int w;\n       cin >> w;\n       cout << ((w > 2 && w%2 == 0) ? \"YES\\n\" : \"NO\\n\");\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution Discussion",
+        "description": "",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "/*\n\n                Watermelon Weight (w)\n                         │\n              ┌──────────┴──────────┐\n              │                     │\n            w ≤ 2                 w > 2\n              │                     │\n           ❌ NO          Is w divisible by 2?\n                                    │\n                        ┌───────────┴───────────┐\n                        │                       │\n                       NO                      YES\n                        │                       │\n                     ❌ NO                   ✅ YES\n\n\n*/",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1767289497787-9n35e5"
+  },
+  {
+    "title": "Pythagorean Theorem II",
+    "date": "2025-08-16",
+    "category": "Math",
+    "tags": [
+      "Codeforces",
+      "Brute force",
+      "math",
+      "A. Pythagorean Theorem II",
+      "Rating - 1200"
+    ],
+    "link": "https://codeforces.com/contest/304/problem/A",
+    "images": [],
+    "sections": [
+      {
+        "subtitle": "Solution 2 ( Brute force ) & Explanation",
+        "description": "int c = sqrt(i*i+j*j);\nif(c <=n && c*c == i*i+j*j)result++; // Ensure that it's under limit & perfect sqrt\n\n\nLet, assume that >>  sqrt(i*i+j*j) >> contains floating point \nsqrt(i*i+j*j); >>> if it contains any floating point >> then cut off >> int c ( stores in int type )\n\nthen \n    >> c*c != (i*i+j*j) // Ensure that perfect sqrt\n    >> c <=n // Ensure that it's under limit",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nint main(){\n\nint n,result = 0;\ncin >> n;\n\nfor(int i=1; i<=n; i++)\n    for(int j=i+1; j<=n; j++){\n        int c = sqrt(i*i+j*j);\n        if(c <=n && c*c == i*i+j*j)result++; // Ensure that it's under limit & perfect sqrt\n      }\n\ncout << result;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Solution 1 ( Histogram )  & Explanation",
+        "description": "As 10^4*10^4 = 100000000 >> max limit for the Histogram  -->> extra 1 is for 0 base indexing\n\n\nif(range >= x) -->> to get rid of out of bound error ( runtime error )\n\nout of bound error -->> trying to access an index out of the array",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "#include<bits/stdc++.h>\nusing namespace std;\n\nbool a[100000001]; // As 10^4*10^4 = 100000000 >> max limit for the Histogram // extra 1 is for 0 base indexing\n\nint main(){\n\nint n, result = 0;\ncin>> n;\nlong int range = 10000*10000;\n\nfor(int i=1; i<=n; i++){long int x = i*i; a[x]=true;}\n\nfor(int i=1; i<=n; i++)\n    for(int j=i+1; j<=n; j++){\n      long int x = i*i+j*j;\n      if(range >= x)(a[x])? result++ : result +=0; // to get rid of out of bound error\n}\n\ncout << result;\n\nreturn 0;\n}",
+          "go": "",
+          "py": "",
+          "js": "",
+          "java": ""
+        }
+      }
+    ],
+    "namedLinks": [],
+    "id": "1755319711190-jtwx4q"
+  }
+]

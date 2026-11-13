@@ -1,0 +1,61 @@
+[
+  {
+    "id": "seed-rag-pipeline",
+    "title": "Build a RAG Pipeline from Scratch",
+    "date": "2026-10-14",
+    "category": "RAG",
+    "tags": [
+      "RAG",
+      "Embeddings",
+      "Retrieval"
+    ],
+    "link": "",
+    "images": [],
+    "namedLinks": [
+      {
+        "name": "LangChain RAG tutorial",
+        "url": "https://python.langchain.com/docs/tutorials/rag/"
+      }
+    ],
+    "sections": [
+      {
+        "subtitle": "The pipeline",
+        "description": "<p>RAG connects a <span style=\"color:#93c5fd;font-weight:600\">retriever</span> to a generator. The retriever finds relevant chunks; the generator answers using those chunks as context.</p>\n<p>The quality of the answer is capped by the quality of retrieval. Start there.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "visualization": {
+          "enabled": true,
+          "title": "Documents → chunks → vectors → answer",
+          "html": "<!doctype html>\n<html>\n<head>\n<meta charset=\"utf-8\" />\n<style>\n  body { margin: 0; padding: 18px; background: #0b0b0b; color: #e5e7eb; font-family: \"Segoe UI\", system-ui, sans-serif; }\n  h3 { margin: 0 0 14px; color: #fca5a5; font-size: 16px; }\n  .flow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }\n  .box { background: #111827; border: 1px solid #374151; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #cbd5e1; }\n  .box strong { display: block; color: #a5b4fc; margin-bottom: 3px; }\n  .arrow { color: #6b7280; font-size: 18px; }\n  .note { margin-top: 16px; color: #9ca3af; font-size: 12px; line-height: 1.6; }\n</style>\n</head>\n<body>\n<h3>RAG pipeline</h3>\n<div class=\"flow\">\n  <div class=\"box\"><strong>Documents</strong>PDF, docs, notes</div>\n  <div class=\"arrow\">→</div>\n  <div class=\"box\"><strong>Chunks</strong>overlap + metadata</div>\n  <div class=\"arrow\">→</div>\n  <div class=\"box\"><strong>Vectors</strong>embedding model</div>\n  <div class=\"arrow\">→</div>\n  <div class=\"box\"><strong>Retrieve</strong>top-k search</div>\n  <div class=\"arrow\">→</div>\n  <div class=\"box\"><strong>Generate</strong>answer + citations</div>\n</div>\n<p class=\"note\">Each stage adds its own failure mode. Evaluate retrieval separately from generation.</p>\n</body>\n</html>",
+          "url": ""
+        }
+      },
+      {
+        "subtitle": "Chunking and embeddings",
+        "description": "<p>Chunks should be small enough to be specific and large enough to be meaningful. Overlap preserves context across boundaries.</p>\n<p>An embedding maps a chunk to a vector. Similar meaning should produce nearby vectors.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "consoleBlock": {
+          "c": "",
+          "cpp": "",
+          "go": "",
+          "py": "text = \"\"\"Retrieval augmented generation combines a retriever with a generator.\nChunking decides what the retriever can find.\nEmbeddings turn chunks into vectors.\"\"\"\n\nchunks = [chunk.strip() for chunk in text.split(\".\") if chunk.strip()]\n\nfor index, chunk in enumerate(chunks, start=1):\n    print(index, chunk)",
+          "js": "",
+          "java": ""
+        }
+      },
+      {
+        "subtitle": "Rank with cosine similarity",
+        "description": "<p>Cosine similarity measures the angle between two vectors. It ignores magnitude, which is useful when embedding lengths vary.</p>\n<p>In production, a vector database handles this search at scale.</p>",
+        "descriptionFormat": "html",
+        "defaultLang": "py",
+        "python": {
+          "enabled": true,
+          "title": "Rank chunks with cosine similarity",
+          "code": "import math\n\ndef cosine(a, b):\n    dot = sum(x * y for x, y in zip(a, b))\n    norm_a = math.sqrt(sum(x * x for x in a))\n    norm_b = math.sqrt(sum(y * y for y in b))\n    return dot / (norm_a * norm_b)\n\nquery = [0.9, 0.1, 0.4]\ndocs = {\n    \"chunk-a\": [0.8, 0.2, 0.5],\n    \"chunk-b\": [0.1, 0.9, 0.2],\n    \"chunk-c\": [0.7, 0.3, 0.1],\n}\n\nranked = sorted(docs.items(), key=lambda item: cosine(query, item[1]), reverse=True)\nfor name, vector in ranked:\n    print(f\"{name}: {cosine(query, vector):.3f}\")",
+          "stdin": ""
+        }
+      }
+    ]
+  }
+]

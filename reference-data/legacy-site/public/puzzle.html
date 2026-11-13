@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Puzzle</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"/>
+</head>
+<body>
+
+  <!-- Common layout with blog.js support -->
+  <!-- Custom fetchPosts() for puzzle posts -->
+
+  <script>
+    async function fetchPosts() {
+      try {
+        const res = await fetch("/api/puzzle");
+        return await res.json();
+      } catch (e) {
+        console.error("Error fetching puzzle posts:", e);
+        return [];
+      }
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+  <script src="js/blog.js"></script>
+</body>
+</html>
