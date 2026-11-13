@@ -1,6 +1,6 @@
 # Backend progress
 
-_Last updated: content folders per class; Play + Nursery + Classes 1–12 authored (Class 7 provisional; 9–10 and 11–12 shared books)._
+_Last updated: visitor analytics, six-hour email reports, contact API, topic search, and resilient auto-seeding._
 
 ## Status
 
@@ -21,6 +21,10 @@ _Last updated: content folders per class; Play + Nursery + Classes 1–12 author
 | Moderation | ✅ | Public report submission, editor queue + status updates |
 | Users | ✅ | Admin list/update/soft-delete |
 | Health | ✅ | Mongo ping + optional service status |
+| Visitor analytics | ✅ | `visits` collection, hydrated visitor id, unique-visitor/page-view summary |
+| Visitor report | ✅ | Cron every 6 hours emails admin + moderators today’s visitors at `REPORT_TIMEZONE` |
+| Contact | ✅ | Public contact form API → SMTP email with `Reply-To` |
+| Search | ✅ | `GET /topics?q=` across English/Bangla titles, summaries and slugs, with class filter + pagination |
 | Seed | ✅ | 5 bands, 14 levels, companion, 2 templates, admin/moderator/demo users |
 | Content layout | ✅ | One folder per class: `src/app/content/play`, `nursery`, `class-1` … `class-12`; shared books live in `content/shared/` |
 | Play content | ✅ | 5 chapters, 15 topics, 33 visualizations (moved into `content/play/`) |
@@ -40,15 +44,26 @@ _Last updated: content folders per class; Play + Nursery + Classes 1–12 author
 | Tests | ✅ | 12 unit tests for math engine + generators (`npm test`) |
 | Docs | ✅ | `README.md`, `docs/api/*` |
 
+## Latest update
+
+- Added `Visit` analytics: `POST /analytics/visit` records one page view per browser id/path (five-minute de-dupe), and `GET /analytics/visitors` returns unique visitors, page views, signed-in visitors and top pages.
+- Added `scheduleVisitorReport()`: `VISITOR_REPORT_CRON` (default `0 */6 * * *`) emails the admin and every moderator the current day’s visitor count in `REPORT_TIMEZONE` (default `Asia/Dhaka`) plus a rolling six-hour count. `POST /analytics/visitors/report` sends it on demand (admin).
+- Added the public `POST /contact` endpoint and `contact-message.ejs` email template.
+- Added full-text-style topic search via `GET /topics?q=…&classLevelId=…&page=…&limit=…`; both English and Bangla titles/summaries are matched, and the response keeps the pagination envelope.
+- Startup is now resilient: the HTTP server starts before seeding, `AUTO_SEED` retries with an actionable Atlas message instead of crashing, and `seedDatabaseIfEmpty()` no longer double-queries with `Promise.all` or re-seeds users that already exist.
+- Cron job added to `startCronJobs()`; no changes are required in the frontend for the email report.
+
 ## Verification
 
 ```bash
-bun x tsc --noEmit                # clean
-bun test src/app/lib/__tests__    # 12 pass
-bun x tsup                        # bundle succeeds
+npm run typecheck                 # clean
+npm test                          # 12 pass
+npm run build                     # tsup bundle succeeds
 ```
 
-> Verified with Bun because `node`/`npx` are not on PATH in this shell. A content audit over `CONTENT_PACKS` found 14 packs, 180 chapters, 238 topics and 325 visualizations with no duplicate topic slugs or unresolved visualization references.
+> `AUTO_SEED=true` seeds automatically on startup. If MongoDB Atlas is unreachable, whitelist the machine’s public IP under **Atlas → Network Access** and the retry loop seeds without a restart. The catalog audit still finds 14 packs, 180 chapters, 238 topics and 325 visualizations.
+
+> **Multi-IP NAT fix (2026-11-13, resolved):** some ISPs route different destinations through different outbound IPs. On this machine `api.ipify.org` reported `103.51.53.36`, `ipinfo.io` reported `103.51.53.37`, and `icanhazip.com` reported `103.51.53.38`; Atlas only accepted the whitelisted one, so shard `-00-00` connected but the primary `-00-01` failed TLS with `InternalError`, producing `ReplicaSetNoPrimary` / `Server selection timeout`. Whitelisting `103.51.53.0/24` in **Atlas → Network Access** fixed all three shards. Verify with `Resolve-DnsName` and a direct `prisma.$runCommandRaw({ hello: 1 })` against each shard. Seed and `prisma db push` both complete now: 4 users, 5 bands, 14 levels, 180 chapters, 238 topics, 1533 visualizations.
 
 ## Content authoring rules
 

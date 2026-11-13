@@ -59,6 +59,7 @@ All variables live in `.env.example`; `.env` is intentionally left for the opera
 | OpenRouter | `OPENROUTER_API_KEY`, `OPENROUTER_CHAT_MODELS`, `OPENROUTER_FALLBACK_CHAT_MODELS`, `OPENROUTER_VISION_MODEL`, `OPENROUTER_EMBEDDING_MODEL` |
 | Embeddings | `EMBEDDING_PROVIDER` (`openrouter` \| `local` \| `stub`), `EMBEDDING_MODEL`, `EMBEDDING_DIMENSIONS` |
 | Chat | `CHAT_RATE_LIMIT_PER_HOUR` |
+| Visitor reports | `VISITOR_REPORT_CRON`, `REPORT_TIMEZONE`, `CONTACT_EMAIL` |
 | Seeds | `ADMIN_*`, `MODERATOR_*`, `USER_*`, `LEGACY_JSON_DIR` |
 
 Optional services degrade gracefully:
@@ -71,7 +72,7 @@ Optional services degrade gracefully:
 ## Project structure
 
 ```text
-prisma/schema.prisma              Users, taxonomy, topics, visualizations, knowledge, quiz, chat, moderation
+prisma/schema.prisma              Users, taxonomy, topics, visualizations, knowledge, quiz, chat, moderation, visits
 src/server.ts                     Connect services, optional seed, cron, listen
 src/app.ts                        Express app and /api/v1 route mounting
 src/app/config/                   Typed env parsing
@@ -141,6 +142,8 @@ Base path: `/api/v1`. Health is also available at `/health`.
 | Chat | `/chat` | [docs/api/chat.md](docs/api/chat.md) |
 | Knowledge | `/knowledge` | [docs/api/knowledge.md](docs/api/knowledge.md) |
 | Moderation | `/moderation` | [docs/api/moderation.md](docs/api/moderation.md) |
+| Analytics | `/analytics` | `POST /visit` (public), `GET /visitors` (editor), `POST /visitors/report` (admin) |
+| Contact | `/contact` | `POST /` sends the contact form over SMTP |
 | Health | `/health` | [docs/api/health.md](docs/api/health.md) |
 
 See [docs/api/README.md](docs/api/README.md) for conventions, enums and role rules.
@@ -155,7 +158,11 @@ See [docs/api/README.md](docs/api/README.md) for conventions, enums and role rul
 4. Two question templates: `addition.singleDigit` (Play/Nursery) and `addition.twoDigit` (Class 1â€“5).
 5. `ADMIN`, `MODERATOR` and demo `USER` accounts from env.
 
-No categories, chapters, topics or visualizations are seeded. On startup `AUTO_SEED=true` only fills empty collections and never overwrites edited data.
+The class content packs (`play` … `class-12`) are also seeded idempotently, so `AUTO_SEED=true` fills empty collections on startup and never overwrites edited data. Startup seeding runs after the API starts and retries for a few minutes if Atlas is unreachable; whitelist the machine's public IP under **Atlas → Network Access** if it cannot connect.
+
+### Visitor report
+
+Every six hours (`VISITOR_REPORT_CRON`, default `0 */6 * * *`) the backend counts unique visitors and page views for the current day in `REPORT_TIMEZONE` (default `Asia/Dhaka`), plus a rolling six-hour count, and emails the admin and all moderator addresses. Trigger it manually with `POST /api/v1/analytics/visitors/report` (admin) or inspect with `GET /api/v1/analytics/visitors` (admin/moderator).
 
 ## Notes
 

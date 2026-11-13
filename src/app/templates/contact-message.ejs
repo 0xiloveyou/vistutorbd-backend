@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <body style="margin:0;padding:24px;background:#f5f6fb;color:#171b2c;font-family:Segoe UI,system-ui,sans-serif">
+    <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #dfe3ef;border-radius:16px;overflow:hidden">
+      <div style="padding:22px 26px;background:#171b2c;color:#ffffff">
+        <p style="margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.75">VizTutorBD &middot; contact form</p>
+        <h1 style="margin:8px 0 0;font-size:20px"><%= subject %></h1>
+      </div>
+      <div style="padding:26px">
+        <p style="margin:0 0 6px;color:#5d647e;font-size:13px">From</p>
+        <p style="margin:0 0 18px;font-size:15px"><strong><%= name %></strong> &lt;<a href="mailto:<%= email %>" style="color:#4f46e5"><%= email %></a>&gt;</p>
+
+        <p style="margin:0 0 6px;color:#5d647e;font-size:13px">Message</p>
+        <div style="margin:0 0 20px;padding:14px;border-radius:10px;background:#f8f9fd;border:1px solid #dfe3ef;white-space:pre-wrap;line-height:1.65;font-size:14px"><%= message %></div>
+
+        <p style="margin:0;color:#8b91a8;font-size:12px">Submitted <%= submittedAt %> from <a href="<%= frontendUrl %>" style="color:#4f46e5"><%= frontendUrl %></a>. Reply directly to this email to answer.</p>
+      </div>
+    </div>
+  </body>
+</html>

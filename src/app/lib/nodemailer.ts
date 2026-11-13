@@ -64,10 +64,11 @@ export const sendMail = async (options: {
   to: string;
   subject: string;
   html: string;
+  replyTo?: string;
 }) => {
   if (!transporter) {
     console.log(
-      `[mail:dev] To: ${options.to} | Subject: ${options.subject}\n${options.html}`,
+      `[mail:dev] To: ${options.to} | Subject: ${options.subject}${options.replyTo ? ` | Reply-To: ${options.replyTo}` : ""}\n${options.html}`,
     );
     return;
   }
@@ -77,5 +78,6 @@ export const sendMail = async (options: {
     to: options.to,
     subject: options.subject,
     html: options.html,
+    ...(options.replyTo ? { replyTo: options.replyTo } : {}),
   });
 };

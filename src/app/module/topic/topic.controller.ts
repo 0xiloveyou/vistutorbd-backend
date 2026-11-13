@@ -20,6 +20,7 @@ const listTopics = catchAsync(async (req: Request, res: Response) => {
     categoryId: str(req.query.categoryId),
     classLevelId: str(req.query.classLevelId),
     classBandId: str(req.query.classBandId),
+    q: str(req.query.q),
     includeUnpublished: isEditor(req.user?.role) && req.query.all === "true",
     page: num(req.query.page),
     limit: num(req.query.limit),

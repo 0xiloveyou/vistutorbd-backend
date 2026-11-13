@@ -505,3 +505,25 @@ model ModerationReport {
   @@index([targetType])
   @@map("moderation_reports")
 }
+
+// ---------------------------------------------------------------------------
+// Visitor analytics — one document per page view. A visitor is identified by a
+// browser-generated id (stored in localStorage), so the daily report can count
+// unique visitors as well as page views.
+// ---------------------------------------------------------------------------
+
+model Visit {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  visitorId String
+  userId    String?
+  path      String   @default("/")
+  referrer  String   @default("")
+  userAgent String   @default("")
+  ip        String   @default("")
+  createdAt DateTime @default(now())
+
+  @@index([visitorId])
+  @@index([createdAt])
+  @@index([path])
+  @@map("visits")
+}

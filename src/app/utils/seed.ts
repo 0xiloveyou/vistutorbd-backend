@@ -207,15 +207,17 @@ export const seedDatabase = async () => {
 };
 
 export const seedDatabaseIfEmpty = async () => {
-  const [userCount, bandCount] = await Promise.all([
-    prisma.user.count(),
-    prisma.classBand.count(),
-  ]);
+  // Query one collection at a time: if Atlas is unreachable, Promise.all leaves
+  // the second query running and produces an extra unhandled rejection.
+  const userCount = await prisma.user.count();
 
-  await seedRoles();
-  if (userCount > 0) {
+  if (userCount === 0) {
+    await seedRoles();
+  } else {
     console.log("[seed] Users already exist — skipping user seed.");
   }
+
+  const bandCount = await prisma.classBand.count();
 
   if (bandCount === 0) {
     await seedTaxonomy();

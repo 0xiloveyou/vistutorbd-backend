@@ -19,17 +19,50 @@ type TopicInput = {
 
 const publicWhere = { status: "PUBLISHED" as const };
 
+const topicListSelect = {
+  id: true,
+  slug: true,
+  title: true,
+  summary: true,
+  chapterId: true,
+  categoryId: true,
+  classLevelId: true,
+  classBandId: true,
+  difficulty: true,
+  visualizationIds: true,
+  knowledgeStatus: true,
+  status: true,
+  updatedAt: true,
+} as const;
+
+const matchesSearch = (
+  topic: {
+    slug: string;
+    title: { en: string; bn: string };
+    summary: { en: string; bn: string } | null;
+  },
+  needle: string,
+) =>
+  [
+    topic.slug,
+    topic.title?.en,
+    topic.title?.bn,
+    topic.summary?.en,
+    topic.summary?.bn,
+  ].some((value) => String(value ?? "").toLowerCase().includes(needle));
+
 const listTopics = async (options: {
   chapterId?: string;
   categoryId?: string;
   classLevelId?: string;
   classBandId?: string;
+  q?: string;
   includeUnpublished?: boolean;
   page?: number;
   limit?: number;
 }) => {
-  const page = options.page ?? 1;
-  const limit = options.limit ?? 20;
+  const page = Math.max(1, options.page ?? 1);
+  const limit = Math.min(50, Math.max(1, options.limit ?? 20));
 
   const where = {
     ...(options.includeUnpublished ? {} : publicWhere),
@@ -39,27 +72,45 @@ const listTopics = async (options: {
     ...(options.classBandId ? { classBandId: options.classBandId } : {}),
   };
 
+  const orderBy = [
+    { difficulty: "asc" as const },
+    { createdAt: "asc" as const },
+  ];
+
+  // LocalizedText is a composite. Prisma's MongoDB connector cannot run one
+  // text query across both language fields reliably, so a search fetches the
+  // already-filtered shortlist and matches both languages in memory. The
+  // catalog is small (a few hundred topics), and the class filter still runs
+  // in MongoDB.
+  const needle = options.q?.trim().toLowerCase();
+  if (needle) {
+    const all = await prisma.topic.findMany({
+      where,
+      orderBy,
+      select: topicListSelect,
+    });
+
+    const filtered = all.filter((topic) => matchesSearch(topic, needle));
+    const total = filtered.length;
+
+    return {
+      items: filtered.slice((page - 1) * limit, page * limit),
+      meta: {
+        page,
+        limit,
+        total,
+        totalPages: Math.max(1, Math.ceil(total / limit)),
+      },
+    };
+  }
+
   const [items, total] = await Promise.all([
     prisma.topic.findMany({
       where,
-      orderBy: [{ difficulty: "asc" }, { createdAt: "asc" }],
+      orderBy,
       skip: (page - 1) * limit,
       take: limit,
-      select: {
-        id: true,
-        slug: true,
-        title: true,
-        summary: true,
-        chapterId: true,
-        categoryId: true,
-        classLevelId: true,
-        classBandId: true,
-        difficulty: true,
-        visualizationIds: true,
-        knowledgeStatus: true,
-        status: true,
-        updatedAt: true,
-      },
+      select: topicListSelect,
     }),
     prisma.topic.count({ where }),
   ]);

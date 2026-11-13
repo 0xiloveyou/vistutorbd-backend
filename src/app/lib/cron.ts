@@ -1,4 +1,6 @@
 import cron from "node-cron";
+import config from "../config";
+import { AnalyticsService } from "../module/analytics/analytics.service";
 import { prisma } from "./prisma";
 
 export const cleanupUnverifiedUsers = async () => {
@@ -71,9 +73,29 @@ export const scheduleDailyStats = async () => {
   });
 };
 
+/**
+ * Every six hours, email the admin and moderators the number of unique
+ * visitors and page views for "today" in the configured timezone (Bangladesh
+ * by default), plus a rolling six-hour count.
+ */
+export const scheduleVisitorReport = async () => {
+  cron.schedule(config.visitor_report_cron, async () => {
+    try {
+      await AnalyticsService.sendVisitorReport();
+    } catch (error) {
+      console.error("[cron] Visitor report failed:", error);
+    }
+  });
+
+  console.log(
+    `[cron] Visitor report scheduled (${config.visitor_report_cron}, timezone ${config.report_timezone}).`,
+  );
+};
+
 export const startCronJobs = () => {
   cleanupUnverifiedUsers();
   scheduleKnowledgeReindex();
   scheduleDailyStats();
+  void scheduleVisitorReport();
   console.log("[cron] Scheduled jobs registered.");
 };

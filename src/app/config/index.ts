@@ -81,6 +81,14 @@ export default {
 
   chat_rate_limit_per_hour: Number(process.env.CHAT_RATE_LIMIT_PER_HOUR || 30),
 
+  // Visitor analytics + the six-hour email report.
+  visitor_report_cron: process.env.VISITOR_REPORT_CRON || "0 */6 * * *",
+  report_timezone: process.env.REPORT_TIMEZONE || "Asia/Dhaka",
+  contact_email:
+    process.env.CONTACT_EMAIL ||
+    process.env.ADMIN_EMAIL ||
+    "care.1337.leet@gmail.com",
+
   admin_name: process.env.ADMIN_NAME || "Math Admin",
   admin_email: process.env.ADMIN_EMAIL || "admin@mathlearn.local",
   admin_password: process.env.ADMIN_PASSWORD || "Admin@12345",

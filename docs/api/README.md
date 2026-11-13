@@ -79,6 +79,7 @@ Both keys are required when creating content. Readers should fall back to `en` w
 
 ### Slugs and ids
 
+- `GET /topics` accepts `q` in addition to the class/chapter filters. Search matches English and Bangla titles, summaries and the slug, then applies `page`/`limit` pagination.
 - Slugs match `^[a-z0-9]+(?:-[a-z0-9]+)*$`, 2–80 chars.
 - Visualization ids match `viz.<band>.<subject>.<chapter>.<topic>.<variant>.v<version>`.
 - Class level ids are readable strings: `play`, `nursery`, `class-1` … `class-12`.
@@ -113,6 +114,8 @@ Both keys are required when creating content. Readers should fall back to `en` w
 | Chat | [chat.md](chat.md) |
 | Knowledge | [knowledge.md](knowledge.md) |
 | Moderation | [moderation.md](moderation.md) |
+| Analytics | `POST /analytics/visit`, `GET /analytics/visitors`, `POST /analytics/visitors/report` |
+| Contact | `POST /contact` |
 | Health | [health.md](health.md) |
 
 ## Status codes
