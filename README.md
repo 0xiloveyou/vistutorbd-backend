@@ -159,6 +159,7 @@ See [docs/api/README.md](docs/api/README.md) for conventions, enums and role rul
 3. The default companion personality.
 4. Two question templates: `addition.singleDigit` (Play/Nursery) and `addition.twoDigit` (Class 1â€“5).
 5. `ADMIN`, `MODERATOR` and demo `USER` accounts from env.
+6. When `forum_posts` is empty, 10 starter forum questions with maths (`$...$`) and starter comments. Existing posts are never overwritten.
 
 The class content packs (`play` … `class-12`) are also seeded idempotently, so `AUTO_SEED=true` fills empty collections on startup and never overwrites edited data. Startup seeding runs after the API starts and retries for a few minutes if Atlas is unreachable; whitelist the machine's public IP under **Atlas → Network Access** if it cannot connect.
 

@@ -198,12 +198,208 @@ export const seedContent = async () => {
   }
 };
 
+type SeedForumComment = {
+  authorName: string;
+  isAnonymous?: boolean;
+  body: string;
+};
+
+type SeedForumPost = {
+  authorName: string;
+  isAnonymous?: boolean;
+  title: string;
+  body: string;
+  tags: string[];
+  comments?: SeedForumComment[];
+};
+
+/**
+ * Ten starter questions so the forum never opens empty. Posts use the same
+ * `$...$` maths syntax as the composer, so they exercise KaTeX out of the box.
+ * The seed only runs when the forum has no posts and never overwrites data.
+ */
+const FORUM_SEED_POSTS: SeedForumPost[] = [
+  {
+    authorName: "Nadia",
+    title: "How do I multiply two 2×2 matrices?",
+    body: "I know how to add matrices, but multiplication confuses me. For example, what is $A \\times B$ when $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ and $B = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}$? Please show the row-by-column steps.",
+    tags: ["matrix", "algebra"],
+    comments: [
+      {
+        authorName: "Rafi",
+        body: "Multiply each row of $A$ by each column of $B$. The first entry is $(1\\times0)+(2\\times1)=2$, so the product starts with $\\begin{bmatrix} 2 & 1 \\\\ 4 & 3 \\end{bmatrix}$.",
+      },
+    ],
+  },
+  {
+    authorName: "Anonymous",
+    isAnonymous: true,
+    title: "Why is sin²θ + cos²θ = 1?",
+    body: "I can memorise the identity but I do not understand where it comes from. Can someone explain it using a right triangle or the unit circle?",
+    tags: ["trigonometry", "geometry"],
+    comments: [
+      {
+        authorName: "Mim",
+        body: "On the unit circle, the point is $(\\cos\\theta, \\sin\\theta)$. Since the radius is 1, Pythagoras gives $\\cos^2\\theta + \\sin^2\\theta = 1$.",
+      },
+      {
+        authorName: "Nadia",
+        body: "In a right triangle, divide $a^2+b^2=c^2$ by $c^2$. You get $(a/c)^2+(b/c)^2=1$, which is $\\sin^2\\theta+\\cos^2\\theta=1$.",
+      },
+    ],
+  },
+  {
+    authorName: "Tanvir",
+    title: "Solve x² − 5x + 6 = 0 step by step",
+    body: "I need the factorisation method and the quadratic formula for $x^2 - 5x + 6 = 0$. Which method is faster in an exam?",
+    tags: ["algebra", "exam"],
+    comments: [
+      {
+        authorName: "Anonymous",
+        isAnonymous: true,
+        body: "Factorise: $x^2-5x+6=(x-2)(x-3)$, so $x=2$ or $x=3$. The formula gives the same answers with more writing.",
+      },
+    ],
+  },
+  {
+    authorName: "Sadia",
+    title: "What is the difference between mean and median?",
+    body: "Our statistics chapter uses both. For the data set $2, 4, 4, 7, 9$, how are the mean and median different?",
+    tags: ["probability", "arithmetic"],
+    comments: [
+      {
+        authorName: "Tanvir",
+        body: "Mean is $\\frac{2+4+4+7+9}{5}=5.2$ and the median is the middle value $4$. The median ignores how large the extreme values are.",
+      },
+    ],
+  },
+  {
+    authorName: "Anonymous",
+    isAnonymous: true,
+    title: "Area of a circle with radius r",
+    body: "I keep mixing up $\\pi r^2$ and $2\\pi r$. Which one is area and which one is circumference? A diagram would help.",
+    tags: ["geometry", "mensuration"],
+    comments: [
+      {
+        authorName: "Mim",
+        body: "$\\pi r^2$ is the area (square units). $2\\pi r$ is the circumference (length units).",
+      },
+    ],
+  },
+  {
+    authorName: "Rafi",
+    title: "Limit question: lim(x→0) sin x / x",
+    body: "Why does $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$? Substituting $x=0$ gives $0/0$, so what should I do?",
+    tags: ["calculus", "trigonometry"],
+    comments: [
+      {
+        authorName: "Sadia",
+        body: "Use the small-angle approximation $\\sin x \\approx x$ near zero, or expand $\\sin x$ as $x - x^3/6 + \\cdots$. Both give the limit 1.",
+      },
+    ],
+  },
+  {
+    authorName: "Anonymous",
+    isAnonymous: true,
+    title: "Integrate x² from 0 to 3",
+    body: "I need the full working for $\\int_{0}^{3} x^2 \\, dx$. Where do I substitute the limits?",
+    tags: ["calculus", "integration"],
+    comments: [
+      {
+        authorName: "Tanvir",
+        body: "The antiderivative is $\\frac{x^3}{3}$. Evaluate at 3 and 0: $\\frac{27}{3}-0=9$.",
+      },
+    ],
+  },
+  {
+    authorName: "Mim",
+    title: "Probability of two heads in three coin tosses",
+    body: "A fair coin is tossed three times. What is the probability of exactly two heads? I wrote $\\binom{3}{2}(1/2)^3$.",
+    tags: ["probability", "homework"],
+    comments: [
+      {
+        authorName: "Rafi",
+        body: "That is correct: $\\binom{3}{2}\\left(\\frac{1}{2}\\right)^3 = 3/8$.",
+      },
+    ],
+  },
+  {
+    authorName: "Tanvir",
+    title: "Pythagoras theorem: legs 3 and 4",
+    body: "How do I find the hypotenuse when the two shorter sides are 3 cm and 4 cm? I got 5 but I want to see the formula.",
+    tags: ["geometry", "algebra"],
+    comments: [
+      {
+        authorName: "Anonymous",
+        isAnonymous: true,
+        body: "$a^2+b^2=c^2$, so $3^2+4^2=c^2$, $9+16=25$, hence $c=5$ cm.",
+      },
+    ],
+  },
+  {
+    authorName: "Sadia",
+    title: "How to simplify (x² − 9)/(x − 3)",
+    body: "I know the answer might be $x+3$, but I do not see the cancellation. Which identity should I use?",
+    tags: ["algebra", "simplification"],
+    comments: [
+      {
+        authorName: "Mim",
+        body: "Use the difference of squares: $x^2-9=(x-3)(x+3)$. Cancel $(x-3)$ to get $x+3$ for $x \\ne 3$.",
+      },
+    ],
+  },
+];
+
+export const seedForumPosts = async () => {
+  const postCount = await prisma.forumPost.count();
+
+  if (postCount > 0) {
+    console.log("[seed] Forum posts already exist — skipping forum seed.");
+    return;
+  }
+
+  const now = Date.now();
+
+  for (const [index, post] of FORUM_SEED_POSTS.entries()) {
+    const createdAt = new Date(
+      now - (FORUM_SEED_POSTS.length - index) * 6 * 60 * 60 * 1000,
+    );
+
+    const created = await prisma.forumPost.create({
+      data: {
+        authorName: post.isAnonymous ? "Anonymous" : post.authorName,
+        isAnonymous: Boolean(post.isAnonymous),
+        title: post.title,
+        body: post.body,
+        tags: post.tags,
+        createdAt,
+        updatedAt: createdAt,
+      },
+    });
+
+    for (const [commentIndex, comment] of (post.comments ?? []).entries()) {
+      await prisma.forumComment.create({
+        data: {
+          postId: created.id,
+          authorName: comment.isAnonymous ? "Anonymous" : comment.authorName,
+          isAnonymous: Boolean(comment.isAnonymous),
+          body: comment.body,
+          createdAt: new Date(createdAt.getTime() + (commentIndex + 1) * 60_000),
+        },
+      });
+    }
+  }
+
+  console.log(`Seeded ${FORUM_SEED_POSTS.length} forum posts with starter comments.`);
+};
+
 export const seedDatabase = async () => {
   await seedRoles();
   await seedTaxonomy();
   await seedCompanions();
   await seedQuestionTemplates();
   await seedContent();
+  await seedForumPosts();
 };
 
 export const seedDatabaseIfEmpty = async () => {
@@ -240,4 +436,8 @@ export const seedDatabaseIfEmpty = async () => {
       }
     }
   }
+
+  // Forum starter content is independent of users/taxonomy, so it still seeds
+  // when the rest of the database is already populated.
+  await seedForumPosts();
 };

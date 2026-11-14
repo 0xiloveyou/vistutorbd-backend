@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play and Learn Carousel</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f1f5f9;color:#0f172a}
+
+  /* ===== placeholder for YOUR existing hero section (delete this) ===== */
+  .hero-stub{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+  .hero-stub h1{font-size:34px;margin:0 0 8px}
+  .hero-stub p{color:#64748b;margin:0}
+
+  /* ===== NEW SECTION: play & learn carousel ===== */
+  .vc{padding:64px 0 80px;background:linear-gradient(#f1f5f9,#e2e8f0);overflow:hidden}
+  .vc-wrap{max-width:none;margin:0 auto;padding:0 16px}
+  .vc h2{font-size:30px;margin:0 auto 6px;text-align:center}
+  .vc-sub{text-align:center;color:#64748b;margin:0 auto 30px}
+  .vc-wrap>h2,.vc-wrap>.vc-sub{max-width:820px}
+
+  /* --- the carousel itself --- */
+  .vc-carousel{position:relative;outline:none}
+  .vc-viewport{overflow:hidden;padding:18px 0 26px;touch-action:pan-y}
+  .vc-track{display:flex;gap:22px;transition:transform .55s cubic-bezier(.65,0,.25,1);will-change:transform}
+  .vc-slide{flex:0 0 auto;background:#111a2e;border-radius:22px;padding:14px;box-shadow:0 18px 50px #0f172a33;
+    opacity:.42;transform:scale(.92);filter:saturate(.6);cursor:pointer;
+    transition:opacity .5s,transform .5s,filter .5s}
+  .vc-slide.on{opacity:1;transform:none;filter:none;cursor:default}
+  .vc-head{display:flex;align-items:center;gap:10px;color:#e6edf7;padding:2px 6px 12px}
+  .vc-count{background:#1e293b;color:#38bdf8;font-weight:700;font-size:13px;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .vc-head b{font-size:16px}
+  .vc-head small{font-weight:600;font-size:14px;color:#7dd3fc;margin-left:6px}
+  .vc-stage{border-radius:14px;overflow:hidden;background-color:#0b1220;
+    background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+    background-size:32px 32px}
+  .vc-stage svg{display:block;width:100%;height:auto;user-select:none;-webkit-user-select:none}
+  .vc-stage svg text{font-family:"Segoe UI","Nirmala UI","Noto Sans Bengali",system-ui,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+
+  /* --- tap targets + animations inside the lessons --- */
+  .vc-stage svg .tap{cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .vc-stage svg .tap:hover .bg{filter:brightness(1.18)}
+  .vc-stage svg .wob,.vc-stage svg .pop,.vc-stage svg .eye,.vc-stage svg .mouth,.vc-stage svg .flame{transform-box:fill-box;transform-origin:center}
+  .vc-stage svg .wob{animation:vcWob .55s}
+  .vc-stage svg .pop{animation:vcPop .5s}
+  .vc-stage svg .fly{animation:vcFly 1s ease-in forwards}
+  .vc-stage svg .joinL{animation:vcJoinL .65s ease-out}
+  .vc-stage svg .joinR{animation:vcJoinR .65s ease-out}
+  .vc-stage svg .tilt{animation:vcTilt .9s ease-in-out}
+  .vc-stage svg .lift{animation:vcLift .9s ease-in-out}
+  .vc-stage svg .bob{animation:vcBob 2.4s ease-in-out infinite}
+  .vc-stage svg .flame{transform-origin:center top;animation:vcFlame .25s ease-in-out infinite alternate}
+  .vc-stage svg .eye{animation:vcBlink 4s infinite}
+  .vc-stage svg .mouth.talk{animation:vcTalk .22s ease-in-out infinite alternate}
+  .vc-stage svg .jumpy{animation:vcJump .55s ease-out 2}
+  @keyframes vcWob{0%,100%{transform:rotate(0)}20%{transform:rotate(-7deg)}45%{transform:rotate(6deg)}70%{transform:rotate(-4deg)}}
+  @keyframes vcPop{0%{transform:scale(.3);opacity:0}60%{transform:scale(1.25);opacity:1}100%{transform:scale(1)}}
+  @keyframes vcFly{to{transform:translateY(-170px) rotate(18deg);opacity:0}}
+  @keyframes vcJoinL{from{transform:translateX(-90px);opacity:.3}}
+  @keyframes vcJoinR{from{transform:translateX(90px);opacity:.3}}
+  @keyframes vcTilt{from{transform:rotate(0)}}
+  @keyframes vcLift{from{transform:translateY(0)}}
+  @keyframes vcBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes vcFlame{from{transform:scaleY(.8)}to{transform:scaleY(1.25)}}
+  @keyframes vcBlink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+  @keyframes vcTalk{from{transform:scaleY(1)}to{transform:scaleY(2.8)}}
+  @keyframes vcJump{40%{transform:translateY(-28px)}}
+  @media (prefers-reduced-motion:reduce){.vc-stage svg *{animation:none!important}}
+
+  .vc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;
+    border:0;background:#fff;color:#0f172a;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 6px 18px #0f172a30;
+    display:flex;align-items:center;justify-content:center;padding:0 0 4px}
+  .vc-arrow:hover{background:#38bdf8}
+  .vc-arrow.prev{left:6px}.vc-arrow.next{right:6px}
+
+  .vc-dots{display:flex;justify-content:center;gap:10px;margin:0 0 26px}
+  .vc-dots button{width:10px;height:10px;padding:0;border:0;border-radius:999px;background:#94a3b8;cursor:pointer;transition:.3s}
+  .vc-dots button.on{width:30px;background:#0ea5e9}
+
+  /* --- shared control panel --- */
+  .vc-panel{max-width:820px;margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;
+    padding:16px 18px;box-shadow:0 10px 30px #0f172a14;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;justify-content:space-between}
+  .vc-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;font-weight:700;margin-bottom:6px}
+  .vc-btns{display:flex;gap:8px;flex-wrap:wrap}
+  .vc-btns button,.vc-modes button{border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;padding:9px 14px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+  .vc-btns button:hover,.vc-modes button:hover{background:#e0f2fe;border-color:#38bdf8}
+  .vc-btns button.main{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+  .vc-btns button.main:hover{background:#0284c7}
+  .vc-modes{display:flex;gap:8px;flex-wrap:wrap}
+  .vc-modes button.on{background:#0f172a;border-color:#0f172a;color:#fff}
+  .vc-modes button[disabled]{opacity:.35;cursor:not-allowed}
+  .vc-info{flex:1 1 100%;display:flex;align-items:center;gap:12px;color:#64748b;font-size:13px}
+  .vc-prog{flex:1;height:5px;background:#e2e8f0;border-radius:5px;overflow:hidden}
+  .vc-prog i{display:block;height:100%;width:0;background:#0ea5e9;transition:width .4s}
+  @media(max-width:640px){.vc-arrow{width:38px;height:38px;font-size:22px}.vc-btns button{padding:8px 10px;font-size:13px}}
+</style>
+</head>
+<body>
+<main>
+
+  <!-- ===== YOUR existing hero / main section goes here ===== -->
+  <section class="hero-stub">
+    <h1>Your existing section</h1>
+    <p>Text on one side, visual on the other. Scroll down ↓</p>
+  </section>
+
+  <!-- ===== NEW SECTION (copy from here) ===== -->
+  <section id="vc" class="vc" aria-label="Play and learn">
+    <div class="vc-wrap">
+      <h2>Tap, listen and play!</h2>
+      <p class="vc-sub">Four little games with Bolt the robot. Tap the big buttons &middot; বড় বোতামে চাপ দাও।</p>
+
+      <!-- carousel: only slides + side arrows -->
+      <div class="vc-carousel" id="vcCar" tabindex="0" aria-roledescription="carousel">
+        <button class="vc-arrow prev" id="aPrev" aria-label="Previous lesson">&#8249;</button>
+        <div class="vc-viewport" id="vcView"><div class="vc-track" id="vcTrack"></div></div>
+        <button class="vc-arrow next" id="aNext" aria-label="Next lesson">&#8250;</button>
+      </div>
+      <div class="vc-dots" id="vcDots"></div>
+
+      <!-- shared control panel (works for every lesson) -->
+      <div class="vc-panel">
+        <div>
+          <div class="vc-label">Playback</div>
+          <div class="vc-btns">
+            <button id="bPrev" aria-label="Previous lesson">⏮ Back</button>
+            <button id="bPlay" class="main" aria-label="Hear Bolt again">🔊 Hear again</button>
+            <button id="bRep"  aria-label="Start this lesson over">⟲ Start over</button>
+            <button id="bNext" aria-label="Next lesson">Next ⏭</button>
+          </div>
+        </div>
+        <div>
+          <div class="vc-label">Level</div>
+          <div class="vc-modes" id="vcLevels"></div>
+        </div>
+        <div>
+          <div class="vc-label">Voice</div>
+          <div class="vc-modes" id="vcVoice"></div>
+        </div>
+        <div class="vc-info"><span id="vcInfo"></span><div class="vc-prog"><i id="vcFill"></i></div></div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== (copy until here, plus the style and script blocks) ===== -->
+
+</main>
+
+<script>
+(function(){
+/* =====================================================================
+   HOW TO ADD A NEW LESSON LATER
+   registerLesson({
+     id:'my-lesson', title:'English title', bn:'বাংলা শিরোনাম',
+     max:3,                              // highest level (tier) this lesson supports
+     start(st){ ...set up one round using st.lv and st.round (0-4)...
+                st.say=['English line','বাংলা লাইন']; },   // what Bolt says
+     render(st){ return '<svg inner markup (800x480)>'; },  // use T(), R(), btn() helpers
+     act(st,action,arg){ ...handle a tap on data-act="action"...
+                         // helpers: say(st,en,bn) good() pop(n) soft() cheer()
+                         //          later(ms,fn) countSeq() speakNum(n)
+                         // set st.ready=true when the round is finished -> "Next" appears }
+   });
+   Controls (Back / Hear again / Start over / Next, Level, Voice) are shared.
+   ===================================================================== */
+const ROUNDS=5, LESSONS=[];
+const S={vi:0,lv:1,voice:'both',st:[],tm:[],busy:false,ready:false,talkUntil:0};
+window.registerLesson=l=>{LESSONS.push(l);if(S.ready) rebuild();};
+
+/* ---------- tiny helpers ---------- */
+const $=s=>document.querySelector(s);
+const clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]];}return a;};
+const BND='০১২৩৪৫৬৭৮৯', bn=n=>String(n).replace(/\d/g,d=>BND[d]);
+const f=n=>Math.round(n*10)/10;
+const CA='#fbbf24',CB='#4ade80',CC='#c4b5fd',CT='#38bdf8',INK='#e2e8f0';
+function wrap(s,n){const out=[];let l='';for(const w of s.split(' ')){if((l+' '+w).trim().length>n&&l){out.push(l);l=w;}else l=(l+' '+w).trim();}if(l)out.push(l);return out;}
+
+/* ---------- svg helpers ---------- */
+function T(x,y,s,o={}){
+  const {size=20,fill=INK,anchor='middle',w=700,op=1,cls=''}=o;
+  return `<text class="${cls}" x="${f(x)}" y="${f(y)}" font-size="${size}" fill="${fill}" text-anchor="${anchor}" font-weight="${w}" opacity="${op}">${s}</text>`;
+}
+function R(x,y,w,h,o={}){
+  const {fill='none',stroke='none',sw=2.5,rx=0,cls=''}=o;
+  return `<rect class="${cls}" x="${f(x)}" y="${f(y)}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
+}
+function btn(x,y,w,h,label,act,arg,o={}){
+  const {fill=CT,color='#fff',size=28,cls='',aria=label}=o;
+  return `<g class="tap ${cls}" data-act="${act}" data-arg="${arg===undefined?'':arg}" role="button" aria-label="${aria}">`
+    +`<rect class="bg" x="${x}" y="${y}" width="${w}" height="${h}" rx="18" fill="${fill}" stroke="#ffffff55" stroke-width="2"/>`
+    +T(x+w/2,y+h/2+size*.35,label,{size,fill:color})+`</g>`;
+}
+const badge=(x,y,n,hot)=>`<circle cx="${f(x)}" cy="${f(y)}" r="14" fill="${hot?CA:'#0ea5e9'}" stroke="#0b1220" stroke-width="2"/>`+T(x,y+5,n,{size:15,fill:hot?'#0b1220':'#fff'});
+const nextBtn=()=>btn(110,402,280,68,'Next ➜','next',0,{fill:'#22c55e',size:28,aria:'Next game'});
+
+/* ---------- Bolt the companion (animated with CSS only, so taps are never interrupted) ---------- */
+function bolt(jump){
+  const cx=655,cy=352;
+  return `<g class="${jump?'jumpy':''}"><ellipse cx="${cx}" cy="440" rx="38" ry="7" fill="#000" opacity=".25"/><g class="bob">
+  <path class="flame" d="M${cx-12} ${cy+36}L${cx} ${cy+66}L${cx+12} ${cy+36}Z" fill="#fb923c"/>
+  <path d="M${cx+36} ${cy-20}Q${cx+64} ${cy} ${cx+56} ${cy+26}" fill="none" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/>
+  <rect x="${cx-36}" y="${cy-42}" width="72" height="78" rx="16" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
+  <circle cx="${cx}" cy="${cy-8}" r="11" fill="#38bdf8" opacity=".85"/>
+  <rect x="${cx-8}" y="${cy-52}" width="16" height="12" fill="#94a3b8"/>
+  <line x1="${cx}" y1="${cy-114}" x2="${cx}" y2="${cy-132}" stroke="#94a3b8" stroke-width="4"/>
+  <circle cx="${cx}" cy="${cy-137}" r="7" fill="#f472b6"/>
+  <rect x="${cx-46}" y="${cy-114}" width="92" height="66" rx="22" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+  <rect x="${cx-35}" y="${cy-104}" width="70" height="46" rx="14" fill="#0f172a"/>
+  <ellipse class="eye" cx="${cx-15}" cy="${cy-86}" rx="7" ry="7" fill="#38bdf8"/>
+  <ellipse class="eye" cx="${cx+15}" cy="${cy-86}" rx="7" ry="7" fill="#38bdf8"/>
+  <rect class="mouth" x="${cx-9}" y="${cy-73}" width="18" height="4" rx="2" fill="#38bdf8"/>
+  <circle cx="${cx-27}" cy="${cy-74}" r="4" fill="#f472b6" opacity=".6"/><circle cx="${cx+27}" cy="${cy-74}" r="4" fill="#f472b6" opacity=".6"/>
+  <path d="M${cx-36} ${cy-20}Q${cx-62} ${cy+6} ${cx-52} ${cy+34}" fill="none" stroke="#94a3b8" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="${cx-52}" cy="${cy+34}" r="12" fill="#fde68a" stroke="#f59e0b" stroke-width="3"/>
+  </g></g>`;
+}
+function bubble(say){
+  if(!say) return '';
+  const en=wrap(say[0],27), b=wrap(say[1],26), h=en.length*21+b.length*20+22, top=190-h;
+  let s=`<rect x="498" y="${top}" width="290" height="${h}" rx="14" fill="#f8fafc"/><path d="M642 189L670 189L656 208Z" fill="#f8fafc"/>`;
+  en.forEach((l,i)=>{s+=`<text x="512" y="${top+24+i*21}" font-size="16" font-weight="700" fill="#0f172a">${l}</text>`;});
+  b.forEach((l,i)=>{s+=`<text x="512" y="${top+28+en.length*21+i*20}" font-size="15" font-weight="600" fill="#0369a1">${l}</text>`;});
+  return s;
+}
+
+/* ---------- sound + voice ---------- */
+let AC=null;
+function unlock(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();}catch(e){}}
+function tone(fr,d=.18,type='sine',vol=.14,when=0){
+  try{if(!AC) return;const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+when;
+    o.type=type;o.frequency.value=fr;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+    o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.02);}catch(e){}
+}
+const good=(n=0)=>{tone(523+n*30,.15,'triangle');tone(784+n*30,.2,'triangle',.12,.1);};   // happy "ding-ding" on every correct tap
+const pop=n=>tone(330+n*28,.13,'sine',.15);                                           // counting blip, rises as numbers grow
+const soft=()=>tone(440,.2,'sine',.06);                                                // gentle "try again" (never a harsh sound)
+const cheer=()=>[523,659,784,1047].forEach((fr,i)=>tone(fr,.22,'triangle',.14,i*.12));
+
+function talk(ms){
+  S.talkUntil=performance.now()+ms;
+  const m=svgs[S.vi]&&svgs[S.vi].querySelector('.mouth'); if(m) m.classList.add('talk');
+  setTimeout(()=>{if(performance.now()>=S.talkUntil-20){const m2=svgs[S.vi]&&svgs[S.vi].querySelector('.mouth');if(m2)m2.classList.remove('talk');}},ms+40);
+}
+function voiceFor(prefix){try{return speechSynthesis.getVoices().find(v=>v.lang.replace('_','-').toLowerCase().startsWith(prefix))||null;}catch(e){return null;}}
+function speak(en,bnText){
+  if(!en) return;
+  if(!('speechSynthesis' in window)||S.voice==='off'){talk(1200);return;}
+  try{
+    speechSynthesis.cancel(); let ms=0;
+    const parts=[];
+    if(S.voice!=='bn') parts.push([en,'en-US','en']);
+    if(S.voice!=='en'&&bnText) parts.push([bnText,'bn-BD','bn']);
+    parts.forEach(([t,lang,pre])=>{
+      const v=voiceFor(pre); if(pre==='bn'&&!v) return;           // no Bangla voice installed: the text bubble still shows it
+      const u=new SpeechSynthesisUtterance(t);u.lang=lang;if(v)u.voice=v;u.rate=.85;u.pitch=1.15;
+      speechSynthesis.speak(u);ms+=t.length*75;
+    });
+    talk(Math.max(ms,1000));
+  }catch(e){}
+}
+function speakNum(n){
+  if(!('speechSynthesis' in window)||S.voice==='off') return;
+  try{speechSynthesis.cancel();
+    const bnMode=S.voice==='bn'&&voiceFor('bn');
+    const u=new SpeechSynthesisUtterance(bnMode?bn(n):String(n));u.lang=bnMode?'bn-BD':'en-US';
+    const v=voiceFor(bnMode?'bn':'en');if(v)u.voice=v;u.rate=.9;u.pitch=1.2;speechSynthesis.speak(u);}catch(e){}
+}
+const msg=(st,en,b)=>{st.say=[en,b];};                       // set the bubble only
+const say=(st,en,b)=>{st.say=[en,b];speak(en,b);};           // set the bubble and speak it
+const hi=st=>st.round===0?["Hi, I'm Bolt! ","আমি বোল্ট! "]:['',''];
+
+/* timers are cleared whenever the player moves on, so nothing fires on a stale lesson */
+function later(ms,fn){S.tm.push(setTimeout(()=>{fn();draw(S.vi);},ms));}
+function clearTimers(){S.tm.forEach(clearTimeout);S.tm=[];}
+function countSeq(st,n,set,done,gap=650,first=750){
+  let k=0;
+  const step=()=>{k++;set(k);pop(k);speakNum(k);if(k<n) later(gap,step); else later(gap+250,done);};
+  later(first,step);
+}
+
+/* =====================================================================
+   LESSON 1  (play.02)  Put together & take away
+   ===================================================================== */
+registerLesson({
+  id:'addsub',title:'Put together & take away',bn:'একসাথে ও বাদ',max:2,
+  start(st){
+    const h=hi(st), mx=st.lv===1?5:10;
+    st.mode=st.round%2===0?'add':'take'; st.counted=0; st.fx={};
+    if(st.mode==='add'){
+      const a=rnd(1,mx-1), b=rnd(1,mx-a), pr=pick([['🍎','🍏'],['🐥','🐤'],['🐟','🐠'],['🌸','🌼']]);
+      Object.assign(st,{a,b,tot:a+b,e1:pr[0],e2:pr[1],ph:'ready'});
+      msg(st,h[0]+'How many in all? Press Put together!',h[1]+'সব মিলিয়ে কতগুলো? একসাথে করো বোতামে চাপো!');
+    }else{
+      const n=rnd(Math.max(3,mx-2),mx), k=rnd(1,n-1);
+      Object.assign(st,{n,k,gone:[],e1:'🐥',ph:'pick'});
+      msg(st,h[0]+`Tap ${k} to fly away!`,h[1]+`${bn(k)}টিতে চাপো, ওরা উড়ে যাবে!`);
+    }
+  },
+  render(st){
+    let s='';
+    if(st.mode==='add'){
+      s+=T(30,52,`${st.a} <tspan fill="${CA}">+</tspan> ${st.b} = ${st.ready?`<tspan fill="${CB}">${st.tot}</tspan>`:'?'}`,{size:34,anchor:'start'});
+      if(st.ph==='ready'){
+        s+=R(30,84,190,232,{fill:'rgba(251,191,36,.10)',stroke:CA,rx:20})+R(270,84,190,232,{fill:'rgba(74,222,128,.10)',stroke:CB,rx:20})+T(245,226,'+',{size:60,fill:CA});
+        for(let i=0;i<st.a;i++) s+=T(67+(i%3)*58,152+Math.floor(i/3)*68,st.e1,{size:42});
+        for(let i=0;i<st.b;i++) s+=T(307+(i%3)*58,152+Math.floor(i/3)*68,st.e2,{size:42});
+        s+=btn(110,402,280,68,'Put together','join',0,{fill:'#f59e0b',size:28});
+      }else{
+        s+=R(30,84,430,236,{fill:'rgba(56,189,248,.08)',stroke:CT,rx:20});
+        for(let i=0;i<st.tot;i++){
+          const x=90+(i%5)*80,y=150+Math.floor(i/5)*84,a=i<st.a;
+          s+=T(x,y+14,a?st.e1:st.e2,{size:46,cls:st.fx.join?(a?'joinL':'joinR'):''});
+          if(i<st.counted) s+=badge(x+22,y-14,i+1,i+1===st.counted);
+        }
+        if(st.counted>0) s+=T(245,376,st.counted,{size:46,fill:CA,cls:st.ready&&st.fx.pop?'pop':''});
+      }
+    }else{
+      s+=T(30,52,`${st.n} <tspan fill="${CA}">−</tspan> ${st.k} = ${st.ready?`<tspan fill="${CB}">${st.n-st.k}</tspan>`:'?'}`,{size:34,anchor:'start'});
+      s+=R(30,84,430,236,{fill:'rgba(56,189,248,.08)',stroke:CT,rx:20});
+      const left=[];
+      for(let i=0;i<st.n;i++){
+        const x=90+(i%5)*80,y=150+Math.floor(i/5)*84;
+        if(st.gone.includes(i)){ if(st.fx.fly===i) s+=T(x,y+14,st.e1,{size:46,cls:'fly'}); continue; }
+        left.push(i);
+        s+=`<g class="tap" data-act="rm" data-arg="${i}" role="button" aria-label="Make this one fly away"><rect x="${x-38}" y="${y-38}" width="76" height="76" fill="#000" fill-opacity="0"/>${T(x,y+14,st.e1,{size:46})}</g>`;
+      }
+      left.forEach((idx,j)=>{ if(j<st.counted) s+=badge(90+(idx%5)*80+22,150+Math.floor(idx/5)*84-14,j+1,j+1===st.counted); });
+      if(st.ph==='pick') s+=T(245,372,`Tap ${st.k-st.gone.length} to fly away`,{size:24});
+      else if(st.counted>0) s+=T(245,376,st.counted,{size:46,fill:CA,cls:st.ready&&st.fx.pop?'pop':''});
+    }
+    return s;
+  },
+  act(st,a,arg){
+    if(a==='join'&&st.mode==='add'&&st.ph==='ready'){
+      st.ph='joined';st.fx.join=true;good();say(st,'Together! Let us count.','একসাথে! চলো গুনি।');
+      countSeq(st,st.tot,k=>{st.counted=k;},()=>{st.ready=true;st.fx.pop=1;st.fx.jump=true;cheer();
+        say(st,`${st.a} plus ${st.b} makes ${st.tot}!`,`${bn(st.a)} আর ${bn(st.b)} মিলে ${bn(st.tot)}!`);});
+    }
+    if(a==='rm'&&st.mode==='take'&&st.ph==='pick'){
+      const i=+arg; if(st.gone.includes(i)) return;
+      st.gone.push(i);st.fx.fly=i;good(st.gone.length);
+      if(st.gone.length===st.k){
+        st.ph='count';const left=st.n-st.k;
+        say(st,'Bye bye! Now count what is left.','টা টা! এখন যা আছে গুনি।');
+        countSeq(st,left,k=>{st.counted=k;},()=>{st.ready=true;st.fx.pop=1;st.fx.jump=true;cheer();
+          say(st,`${st.n} take away ${st.k} leaves ${left}!`,`${bn(st.n)} থেকে ${bn(st.k)} গেলে থাকে ${bn(left)}!`);},650,1100);
+      }else say(st,`Bye bye! ${st.k-st.gone.length} more.`,`টা টা! আরও ${bn(st.k-st.gone.length)}টি।`);
+    }
+  }
+});
+
+/* =====================================================================
+   LESSON 2  (nursery.01)  How many here?  (tap each object once, up to 20)
+   ===================================================================== */
+registerLesson({
+  id:'count',title:'How many are here?',bn:'এখানে কতগুলো?',max:3,
+  start(st){
+    const h=hi(st), r=st.lv===1?[4,10]:st.lv===2?[10,15]:[15,20];
+    st.n=rnd(r[0],r[1]);st.emo=pick(['🍓','🐥','⭐','🎈','🐟','🍎']);st.counted=0;st.fx={};
+    const cells=shuffle([...Array(20).keys()]).slice(0,st.n).sort((x,y)=>x-y);
+    st.items=cells.map(c=>({x:75+(c%5)*88+rnd(-8,8),y:122+Math.floor(c/5)*68+rnd(-6,6),m:0}));
+    msg(st,h[0]+'Tap each one to count. Do not skip any!',h[1]+'প্রতিটিতে চাপ দিয়ে গোনো। কোনোটা বাদ দিও না!');
+  },
+  render(st){
+    let s=T(30,52,'Tap each one to count!',{size:28,anchor:'start'});
+    st.items.forEach((it,i)=>{
+      s+=`<g class="tap ${st.fx.wob===i?'wob':''}" data-act="c" data-arg="${i}" role="button" aria-label="Count this one">`
+        +`<rect x="${it.x-40}" y="${it.y-36}" width="80" height="68" fill="#000" fill-opacity="0"/>`
+        +(it.m?`<circle cx="${f(it.x)}" cy="${f(it.y-4)}" r="34" fill="none" stroke="${CB}" stroke-width="3" opacity=".85"/>`:'')
+        +T(it.x,it.y+14,st.emo,{size:42,cls:st.fx.pop===i?'pop':''})
+        +(it.m?badge(it.x+24,it.y-26,it.m,it.m===st.n&&st.ready):'')+`</g>`;
+    });
+    if(st.counted>0) s+=T(255,384,st.ready?`${st.counted} in all!`:st.counted,{size:44,fill:CA,cls:st.ready&&st.fx.pop===undefined?'':''});
+    return s;
+  },
+  act(st,a,arg){
+    if(a!=='c'||st.ready) return;
+    const i=+arg,it=st.items[i];
+    if(it.m){st.fx.wob=i;soft();say(st,'Already counted! Find one without a number.','গোনা হয়ে গেছে! নম্বর ছাড়া একটি খোঁজো।');return;}
+    it.m=++st.counted;st.fx.pop=i;pop(st.counted);speakNum(st.counted);
+    if(st.counted===st.n){
+      st.ready=true;
+      later(750,()=>{cheer();st.fx.jump=true;say(st,`There are ${st.n} in all! Great counting!`,`মোট ${bn(st.n)}টি! দারুণ গোনা!`);});
+    }
+  }
+});
+
+/* =====================================================================
+   LESSON 3  (nursery.04)  Which is more?  (balance scale, tap the bigger number)
+   ===================================================================== */
+registerLesson({
+  id:'compare',title:'Which is more?',bn:'কোনটি বেশি?',max:3,
+  start(st){
+    const h=hi(st), r=st.lv===1?[1,5]:st.lv===2?[1,10]:[2,20];
+    let a,b;do{a=rnd(r[0],r[1]);b=rnd(r[0],r[1]);}while(a===b);
+    Object.assign(st,{a,b,done:false,big:null,fx:{}});
+    msg(st,h[0]+'Tap the number that is MORE!',h[1]+'যে সংখ্যাটি বেশি, সেটিতে চাপো!');
+  },
+  render(st){
+    let s=T(30,48,'Which one is MORE?',{size:28,anchor:'start'});
+    const ang=st.done?(st.big==='R'?10:-10):0, dyL=st.done?(st.big==='L'?26:-26):0, dyR=-dyL;
+    s+=`<path d="M225 384L285 384L255 250Z" fill="#475569"/>`;
+    s+=`<g class="${st.fx.tilt?'tilt':''}" style="transform-origin:255px 244px;transform:rotate(${ang}deg)"><rect x="105" y="238" width="300" height="12" rx="6" fill="#cbd5e1"/><circle cx="255" cy="244" r="9" fill="#f8fafc"/></g>`;
+    const pan=(cx,side,n,dy)=>{
+      let g=`<g class="${st.fx.tilt?'lift':''}" style="transform:translateY(${dy}px)">`;
+      g+=`<line x1="${cx}" y1="246" x2="${cx-50}" y2="380" stroke="#94a3b8" stroke-width="3"/><line x1="${cx}" y1="246" x2="${cx+50}" y2="380" stroke="#94a3b8" stroke-width="3"/>`;
+      g+=R(cx-66,380,132,14,{fill:'#94a3b8',rx:7});
+      g+=`<g class="tap ${st.fx.wob===side?'wob':''}" data-act="pick" data-arg="${side}" role="button" aria-label="Number ${n}">`
+        +`<rect class="bg" x="${cx-50}" y="292" width="100" height="88" rx="14" fill="#1e3a5f" stroke="${CT}" stroke-width="3"/>`;
+      if(st.lv<3){
+        g+=T(cx,330,n,{size:36});
+        for(let i=0;i<n;i++) g+=`<circle cx="${cx-32+(i%5)*16}" cy="${347+Math.floor(i/5)*15}" r="5" fill="${CA}"/>`;
+      }else g+=T(cx,348,n,{size:44});
+      return g+`</g></g>`;
+    };
+    s+=pan(105,'L',st.a,dyL)+pan(405,'R',st.b,dyR);
+    if(st.done){
+      const big=Math.max(st.a,st.b);
+      s+=T(255,150,st.lv===1?`${big} is more!`:`${st.a} ${st.a>st.b?'&gt;':'&lt;'} ${st.b}`,{size:st.lv===1?42:62,fill:CB,cls:'pop'});
+    }
+    return s;
+  },
+  act(st,a,arg){
+    if(a!=='pick'||st.done) return;
+    const mine=arg==='L'?st.a:st.b, other=arg==='L'?st.b:st.a;
+    if(mine>other){
+      st.done=true;st.big=arg;st.ready=true;st.fx.tilt=true;st.fx.jump=true;good();later(500,cheer);
+      say(st,st.lv===3?`${mine} is more than ${other}! The crocodile eats the bigger one.`:`${mine} is more than ${other}!`,
+              st.lv===3?`${bn(mine)} বেশি, ${bn(other)} কম! কুমির বড়টাকে খায়।`:`${bn(mine)} বেশি, ${bn(other)} কম!`);
+    }else{
+      st.fx.wob=arg;soft();
+      say(st,st.lv<3?'Try again! Which one has more dots?':'Try again! Which number is bigger?','আবার চেষ্টা করো! কোনটা বেশি?');
+    }
+  }
+});
+
+/* =====================================================================
+   LESSON 4  (nursery.09)  Build the number  (tens bundles and ones sticks)
+   ===================================================================== */
+registerLesson({
+  id:'build',title:'Tens and ones',bn:'দশক ও একক',max:3,
+  start(st){
+    const h=hi(st), r=st.lv===1?[11,19]:st.lv===2?[21,59]:[61,99];
+    Object.assign(st,{tgt:rnd(r[0],r[1]),tens:0,ones:0,fx:{}});
+    msg(st,h[0]+`Build ${st.tgt}! Use bundles of 10 and single sticks.`,h[1]+`${bn(st.tgt)} বানাও! দশের আঁটি আর একটি কাঠি ব্যবহার করো।`);
+  },
+  render(st){
+    const val=st.tens*10+st.ones, ok=st.ready;
+    let s=T(30,48,`Build <tspan fill="${CA}">${st.tgt}</tspan>`,{size:34,anchor:'start'});
+    s+=T(470,46,`You have ${val}`,{size:22,anchor:'end',fill:'#94a3b8'});
+    s+=R(30,92,252,212,{fill:'rgba(251,191,36,.10)',stroke:ok?CB:CA,rx:20})+R(298,92,182,212,{fill:'rgba(74,222,128,.10)',stroke:ok?CB:CB,rx:20});
+    s+=T(156,120,'Tens · দশক',{size:18,fill:CA})+T(389,120,'Ones · একক',{size:18,fill:CB});
+    for(let i=0;i<st.tens;i++){
+      const x=42+i*26,y=140;
+      s+=`<g class="${st.fx.pop==='t'&&i===st.tens-1?'pop':''}">`+R(x,y,22,100,{fill:'#f59e0b',stroke:'#b45309',sw:2,rx:5})
+        +`<line x1="${x+7}" y1="${y+4}" x2="${x+7}" y2="${y+96}" stroke="#b45309" stroke-width="1.5"/><line x1="${x+15}" y1="${y+4}" x2="${x+15}" y2="${y+96}" stroke="#b45309" stroke-width="1.5"/>`
+        +R(x-2,y+42,26,12,{fill:'#ef4444',rx:3})+`</g>`;
+    }
+    for(let i=0;i<st.ones;i++) s+=R(312+i*18,166,11,72,{fill:CB,stroke:'#15803d',sw:2,rx:4});
+    s+=T(156,284,`${st.tens} ten${st.tens===1?'':'s'} = ${st.tens*10}`,{size:20,fill:CA})+T(389,284,`${st.ones} one${st.ones===1?'':'s'}`,{size:20,fill:CB});
+    const w=k=>st.fx.wob===k?'wob':'';
+    s+=btn(30,316,122,68,'− 10','m10',0,{fill:'#b45309',size:30,cls:w('m10'),aria:'Take away a bundle of ten'})
+      +btn(160,316,122,68,'+ 10','p10',0,{fill:'#f59e0b',size:30,cls:w('p10'),aria:'Add a bundle of ten'})
+      +btn(298,316,86,68,'− 1','m1',0,{fill:'#15803d',size:30,cls:w('m1'),aria:'Take away one stick'})
+      +btn(394,316,86,68,'+ 1','p1',0,{fill:'#22c55e',size:30,cls:w('p1'),aria:'Add one stick'});
+    if(ok) s+=T(255,395,`${st.tens} tens + ${st.ones} ones = ${val}`,{size:20,fill:CB,cls:'pop'});
+    return s;
+  },
+  act(st,a){
+    if(st.ready) return;
+    if(a==='p10'){ if(st.tens>=9){st.fx.wob='p10';soft();return;} st.tens++;st.fx.pop='t';good(st.tens); }
+    else if(a==='m10'){ if(st.tens<=0){st.fx.wob='m10';soft();return;} st.tens--;pop(2); }
+    else if(a==='p1'){
+      if(st.ones>=9){
+        if(st.tens>=9){st.fx.wob='p1';soft();return;}
+        st.ones=0;st.tens++;st.fx.pop='t';good(5);say(st,'10 sticks! Tie them into one bundle.','১০টি কাঠি! বেঁধে একটি আঁটি বানাও।');
+      }else{st.ones++;good(st.ones);}
+    }else if(a==='m1'){
+      if(st.ones<=0){
+        if(st.tens<=0){st.fx.wob='m1';soft();return;}
+        st.tens--;st.ones=9;pop(4);say(st,'We opened a bundle: 10 sticks, take 1 away.','একটি আঁটি খুললাম: ১০টি কাঠি, ১টি বাদ।');
+      }else{st.ones--;pop(1);}
+    }
+    const val=st.tens*10+st.ones;
+    if(val===st.tgt){
+      st.ready=true;st.fx.jump=true;later(400,cheer);
+      say(st,`You built ${st.tgt}! ${st.tens} tens and ${st.ones} ones.`,`তুমি ${bn(st.tgt)} বানিয়েছ! ${bn(st.tens)}টি দশক ও ${bn(st.ones)}টি একক।`);
+    }else if(val>st.tgt) say(st,'Too many! Tap the minus buttons.','অনেক বেশি! বিয়োগ বোতামে চাপো।');
+    else if(!(a==='p1'&&st.ones===0)&&!(a==='m1'&&st.ones===9&&st.tens>=0&&st.say[0].startsWith('We opened'))) speakNum(val);
+  }
+});
+
+/* =====================================================================
+   CAROUSEL ENGINE  (slides slide sideways; the active slide is the game)
+   ===================================================================== */
+const track=$('#vcTrack'),view=$('#vcView'),svgs=[],slides=[];
+
+function fresh(i){
+  const L=LESSONS[i],st={lv:Math.min(S.lv,L.max),round:0,ready:false,finished:false,fx:{},say:null};
+  L.start(st);S.st[i]=st;return st;
+}
+const finalScene=()=>T(255,170,'🎉',{size:92,cls:'pop'})+T(255,250,'⭐⭐⭐⭐⭐',{size:40})+T(255,306,'Great job!',{size:36})+T(255,344,'চমৎকার!',{size:26,fill:'#7dd3fc'})
+  +btn(110,402,280,68,'Play again ⟲','again',0,{fill:'#a855f7',size:26});
+function frame(i){
+  const L=LESSONS[i],st=S.st[i];
+  const body=st.finished?finalScene():L.render(st)+(st.ready?nextBtn():'');
+  return body+bubble(st.say)+bolt(st.fx.jump||st.finished);
+}
+function draw(i){
+  const st=S.st[i];if(!st||!svgs[i]) return;
+  svgs[i].innerHTML=frame(i);st.fx={};
+  if(i===S.vi&&performance.now()<S.talkUntil){const m=svgs[i].querySelector('.mouth');if(m)m.classList.add('talk');}
+  progress();
+}
+function progress(){
+  const st=S.st[S.vi];if(!st) return;
+  const done=st.finished?ROUNDS:st.round+(st.ready?1:0);
+  $('#vcFill').style.width=(done/ROUNDS*100)+'%';
+  $('#vcInfo').textContent='Lesson '+(S.vi+1)+' of '+LESSONS.length+'  ·  '+(st.finished?'All done! ⭐':'Game '+(st.round+1)+' of '+ROUNDS);
+}
+function rebuild(){
+  track.innerHTML='';svgs.length=0;slides.length=0;S.st=[];
+  LESSONS.forEach((L,i)=>{
+    const sl=document.createElement('div');sl.className='vc-slide';
+    sl.innerHTML='<div class="vc-head"><span class="vc-count">'+(i+1)+' / '+LESSONS.length+'</span><b>'+L.title+'<small>'+L.bn+'</small></b></div>'
+      +'<div class="vc-stage"><svg viewBox="0 0 800 480" role="group" aria-label="'+L.title+'"></svg></div>';
+    sl.onclick=()=>{if(i!==S.vi) go(i);};
+    track.appendChild(sl);slides.push(sl);const sv=sl.querySelector('svg');svgs.push(sv);
+    sv.addEventListener('click',e=>onTap(e,i));
+    fresh(i);
+  });
+  buildDots();buildLevels();buildVoice();layout();LESSONS.forEach((_,i)=>draw(i));
+}
+function layout(){
+  const w=view.clientWidth||800, sw=w<640?w*.94:Math.min(w*.62,760), gap=22;
+  slides.forEach((sl,i)=>{sl.style.flexBasis=sw+'px';sl.classList.toggle('on',i===S.vi);});
+  track.style.transform='translateX('+((w-sw)/2-S.vi*(sw+gap))+'px)';
+}
+function buildDots(){
+  const d=$('#vcDots');d.innerHTML='';
+  LESSONS.forEach((L,i)=>{const b=document.createElement('button');b.title=L.title;b.setAttribute('aria-label',L.title);b.className=i===S.vi?'on':'';b.onclick=()=>go(i);d.appendChild(b);});
+}
+function buildLevels(){
+  const box=$('#vcLevels');box.innerHTML='';const max=LESSONS[S.vi].max,cur=Math.min(S.lv,max);
+  [1,2,3].forEach(n=>{
+    const b=document.createElement('button');b.textContent='⭐'.repeat(n);b.title='Level '+n;b.setAttribute('aria-label','Level '+n);
+    b.className=n===cur?'on':'';b.disabled=n>max;
+    b.onclick=()=>{S.lv=n;clearTimers();unlock();fresh(S.vi);buildLevels();draw(S.vi);speak(...S.st[S.vi].say);};
+    box.appendChild(b);
+  });
+}
+function buildVoice(){
+  const box=$('#vcVoice');box.innerHTML='';
+  [['both','🔊 EN + বাংলা'],['en','EN'],['bn','বাংলা'],['off','🔇 Off']].forEach(([k,lab])=>{
+    const b=document.createElement('button');b.textContent=lab;b.className=S.voice===k?'on':'';
+    b.onclick=()=>{S.voice=k;unlock();try{speechSynthesis.cancel();}catch(e){}buildVoice();speak(...S.st[S.vi].say);};
+    box.appendChild(b);
+  });
+}
+function onTap(e,i){
+  const g=e.target.closest('[data-act]');if(!g||i!==S.vi||S.busy) return;
+  unlock();
+  const act=g.dataset.act,arg=g.dataset.arg,st=S.st[i],L=LESSONS[i];
+  if(act==='next') nextRound();
+  else if(act==='again'){clearTimers();fresh(i);draw(i);speak(...S.st[i].say);}
+  else{L.act(st,act,arg);draw(i);}
+}
+function nextRound(){
+  clearTimers();const L=LESSONS[S.vi],st=S.st[S.vi];
+  st.round++;st.ready=false;st.fx={};
+  if(st.round>=ROUNDS){st.finished=true;st.fx.jump=true;cheer();say(st,'You did it! Great job!','তুমি পেরেছ! চমৎকার!');}
+  else{L.start(st);speak(...st.say);}
+  draw(S.vi);
+}
+function go(i){
+  if(S.busy||!LESSONS.length) return;
+  S.busy=true;clearTimers();try{speechSynthesis.cancel();}catch(e){}
+  S.vi=(i+LESSONS.length)%LESSONS.length;
+  fresh(S.vi);buildDots();buildLevels();layout();LESSONS.forEach((_,j)=>draw(j));
+  setTimeout(()=>{S.busy=false;speak(...S.st[S.vi].say);},560);   // wait for the slide animation
+}
+
+$('#bPlay').onclick=()=>{unlock();speak(...S.st[S.vi].say);};
+$('#bRep').onclick=()=>{unlock();clearTimers();fresh(S.vi);draw(S.vi);speak(...S.st[S.vi].say);};
+$('#bNext').onclick=$('#aNext').onclick=()=>go(S.vi+1);
+$('#bPrev').onclick=$('#aPrev').onclick=()=>go(S.vi-1);
+$('#vcCar').onkeydown=e=>{if(e.key==='ArrowRight') go(S.vi+1);if(e.key==='ArrowLeft') go(S.vi-1);};
+let sx=null;
+view.addEventListener('pointerdown',e=>{sx=e.target.closest('[data-act]')?null:e.clientX;});
+view.addEventListener('pointerup',e=>{
+  if(sx===null) return; const dx=e.clientX-sx; sx=null;
+  if(Math.abs(dx)>60) go(S.vi+(dx<0?1:-1));
+});
+window.addEventListener('resize',layout);
+try{speechSynthesis.getVoices();}catch(e){}
+
+S.ready=true;rebuild();
+})();
+</script>
+</body>
+</html>

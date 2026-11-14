@@ -1,6 +1,6 @@
 # Backend progress
 
-_Last updated: visitor analytics, six-hour email reports, contact API, topic search, and resilient auto-seeding._
+_Last updated: forum starter seeding (10 posts + comments), forum feed/toolbar support, visitor analytics, six-hour email reports, contact API, topic search, and resilient auto-seeding._
 
 ## Status
 
@@ -18,6 +18,7 @@ _Last updated: visitor analytics, six-hour email reports, contact API, topic sea
 | Chat + RAG | ✅ | Grounded context, OpenRouter rewrite, free auto-router fallback, image transcription, free TTS, sessions, rate limit |
 | Knowledge | ✅ | Ingest, local cosine search, topic reindex, chunk admin |
 | Learner state | ✅ | Bookmarks, progress, preferences |
+| Forum | ✅ | Posts/comments/tags/Ask AI; 10 starter posts with comments seeded when the collection is empty |
 | Moderation | ✅ | Public report submission, editor queue + status updates |
 | Users | ✅ | Admin list/update/soft-delete |
 | Health | ✅ | Mongo ping + optional service status |
@@ -46,6 +47,8 @@ _Last updated: visitor analytics, six-hour email reports, contact API, topic sea
 
 ## Latest update
 
+- Added `seedForumPosts()` to `src/app/utils/seed.ts`. It counts `forum_posts`, exits when at least one post exists, and otherwise creates **10 starter maths questions** (matrix multiplication, trig identity, quadratic, statistics, circle area, limits, integration, probability, Pythagoras, algebraic simplification) plus their starter comments. `$...$` maths in the bodies exercises the frontend KaTeX path.
+- Wired `seedForumPosts()` into both `seedDatabase()` (`npm run seed`) and `seedDatabaseIfEmpty()` (startup `AUTO_SEED=true`), outside the user/taxonomy/content checks so the forum seeds even when the rest of the database is already populated. The helper is idempotent and never overwrites edited posts.
 - Added `Visit` analytics: `POST /analytics/visit` records one page view per browser id/path (five-minute de-dupe), and `GET /analytics/visitors` returns unique visitors, page views, signed-in visitors and top pages.
 - Added `scheduleVisitorReport()`: `VISITOR_REPORT_CRON` (default `0 */6 * * *`) emails the admin and every moderator the current day’s visitor count in `REPORT_TIMEZONE` (default `Asia/Dhaka`) plus a rolling six-hour count. `POST /analytics/visitors/report` sends it on demand (admin).
 - Added the public `POST /contact` endpoint and `contact-message.ejs` email template.
@@ -68,6 +71,7 @@ npm run build                     # tsup bundle succeeds
 
 - `POST /chat/speech` with `lang: "en"` → `200 audio/mpeg` (≈98 KB for a test sentence); `lang: "bn"` → `422` by design.
 - `/health` reports `openrouter: configured`, `vision: configured`, `voice: configured`.
+- `seedForumPosts()` creates 10 posts + comments only when `forum_posts` is empty; a second run prints the skip message and leaves the collection unchanged.
 
 > `AUTO_SEED=true` seeds automatically on startup. If MongoDB Atlas is unreachable, whitelist the machine’s public IP under **Atlas → Network Access** and the retry loop seeds without a restart. The catalog audit still finds 14 packs, 180 chapters, 238 topics and 325 visualizations.
 
