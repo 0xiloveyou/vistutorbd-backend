@@ -36,11 +36,12 @@ npm run dev
 | `npm run build` | Bundle with tsup into `dist/` |
 | `npm start` | Run `dist/server.js` |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm test` | Unit tests for the math engine and question generators |
+| `npm test` | Unit tests for the math engine, generators and next-plan carousels |
 | `npm run db:generate` | Generate Prisma Client |
 | `npm run db:push` | Push the schema to MongoDB |
 | `npm run db:studio` | Open Prisma Studio |
 | `npm run seed` | Idempotent configuration seed |
+| `npm run content:next-plan` | Regenerate the 15 next-plan game/visual/Q&A carousel documents |
 | `npm run lint:check` / `lint:fix` | Biome lint |
 | `npm run format:check` / `format:fix` | Biome format |
 
@@ -83,6 +84,8 @@ src/app/lib/                      prisma, redis, mail, google, jwt, cookies, ope
 src/app/middleware/               checkAuth (auth/optionalAuth), validateRequest, rateLimit, errors
 src/app/module/<feature>/         route â†’ controller â†’ service â†’ validation
 src/app/scripts/seed.ts           Configuration seed entry point
+src/app/content/next-plan/        Merged folder 1+2+3 content bank, runtime and generator
+src/app/content/carousels/        Carousel HTML seeded into MongoDB (15 next-plan files included)
 src/app/templates/                EJS email templates
 reference-data/                    Reference material only, never served at runtime
   legacy-json/                     Old JSON lessons kept only as format reference
@@ -160,9 +163,44 @@ See [docs/api/README.md](docs/api/README.md) for conventions, enums and role rul
 4. Two question templates: `addition.singleDigit` (Play/Nursery) and `addition.twoDigit` (Class 1â€“5).
 5. `ADMIN`, `MODERATOR` and demo `USER` accounts from env.
 6. When `forum_posts` is empty, 10 starter forum questions with maths (`$...$`) and starter comments. Existing posts are never overwritten.
-7. Learn carousels from `src/app/content/carousels/`: the generic `explanation-all` document and the Class 9–10 `explanation-class-9-10` visual lab. They are upserted by slug and content hash, then served through `/api/v1/learn/*`.
+7. Learn carousels from `src/app/content/carousels/`: the generic `explanation-all` document, the Class 9–10 `explanation-class-9-10` visual lab, and the 15 next-plan activities (five games, five visual explanations, five Q&A sets). They are upserted by slug and content hash, then served through `/api/v1/learn/*`.
 
 The class content packs (`play` … `class-12`) are also seeded idempotently, so `AUTO_SEED=true` fills empty collections on startup and never overwrites edited data. Startup seeding runs after the API starts and retries for a few minutes if Atlas is unreachable; whitelist the machine's public IP under **Atlas → Network Access** if it cannot connect.
+
+## Next-plan content cycle
+
+The material in `public/next plan/1`, `/2` and `/3` is stored as a typed bank in `src/app/content/next-plan/`:
+
+| Source | Folder | Stored as |
+| --- | --- | --- |
+| Game pattern + Bolt companion | `/1` (`game.html`) | `runtime/engine.js`, `runtime/engine.css`, `runtime/robot.svg` |
+| Concept map | `/2` | `source/concept-map.txt` → `catalog.generated.json` (75 cards) |
+| Idea bank | `/3` | `source/idea-bank.txt` → `catalog.generated.json` (148 rows, 32 game ideas, 14 templates) |
+
+- `merge-sources.mjs` reproduces `catalog.generated.json`; the original prose stays in `source/` for provenance.
+- `activities/games.ts`, `activities/visuals.ts` and `activities/questions.ts` hold the typed activity data. `activities/index.ts` exports the combined list.
+- `generate.ts` injects one activity plus the group/kind labels into the shared runtime and writes a standalone document per activity. The runtime payload is `window.__NEXT_PLAN__ = { activity, groupLabel, kindLabel }`.
+- Bolt is the default style everywhere (`defaultStyle: "robot"`); Play & Nursery hides the style switch so the robot cannot be turned off.
+- `carousels.ts` converts activities into `LearnCarousel` seeds: visuals use `EXPLANATION`, games and Q&A use `QUESTION`. `seed-learn-carousels.ts` appends these seeds to the original carousel list.
+
+Build order is one cycle per group: **game → visual → Q&A** for Play & Nursery, Class 1–5, 6–8, 9–10 and 11–12. The 15 carousel slugs are:
+
+```text
+next-game-play-nursery      next-visual-play-nursery      next-question-play-nursery
+next-game-class-1-5         next-visual-class-1-5         next-question-class-1-5
+next-game-class-6-8         next-visual-class-6-8         next-question-class-6-8
+next-game-class-9-10        next-visual-class-9-10        next-question-class-9-10
+next-game-class-11-12       next-visual-class-11-12       next-question-class-11-12
+```
+
+```bash
+npm run content:next-plan   # rebuild the 15 HTML files + manifest.generated.json
+npm run typecheck
+npm test
+npm run learn:seed          # upsert the carousel documents (needs MongoDB)
+```
+
+`manifest.generated.json` records the slug, file, kind, group, cycle and title of every generated activity and is useful for CI checks.
 
 ### Visitor report
 

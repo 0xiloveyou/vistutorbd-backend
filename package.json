@@ -15,6 +15,7 @@
     "db:studio": "prisma studio",
     "seed": "tsx src/app/scripts/seed.ts",
     "learn:seed": "tsx src/app/scripts/seed-learn.ts",
+    "content:next-plan": "tsx src/app/content/next-plan/generate.ts",
     "content:inventory": "bun run src/app/scripts/content-inventory.ts",
     "format:check": "biome format ./src",
     "format:fix": "biome format --write ./src",

@@ -1,0 +1,1810 @@
+{
+  "generatedAt": "2026-11-15T11:05:53.688Z",
+  "sources": {
+    "games": "source/games-plan.txt",
+    "concepts": "source/concept-map.txt",
+    "ideas": "source/idea-bank.txt"
+  },
+  "groups": [
+    {
+      "id": "play-nursery",
+      "label": "Play & Nursery"
+    },
+    {
+      "id": "class-1-5",
+      "label": "Class 1-5"
+    },
+    {
+      "id": "class-6-8",
+      "label": "Class 6-8"
+    },
+    {
+      "id": "class-9-10",
+      "label": "Class 9-10"
+    },
+    {
+      "id": "class-11-12",
+      "label": "Class 11-12"
+    }
+  ],
+  "conceptCards": [
+    {
+      "id": "N1",
+      "title": "Many or Few?",
+      "level": "Seed",
+      "group": "play-nursery",
+      "idea": "Compare two groups without counting, just by looking.",
+      "angle": "Children feed a toy \"hungry monster\" with beans; the monster says which bowl has more by \"sniffing\" (teacher guides)."
+    },
+    {
+      "id": "N2",
+      "title": "Number Friends 1-10",
+      "level": "Seed",
+      "group": "play-nursery",
+      "idea": "Each number has a character with that many spots/buttons.",
+      "angle": "Number is linked to a body part count (2 eyes, 5 fingers, 10 toes) so counting feels personal."
+    },
+    {
+      "id": "N3",
+      "title": "Shape Detectives",
+      "level": "Seed",
+      "group": "play-nursery",
+      "idea": "Circle, square, triangle, rectangle recognised in objects.",
+      "angle": "A \"shape hunt\" around the classroom with a paper magnifier; the child sticks a coloured dot on each shape found."
+    },
+    {
+      "id": "N4",
+      "title": "Big, Bigger, Biggest",
+      "level": "Seed",
+      "group": "play-nursery",
+      "idea": "Order three objects by size.",
+      "angle": "Line up three paper shoes (baby, child, giant) and match each to a character."
+    },
+    {
+      "id": "N5",
+      "title": "What Comes Next?",
+      "level": "Seed",
+      "group": "play-nursery",
+      "idea": "Simple AB and AAB patterns.",
+      "angle": "Patterns made with claps, stomps and jumps first, then with beads, then with colours on paper."
+    },
+    {
+      "id": "N6",
+      "title": "Up, Down, Inside, Beside",
+      "level": "Seed",
+      "group": "play-nursery",
+      "idea": "Position words.",
+      "angle": "A \"treasure box\" game: hide a toy and give clues like \"under the chair\"."
+    },
+    {
+      "id": "N7",
+      "title": "Count and Take Away",
+      "level": "Grow",
+      "group": "play-nursery",
+      "idea": "Adding one more / taking one away with objects up to 5.",
+      "angle": "Story-play with a toy bus: 3 dolls get on, 1 gets off."
+    },
+    {
+      "id": "N8",
+      "title": "Heavy or Light?",
+      "level": "Seed",
+      "group": "play-nursery",
+      "idea": "Feel and compare weight.",
+      "angle": "A homemade balance from a hanger and two cups."
+    },
+    {
+      "id": "P1",
+      "title": "Ten-Frame Town",
+      "level": "Seed",
+      "group": "class-1-5",
+      "idea": "Make numbers to 20 using ten-frames.",
+      "angle": "Each frame is a \"house\" with 10 windows; numbers are families moving in and out."
+    },
+    {
+      "id": "P2",
+      "title": "Place Value Shop",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Ones, tens, hundreds.",
+      "angle": "A pretend shop sells loose sticks (ones) and bundles (tens); customers must pay exact amounts."
+    },
+    {
+      "id": "P3",
+      "title": "Add Up Stories",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Addition and subtraction within 100.",
+      "angle": "Children write their own picture stories, then the partner turns the story into a number sentence."
+    },
+    {
+      "id": "P4",
+      "title": "Skip-Count Trail",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Counting in 2s, 5s, 10s.",
+      "angle": "Walk a floor trail; every 5th tile is painted, and the child predicts the next painted tile."
+    },
+    {
+      "id": "P5",
+      "title": "Time Tellers",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Hour, half hour, quarter hour.",
+      "angle": "Create a cardboard clock for a daily routine chart."
+    },
+    {
+      "id": "P6",
+      "title": "Array Gardens",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Multiplication as rows and columns.",
+      "angle": "Plant paper flowers in rows; show 3x4 and 4x3 are the same garden turned around."
+    },
+    {
+      "id": "P7",
+      "title": "Equal Share Kitchen",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Division as sharing and grouping.",
+      "angle": "Two ways to answer \"12 biscuits, 3 plates\": how many on each plate, and how many plates if each holds 3."
+    },
+    {
+      "id": "P8",
+      "title": "Fraction Folding",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Halves, quarters, thirds with paper strips.",
+      "angle": "Fold a ribbon and compare lengths to see which fraction is bigger before using symbols."
+    },
+    {
+      "id": "P9",
+      "title": "Perimeter Walk",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Distance around a shape.",
+      "angle": "Walk around the playground edge and count steps; compare to a rectangle drawn on paper."
+    },
+    {
+      "id": "P10",
+      "title": "Money Maker",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Coins, notes, change.",
+      "angle": "A class market day with price tags and a \"bank\" for change."
+    },
+    {
+      "id": "P11",
+      "title": "Fraction Number Line",
+      "level": "Bloom",
+      "group": "class-1-5",
+      "idea": "Place fractions and mixed numbers on a line.",
+      "angle": "A clothesline in the classroom with fraction cards pegged in order."
+    },
+    {
+      "id": "P12",
+      "title": "Decimal Meter Stick",
+      "level": "Bloom",
+      "group": "class-1-5",
+      "idea": "Tenths and hundredths linked to metres, centimetres.",
+      "angle": "Measure objects in metres with decimals, e.g. 0.45 m."
+    },
+    {
+      "id": "P13",
+      "title": "Area Tiles",
+      "level": "Bloom",
+      "group": "class-1-5",
+      "idea": "Area as covering with unit squares.",
+      "angle": "Cover a book cover with sticky notes, then switch to multiplication for rectangles."
+    },
+    {
+      "id": "P14",
+      "title": "Data Detectives",
+      "level": "Grow",
+      "group": "class-1-5",
+      "idea": "Tally, bar graph, pictogram.",
+      "angle": "Survey \"favourite lunch\" and decide what the cook should prepare most."
+    },
+    {
+      "id": "P15",
+      "title": "Chance Cards",
+      "level": "Seed",
+      "group": "class-1-5",
+      "idea": "Certain, likely, unlikely, impossible.",
+      "angle": "Draw from a bag of coloured counters; sort statements onto a \"chance ladder\"."
+    },
+    {
+      "id": "P16",
+      "title": "Mystery Number Machine",
+      "level": "Bloom",
+      "group": "class-1-5",
+      "idea": "Input-output rules (early algebra).",
+      "angle": "A cardboard machine \"doubles then adds 1\"; others guess the rule from the outputs."
+    },
+    {
+      "id": "M1",
+      "title": "Factor Forest",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Factors, multiples, primes, HCF, LCM.",
+      "angle": "Draw factor trees and treat primes as the \"seeds\" every number grows from."
+    },
+    {
+      "id": "M2",
+      "title": "Integer Elevator",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Negative and positive numbers.",
+      "angle": "A building with basement floors; moving up and down models addition and subtraction of integers."
+    },
+    {
+      "id": "M3",
+      "title": "Ratio Recipes",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Ratio and unitary method.",
+      "angle": "Scale a recipe for 4 people up to 30, and spot which ingredient breaks the ratio."
+    },
+    {
+      "id": "M4",
+      "title": "Variable Boxes",
+      "level": "Seed",
+      "group": "class-6-8",
+      "idea": "A letter stands for an unknown number.",
+      "angle": "A mystery box that hides a number; build expressions by combining boxes and loose counters."
+    },
+    {
+      "id": "M5",
+      "title": "Equation Balance",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Solve linear equations by doing the same to both sides.",
+      "angle": "Use a virtual see-saw; students must justify each move."
+    },
+    {
+      "id": "M6",
+      "title": "Angle Hunter",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Angle pairs, parallel lines and transversal.",
+      "angle": "Use a road-map with crossing roads to find matching angles."
+    },
+    {
+      "id": "M7",
+      "title": "Triangle Rules",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Angle sum, inequality, congruence conditions.",
+      "angle": "Try to build triangles from straws; discover which side lengths fail."
+    },
+    {
+      "id": "M8",
+      "title": "Percent Lens",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Percentages, discount, profit and loss, simple interest.",
+      "angle": "Compare two shops' sales and decide the better deal."
+    },
+    {
+      "id": "M9",
+      "title": "Rational Number Map",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Fractions and decimals on one number line, operations.",
+      "angle": "Locate numbers between two given rationals to show there are always more."
+    },
+    {
+      "id": "M10",
+      "title": "Exponent Growth",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Laws of exponents, standard form.",
+      "angle": "A rumour spreading: 2 people tell 2 more each hour; write the count as a power."
+    },
+    {
+      "id": "M11",
+      "title": "Pattern to Formula",
+      "level": "Bloom",
+      "group": "class-6-8",
+      "idea": "Algebraic identities and factorisation.",
+      "angle": "Show (a+b)^2 with a square cut into four pieces."
+    },
+    {
+      "id": "M12",
+      "title": "Square and Cube Roots",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Perfect squares/cubes, estimation of roots.",
+      "angle": "Tile squares on a grid and find the side from the area."
+    },
+    {
+      "id": "M13",
+      "title": "Quadrilateral Family Tree",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Properties of parallelogram, rhombus, rectangle, trapezium.",
+      "angle": "Build a \"family tree\" showing which shape is a special case of another."
+    },
+    {
+      "id": "M14",
+      "title": "Surface and Volume",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Cuboid, cylinder; surface area and volume.",
+      "angle": "Wrap a box with paper, measure, and compare with the formula."
+    },
+    {
+      "id": "M15",
+      "title": "Data Stories",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Mean, median, mode, pie chart, histogram.",
+      "angle": "Choose the best summary for a real data set and defend why."
+    },
+    {
+      "id": "M16",
+      "title": "Direct vs Inverse",
+      "level": "Grow",
+      "group": "class-6-8",
+      "idea": "Direct and inverse variation.",
+      "angle": "Compare \"more workers, less time\" with \"more distance, more time\" using tables and graphs."
+    },
+    {
+      "id": "S1",
+      "title": "Between the Numbers",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Irrational numbers and the real line.",
+      "angle": "Construct sqrt(2) on a number line with a right triangle and discuss why it never ends."
+    },
+    {
+      "id": "S2",
+      "title": "Polynomial Anatomy",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Degree, terms, zeros, remainder and factor theorem.",
+      "angle": "Treat a polynomial as a machine and find which inputs give zero output."
+    },
+    {
+      "id": "S3",
+      "title": "Line Equations Lab",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Linear equations in two variables and their graphs.",
+      "angle": "Plot a taxi fare (fixed + per km) and interpret the slope as cost per kilometre."
+    },
+    {
+      "id": "S4",
+      "title": "Proof Builder",
+      "level": "Bloom",
+      "group": "class-9-10",
+      "idea": "Axioms, theorems, two-column proofs.",
+      "angle": "Provide shuffled proof statements; students reorder them and justify each link."
+    },
+    {
+      "id": "S5",
+      "title": "Circle Secrets",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Chords, arcs, angle in a semicircle, cyclic quadrilateral.",
+      "angle": "Use a dynamic sketch or string-and-pin model to test angle properties."
+    },
+    {
+      "id": "S6",
+      "title": "Heron's Pathway",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Area of triangle by Heron's formula.",
+      "angle": "Compare with the base-height method to see when each is easier."
+    },
+    {
+      "id": "S7",
+      "title": "Statistics Lens",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Frequency tables, grouped data, central tendency.",
+      "angle": "Analyse real exam or sports scores and find outliers."
+    },
+    {
+      "id": "S8",
+      "title": "Two Equations, One Answer",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Pair of linear equations (graphical, substitution, elimination).",
+      "angle": "Model two phone plans and find when they cost the same."
+    },
+    {
+      "id": "S9",
+      "title": "Quadratic Curve Story",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Solving quadratics (factorising, formula, completing the square) and graphs.",
+      "angle": "A thrown ball path; interpret roots as landing points."
+    },
+    {
+      "id": "S10",
+      "title": "Sequences that Climb",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Arithmetic progressions, nth term, sum.",
+      "angle": "Seating in a theatre where each row adds the same seats."
+    },
+    {
+      "id": "S11",
+      "title": "Similar Shapes, Same Story",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Similar triangles, Thales' theorem.",
+      "angle": "Measure a tree height with a stick and shadow."
+    },
+    {
+      "id": "S12",
+      "title": "Trig Triangle Toolkit",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "sin, cos, tan, identities, heights and distances.",
+      "angle": "Use a homemade clinometer to measure a building angle."
+    },
+    {
+      "id": "S13",
+      "title": "Coordinate Compass",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Distance, midpoint, section formula.",
+      "angle": "Plot a city map and compute shortest direct distances."
+    },
+    {
+      "id": "S14",
+      "title": "Surface Area Studio",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Combined solids, frustum, conversion between shapes.",
+      "angle": "Design a toy rocket made of a cone, cylinder and hemisphere."
+    },
+    {
+      "id": "S15",
+      "title": "Probability Lab",
+      "level": "Grow",
+      "group": "class-9-10",
+      "idea": "Theoretical vs experimental probability.",
+      "angle": "Run 100 coin or dice trials and compare with predictions."
+    },
+    {
+      "id": "S16",
+      "title": "Tangent Touch",
+      "level": "Bloom",
+      "group": "class-9-10",
+      "idea": "Tangent to a circle and its properties.",
+      "angle": "Roll a coin against a ruler and see where it touches once."
+    },
+    {
+      "id": "H1",
+      "title": "Set Logic Garden",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Sets, Venn diagrams, relations.",
+      "angle": "Use survey data on student clubs to explore overlap, union and complement."
+    },
+    {
+      "id": "H2",
+      "title": "Function Zoo",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Domain, range, one-one, onto, inverse, composition.",
+      "angle": "Treat each function as an animal with habits (growth, symmetry, restrictions) and sort them."
+    },
+    {
+      "id": "H3",
+      "title": "Unit Circle Story",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Radian measure, trig functions, identities.",
+      "angle": "A Ferris wheel that links angle to height over time."
+    },
+    {
+      "id": "H4",
+      "title": "Complex Plane Walk",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Complex numbers, modulus, argument, Argand diagram.",
+      "angle": "Multiplication as rotation plus scaling on the plane."
+    },
+    {
+      "id": "H5",
+      "title": "Counting Strategies",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Permutations, combinations, binomial expansion.",
+      "angle": "Plan seating, passwords and team selection; connect Pascal's triangle to combination counts."
+    },
+    {
+      "id": "H6",
+      "title": "Conic Garden",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Circle, parabola, ellipse, hyperbola.",
+      "angle": "Slice a cone model (or torch beam on wall) to see each curve."
+    },
+    {
+      "id": "H7",
+      "title": "Limit Zoom",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Limits and the idea of a derivative.",
+      "angle": "Zoom into a graph until it looks straight; the slope there is the derivative."
+    },
+    {
+      "id": "H8",
+      "title": "Series Machines",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "GP, sum to infinity, special series.",
+      "angle": "Bouncing ball whose heights form a geometric series."
+    },
+    {
+      "id": "H9",
+      "title": "Dispersion Dial",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Variance, standard deviation.",
+      "angle": "Compare two classes with the same mean but different spread."
+    },
+    {
+      "id": "H10",
+      "title": "Derivative Toolkit",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Rules of differentiation, chain, implicit, parametric.",
+      "angle": "Build a \"derivative recipe book\" mapping each rule to a visual and a real rate."
+    },
+    {
+      "id": "H11",
+      "title": "Optimise It",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Maxima, minima, rate of change, curve sketching.",
+      "angle": "Design the cheapest can or the largest-area fence."
+    },
+    {
+      "id": "H12",
+      "title": "Area Under the Story",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Definite integral as accumulated change; area between curves.",
+      "angle": "Speed-time graph to distance; water-flow graph to volume."
+    },
+    {
+      "id": "H13",
+      "title": "Integration Strategies",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Substitution, parts, partial fractions.",
+      "angle": "Decision flowchart that helps pick a method."
+    },
+    {
+      "id": "H14",
+      "title": "Differential Equations in Motion",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Forming and solving first-order ODEs.",
+      "angle": "Model population growth, cooling coffee, or loan balance."
+    },
+    {
+      "id": "H15",
+      "title": "Matrix Machines",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Matrices, determinants, inverse, linear systems.",
+      "angle": "Image transformations (rotate, reflect, scale) as matrices."
+    },
+    {
+      "id": "H16",
+      "title": "Vector Space Voyage",
+      "level": "Grow",
+      "group": "class-11-12",
+      "idea": "Vectors, dot and cross products, lines and planes in 3D.",
+      "angle": "Navigation of a drone: position vectors and direction vectors."
+    },
+    {
+      "id": "H17",
+      "title": "Probability Tree Lab",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Conditional probability, Bayes' theorem, distributions.",
+      "angle": "Medical test or spam filter scenario with tree diagrams."
+    },
+    {
+      "id": "H18",
+      "title": "Linear Programming Planner",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Feasible region and optimum.",
+      "angle": "A small factory choosing product mix for maximum profit."
+    },
+    {
+      "id": "H19",
+      "title": "Proof and Reasoning",
+      "level": "Bloom",
+      "group": "class-11-12",
+      "idea": "Induction, contradiction, logical statements.",
+      "angle": "Prove a domino-chain pattern and discuss why base case matters. effects on the formula. integral and defend it. population) and predict. gaps. Find P(both red)."
+    }
+  ],
+  "ideaBank": [
+    {
+      "code": "PN-01",
+      "group": "play-nursery",
+      "title": "Count the Mangoes",
+      "detail": "(T01) Drag 1-10 objects to the basket."
+    },
+    {
+      "code": "PN-02",
+      "group": "play-nursery",
+      "title": "Tap and Count",
+      "detail": "Tap each fish once; each tap lights it and the robot says the next number. Prevents double counting by greying counted items."
+    },
+    {
+      "code": "PN-03",
+      "group": "play-nursery",
+      "title": "Number Trace",
+      "detail": "(T08) Trace 1-10 with a finger. Line art draws a dotted path with a moving arrow."
+    },
+    {
+      "code": "PN-04",
+      "group": "play-nursery",
+      "title": "More or Less",
+      "detail": "Two groups of animals; tap the group with more. Robot lines them up in rows to prove it."
+    },
+    {
+      "code": "PN-05",
+      "group": "play-nursery",
+      "title": "Ten Frame Train",
+      "detail": "Fill carriages (2 x 5 grid) with passengers; robot says \"5 and 3 more makes 8\"."
+    },
+    {
+      "code": "PN-06",
+      "group": "play-nursery",
+      "title": "Shape Houses",
+      "detail": "(T05) Drag circle/square/triangle into the matching window shape."
+    },
+    {
+      "code": "PN-07",
+      "group": "play-nursery",
+      "title": "Shape Hunt in the Picture",
+      "detail": "Tap every circle in a village scene (wheel, sun, plate). Check: all found."
+    },
+    {
+      "code": "PN-08",
+      "group": "play-nursery",
+      "title": "Colour Paint Pots",
+      "detail": "Drag a colour to a patch with its name; voice says the colour in both languages."
+    },
+    {
+      "code": "PN-09",
+      "group": "play-nursery",
+      "title": "Make a Picture",
+      "detail": "Build a boat from triangles and rectangles; a ghost outline guides the pieces."
+    },
+    {
+      "code": "PN-10",
+      "group": "play-nursery",
+      "title": "Big, Small, Tiny",
+      "detail": "Order three elephants from small to big by dragging them onto steps."
+    },
+    {
+      "code": "PN-11",
+      "group": "play-nursery",
+      "title": "Long and Short",
+      "detail": "Tap the longest pencil; robot lays them side by side to compare."
+    },
+    {
+      "code": "PN-12",
+      "group": "play-nursery",
+      "title": "Where Is the Bird?",
+      "detail": "On / under / next to / behind. \"Put the bird under the table.\" Drag and drop."
+    },
+    {
+      "code": "PN-13",
+      "group": "play-nursery",
+      "title": "Sort the Toys",
+      "detail": "(T05) Two bins: toys / food, or red / blue."
+    },
+    {
+      "code": "PN-14",
+      "group": "play-nursery",
+      "title": "What Comes Next",
+      "detail": "AB AB __ (red, blue, red, blue ?). Pick the next bead. Later: AAB, ABC."
+    },
+    {
+      "code": "PN-15",
+      "group": "play-nursery",
+      "title": "Odd One Out",
+      "detail": "Four items; tap the one that does not belong."
+    },
+    {
+      "code": "PN-16",
+      "group": "play-nursery",
+      "title": "Match the Pairs",
+      "detail": "Memory cards: number 3 with three dots."
+    },
+    {
+      "code": "PN-17",
+      "group": "play-nursery",
+      "title": "Day and Night",
+      "detail": "Drag sun/moon to the right sky; morning, afternoon, night routines in order."
+    },
+    {
+      "code": "PN-18",
+      "group": "play-nursery",
+      "title": "Hot and Cold",
+      "detail": "Slide a thermometer toy; sort drinks and ice."
+    },
+    {
+      "code": "C15-01",
+      "group": "class-1-5",
+      "title": "Bundle the Sticks",
+      "detail": "(T01) Ten loose sticks become one bundle; tens and ones build any two-digit number."
+    },
+    {
+      "code": "C15-02",
+      "group": "class-1-5",
+      "title": "Block Builder",
+      "detail": "Hundreds / tens / ones blocks to 999, with \"trade\" animation (10 ones -> 1 ten)."
+    },
+    {
+      "code": "C15-03",
+      "group": "class-1-5",
+      "title": "Number Line Frog",
+      "detail": "(T06) Frog hops to a number; student types where it lands. Counting by 2s, 5s, 10s."
+    },
+    {
+      "code": "C15-04",
+      "group": "class-1-5",
+      "title": "Bigger or Smaller Balance",
+      "detail": "Tilting scale shows which number is greater; student sets the sign <, >, =."
+    },
+    {
+      "code": "C15-05",
+      "group": "class-1-5",
+      "title": "Rounding Hill",
+      "detail": "A ball rolls to the nearer ten on a hill."
+    },
+    {
+      "code": "C15-06",
+      "group": "class-1-5",
+      "title": "Basket Merge",
+      "detail": "Two baskets join; count the total; write it."
+    },
+    {
+      "code": "C15-07",
+      "group": "class-1-5",
+      "title": "Carry the Bundle",
+      "detail": "Column addition with real blocks; when ones exceed 9, robot trades them for a ten."
+    },
+    {
+      "code": "C15-08",
+      "group": "class-1-5",
+      "title": "Subtract at the Bazar",
+      "detail": "Start with 50 taka, buy items, find change."
+    },
+    {
+      "code": "C15-09",
+      "group": "class-1-5",
+      "title": "Fact Family Houses",
+      "detail": "Three numbers form a house with four number sentences; student completes the house."
+    },
+    {
+      "code": "C15-10",
+      "group": "class-1-5",
+      "title": "Missing Number Bridge",
+      "detail": "6 + __ = 11 as a bridge with a gap."
+    },
+    {
+      "code": "C15-11",
+      "group": "class-1-5",
+      "title": "Egg Tray Arrays",
+      "detail": "Rows and columns of eggs; 3 rows of 4; rotate it to see 4 rows of 3."
+    },
+    {
+      "code": "C15-12",
+      "group": "class-1-5",
+      "title": "Skip Counting Train",
+      "detail": "Carriages show multiples of 3; press to hear."
+    },
+    {
+      "code": "C15-13",
+      "group": "class-1-5",
+      "title": "Fair Share Biscuits",
+      "detail": "Division as sharing among friends; remainder shown as leftovers."
+    },
+    {
+      "code": "C15-14",
+      "group": "class-1-5",
+      "title": "Times Table Garden",
+      "detail": "Plant seeds in equal rows to discover tables."
+    },
+    {
+      "code": "C15-15",
+      "group": "class-1-5",
+      "title": "Fraction Pizza Shop",
+      "detail": "(already built) Select slices for an order."
+    },
+    {
+      "code": "C15-16",
+      "group": "class-1-5",
+      "title": "Fold the Paper",
+      "detail": "Drag a fold line to cut a strip in halves, quarters, eighths; label each part."
+    },
+    {
+      "code": "C15-17",
+      "group": "class-1-5",
+      "title": "Fraction Wall",
+      "detail": "Stacked bars; slide a line down to see equivalent fractions (1/2 = 2/4 = 4/8)."
+    },
+    {
+      "code": "C15-18",
+      "group": "class-1-5",
+      "title": "Which Is Bigger?",
+      "detail": "Two fractions on a number line, student drags them into order."
+    },
+    {
+      "code": "C15-19",
+      "group": "class-1-5",
+      "title": "Money as Decimals",
+      "detail": "Taka and poisha: 2.50 taka shown with coins (Class 4-5)."
+    },
+    {
+      "code": "C15-20",
+      "group": "class-1-5",
+      "title": "Clock Setter",
+      "detail": "Drag hands to show 3:30; analog and digital linked live; \"What time in 45 minutes?\""
+    },
+    {
+      "code": "C15-21",
+      "group": "class-1-5",
+      "title": "Daily Routine Timeline",
+      "detail": "Place school day events on a 24-hour bar."
+    },
+    {
+      "code": "C15-22",
+      "group": "class-1-5",
+      "title": "Taka Shop",
+      "detail": "Pay exact amount with notes and coins; or find change."
+    },
+    {
+      "code": "C15-23",
+      "group": "class-1-5",
+      "title": "Ruler Lab",
+      "detail": "Drag an object along a ruler; read the length in cm; estimate before measuring."
+    },
+    {
+      "code": "C15-24",
+      "group": "class-1-5",
+      "title": "Balance and Weigh",
+      "detail": "Kilogram/gram balance with fruit and weights."
+    },
+    {
+      "code": "C15-25",
+      "group": "class-1-5",
+      "title": "Pour and Measure",
+      "detail": "Pour liquids between jugs to reach 1 litre."
+    },
+    {
+      "code": "C15-26",
+      "group": "class-1-5",
+      "title": "Shape Machine",
+      "detail": "Slide sides/corners; app names the shape and counts sides and corners."
+    },
+    {
+      "code": "C15-27",
+      "group": "class-1-5",
+      "title": "Mirror Fold",
+      "detail": "Draw half a butterfly; the other half appears; student finds the line of symmetry."
+    },
+    {
+      "code": "C15-28",
+      "group": "class-1-5",
+      "title": "Tile the Floor",
+      "detail": "Cover a rectangle with unit squares; perimeter and area counted live (Class 3-5)."
+    },
+    {
+      "code": "C15-29",
+      "group": "class-1-5",
+      "title": "Angle Door",
+      "detail": "Open a door by dragging; classify as less than, equal to, or greater than a right angle."
+    },
+    {
+      "code": "C15-30",
+      "group": "class-1-5",
+      "title": "Pattern Maker",
+      "detail": "Make a repeating pattern from shapes and colours; machine continues it."
+    },
+    {
+      "code": "C15-31",
+      "group": "class-1-5",
+      "title": "Tally the Class",
+      "detail": "Vote on favourite fruit; tallies become a picture graph, then a bar graph."
+    },
+    {
+      "code": "C15-32",
+      "group": "class-1-5",
+      "title": "Reading a Bar Graph",
+      "detail": "Questions that ask \"how many more\", \"total\"."
+    },
+    {
+      "code": "C15-33",
+      "group": "class-1-5",
+      "title": "Number Pattern Detective",
+      "detail": "2, 5, 8, 11, ? Find the rule, extend it."
+    },
+    {
+      "code": "C68-01",
+      "group": "class-6-8",
+      "title": "Integer Elevator",
+      "detail": "(T06) Building floors above and below ground; moving adds and subtracts; shows rules."
+    },
+    {
+      "code": "C68-02",
+      "group": "class-6-8",
+      "title": "Factor Rainbow",
+      "detail": "Click a number; its factor pairs arc above it (primes have just one arc)."
+    },
+    {
+      "code": "C68-03",
+      "group": "class-6-8",
+      "title": "Prime Sieve Race",
+      "detail": "Cross out multiples step by step."
+    },
+    {
+      "code": "C68-04",
+      "group": "class-6-8",
+      "title": "HCF and LCM Gears",
+      "detail": "Two gears with teeth a and b; find when marks align again (LCM) and the largest shared piece (HCF)."
+    },
+    {
+      "code": "C68-05",
+      "group": "class-6-8",
+      "title": "Exponent Folding",
+      "detail": "Fold paper n times; count layers; powers of 2."
+    },
+    {
+      "code": "C68-06",
+      "group": "class-6-8",
+      "title": "Fractions on a Strip",
+      "detail": "Add fractions with different denominators by re-cutting strips to a common size."
+    },
+    {
+      "code": "C68-07",
+      "group": "class-6-8",
+      "title": "Percent Grid",
+      "detail": "10 x 10 grid; shade to make 35%, then convert to fraction and decimal."
+    },
+    {
+      "code": "C68-08",
+      "group": "class-6-8",
+      "title": "Recipe Scaler",
+      "detail": "Biryani for 4; slide to 10 people; ratio table updates; spot the constant multiplier."
+    },
+    {
+      "code": "C68-09",
+      "group": "class-6-8",
+      "title": "River Boat Race",
+      "detail": "(full spec in Section 3, Example A)"
+    },
+    {
+      "code": "C68-10",
+      "group": "class-6-8",
+      "title": "Map Scale Detective",
+      "detail": "Zoom a map of Bangladesh, measure two cities, compute real distance from the scale."
+    },
+    {
+      "code": "C68-11",
+      "group": "class-6-8",
+      "title": "Discount or Not",
+      "detail": "Shop signs \"20% off\" vs \"buy 4 get 1 free\"; compare real price per item."
+    },
+    {
+      "code": "C68-12",
+      "group": "class-6-8",
+      "title": "Speed-Distance-Time Triangle",
+      "detail": "Tap what is unknown; the formula rearranges."
+    },
+    {
+      "code": "C68-13",
+      "group": "class-6-8",
+      "title": "Balance the Equation",
+      "detail": "(T07) Remove or add the same from both pans."
+    },
+    {
+      "code": "C68-14",
+      "group": "class-6-8",
+      "title": "Expression Tiles",
+      "detail": "Algebra tiles for x and 1; combine like terms; expand brackets as area."
+    },
+    {
+      "code": "C68-15",
+      "group": "class-6-8",
+      "title": "Pattern to Rule",
+      "detail": "Matchstick pattern grows; fill table; write the n-th rule; test it with a slider."
+    },
+    {
+      "code": "C68-16",
+      "group": "class-6-8",
+      "title": "Function Machine",
+      "detail": "Input goes in; student guesses the hidden rule from the outputs."
+    },
+    {
+      "code": "C68-17",
+      "group": "class-6-8",
+      "title": "Linear Graph Lab",
+      "detail": "Sliders for slope m and intercept c; match a target line."
+    },
+    {
+      "code": "C68-18",
+      "group": "class-6-8",
+      "title": "Story to Graph",
+      "detail": "(T14) \"A rickshaw puller charges 20 taka plus 10 per km.\" Build the graph and equation."
+    },
+    {
+      "code": "C68-19",
+      "group": "class-6-8",
+      "title": "Inequality Fence",
+      "detail": "Shade a number line for x > 3; test points."
+    },
+    {
+      "code": "C68-20",
+      "group": "class-6-8",
+      "title": "Angle Sum Tear",
+      "detail": "Tear the triangle's corners and rearrange them to form a straight line (180)."
+    },
+    {
+      "code": "C68-21",
+      "group": "class-6-8",
+      "title": "Parallel Lines Playground",
+      "detail": "Drag a transversal; corresponding, alternate, co-interior angles update and colour."
+    },
+    {
+      "code": "C68-22",
+      "group": "class-6-8",
+      "title": "Triangle Builder",
+      "detail": "(T10) Given three sides, can a triangle be made? Slide to find the limit (triangle inequality)."
+    },
+    {
+      "code": "C68-23",
+      "group": "class-6-8",
+      "title": "Congruence Judge",
+      "detail": "Choose SSS/SAS/ASA/RHS match for two triangles; test by sliding one onto the other."
+    },
+    {
+      "code": "C68-24",
+      "group": "class-6-8",
+      "title": "Pythagoras Squares",
+      "detail": "Three squares on the sides; drag the right angle vertex to see area relationship."
+    },
+    {
+      "code": "C68-25",
+      "group": "class-6-8",
+      "title": "Circle Unroll",
+      "detail": "Unroll a circle into a rectangle to discover the area formula."
+    },
+    {
+      "code": "C68-26",
+      "group": "class-6-8",
+      "title": "Transform the Kite",
+      "detail": "Translate, reflect, rotate, enlarge a shape on the grid; read coordinates."
+    },
+    {
+      "code": "C68-27",
+      "group": "class-6-8",
+      "title": "Net to Solid",
+      "detail": "Fold a cube/prism net in 3D; count faces and edges; compute surface area."
+    },
+    {
+      "code": "C68-28",
+      "group": "class-6-8",
+      "title": "Fill the Tank",
+      "detail": "A cuboid tank fills with water; plot volume against height."
+    },
+    {
+      "code": "C68-29",
+      "group": "class-6-8",
+      "title": "Area Cut and Paste",
+      "detail": "Cut a parallelogram into a rectangle to show the formula; same for trapezium."
+    },
+    {
+      "code": "C68-30",
+      "group": "class-6-8",
+      "title": "Mean as Balance Point",
+      "detail": "(T11) Drag dots on a number line; a seesaw tips until the fulcrum sits at the mean."
+    },
+    {
+      "code": "C68-31",
+      "group": "class-6-8",
+      "title": "Median Walk",
+      "detail": "Students line up by height; median pointer."
+    },
+    {
+      "code": "C68-32",
+      "group": "class-6-8",
+      "title": "Two Districts, One Monsoon (full spec in Section 3, Example B)",
+      "detail": ""
+    },
+    {
+      "code": "C68-33",
+      "group": "class-6-8",
+      "title": "Spinner Lab",
+      "detail": "(T12) Spin a coloured spinner 1/10/100/1000 times; experimental vs theoretical."
+    },
+    {
+      "code": "C68-34",
+      "group": "class-6-8",
+      "title": "Dice Sum Bars",
+      "detail": "Roll two dice 500 times; why 7 appears most."
+    },
+    {
+      "code": "C68-35",
+      "group": "class-6-8",
+      "title": "Misleading Graph Hunt",
+      "detail": "(T09) Spot the trick (cut axis, odd scale)."
+    },
+    {
+      "code": "C910-01",
+      "group": "class-9-10",
+      "title": "Identity Area Models",
+      "detail": "(a+b)^2 as a square cut into four parts; drag sliders for a and b; see the identity hold."
+    },
+    {
+      "code": "C910-02",
+      "group": "class-9-10",
+      "title": "Factorisation Puzzle",
+      "detail": "Drag algebra tiles into a rectangle; its sides are the factors."
+    },
+    {
+      "code": "C910-03",
+      "group": "class-9-10",
+      "title": "Simultaneous Equations Meet",
+      "detail": "Two lines on a graph; drag one; the intersection point and solution track live. Compare with substitution/elimination steps."
+    },
+    {
+      "code": "C910-04",
+      "group": "class-9-10",
+      "title": "Quadratic Shape Lab",
+      "detail": "Sliders a, b, c reshape a parabola; see roots, vertex, axis; match a target curve."
+    },
+    {
+      "code": "C910-05",
+      "group": "class-9-10",
+      "title": "Complete the Square",
+      "detail": "Square tiles rearranged to make a bigger square plus a leftover."
+    },
+    {
+      "code": "C910-06",
+      "group": "class-9-10",
+      "title": "Roots Explorer",
+      "detail": "Move the parabola up and down; discriminant shows 0, 1, 2 real roots."
+    },
+    {
+      "code": "C910-07",
+      "group": "class-9-10",
+      "title": "Indices Rule Builder",
+      "detail": "Pairs of expressions; student tests rules a^m x a^n with numeric examples."
+    },
+    {
+      "code": "C910-08",
+      "group": "class-9-10",
+      "title": "Log Slide Rule",
+      "detail": "Two scales slide to turn multiplication into addition (logarithm idea)."
+    },
+    {
+      "code": "C910-09",
+      "group": "class-9-10",
+      "title": "Sequence Stairs",
+      "detail": "Arithmetic and geometric sequences as bars; slider for n; nth term and sum."
+    },
+    {
+      "code": "C910-10",
+      "group": "class-9-10",
+      "title": "Inequality Region",
+      "detail": "Shade the region for two linear inequalities; test a point."
+    },
+    {
+      "code": "C910-11",
+      "group": "class-9-10",
+      "title": "Circle Theorem Lab",
+      "detail": "(T10) Drag points on a circle: angle at the centre vs circumference, angles in the same segment, cyclic quadrilateral."
+    },
+    {
+      "code": "C910-12",
+      "group": "class-9-10",
+      "title": "Tangent Touch",
+      "detail": "Slide a line to touch a circle; tangent is perpendicular to the radius."
+    },
+    {
+      "code": "C910-13",
+      "group": "class-9-10",
+      "title": "Similar Shadows",
+      "detail": "Flashlight and shadow; scale factor, ratio of sides, areas, volumes."
+    },
+    {
+      "code": "C910-14",
+      "group": "class-9-10",
+      "title": "Construct It",
+      "detail": "Step-by-step compass-and-ruler constructions with guided hints."
+    },
+    {
+      "code": "C910-15",
+      "group": "class-9-10",
+      "title": "Locus Dots",
+      "detail": "A moving point leaves a trail satisfying a rule (equidistant from two points, etc.)."
+    },
+    {
+      "code": "C910-16",
+      "group": "class-9-10",
+      "title": "Coordinate Geometry Lab",
+      "detail": "Drag A and B; midpoint, distance, gradient, section formula update live."
+    },
+    {
+      "code": "C910-17",
+      "group": "class-9-10",
+      "title": "Right Triangle Ratios",
+      "detail": "Slide angle; opposite/adjacent/hypotenuse change; sin, cos, tan plotted."
+    },
+    {
+      "code": "C910-18",
+      "group": "class-9-10",
+      "title": "Height of the Minar",
+      "detail": "Angle of elevation with a clinometer; solve height problems on a real photo-style scene."
+    },
+    {
+      "code": "C910-19",
+      "group": "class-9-10",
+      "title": "Unit Circle Walk",
+      "detail": "A point travels around a circle and its height traces a sine wave."
+    },
+    {
+      "code": "C910-20",
+      "group": "class-9-10",
+      "title": "Solid Slicer",
+      "detail": "Cut a cylinder/cone/sphere; compare volumes (cone is 1/3 of a cylinder demo with fill)."
+    },
+    {
+      "code": "C910-21",
+      "group": "class-9-10",
+      "title": "Surface Area Unfold",
+      "detail": "Unfold the curved surface of a cylinder/cone into a rectangle/sector."
+    },
+    {
+      "code": "C910-22",
+      "group": "class-9-10",
+      "title": "Cost to Paint a Room",
+      "detail": "Story problem with real dimensions and prices."
+    },
+    {
+      "code": "C910-23",
+      "group": "class-9-10",
+      "title": "Venn Drop",
+      "detail": "Drag students (names/numbers) into two or three overlapping circles; read set counts."
+    },
+    {
+      "code": "C910-24",
+      "group": "class-9-10",
+      "title": "Frequency Table to Histogram",
+      "detail": "Edit class intervals; histogram, frequency polygon and ogive update; read mean/median."
+    },
+    {
+      "code": "C910-25",
+      "group": "class-9-10",
+      "title": "Cumulative Race",
+      "detail": "Plot an ogive; read the median and quartiles."
+    },
+    {
+      "code": "C910-26",
+      "group": "class-9-10",
+      "title": "Probability Tree",
+      "detail": "Build a tree for two picks (with or without replacement); multiply branches."
+    },
+    {
+      "code": "C910-27",
+      "group": "class-9-10",
+      "title": "Law of Large Numbers",
+      "detail": "(T12) Coin / die simulation; running average settles near the theoretical value."
+    },
+    {
+      "code": "C910-28",
+      "group": "class-9-10",
+      "title": "Find the Mistake",
+      "detail": "(T09) Worked solution with an error in a quadratic or trig step."
+    },
+    {
+      "code": "C910-29",
+      "group": "class-9-10",
+      "title": "Exam Sprint",
+      "detail": "Timed set from one chapter; show marks and a review of errors (Robot OFF here)."
+    },
+    {
+      "code": "C1112-01",
+      "group": "class-11-12",
+      "title": "Transformation Studio",
+      "detail": "f(x) -> a f(b(x - h)) + k with sliders; match a target curve; record what each slider does."
+    },
+    {
+      "code": "C1112-02",
+      "group": "class-11-12",
+      "title": "Inverse Mirror",
+      "detail": "Reflect a function over y = x; check one-to-one with a horizontal-line test."
+    },
+    {
+      "code": "C1112-03",
+      "group": "class-11-12",
+      "title": "Domain and Range Brush",
+      "detail": "Paint the x-axis interval; image on y-axis lights up."
+    },
+    {
+      "code": "C1112-04",
+      "group": "class-11-12",
+      "title": "Exponential vs Polynomial",
+      "detail": "Race growth; at what x does one overtake?"
+    },
+    {
+      "code": "C1112-05",
+      "group": "class-11-12",
+      "title": "Log Explorer",
+      "detail": "Change base; see graph and the change-of-base relationship."
+    },
+    {
+      "code": "C1112-06",
+      "group": "class-11-12",
+      "title": "Wave Builder",
+      "detail": "Amplitude, period, phase sliders; match a recorded wave (sound or tide)."
+    },
+    {
+      "code": "C1112-07",
+      "group": "class-11-12",
+      "title": "Identity Prover",
+      "detail": "Pick transformations step by step; app checks each step is valid; complete the proof."
+    },
+    {
+      "code": "C1112-08",
+      "group": "class-11-12",
+      "title": "Trig Equation Solver",
+      "detail": "Intersect y = sin x with a horizontal line; list the general solution."
+    },
+    {
+      "code": "C1112-09",
+      "group": "class-11-12",
+      "title": "Slope of the Hill",
+      "detail": "(full spec in Section 3, Example D) limits and tangents."
+    },
+    {
+      "code": "C1112-10",
+      "group": "class-11-12",
+      "title": "Derivative Graph Twins",
+      "detail": "f(x) on top, f'(x) below; drag along; see where slope zero matches turning points."
+    },
+    {
+      "code": "C1112-11",
+      "group": "class-11-12",
+      "title": "Optimisation Workshop",
+      "detail": "Fold a box from a sheet; slider for the cut size; graph the volume; find the maximum."
+    },
+    {
+      "code": "C1112-12",
+      "group": "class-11-12",
+      "title": "Riemann Rain",
+      "detail": "Rectangle sums with n slider; the area approaches the integral."
+    },
+    {
+      "code": "C1112-13",
+      "group": "class-11-12",
+      "title": "Area Between Curves",
+      "detail": "Shade between two curves; set limits; compare numeric to exact answer."
+    },
+    {
+      "code": "C1112-14",
+      "group": "class-11-12",
+      "title": "Motion Graph Trio",
+      "detail": "Position, velocity, acceleration graphs linked; drag one, others update."
+    },
+    {
+      "code": "C1112-15",
+      "group": "class-11-12",
+      "title": "Related Rates Ladder",
+      "detail": "A ladder slides down a wall; plot rates."
+    },
+    {
+      "code": "C1112-16",
+      "group": "class-11-12",
+      "title": "Vector Arrow Lab",
+      "detail": "Drag two arrows; sum, difference, dot product, angle between them shown live."
+    },
+    {
+      "code": "C1112-17",
+      "group": "class-11-12",
+      "title": "Projection Shadow",
+      "detail": "Project one vector onto another; scalar and vector projection."
+    },
+    {
+      "code": "C1112-18",
+      "group": "class-11-12",
+      "title": "Matrix Transformer",
+      "detail": "2 x 2 matrix entries change the plane; a unit square becomes a parallelogram; area equals the determinant."
+    },
+    {
+      "code": "C1112-19",
+      "group": "class-11-12",
+      "title": "Linear System Views",
+      "detail": "Three planes/lines: unique / none / infinite solutions, matched with matrix row reduction."
+    },
+    {
+      "code": "C1112-20",
+      "group": "class-11-12",
+      "title": "Argand Spinner",
+      "detail": "Multiply complex numbers: lengths multiply, angles add; roots of unity around a circle."
+    },
+    {
+      "code": "C1112-21",
+      "group": "class-11-12",
+      "title": "Circle from Three Points",
+      "detail": "Drag three points; circle and equation form."
+    },
+    {
+      "code": "C1112-22",
+      "group": "class-11-12",
+      "title": "Conic Slicer",
+      "detail": "Slice a cone at different angles to get circle, ellipse, parabola, hyperbola."
+    },
+    {
+      "code": "C1112-23",
+      "group": "class-11-12",
+      "title": "Focus and Directrix",
+      "detail": "Parabola as set of points equidistant from a point and a line; drag a point to verify."
+    },
+    {
+      "code": "C1112-24",
+      "group": "class-11-12",
+      "title": "Ellipse String",
+      "detail": "Two pins and a loop of string trace an ellipse; eccentricity slider."
+    },
+    {
+      "code": "C1112-25",
+      "group": "class-11-12",
+      "title": "Arrange or Choose",
+      "detail": "Permutation vs combination with a seat-picking interface; see why n!/(n-r)! and nCr differ."
+    },
+    {
+      "code": "C1112-26",
+      "group": "class-11-12",
+      "title": "Binomial Galton Board",
+      "detail": "Balls drop through pegs; histogram builds; compare with the binomial formula."
+    },
+    {
+      "code": "C1112-27",
+      "group": "class-11-12",
+      "title": "Normal Curve Playground",
+      "detail": "Slide mean and standard deviation; shade area for a given range."
+    },
+    {
+      "code": "C1112-28",
+      "group": "class-11-12",
+      "title": "Regression Line Lab",
+      "detail": "Drag points; best-fit line, correlation r, residuals; effect of an outlier."
+    },
+    {
+      "code": "C1112-29",
+      "group": "class-11-12",
+      "title": "Conditional Probability Table",
+      "detail": "Two-way table with sliders; compute P(A|B), Bayes' rule intuition."
+    },
+    {
+      "code": "C1112-30",
+      "group": "class-11-12",
+      "title": "Projectile Planner",
+      "detail": "Angle and speed sliders; range, height, time; hit a target (math + physics)."
+    },
+    {
+      "code": "C1112-31",
+      "group": "class-11-12",
+      "title": "Spring and Wave (SHM)",
+      "detail": "Mass on a spring traces a sine wave."
+    },
+    {
+      "code": "C1112-32",
+      "group": "class-11-12",
+      "title": "Loan Calculator",
+      "detail": "Compound interest and EMI; graph of balance (math + economics)."
+    },
+    {
+      "code": "C1112-33",
+      "group": "class-11-12",
+      "title": "Mini Cipher Lab",
+      "detail": "Modular arithmetic encryption (math + ICT). id: \"C68-09\", title: { en: \"River Boat Race\", bn: \"নদীর নৌকা দৌড়\" }, band: \"6-8\", defaultStyle: \"line\", // robot | line | text robotAllowed: true, // false for timed quiz modes rounds: [ { boats: [ { name: \"Lal\", form: \"graph\", slope: 4.8 }, { name: \"Nil\", form: \"table\", rows: [[2,9],[4,18],[6,27],[8,36]] }, { name: \"Sobuj\", form: \"sentence\", dist: 28, time: 6 } ] } ], check(answer, round) { /* return {ok, message} */ }, steps(round) { // one source of truth for all styles return [ { target: \"#cardLal\", say: {en:\"...\", bn:\"...\"}, draw: \"slopeTriangle\", text: \"...\" }, { target: \"#cardNil\", say: {...}, draw: \"rowBrackets\", text: \"...\" } ]; } player, hint ladder, sound, EN/BN. (Your game.html already has most.) plus content. is a strong first version (35 total). (Practice) - two modes, like a good lesson interaction until it is clearly my own the teacher guide if your school wants to acknowledge the inspiration"
+    }
+  ],
+  "gameIdeas": [
+    {
+      "code": "A1",
+      "group": "play-nursery",
+      "title": "Fruit Basket Count",
+      "detail": "drag fruits into a basket, tap each to count aloud 1-10. Picture: big fruits, number pops up. Pip points and counts with every fruit."
+    },
+    {
+      "code": "A2",
+      "group": "play-nursery",
+      "title": "Number Train",
+      "detail": "trains have empty wagons; drag the missing number (1-20). Picture: coloured train. Pip flies along the track."
+    },
+    {
+      "code": "A3",
+      "group": "play-nursery",
+      "title": "Shape Hunt",
+      "detail": "tap all circles/squares/triangles hidden in a play room scene. Picture: toys, windows, plates. Pip circles the shape with the crayon."
+    },
+    {
+      "code": "A4",
+      "group": "play-nursery",
+      "title": "Big & Small Balance",
+      "detail": "put two objects on a see-saw; pick which is bigger, more, fewer. Picture: animals on the see-saw."
+    },
+    {
+      "code": "A5",
+      "group": "play-nursery",
+      "title": "Bead Pattern",
+      "detail": "continue a red-blue-red-blue string by dragging beads. Pip taps the rhythm of the pattern."
+    },
+    {
+      "code": "A6",
+      "group": "play-nursery",
+      "title": "Colour Sort Garden",
+      "detail": "drop flowers/objects in the matching pot. Pip says the colour name, then the student repeats."
+    },
+    {
+      "code": "B1",
+      "group": "class-1-5",
+      "title": "Fraction Pizza Shop (EXAMPLE FILE: game.html)",
+      "detail": "customer orders a fraction like 3/4; student taps slices. Bolt shows top/bottom number. Later levels: equivalent fractions, compare two pizzas."
+    },
+    {
+      "code": "B2",
+      "group": "class-1-5",
+      "title": "Ten-Frame Add-Up",
+      "detail": "drop counters in a ten-frame to make sums within 10 and 20; subtraction by removing counters."
+    },
+    {
+      "code": "B3",
+      "group": "class-1-5",
+      "title": "Block Builder (place value)",
+      "detail": "build a number using hundred/ten/one blocks; trade 10 ones for 1 ten. Bolt explains regrouping."
+    },
+    {
+      "code": "B4",
+      "group": "class-1-5",
+      "title": "Clock Cafe",
+      "detail": "move the clock hands to the time on the order slip; later: how long until the cake is ready (elapsed time)."
+    },
+    {
+      "code": "B5",
+      "group": "class-1-5",
+      "title": "Taka Shop",
+      "detail": "pay the exact price with coins/notes, then give change. Currency shown in Taka."
+    },
+    {
+      "code": "B6",
+      "group": "class-1-5",
+      "title": "Flower Array",
+      "detail": "plant rows x columns to see multiplication as equal groups; swap rows and columns to see 3x4 = 4x3."
+    },
+    {
+      "code": "B7",
+      "group": "class-1-5",
+      "title": "Bake-Sale Graph",
+      "detail": "tally sales, drag bars to build a bar graph, then answer \"which sold most / how many more?\""
+    },
+    {
+      "code": "B8",
+      "group": "class-1-5",
+      "title": "Pet Fence",
+      "detail": "drag fence pieces around a field; count squares for area and fence length for perimeter."
+    },
+    {
+      "code": "C1",
+      "group": "class-6-8",
+      "title": "Smoothie Ratio Mixer",
+      "detail": "keep a recipe ratio when serving more people; unit rate = cost of 1 glass. Visual: glasses fill with colour."
+    },
+    {
+      "code": "C2",
+      "group": "class-6-8",
+      "title": "Basement Lift",
+      "detail": "a lift moves above/below ground; add and subtract integers as moves on a vertical number line."
+    },
+    {
+      "code": "C3",
+      "group": "class-6-8",
+      "title": "Balance Scale Equations",
+      "detail": "keep the scale level while adding/removing equal weights to solve one- and two-step equations."
+    },
+    {
+      "code": "C4",
+      "group": "class-6-8",
+      "title": "Factor Tree Forest",
+      "detail": "split a number into prime leaves; use the leaves to find GCF and LCM."
+    },
+    {
+      "code": "C5",
+      "group": "class-6-8",
+      "title": "Ramp Designer",
+      "detail": "drag a ramp's height and run; slope number updates; match the ramp to a given slope."
+    },
+    {
+      "code": "C6",
+      "group": "class-6-8",
+      "title": "Ladder Rescue (Pythagoras)",
+      "detail": "ladder against a wall; squares grow on each side to prove a2 + b2 = c2; find the safe ladder length."
+    },
+    {
+      "code": "D1",
+      "group": "class-9-10",
+      "title": "Hoop Shot (quadratics)",
+      "detail": "change a, h, k sliders so the ball's parabola passes through hoops; roots = where it lands."
+    },
+    {
+      "code": "D2",
+      "group": "class-9-10",
+      "title": "Function Factory",
+      "detail": "a machine turns inputs into outputs; guess the rule, then chain two machines (composition), find domain/range."
+    },
+    {
+      "code": "D3",
+      "group": "class-9-10",
+      "title": "Treasure Map Systems",
+      "detail": "two clue lines cross at the treasure; solve by graph, then check by substitution/elimination."
+    },
+    {
+      "code": "D4",
+      "group": "class-9-10",
+      "title": "Proof Builder",
+      "detail": "drag reason cards (SAS, ASA, CPCTC) into a two-column proof for triangle congruence."
+    },
+    {
+      "code": "D5",
+      "group": "class-9-10",
+      "title": "Tower Surveyor (trigonometry)",
+      "detail": "choose sin, cos or tan to find the height of a tower from a given angle and distance."
+    },
+    {
+      "code": "D6",
+      "group": "class-9-10",
+      "title": "Grow or Fade",
+      "detail": "compare linear vs exponential (savings, medicine, virus); slide the rate and watch both graphs."
+    },
+    {
+      "code": "E1",
+      "group": "class-11-12",
+      "title": "Unit Circle Spinner",
+      "detail": "drag a point round the circle; see angle in degrees and radians and sin/cos drawn as a live wave."
+    },
+    {
+      "code": "E2",
+      "group": "class-11-12",
+      "title": "Limit Zoom Lens",
+      "detail": "zoom into a graph near a point; numbers from left and right close in; spot jumps and holes (continuity)."
+    },
+    {
+      "code": "E3",
+      "group": "class-11-12",
+      "title": "Slope Tracker (derivative)",
+      "detail": "a tangent line rides the curve and its slope draws the derivative graph in a second panel."
+    },
+    {
+      "code": "E4",
+      "group": "class-11-12",
+      "title": "Box Optimiser",
+      "detail": "cut corners of a sheet to fold a box; slider finds the maximum volume; link to derivative = 0."
+    },
+    {
+      "code": "E5",
+      "group": "class-11-12",
+      "title": "Rain Rectangles (integrals)",
+      "detail": "add more rectangles under a curve and watch the sum approach the exact area."
+    },
+    {
+      "code": "E6",
+      "group": "class-11-12",
+      "title": "Matrix Transformer",
+      "detail": "a 2x2 matrix reshapes a picture; determinant = area scale; try to undo it with the inverse. target: \"3/4\", selected: 2, tries: 1 } context. Reply in at most 2 short sentences in the student's language. Give a hint, not the final answer, until tries >= 3. Never give the answer to graded questions directly.\""
+    }
+  ],
+  "interactionTemplates": [
+    {
+      "code": "T01",
+      "title": "DRAG-TO-BUILD",
+      "detail": "Student drags blocks/pieces into a frame to make a target amount. Used for: counting, place value, fractions, area tiles, equations. Check: sum of placed pieces equals target."
+    },
+    {
+      "code": "T02",
+      "title": "SLIDER EXPLORER",
+      "detail": "One or more sliders change a picture or graph live. A readout shows the numbers. Prompt: \"Move it. What stays the same? What changes?\" Check: optional mini-question after exploring (\"Make the slope 3\")."
+    },
+    {
+      "code": "T03",
+      "title": "COMPARE THREE REPRESENTATIONS",
+      "detail": "Same idea shown as picture, table, graph, words. Student matches or ranks. Check: matches and ranking correct."
+    },
+    {
+      "code": "T04",
+      "title": "PREDICT, THEN RUN",
+      "detail": "Student commits to a guess, presses Run, an animation reveals the truth, then the screen shows the gap between guess and result. Used for: races, probability, rates, motion."
+    },
+    {
+      "code": "T05",
+      "title": "TAP-TO-SORT / SORTING BINS",
+      "detail": "Items fall; student drags into bins (even/odd, shape type, prime/not). Check: all items binned. Reveal rule at end."
+    },
+    {
+      "code": "T06",
+      "title": "NUMBER LINE HOP",
+      "detail": "A character hops along a line. Student sets jump size and count. Used for: addition, subtraction, integers, multiplication, fractions."
+    },
+    {
+      "code": "T07",
+      "title": "BALANCE SCALE",
+      "detail": "Two pans with objects/unknown boxes. Student adds/removes the SAME thing from both sides. Used for: equal sign, equations, inequalities."
+    },
+    {
+      "code": "T08",
+      "title": "DRAW-IT-YOURSELF (trace / plot)",
+      "detail": "Student traces a shape, plots points, or draws a line through points. Check: tolerance-based (within X pixels). Line art style shines here."
+    },
+    {
+      "code": "T09",
+      "title": "FIND-THE-MISTAKE",
+      "detail": "A worked solution with one wrong line. Student taps the bad line. Check: correct line chosen; then explains why in a choice list."
+    },
+    {
+      "code": "T10",
+      "title": "CONSTRUCT & MEASURE",
+      "detail": "Student drags vertices/points; app shows angles, lengths, area live. Check: \"Make a triangle with area 12\" within tolerance."
+    },
+    {
+      "code": "T11",
+      "title": "DATA PLAYGROUND",
+      "detail": "Student drags dots on a dot plot / bars on a chart. Mean, median, spread update live. Used for: statistics from Class 3 to Class 12."
+    },
+    {
+      "code": "T12",
+      "title": "SIMULATE MANY TIMES",
+      "detail": "Button \"Run 1 / 10 / 100 / 1000 times\" shows results piling up as a graph. Used for: probability, randomness, distributions."
+    },
+    {
+      "code": "T13",
+      "title": "STORY PROBLEM WITH A PICTURE ENGINE",
+      "detail": "A short local story (bazar, school bus, river, cricket) generated from a template with random numbers, solved with a built-in tool. Check: numeric input with accepted tolerance or unit handling."
+    },
+    {
+      "code": "T14",
+      "title": "BUILD-A-GRAPH-FROM-A-STORY",
+      "detail": "Student sets a graph's shape to match a story, or writes the story that matches a graph (two directions). Used for: rates, functions, calculus. different form. Students find each unit rate, rank the boats, and then watch the race to see if they were right. Boat Lal : a distance-time GRAPH (a straight line) Boat Nil : a TABLE (time 2,4,6,8 s -> distance 9,18,27,36 m) Boat Sobuj : a SENTENCE \"goes 28 m in 6 seconds\" Below: a river lane view, finish line at 60 m. 2. Drags the boats into 1st / 2nd / 3rd. 3. Presses Race. Boats move at constant speed. Rank is confirmed. students must really calculate. Randomise within a safe range. Points at two table rows, draws the division. Celebrates after race. brackets; the sentence is underlined and divided. Which district is \"more rainy\" and which is \"more unpredictable\"? when the student taps \"Show mean\". distance from the mean appears (this builds mean absolute deviation). 3. Reads off MAD for each district (enter numbers). 4. Answers: \"The difference between the means is ___ times the MAD.\" Sylhet : 5,9,13,16,19,22,25,28,30,31 (mean 19.8) Randomise from templates so the cohort gets different sets. the bars. Says \"wide spread means less predictable\". \"pop\" and the robot counts aloud \"one... two... three!\". gives one back to the tree. the curve slides toward A. A secant line is drawn through A and B. 2. Table fills: h, slope of secant. Watches values approach a number. 3. Presses \"Make tangent\": the line settles on the tangent at A. 4. Types the limit value and the derivative formula guess. the robot says the next number. Prevents double counting by greying counted items. draws a dotted path with a moving arrow. more. Robot lines them up in rows to prove it. robot says \"5 and 3 more makes 8\". matching window shape. sun, plate). Check: all found. says the colour in both languages. a ghost outline guides the pieces. dragging them onto steps. by side to compare. under the table.\" Drag and drop. bead. Later: AAB, ABC. afternoon, night routines in order. tens and ones build any two-digit number. \"trade\" animation (10 ones -> 1 ten). where it lands. Counting by 2s, 5s, 10s. student sets the sign <, >, =. exceed 9, robot trades them for a ten. sentences; student completes the house. rotate it to see 4 rows of 3. shown as leftovers. quarters, eighths; label each part. equivalent fractions (1/2 = 2/4 = 4/8). drags them into order. (Class 4-5). linked live; \"What time in 45 minutes?\" find change. in cm; estimate before measuring. counts sides and corners. appears; student finds the line of symmetry. perimeter and area counted live (Class 3-5). than, equal to, or greater than a right angle. colours; machine continues it. picture graph, then a bar graph. moving adds and subtracts; shows rules. (primes have just one arc). align again (LCM) and the largest shared piece (HCF). re-cutting strips to a common size. to fraction and decimal. updates; spot the constant multiplier. compute real distance from the scale. compare real price per item. expand brackets as area. the n-th rule; test it with a slider. from the outputs. target line. 10 per km.\" Build the graph and equation. them to form a straight line (180). co-interior angles update and colour. made? Slide to find the limit (triangle inequality). triangles; test by sliding one onto the other. angle vertex to see area relationship. the area formula. the grid; read coordinates. edges; compute surface area. against height. the formula; same for trapezium. tips until the fulcrum sits at the mean. times; experimental vs theoretical. sliders for a and b; see the identity hold. are the factors. intersection point and solution track live. Compare with substitution/elimination steps. vertex, axis; match a target curve. square plus a leftover. shows 0, 1, 2 real roots. a^m x a^n with numeric examples. addition (logarithm idea). slider for n; nth term and sum. test a point. centre vs circumference, angles in the same segment, cyclic quadrilateral. perpendicular to the radius. sides, areas, volumes. with guided hints. rule (equidistant from two points, etc.). section formula update live. change; sin, cos, tan plotted. height problems on a real photo-style scene. height traces a sine wave. (cone is 1/3 of a cylinder demo with fill). into a rectangle/sector. three overlapping circles; read set counts. polygon and ogive update; read mean/median. replacement); multiply branches. settles near the theoretical value. quadratic or trig step. review of errors (Robot OFF here). a target curve; record what each slider does. with a horizontal-line test. lights up. relationship. recorded wave (sound or tide). each step is valid; complete the proof. list the general solution. and tangents. where slope zero matches turning points. size; graph the volume; find the maximum. approaches the integral. numeric to exact answer. drag one, others update. angle between them shown live. vector projection. square becomes a parallelogram; area equals the determinant. solutions, matched with matrix row reduction. angles add; roots of unity around a circle. circle, ellipse, parabola, hyperbola. point and a line; drag a point to verify. ellipse; eccentricity slider. interface; see why n!/(n-r)! and nCr differ. compare with the binomial formula. area for a given range. residuals; effect of an outlier. P(A|B), Bayes' rule intuition. hit a target (math + physics). (math + economics). { boats: [ { name: \"Lal\", form: \"graph\", slope: 4.8 }, { name: \"Nil\", form: \"table\", rows: [[2,9],[4,18],[6,27],[8,36]] }, { name: \"Sobuj\", form: \"sentence\", dist: 28, time: 6 } ] } return [ { target: \"#cardLal\", say: {en:\"...\", bn:\"...\"}, draw: \"slopeTriangle\", text: \"...\" }, { target: \"#cardNil\", say: {...}, draw: \"rowBrackets\", text: \"...\" } ]; player, hint ladder, sound, EN/BN. (Your game.html already has most.) plus content. is a strong first version (35 total). (Practice) - two modes, like a good lesson interaction until it is clearly my own the teacher guide if your school wants to acknowledge the inspiration"
+    }
+  ],
+  "workedExamples": [
+    {
+      "code": "A",
+      "title": "RIVER BOAT RACE",
+      "band": "Class 6-8, pattern T03 + T04"
+    },
+    {
+      "code": "B",
+      "title": "TWO DISTRICTS, ONE MONSOON",
+      "band": "Class 8-9, pattern T11 + T03"
+    },
+    {
+      "code": "C",
+      "title": "COUNT THE MANGOES",
+      "band": "Play & Nursery, pattern T01"
+    },
+    {
+      "code": "D",
+      "title": "SLOPE OF THE HILL",
+      "band": "Class 11-12, pattern T02 + T14"
+    }
+  ]
+}

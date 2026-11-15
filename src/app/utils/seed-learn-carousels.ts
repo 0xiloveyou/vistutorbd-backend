@@ -1,7 +1,8 @@
-import type { LearnCarouselKind } from "@prisma/client";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import type { LearnCarouselKind } from "@prisma/client";
+import { NEXT_PLAN_CAROUSEL_SEEDS } from "../content/next-plan/carousels";
 import { prisma } from "../lib/prisma";
 
 /**
@@ -17,7 +18,13 @@ import { prisma } from "../lib/prisma";
  * The documents live in MongoDB and are served by `GET /api/v1/learn/*`, so the
  * deployed frontend never exposes the carousel source as a static file.
  */
-const CAROUSEL_DIR = path.join(process.cwd(), "src", "app", "content", "carousels");
+const CAROUSEL_DIR = path.join(
+  process.cwd(),
+  "src",
+  "app",
+  "content",
+  "carousels",
+);
 
 type CarouselSeed = {
   slug: string;
@@ -98,7 +105,10 @@ const CAROUSEL_SEEDS: CarouselSeed[] = [
     file: "play-nursery.html",
     classLevelIds: ["play", "nursery"],
     classBandIds: ["PLAY_NURSERY"],
-    title: { en: "Play and Nursery: tap, listen and answer", bn: "Play and Nursery: tap, listen and answer" },
+    title: {
+      en: "Play and Nursery: tap, listen and answer",
+      bn: "Play and Nursery: tap, listen and answer",
+    },
     summary: {
       en: "Short counting, adding and comparing games with Bolt the robot.",
       bn: "Short counting, adding and comparing games with Bolt the robot.",
@@ -170,6 +180,7 @@ const CAROUSEL_SEEDS: CarouselSeed[] = [
     },
     order: 6,
   },
+  ...NEXT_PLAN_CAROUSEL_SEEDS,
 ];
 
 const HEIGHT_REPORTER = `<script>
@@ -198,7 +209,8 @@ const addHeightReporter = (html: string) => {
   return `${html}${HEIGHT_REPORTER}`;
 };
 
-const hash = (value: string) => createHash("sha256").update(value).digest("hex");
+const hash = (value: string) =>
+  createHash("sha256").update(value).digest("hex");
 
 export const seedLearnCarousels = async () => {
   const seenHashes = new Map<string, string>();

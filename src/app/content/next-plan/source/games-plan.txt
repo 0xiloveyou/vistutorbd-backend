@@ -1,0 +1,214 @@
+=====================================================================
+ SCHOOL MATH GAMES - CONCEPT PLAN FOR 5 CATEGORIES
+=====================================================================
+Inspired by the TOPIC LIST of mathos.ai/app/game (counting, fractions,
+algebra, geometry...). Only the topics were used. All game ideas,
+mechanics, names, characters and look are original for our school.
+
+Groups:  A) Play & Nursery   B) Class 1-5   C) Class 6-8
+         D) Class 9-10       E) Class 11-12
+
+
+---------------------------------------------------------------------
+ 1. HOW EVERY GAME WORKS (same for all games)
+---------------------------------------------------------------------
+Each game is ONE html file with ONE math idea. Same flow every time:
+
+  1. MEET     Companion flies in and says today's goal in one line.
+  2. SEE      "Show me how": companion flies to each part of the
+              picture, points with its pen and explains step by step.
+  3. TRY      Guided first question (hints are free).
+  4. PLAY     3-5 rounds, getting slightly harder. Drag, tap or slide.
+  5. CHECK    Press Check. Right = sound + stars. Wrong = gentle
+              shake and a hint (never a scary message).
+  6. REWARD   Stars + sticker. After 3 wrong tries the companion
+              solves it on screen and the round is repeated later.
+  7. REVIEW   Summary: "Today I learned ..." (1 sentence).
+
+Same buttons in every game (top bar / bottom bar):
+  Style:   🤖 Robot explains | ✏️ Line art | 📝 Text only
+  ▶ Show me how       replays the explanation
+  💡 Suggestion       free hint, 2-3 levels (hint 1 vague, hint 2 clear)
+  🙋 I didn't understand   replays the last step slower
+  🔊 sound on/off     EN / বাংলা language switch
+  ⟳ dock button       swaps companion <-> page tools (up, down, timer)
+
+What the STYLE button does:
+  🤖 Robot explains  companion appears, flies, points with a pen, speaks
+                     in a bubble. Colourful pictures.
+  ✏️ Line art        companion hidden. Clean black-line drawings with
+                     hatch shading, like a board sketch. Explanation
+                     appears as a caption bar.
+  📝 Text only       no companion, no animation. Simple boxes and a
+                     plain written step list. Good for slow devices,
+                     exams and revision.
+  Rule: the companion is used only when it helps. In "play" rounds it
+  stays quiet at home (bottom-left) until the student asks for help.
+
+Allowed exceptions: nursery games have no Text-only mode and use voice;
+class 11-12 games may have a "Challenge" round with a timer.
+
+
+---------------------------------------------------------------------
+ 2. COMPANIONS (all hold a teaching pen and fly with shoes/jets)
+---------------------------------------------------------------------
+Rule for all: flies (no walking), holds a pen / pointer / chalk, tilts
+head when confused, hops when happy, shakes when student is wrong.
+Same API as the attached companion.html (moveTo, point, say, emotion).
+
+  Bolt  (attached robot)  -> Group B, Class 1-5. Jet boots, yellow pen.
+  Pip   (round yellow chick, big eyes) -> Group A. Winged sneakers,
+        fat crayon as pen. Very short words, loud friendly sounds.
+  Nova  (space fox, goggles)  -> Group C, Class 6-8. Rocket shoes,
+        glowing laser-pen. Jokes and challenges.
+  Sage  (calm owl in a cap)   -> Groups D and E. Feather-jet shoes,
+        chalk-pen. Two skins: "Sage Junior" (9-10, round, bright) and
+        "Sage Pro" (11-12, slim, dark blue/gold). Asks "why?" questions.
+
+Emotions to draw for each: idle, happy, sad, confused, think, talking.
+
+
+---------------------------------------------------------------------
+ 3. RULES PER GROUP
+---------------------------------------------------------------------
+                 A Play-Nursery   B Class 1-5    C Class 6-8
+ Reading         none, voice+icon short words    1-2 sentences
+ Input           drag / tap       drag / tap     drag, slider, type
+ Rounds          3, no fail       4-5            5
+ Timer           never            optional       optional
+ Wrong answer    "try again" +    hint after 1   hint after 2,
+                 companion helps  wrong          solution after 3
+ Styles          Robot only       all 3          all 3
+ Reward          big sticker      stars          stars + badge
+
+                 D Class 9-10     E Class 11-12
+ Reading         full problems    full problems
+ Input           slider, type,    slider, type, graph drag,
+                 drag proof cards sketch
+ Rounds          5 + 1 boss       5 + challenge
+ Timer           optional         optional challenge
+ Wrong answer    hint, then       "why wrong" explanation
+                 worked example   with the pen on the graph
+ Styles          all 3            all 3 (Line art is default)
+ Reward          badge + level    badge + level + review sheet
+
+
+---------------------------------------------------------------------
+ 4. GAME IDEAS (6 per group, each 1 html file)
+---------------------------------------------------------------------
+Format: NAME - Play / Picture / Companion help
+
+GROUP A: PLAY & NURSERY (companion: Pip)
+ A1 Fruit Basket Count - drag fruits into a basket, tap each to count
+    aloud 1-10. Picture: big fruits, number pops up. Pip points and
+    counts with every fruit.
+ A2 Number Train - trains have empty wagons; drag the missing number
+    (1-20). Picture: coloured train. Pip flies along the track.
+ A3 Shape Hunt - tap all circles/squares/triangles hidden in a play
+    room scene. Picture: toys, windows, plates. Pip circles the shape
+    with the crayon.
+ A4 Big & Small Balance - put two objects on a see-saw; pick which is
+    bigger, more, fewer. Picture: animals on the see-saw.
+ A5 Bead Pattern - continue a red-blue-red-blue string by dragging
+    beads. Pip taps the rhythm of the pattern.
+ A6 Colour Sort Garden - drop flowers/objects in the matching pot.
+    Pip says the colour name, then the student repeats.
+
+GROUP B: CLASS 1-5 (companion: Bolt)
+ B1 Fraction Pizza Shop (EXAMPLE FILE: game.html) - customer orders a
+    fraction like 3/4; student taps slices. Bolt shows top/bottom number.
+    Later levels: equivalent fractions, compare two pizzas.
+ B2 Ten-Frame Add-Up - drop counters in a ten-frame to make sums within
+    10 and 20; subtraction by removing counters.
+ B3 Block Builder (place value) - build a number using hundred/ten/one
+    blocks; trade 10 ones for 1 ten. Bolt explains regrouping.
+ B4 Clock Cafe - move the clock hands to the time on the order slip;
+    later: how long until the cake is ready (elapsed time).
+ B5 Taka Shop - pay the exact price with coins/notes, then give change.
+    Currency shown in Taka.
+ B6 Flower Array - plant rows x columns to see multiplication as
+    equal groups; swap rows and columns to see 3x4 = 4x3.
+ B7 Bake-Sale Graph - tally sales, drag bars to build a bar graph, then
+    answer "which sold most / how many more?"
+ B8 Pet Fence - drag fence pieces around a field; count squares for
+    area and fence length for perimeter.
+
+GROUP C: CLASS 6-8 (companion: Nova)
+ C1 Smoothie Ratio Mixer - keep a recipe ratio when serving more people;
+    unit rate = cost of 1 glass. Visual: glasses fill with colour.
+ C2 Basement Lift - a lift moves above/below ground; add and subtract
+    integers as moves on a vertical number line.
+ C3 Balance Scale Equations - keep the scale level while adding/removing
+    equal weights to solve one- and two-step equations.
+ C4 Factor Tree Forest - split a number into prime leaves; use the
+    leaves to find GCF and LCM.
+ C5 Ramp Designer - drag a ramp's height and run; slope number updates;
+    match the ramp to a given slope.
+ C6 Ladder Rescue (Pythagoras) - ladder against a wall; squares grow on
+    each side to prove a2 + b2 = c2; find the safe ladder length.
+
+GROUP D: CLASS 9-10 (companion: Sage Junior)
+ D1 Hoop Shot (quadratics) - change a, h, k sliders so the ball's
+    parabola passes through hoops; roots = where it lands.
+ D2 Function Factory - a machine turns inputs into outputs; guess the
+    rule, then chain two machines (composition), find domain/range.
+ D3 Treasure Map Systems - two clue lines cross at the treasure; solve
+    by graph, then check by substitution/elimination.
+ D4 Proof Builder - drag reason cards (SAS, ASA, CPCTC) into a
+    two-column proof for triangle congruence.
+ D5 Tower Surveyor (trigonometry) - choose sin, cos or tan to find the
+    height of a tower from a given angle and distance.
+ D6 Grow or Fade - compare linear vs exponential (savings, medicine,
+    virus); slide the rate and watch both graphs.
+
+GROUP E: CLASS 11-12 (companion: Sage Pro)
+ E1 Unit Circle Spinner - drag a point round the circle; see angle in
+    degrees and radians and sin/cos drawn as a live wave.
+ E2 Limit Zoom Lens - zoom into a graph near a point; numbers from left
+    and right close in; spot jumps and holes (continuity).
+ E3 Slope Tracker (derivative) - a tangent line rides the curve and its
+    slope draws the derivative graph in a second panel.
+ E4 Box Optimiser - cut corners of a sheet to fold a box; slider finds
+    the maximum volume; link to derivative = 0.
+ E5 Rain Rectangles (integrals) - add more rectangles under a curve and
+    watch the sum approach the exact area.
+ E6 Matrix Transformer - a 2x2 matrix reshapes a picture; determinant =
+    area scale; try to undo it with the inverse.
+ (spare ideas: Vector Drone with wind, Probability Tree Lab,
+  Log Slide Rule, Polar Curve Painter)
+
+
+---------------------------------------------------------------------
+ 5. AI COMPANION HOOK (optional, add later)
+---------------------------------------------------------------------
+Every game keeps a small "context" object and sends it with the
+student's question to your backend:
+
+  POST /chat   { message, lang, context }  ->  { reply }
+  context = { vizId: "viz.class_1_5.fractions.pizza.v1",
+              group: "B", stepIndex: 2, narration: "...",
+              target: "3/4", selected: 2, tries: 1 }
+
+Suggested system prompt:
+  "You are <companion name>, a kind math helper for <group>. Use the
+   context. Reply in at most 2 short sentences in the student's
+   language. Give a hint, not the final answer, until tries >= 3.
+   Never give the answer to graded questions directly."
+
+If no backend is connected, the buttons still work with the
+pre-written hints stored in each game file.
+
+
+---------------------------------------------------------------------
+ 6. FILE / BUILD CHECKLIST
+---------------------------------------------------------------------
+ - One html per game: games/<group>/<game-name>.html
+ - Shared companion code (robot svg + moveTo/point/say) in companion.js
+ - Text for every step stored as { en: "...", bn: "..." }
+ - Each step names the element to point at: { t:"#pizza", say:{...} }
+ - Large touch targets (min 44px), keyboard focus visible
+ - Never rely on colour alone (add shape/pattern); sounds can be muted
+ - Respect "reduced motion": companion jumps instead of flying
+ - Start with Group B example (game.html), copy its structure to others
+
+End of file.

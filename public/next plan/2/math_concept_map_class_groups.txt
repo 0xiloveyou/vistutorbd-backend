@@ -1,0 +1,630 @@
+==========================================================================
+ MATH CONCEPT MAP - ORIGINAL DESIGN FOR 5 SCHOOL GROUPS
+==========================================================================
+Purpose : A set of original math concept ideas, activities, links between
+          topics, and assessment ideas, organised by the school's own
+          grouping. Inspired only by the general idea of a "knowledge graph"
+          (topics connected by prerequisites). All names, activities and
+          structures below are newly written and can be freely changed.
+
+Groups  : G1 = Play & Nursery
+          G2 = Class 1 to 5
+          G3 = Class 6 to 8
+          G4 = Class 9 & 10
+          G5 = Class 11 & 12
+
+How each group is organised:
+  A. Big Ideas (the "map regions")
+  B. Concept Cards (what to learn + a fresh angle to teach it)
+  C. Links (what connects to what / prerequisites)
+  D. Activities & Games
+  E. Quick Checks (quiz / flashcard style)
+  F. Real-life Angle
+  G. Mini Project
+
+Note on level tags used in cards:
+  [Seed]  = first meeting with the idea
+  [Grow]  = practising and connecting
+  [Bloom] = using it flexibly / explaining it to others
+
+==========================================================================
+ GROUP 1 : PLAY & NURSERY  (about ages 3-5)
+==========================================================================
+
+A. BIG IDEAS
+  1. Noticing quantity     (more, less, same)
+  2. Shapes in the world
+  3. Patterns and order
+  4. Position and movement
+  5. Comparing sizes
+  6. First counting
+
+B. CONCEPT CARDS
+  Card N1  - "Many or Few?"  [Seed]
+    Idea   : Compare two groups without counting, just by looking.
+    New angle: Children feed a toy "hungry monster" with beans; the monster
+               says which bowl has more by "sniffing" (teacher guides).
+  Card N2  - "Number Friends 1-10"  [Seed]
+    Idea   : Each number has a character with that many spots/buttons.
+    New angle: Number is linked to a body part count (2 eyes, 5 fingers,
+               10 toes) so counting feels personal.
+  Card N3  - "Shape Detectives"  [Seed]
+    Idea   : Circle, square, triangle, rectangle recognised in objects.
+    New angle: A "shape hunt" around the classroom with a paper magnifier;
+               the child sticks a coloured dot on each shape found.
+  Card N4  - "Big, Bigger, Biggest"  [Seed]
+    Idea   : Order three objects by size.
+    New angle: Line up three paper shoes (baby, child, giant) and match
+               each to a character.
+  Card N5  - "What Comes Next?"  [Seed]
+    Idea   : Simple AB and AAB patterns.
+    New angle: Patterns made with claps, stomps and jumps first, then with
+               beads, then with colours on paper.
+  Card N6  - "Up, Down, Inside, Beside"  [Seed]
+    Idea   : Position words.
+    New angle: A "treasure box" game: hide a toy and give clues like
+               "under the chair".
+  Card N7  - "Count and Take Away"  [Grow]
+    Idea   : Adding one more / taking one away with objects up to 5.
+    New angle: Story-play with a toy bus: 3 dolls get on, 1 gets off.
+  Card N8  - "Heavy or Light?"  [Seed]
+    Idea   : Feel and compare weight.
+    New angle: A homemade balance from a hanger and two cups.
+
+C. LINKS
+  Many/Few  -> First counting -> Number friends -> Count and take away
+  Shape detectives -> Patterns (shape patterns) -> Sorting by shape
+  Big/Bigger -> Heavy/Light -> Measuring later in Class 1
+  Position words -> Directions later in Class 1-2
+
+D. ACTIVITIES & GAMES
+  1. Counting Hopscotch      : jump on numbered squares, say the number.
+  2. Sorting Basket Race     : sort buttons by colour or size into trays.
+  3. Shape Bingo             : picture cards instead of numbers.
+  4. Pattern Parade          : children stand in a pattern (sit, stand, sit).
+  5. Water Play Measuring    : fill small and large cups, see which holds more.
+  6. Clay Numbers            : roll clay into number shapes.
+  7. Story Counting          : "Five little birds..." with finger puppets.
+  8. Mystery Bag             : feel a shape inside a bag and guess it.
+
+E. QUICK CHECKS (oral / picture based)
+  - Point to the group that has more.
+  - Which shape is round with no corners?
+  - Clap-clap-stomp, clap-clap-?  What comes next?
+  - Put 4 beads in the bowl.
+  - Which toy is the smallest?
+  Flashcard idea: picture on front (3 apples), numeral and word on back.
+
+F. REAL-LIFE ANGLE
+  Sharing snacks equally, counting steps to the gate, finding round things
+  at home, tidying toys into groups.
+
+G. MINI PROJECT
+  "My Number Pocket" - each child collects 1 leaf, 2 stones, 3 seeds ...
+  up to 5 in a small box and shows it to the class.
+
+==========================================================================
+ GROUP 2 : CLASS 1 TO 5
+==========================================================================
+
+A. BIG IDEAS
+  1. Number sense and place value
+  2. The four operations
+  3. Fractions as parts of a whole
+  4. Measurement (length, mass, capacity, time, money)
+  5. Shapes, symmetry and space
+  6. Data and simple chance
+  7. Patterns and early algebra thinking
+
+B. CONCEPT CARDS
+
+  --- Class 1-2 ---
+  Card P1  - "Ten-Frame Town"  [Seed]
+    Idea   : Make numbers to 20 using ten-frames.
+    New angle: Each frame is a "house" with 10 windows; numbers are
+               families moving in and out.
+  Card P2  - "Place Value Shop"  [Grow]
+    Idea   : Ones, tens, hundreds.
+    New angle: A pretend shop sells loose sticks (ones) and bundles (tens);
+               customers must pay exact amounts.
+  Card P3  - "Add Up Stories"  [Grow]
+    Idea   : Addition and subtraction within 100.
+    New angle: Children write their own picture stories, then the partner
+               turns the story into a number sentence.
+  Card P4  - "Skip-Count Trail"  [Grow]
+    Idea   : Counting in 2s, 5s, 10s.
+    New angle: Walk a floor trail; every 5th tile is painted, and the child
+               predicts the next painted tile.
+  Card P5  - "Time Tellers"  [Grow]
+    Idea   : Hour, half hour, quarter hour.
+    New angle: Create a cardboard clock for a daily routine chart.
+
+  --- Class 3-4 ---
+  Card P6  - "Array Gardens"  [Grow]
+    Idea   : Multiplication as rows and columns.
+    New angle: Plant paper flowers in rows; show 3x4 and 4x3 are the same
+               garden turned around.
+  Card P7  - "Equal Share Kitchen"  [Grow]
+    Idea   : Division as sharing and grouping.
+    New angle: Two ways to answer "12 biscuits, 3 plates": how many on each
+               plate, and how many plates if each holds 3.
+  Card P8  - "Fraction Folding"  [Grow]
+    Idea   : Halves, quarters, thirds with paper strips.
+    New angle: Fold a ribbon and compare lengths to see which fraction is
+               bigger before using symbols.
+  Card P9  - "Perimeter Walk"  [Grow]
+    Idea   : Distance around a shape.
+    New angle: Walk around the playground edge and count steps; compare to
+               a rectangle drawn on paper.
+  Card P10 - "Money Maker"  [Grow]
+    Idea   : Coins, notes, change.
+    New angle: A class market day with price tags and a "bank" for change.
+
+  --- Class 5 ---
+  Card P11 - "Fraction Number Line"  [Bloom]
+    Idea   : Place fractions and mixed numbers on a line.
+    New angle: A clothesline in the classroom with fraction cards pegged in
+               order.
+  Card P12 - "Decimal Meter Stick"  [Bloom]
+    Idea   : Tenths and hundredths linked to metres, centimetres.
+    New angle: Measure objects in metres with decimals, e.g. 0.45 m.
+  Card P13 - "Area Tiles"  [Bloom]
+    Idea   : Area as covering with unit squares.
+    New angle: Cover a book cover with sticky notes, then switch to
+               multiplication for rectangles.
+  Card P14 - "Data Detectives"  [Grow]
+    Idea   : Tally, bar graph, pictogram.
+    New angle: Survey "favourite lunch" and decide what the cook should
+               prepare most.
+  Card P15 - "Chance Cards"  [Seed]
+    Idea   : Certain, likely, unlikely, impossible.
+    New angle: Draw from a bag of coloured counters; sort statements onto a
+               "chance ladder".
+  Card P16 - "Mystery Number Machine"  [Bloom]
+    Idea   : Input-output rules (early algebra).
+    New angle: A cardboard machine "doubles then adds 1"; others guess the
+               rule from the outputs.
+
+C. LINKS
+  Ten-frames -> Place value -> Add/subtract -> Multiplication arrays ->
+  Division sharing -> Fractions -> Decimals -> Area -> Algebra rules
+  Skip-counting -> Multiplication tables -> Patterns -> Function machines
+  Perimeter -> Area -> Volume (Group 3)
+  Data detectives -> Averages (Group 3)
+  Chance cards -> Probability (Group 3-4)
+
+D. ACTIVITIES & GAMES
+  1. Number Line Jump        : hop along a floor number line for add/subtract.
+  2. Tables Tug              : two teams answer table facts to pull a rope marker.
+  3. Fraction Pizza Build    : paper pizzas cut into slices to make orders.
+  4. Shape Hunt Photo Walk   : photograph rectangles, circles, cubes outdoors.
+  5. Clock Relay             : run to set the time the teacher calls out.
+  6. Estimation Jar          : guess beans in a jar, then check by grouping.
+  7. Mirror Art              : make symmetrical butterflies and name the axis.
+  8. Mental Maths Bingo      : answers on the card, questions called aloud.
+
+E. QUICK CHECKS
+  - Show 47 using tens sticks and ones.
+  - Which is greater: 3/4 or 2/4? Prove it with a drawing.
+  - A shape has 4 equal sides and 4 right angles. Name it.
+  - What is the missing number: 6 x __ = 42?
+  - Read the bar graph and say which item is the least liked.
+  Flashcard idea: front shows a clock face, back shows the time in words.
+
+F. REAL-LIFE ANGLE
+  Pocket money, reading a bus schedule, sharing cake, measuring a plant's
+  growth every week, comparing prices in a shop.
+
+G. MINI PROJECT
+  "My Class Shop" : design price lists, make a bill, give change, and draw a
+  bar graph of the most sold items.
+
+==========================================================================
+ GROUP 3 : CLASS 6 TO 8
+==========================================================================
+
+A. BIG IDEAS
+  1. Integers and rational numbers
+  2. Ratio, proportion and percentage
+  3. Algebra foundations (expressions, equations)
+  4. Geometry: lines, angles, triangles, congruence
+  5. Mensuration (area, volume)
+  6. Data handling and probability
+  7. Exponents, factors and number theory
+
+B. CONCEPT CARDS
+
+  --- Class 6 ---
+  Card M1  - "Factor Forest"  [Grow]
+    Idea   : Factors, multiples, primes, HCF, LCM.
+    New angle: Draw factor trees and treat primes as the "seeds" every
+               number grows from.
+  Card M2  - "Integer Elevator"  [Grow]
+    Idea   : Negative and positive numbers.
+    New angle: A building with basement floors; moving up and down models
+               addition and subtraction of integers.
+  Card M3  - "Ratio Recipes"  [Grow]
+    Idea   : Ratio and unitary method.
+    New angle: Scale a recipe for 4 people up to 30, and spot which
+               ingredient breaks the ratio.
+  Card M4  - "Variable Boxes"  [Seed]
+    Idea   : A letter stands for an unknown number.
+    New angle: A mystery box that hides a number; build expressions by
+               combining boxes and loose counters.
+
+  --- Class 7 ---
+  Card M5  - "Equation Balance"  [Grow]
+    Idea   : Solve linear equations by doing the same to both sides.
+    New angle: Use a virtual see-saw; students must justify each move.
+  Card M6  - "Angle Hunter"  [Grow]
+    Idea   : Angle pairs, parallel lines and transversal.
+    New angle: Use a road-map with crossing roads to find matching angles.
+  Card M7  - "Triangle Rules"  [Grow]
+    Idea   : Angle sum, inequality, congruence conditions.
+    New angle: Try to build triangles from straws; discover which side
+               lengths fail.
+  Card M8  - "Percent Lens"  [Grow]
+    Idea   : Percentages, discount, profit and loss, simple interest.
+    New angle: Compare two shops' sales and decide the better deal.
+  Card M9  - "Rational Number Map"  [Grow]
+    Idea   : Fractions and decimals on one number line, operations.
+    New angle: Locate numbers between two given rationals to show there are
+               always more.
+
+  --- Class 8 ---
+  Card M10 - "Exponent Growth"  [Grow]
+    Idea   : Laws of exponents, standard form.
+    New angle: A rumour spreading: 2 people tell 2 more each hour; write the
+               count as a power.
+  Card M11 - "Pattern to Formula"  [Bloom]
+    Idea   : Algebraic identities and factorisation.
+    New angle: Show (a+b)^2 with a square cut into four pieces.
+  Card M12 - "Square and Cube Roots"  [Grow]
+    Idea   : Perfect squares/cubes, estimation of roots.
+    New angle: Tile squares on a grid and find the side from the area.
+  Card M13 - "Quadrilateral Family Tree"  [Grow]
+    Idea   : Properties of parallelogram, rhombus, rectangle, trapezium.
+    New angle: Build a "family tree" showing which shape is a special case
+               of another.
+  Card M14 - "Surface and Volume"  [Grow]
+    Idea   : Cuboid, cylinder; surface area and volume.
+    New angle: Wrap a box with paper, measure, and compare with the formula.
+  Card M15 - "Data Stories"  [Grow]
+    Idea   : Mean, median, mode, pie chart, histogram.
+    New angle: Choose the best summary for a real data set and defend why.
+  Card M16 - "Direct vs Inverse"  [Grow]
+    Idea   : Direct and inverse variation.
+    New angle: Compare "more workers, less time" with "more distance, more
+               time" using tables and graphs.
+
+C. LINKS
+  Factors/Primes -> HCF, LCM -> Fractions -> Rational numbers -> Algebra
+  Integers -> Equations -> Coordinate graphs (Group 4)
+  Ratio -> Percentage -> Interest -> Compound growth (Group 4-5)
+  Ratio -> Direct/inverse variation -> Functions (Group 4)
+  Triangles -> Congruence -> Similarity (Group 4) -> Trigonometry (Group 4)
+  Area -> Surface area -> Volume -> Calculus applications (Group 5)
+  Exponent growth -> Logarithms (Group 4-5)
+  Mean/median/mode -> Statistics (Group 4-5)
+
+D. ACTIVITIES & GAMES
+  1. Prime Sieve Poster      : class colours a number grid to find primes.
+  2. Integer War Cards       : red and black cards for negative/positive.
+  3. Algebra Tile Puzzle     : build and simplify expressions with tiles.
+  4. Geoboard Challenges     : build shapes of a given area or perimeter.
+  5. Estimate the Percent    : guess percentages of shaded diagrams.
+  6. Paper Folding Proofs    : fold to show angle sum of a triangle.
+  7. Real Data Day           : measure height, hand-span, then analyse.
+  8. Equation Escape Room    : each solved equation gives a lock digit.
+
+E. QUICK CHECKS
+  - Write the first five multiples of 6 and 8; find their LCM.
+  - Solve: 3x - 7 = 11. Explain each step in words.
+  - A shirt costs 800; after a 15% discount what is the price?
+  - Can sides 3, 4 and 8 form a triangle? Why or why not?
+  - Find the mean and median of 4, 7, 7, 9, 13.
+  Flashcard idea: front shows an expression, back shows its factorised form
+  and a picture area model.
+
+F. REAL-LIFE ANGLE
+  Phone data plans, sales discounts, scaling maps, cooking quantities,
+  sports averages, bank interest, building materials.
+
+G. MINI PROJECT
+  "Design a Dream Room" : plan the floor with accurate scale, calculate
+  area and paint cost, and present a budget with percentages.
+
+==========================================================================
+ GROUP 4 : CLASS 9 & 10
+==========================================================================
+
+A. BIG IDEAS
+  1. Number systems and real numbers
+  2. Polynomials and algebraic structure
+  3. Linear and quadratic relations
+  4. Coordinate geometry
+  5. Euclidean geometry and proof
+  6. Similarity and trigonometry
+  7. Mensuration (advanced)
+  8. Statistics and probability
+  9. Sequences and progressions
+
+B. CONCEPT CARDS
+
+  --- Class 9 ---
+  Card S1  - "Between the Numbers"  [Grow]
+    Idea   : Irrational numbers and the real line.
+    New angle: Construct sqrt(2) on a number line with a right triangle and
+               discuss why it never ends.
+  Card S2  - "Polynomial Anatomy"  [Grow]
+    Idea   : Degree, terms, zeros, remainder and factor theorem.
+    New angle: Treat a polynomial as a machine and find which inputs give
+               zero output.
+  Card S3  - "Line Equations Lab"  [Grow]
+    Idea   : Linear equations in two variables and their graphs.
+    New angle: Plot a taxi fare (fixed + per km) and interpret the slope as
+               cost per kilometre.
+  Card S4  - "Proof Builder"  [Bloom]
+    Idea   : Axioms, theorems, two-column proofs.
+    New angle: Provide shuffled proof statements; students reorder them and
+               justify each link.
+  Card S5  - "Circle Secrets"  [Grow]
+    Idea   : Chords, arcs, angle in a semicircle, cyclic quadrilateral.
+    New angle: Use a dynamic sketch or string-and-pin model to test angle
+               properties.
+  Card S6  - "Heron's Pathway"  [Grow]
+    Idea   : Area of triangle by Heron's formula.
+    New angle: Compare with the base-height method to see when each is
+               easier.
+  Card S7  - "Statistics Lens"  [Grow]
+    Idea   : Frequency tables, grouped data, central tendency.
+    New angle: Analyse real exam or sports scores and find outliers.
+
+  --- Class 10 ---
+  Card S8  - "Two Equations, One Answer"  [Grow]
+    Idea   : Pair of linear equations (graphical, substitution, elimination).
+    New angle: Model two phone plans and find when they cost the same.
+  Card S9  - "Quadratic Curve Story"  [Grow]
+    Idea   : Solving quadratics (factorising, formula, completing the square)
+               and graphs.
+    New angle: A thrown ball path; interpret roots as landing points.
+  Card S10 - "Sequences that Climb"  [Grow]
+    Idea   : Arithmetic progressions, nth term, sum.
+    New angle: Seating in a theatre where each row adds the same seats.
+  Card S11 - "Similar Shapes, Same Story"  [Grow]
+    Idea   : Similar triangles, Thales' theorem.
+    New angle: Measure a tree height with a stick and shadow.
+  Card S12 - "Trig Triangle Toolkit"  [Grow]
+    Idea   : sin, cos, tan, identities, heights and distances.
+    New angle: Use a homemade clinometer to measure a building angle.
+  Card S13 - "Coordinate Compass"  [Grow]
+    Idea   : Distance, midpoint, section formula.
+    New angle: Plot a city map and compute shortest direct distances.
+  Card S14 - "Surface Area Studio"  [Grow]
+    Idea   : Combined solids, frustum, conversion between shapes.
+    New angle: Design a toy rocket made of a cone, cylinder and hemisphere.
+  Card S15 - "Probability Lab"  [Grow]
+    Idea   : Theoretical vs experimental probability.
+    New angle: Run 100 coin or dice trials and compare with predictions.
+  Card S16 - "Tangent Touch"  [Bloom]
+    Idea   : Tangent to a circle and its properties.
+    New angle: Roll a coin against a ruler and see where it touches once.
+
+C. LINKS
+  Real numbers -> Polynomials -> Quadratics -> Functions (Group 5)
+  Linear equations -> Coordinate geometry -> Straight lines (Group 5)
+  Proof builder -> All geometry -> Vectors and 3D (Group 5)
+  Similar triangles -> Trigonometry -> Heights/distances -> Waves (Group 5)
+  AP -> Series (Group 5) -> Limits and sums
+  Statistics lens -> Dispersion, correlation (Group 5)
+  Probability lab -> Conditional probability (Group 5)
+  Circle secrets -> Conic sections (Group 5)
+
+D. ACTIVITIES & GAMES
+  1. Graph Matching Cards    : match equations to graphs and word stories.
+  2. Trig Scavenger Hunt     : measure real heights around school.
+  3. Quadratic Factor Duel   : teams race to factorise on cards.
+  4. Proof Jigsaw            : puzzle pieces are statements and reasons.
+  5. Geometry Art            : create a tessellation with measured angles.
+  6. Probability Casino Day  : fair vs unfair games analysed with data.
+  7. Spreadsheet Sprint      : use a sheet for AP sums, mean, and plots.
+  8. Error Spotting Court    : find the mistake in a wrong solution.
+
+E. QUICK CHECKS
+  - Is 0.101001000... rational or irrational? Explain.
+  - Factorise x^2 - 5x + 6 and state the roots.
+  - Find the 20th term of 5, 9, 13, ...
+  - In a right triangle with opposite 5 and hypotenuse 13, find sin and cos.
+  - Prove that angles in the same segment of a circle are equal (outline).
+  Flashcard idea: front shows a quadratic graph, back lists roots, vertex
+  and direction of opening.
+
+F. REAL-LIFE ANGLE
+  Budget planning with two-variable equations, projectile paths in sports,
+  survey analysis, architecture and ramps, loan payments, GPS distances.
+
+G. MINI PROJECT
+  "Measure Our School" : use trigonometry and similarity to estimate heights
+  of buildings and flag pole, compare with a tape measure where possible,
+  and report errors.
+
+==========================================================================
+ GROUP 5 : CLASS 11 & 12
+==========================================================================
+
+A. BIG IDEAS
+  1. Sets, relations and functions
+  2. Trigonometric functions and equations
+  3. Algebra: complex numbers, inequalities, permutations, binomial theorem
+  4. Sequences and series
+  5. Coordinate geometry and conic sections
+  6. Vectors and 3D geometry
+  7. Limits, continuity, differentiation
+  8. Integration and differential equations
+  9. Matrices and determinants
+  10. Statistics and probability
+  11. Mathematical reasoning and modelling
+
+B. CONCEPT CARDS
+
+  --- Class 11 ---
+  Card H1  - "Set Logic Garden"  [Grow]
+    Idea   : Sets, Venn diagrams, relations.
+    New angle: Use survey data on student clubs to explore overlap, union
+               and complement.
+  Card H2  - "Function Zoo"  [Grow]
+    Idea   : Domain, range, one-one, onto, inverse, composition.
+    New angle: Treat each function as an animal with habits (growth,
+               symmetry, restrictions) and sort them.
+  Card H3  - "Unit Circle Story"  [Grow]
+    Idea   : Radian measure, trig functions, identities.
+    New angle: A Ferris wheel that links angle to height over time.
+  Card H4  - "Complex Plane Walk"  [Grow]
+    Idea   : Complex numbers, modulus, argument, Argand diagram.
+    New angle: Multiplication as rotation plus scaling on the plane.
+  Card H5  - "Counting Strategies"  [Grow]
+    Idea   : Permutations, combinations, binomial expansion.
+    New angle: Plan seating, passwords and team selection; connect Pascal's
+               triangle to combination counts.
+  Card H6  - "Conic Garden"  [Grow]
+    Idea   : Circle, parabola, ellipse, hyperbola.
+    New angle: Slice a cone model (or torch beam on wall) to see each curve.
+  Card H7  - "Limit Zoom"  [Grow]
+    Idea   : Limits and the idea of a derivative.
+    New angle: Zoom into a graph until it looks straight; the slope there is
+               the derivative.
+  Card H8  - "Series Machines"  [Grow]
+    Idea   : GP, sum to infinity, special series.
+    New angle: Bouncing ball whose heights form a geometric series.
+  Card H9  - "Dispersion Dial"  [Grow]
+    Idea   : Variance, standard deviation.
+    New angle: Compare two classes with the same mean but different spread.
+
+  --- Class 12 ---
+  Card H10 - "Derivative Toolkit"  [Bloom]
+    Idea   : Rules of differentiation, chain, implicit, parametric.
+    New angle: Build a "derivative recipe book" mapping each rule to a
+               visual and a real rate.
+  Card H11 - "Optimise It"  [Bloom]
+    Idea   : Maxima, minima, rate of change, curve sketching.
+    New angle: Design the cheapest can or the largest-area fence.
+  Card H12 - "Area Under the Story"  [Bloom]
+    Idea   : Definite integral as accumulated change; area between curves.
+    New angle: Speed-time graph to distance; water-flow graph to volume.
+  Card H13 - "Integration Strategies"  [Bloom]
+    Idea   : Substitution, parts, partial fractions.
+    New angle: Decision flowchart that helps pick a method.
+  Card H14 - "Differential Equations in Motion"  [Bloom]
+    Idea   : Forming and solving first-order ODEs.
+    New angle: Model population growth, cooling coffee, or loan balance.
+  Card H15 - "Matrix Machines"  [Grow]
+    Idea   : Matrices, determinants, inverse, linear systems.
+    New angle: Image transformations (rotate, reflect, scale) as matrices.
+  Card H16 - "Vector Space Voyage"  [Grow]
+    Idea   : Vectors, dot and cross products, lines and planes in 3D.
+    New angle: Navigation of a drone: position vectors and direction
+               vectors.
+  Card H17 - "Probability Tree Lab"  [Bloom]
+    Idea   : Conditional probability, Bayes' theorem, distributions.
+    New angle: Medical test or spam filter scenario with tree diagrams.
+  Card H18 - "Linear Programming Planner"  [Bloom]
+    Idea   : Feasible region and optimum.
+    New angle: A small factory choosing product mix for maximum profit.
+  Card H19 - "Proof and Reasoning"  [Bloom]
+    Idea   : Induction, contradiction, logical statements.
+    New angle: Prove a domino-chain pattern and discuss why base case
+               matters.
+
+C. LINKS
+  Sets -> Relations -> Functions -> Limits -> Derivatives -> Optimisation
+  Derivatives <-> Integrals (fundamental theorem) -> ODEs -> Modelling
+  Unit circle -> Trig equations -> Waves -> Complex numbers (Euler idea)
+  Counting -> Binomial -> Probability -> Distributions -> Statistics
+  Coordinate geometry -> Conics -> Vectors -> 3D geometry
+  Matrices -> Determinants -> Linear systems -> Linear programming
+  Series -> Limits -> Convergence -> Calculus approximations
+  Reasoning -> Induction -> Formal proof across all topics
+
+D. ACTIVITIES & GAMES
+  1. Graph Transformation Lab : shift, stretch, reflect functions and note
+                                effects on the formula.
+  2. Optimisation Challenge   : design a container with minimum material.
+  3. Matrix Cipher            : encode and decode messages using matrices.
+  4. Probability Court Case   : evaluate evidence using Bayes' theorem.
+  5. Integral Detective       : choose the correct technique for a mystery
+                                integral and defend it.
+  6. Modelling Day            : fit a curve to real data (temperature,
+                                population) and predict.
+  7. Peer Teaching Rounds     : each student explains a theorem in 3 minutes.
+  8. Error Autopsy            : analyse a flawed solution to find logical
+                                gaps.
+
+E. QUICK CHECKS
+  - Find the domain and range of f(x) = sqrt(4 - x^2).
+  - Differentiate x^2 sin x and explain the rule used.
+  - Evaluate the integral of 2x from 0 to 3 and interpret it as an area.
+  - A bag has 3 red and 2 blue balls; two are drawn without replacement.
+    Find P(both red).
+  - Solve the system using a matrix inverse: x + y = 5, 2x - y = 1.
+  Flashcard idea: front shows a curve with a tangent line, back states the
+  derivative idea and a real-life meaning.
+
+F. REAL-LIFE ANGLE
+  Engineering design, population forecasting, medical test accuracy,
+  cryptography, economics (cost and revenue), computer graphics, physics
+  motion, machine learning basics.
+
+G. MINI PROJECT
+  "Model a Real System" : choose an event (cooling tea, school fee growth,
+  rainfall) -> collect data -> choose a function -> use derivative/integral
+  ideas -> predict -> evaluate error -> present.
+
+==========================================================================
+ CROSS-GROUP IDEAS (USEFUL FOR WHOLE SCHOOL)
+==========================================================================
+
+1. SKILL SPIRAL
+   Each big idea returns in every group at a deeper level:
+   Counting (G1) -> Number sense (G2) -> Rational numbers (G3) ->
+   Real numbers (G4) -> Complex numbers (G5).
+
+2. THREE QUESTION TYPES TO USE EVERYWHERE
+   - Recall    : "What is...?"
+   - Reasoning : "Why does ... work?"
+   - Reality   : "Where would we use ...?"
+
+3. WEEKLY MATH ROUTINES
+   - Number of the Day (G1-G3)
+   - Which One Doesn't Belong? (G2-G4)
+   - Estimation Station (all)
+   - Error of the Week (G3-G5)
+   - Problem Poster (all)
+
+4. ASSESSMENT MIX
+   - Quick oral/pictorial checks (G1)
+   - Short quizzes and games (G2-G3)
+   - Mixed quiz + project + reflection (G4)
+   - Concept test + modelling project + viva (G5)
+
+5. MAP-STYLE DISPLAY IDEA
+   Keep a wall chart per group with concept cards as circles and arrows
+   showing prerequisites. Students colour a circle when they master it
+   (Seed = outline, Grow = half colour, Bloom = full colour).
+
+6. TECH / STUDY TOOL IDEAS (OFFLINE OR ONLINE)
+   - Quiz sets from the Quick Checks above
+   - Flashcards from each card's "Idea" and "New angle"
+   - Short explainer videos made by students
+   - Math games from Section D
+
+==========================================================================
+ NOTES FOR USING / EDITING THIS FILE
+==========================================================================
+- All activities and card names are newly written; feel free to rename them
+  to fit your school's culture or language (e.g. Bangla names).
+- Adjust topics to match your national curriculum order if needed.
+- Where a group spans several classes (e.g. Class 1-5), the card headings
+  show approximate class ranges so teachers can place them in sequence.
+- You can add a 6th section later for assessment rubrics or yearly plans.
+
+END OF FILE

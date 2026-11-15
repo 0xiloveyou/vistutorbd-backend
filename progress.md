@@ -1,6 +1,6 @@
 # Backend progress
 
-_Last updated: Class 9–10 visual lab carousel, forum starter seeding (10 posts + comments), forum feed/toolbar support, visitor analytics, six-hour email reports, contact API, topic search, and resilient auto-seeding._
+_Last updated: Next-plan merged content bank, 15 game/visual/Q&A carousels on `/learn`, seeded MongoDB carousels, forum/analytics/reporting work._
 
 ## Status
 
@@ -28,6 +28,7 @@ _Last updated: Class 9–10 visual lab carousel, forum starter seeding (10 posts
 | Search | ✅ | `GET /topics?q=` across English/Bangla titles, summaries and slugs, with class filter + pagination |
 | Seed | ✅ | 5 bands, 14 levels, companion, 2 templates, admin/moderator/demo users |
 | Learn carousels | ✅ | Generic explanation carousel + Class 9–10 visual lab seeded from `content/carousels/` into MongoDB; served at `/api/v1/learn/*` |
+| Next-plan content bank | OK | Folder 1+2+3 merged into `content/next-plan/`: 75 concept cards, 148 idea rows, 15 activities (5 games, 5 visuals, 5 Q&A) generated into carousel HTML |
 | Content layout | ✅ | One folder per class: `src/app/content/play`, `nursery`, `class-1` … `class-12`; shared books live in `content/shared/` |
 | Play content | ✅ | 5 chapters, 15 topics, 33 visualizations (moved into `content/play/`) |
 | Nursery content | ✅ | 14 chapters, 28 topics, 44 visualizations (`content/nursery/`) |
@@ -43,10 +44,18 @@ _Last updated: Class 9–10 visual lab carousel, forum starter seeding (10 posts
 | Class 10 content | ✅ | 17 chapters, 17 topics, 17 visualizations (`content/class-10/` + shared book) |
 | Class 11 content | ✅ | 19 chapters, 19 topics, 19 visualizations (`content/class-11/` + shared book) |
 | Class 12 content | ✅ | 19 chapters, 19 topics, 19 visualizations (`content/class-12/` + shared book) |
-| Tests | ✅ | 12 unit tests for math engine + generators (`npm test`) |
+| Tests | OK | 16 unit tests for the math engine, generators, next-plan activity bank and generated carousels (`npm test`) |
 | Docs | ✅ | `README.md`, `docs/api/*` |
 
 ## Latest update
+
+### Next-plan merge and the first game/visual/Q&A cycle
+
+- Merged the three source documents into a typed bank under `src/app/content/next-plan/`. `merge-sources.mjs` parses the copies in `next-plan/source/` into `catalog.generated.json`: **75 concept cards**, **148 idea-bank rows**, **32 game ideas**, **14 interaction templates** and **4 worked examples**.
+- Added the shared runtime in `next-plan/runtime/` (`engine.js`, `engine.css`, `robot.svg`). It keeps the folder-1 game pattern (meet → see → try → play → check → reward → review) and the cute Bolt robot, including speech bubbles, flying, pointing, moods, Bangla/English speech and reduced-motion handling.
+- Built the first cycle as **one game + one visual + one Q&A set per group**: Play & Nursery, Class 1–5, Class 6–8, Class 9–10 and Class 11–12. Games cover counting mangoes, fraction pizza, an integer elevator, parabola hoop shots and a secant-slope tracker; visuals cover shapes, an equivalent-fraction wall, Pythagoras squares, the parabola family and secant→tangent; Q&A sets cover the core ideas of each band with picture scenes and per-question explanations.
+- Added `generate.ts` and `npm run content:next-plan`. It injects each activity as `window.__NEXT_PLAN__`, uses `defaultStyle: "robot"` everywhere, and writes 15 standalone files (`next-game-*`, `next-visual-*`, `next-question-*`) plus `manifest.generated.json` into `content/carousels/`. The Play & Nursery document hides the style switch so Bolt is mandatory there.
+- Registered the 15 documents in `seed-learn-carousels.ts` through `next-plan/carousels.ts`. Visuals seed as `EXPLANATION`; games and Q&A seed as `QUESTION`; class levels and bands come from `next-plan/groups.ts`. Ordering is cycle-based (`100 + cycle*10 + order/10`), so the new visual sorts after the original explanation carousels and the new game/Q&A sort after the original question carousels.
 
 - Added `src/app/content/carousels/class-9-10.html`: a featured hero plus **14** lessons (11 robot explainers, 3 explore/line-art lessons) with live controls for base, central angle, observer distance, scale factor, series terms/ratio and radius. Topics span real numbers, sets/functions, exponents and logarithms, linear equations, exterior and inscribed angles, trig waves, elevation, similar triangles, simultaneous equations, geometric series, mensuration, ogives and Heron's formula.
 - Registered `explanation-class-9-10` in `seed-learn-carousels.ts` with `kind: "EXPLANATION"`, `classLevelIds: ["class-9", "class-10"]`, `classBandIds: ["C9_10"]`, and `order: 1`. `npm run seed` and `AUTO_SEED=true` upsert it by slug and content hash.
@@ -69,13 +78,22 @@ _Last updated: Class 9–10 visual lab carousel, forum starter seeding (10 posts
 
 ```bash
 npm run typecheck                 # clean
-npm test                          # 12 pass
+npm test                          # 16 pass
+npm run content:next-plan         # 15 activities + manifest
 npm run build                     # tsup bundle succeeds
 ```
 
 - `POST /chat/speech` with `lang: "en"` → `200 audio/mpeg` (≈98 KB for a test sentence); `lang: "bn"` → `422` by design.
 - `/health` reports `openrouter: configured`, `vision: configured`, `voice: configured`.
 - `class-9-10.html` syntax check passes; the frame harness renders **14 visuals / 25 modes / 325 frames** with no errors and reports the robot-first order.
+- All 15 `next-*` documents pass a script-extraction check: the injected `window.__NEXT_PLAN__` payload parses, the runtime body parses, and each file contains exactly one `#robot` and one `#rsvg`. A DOM-stub smoke test also initializes all 15 documents (title, stage and kind render) without errors.
+- Headless-Chrome harness ran all 15 documents end to end: option → Check → Next in every Q&A set, `Show me how` narration in every game/visual, and the Bolt bubble/caption in robot and text modes. No unresolved `{placeholder}` tokens remain.
+  - `roundVars()` returned early for visuals because they have no `rounds[]`, so `a² = {a2}`, `({h}, {k})` and `x = {a}` leaked into Pythagoras, parabola and secant narration; the visual branch now runs before the `rounds` guard.
+  - `steps()` now interpolates `roundVarsForMessage()`, which fixed game steps such as `A is at x = {a}` and `It says {a}`.
+  - The fraction-wall coach copy now matches its control (a line toggle, not a slider) and the toggle relabels between **Show the line** / **Hide the line**.
+  - `main` bottom padding is `260px` (`240px` under 620px) so Bolt and the speech bubble clear the control row inside the `/learn` iframe.
+- `npm run learn:seed` upserted **25** carousel documents. The 15 next-plan rows are active, contain Bolt and the height reporter, and carry the expected `classLevelIds`/`order` (visuals `121`, games `111`, Q&A `132`).
+- Class-list queries match the `/learn` contract: Play and Class 1–5 get the new game + Q&A after their existing question carousel, and Class 6–12 now get game + Q&A rows where the question list was previously empty; every group gets its visual in the explanation list.
 - The carousel seed ran successfully: `explanation-class-9-10` is active with `classLevelIds: ["class-9", "class-10"]` and `order: 1`; the collection returns both `explanation-all` and the Class 9–10 lab.
 - `seedForumPosts()` creates 10 posts + comments only when `forum_posts` is empty; a second run prints the skip message and leaves the collection unchanged.
 
@@ -98,6 +116,9 @@ npm run build                     # tsup bundle succeeds
 - `seedClassContent()` in `src/app/utils/seed-class-content.ts` seeds any class pack; `content/index.ts` lists the packs.
 
 ## Intentional skeleton limits
+
+- **Carousel chrome can cover Bolt.** The activities dock Bolt at the bottom-left of their own frame. On `/learn` the floating section pills sit in the same corner, so when a frame's bottom edge is near the viewport bottom the pills can cover the robot. The speech bubble still renders above the pills, and the site-wide Bolt sits bottom-right.
+- **Activities open in English even when the site is Bangla.** The frame's `EN / বাংলা` button switches everything (labels, narration, Bengali digits) inside the activity, but the srcdoc frame does not inherit the parent page locale.
 
 - **Content depth is broad but not exhaustive.** Play, Nursery and Classes 1–12 have seeds; most chapters have one topic and 1–4 visualizations. Class 7 uses a provisional standard chapter list because the source list was missing.
 - **Two question templates only** (`addition.singleDigit`, `addition.twoDigit`). `multiplication.singleDigit` exists in the generator registry but has no seeded template.
@@ -276,3 +297,4 @@ Full per-chapter list: `src/app/content/CHAPTERS.md`. Each pack folder also has 
 - **Integration** — 1 topic(s), 19 viz: `c12-19-integration`
 
 <!-- END CONTENT INVENTORY -->
+
