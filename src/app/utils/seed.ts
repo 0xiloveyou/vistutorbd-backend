@@ -2,6 +2,7 @@ import { Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import config from "../config";
 import { CONTENT_PACKS } from "../content";
+import { seedLearnCarousels } from "./seed-learn-carousels";
 import { prisma } from "../lib/prisma";
 import { CLASS_BANDS, CLASS_LEVELS, COMPANIONS } from "../lib/taxonomy";
 import { seedClassContent } from "./seed-class-content";
@@ -399,6 +400,7 @@ export const seedDatabase = async () => {
   await seedCompanions();
   await seedQuestionTemplates();
   await seedContent();
+  await seedLearnCarousels();
   await seedForumPosts();
 };
 
@@ -437,7 +439,9 @@ export const seedDatabaseIfEmpty = async () => {
     }
   }
 
-  // Forum starter content is independent of users/taxonomy, so it still seeds
-  // when the rest of the database is already populated.
+  // Learn carousels and forum starter content are independent of
+  // users/taxonomy, so they still seed when the rest of the database is already
+  // populated. Both helpers are idempotent.
+  await seedLearnCarousels();
   await seedForumPosts();
 };

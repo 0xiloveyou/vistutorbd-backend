@@ -1,6 +1,6 @@
 # Backend progress
 
-_Last updated: forum starter seeding (10 posts + comments), forum feed/toolbar support, visitor analytics, six-hour email reports, contact API, topic search, and resilient auto-seeding._
+_Last updated: Class 9–10 visual lab carousel, forum starter seeding (10 posts + comments), forum feed/toolbar support, visitor analytics, six-hour email reports, contact API, topic search, and resilient auto-seeding._
 
 ## Status
 
@@ -27,6 +27,7 @@ _Last updated: forum starter seeding (10 posts + comments), forum feed/toolbar s
 | Contact | ✅ | Public contact form API → SMTP email with `Reply-To` |
 | Search | ✅ | `GET /topics?q=` across English/Bangla titles, summaries and slugs, with class filter + pagination |
 | Seed | ✅ | 5 bands, 14 levels, companion, 2 templates, admin/moderator/demo users |
+| Learn carousels | ✅ | Generic explanation carousel + Class 9–10 visual lab seeded from `content/carousels/` into MongoDB; served at `/api/v1/learn/*` |
 | Content layout | ✅ | One folder per class: `src/app/content/play`, `nursery`, `class-1` … `class-12`; shared books live in `content/shared/` |
 | Play content | ✅ | 5 chapters, 15 topics, 33 visualizations (moved into `content/play/`) |
 | Nursery content | ✅ | 14 chapters, 28 topics, 44 visualizations (`content/nursery/`) |
@@ -47,6 +48,9 @@ _Last updated: forum starter seeding (10 posts + comments), forum feed/toolbar s
 
 ## Latest update
 
+- Added `src/app/content/carousels/class-9-10.html`: a featured hero plus **14** lessons (11 robot explainers, 3 explore/line-art lessons) with live controls for base, central angle, observer distance, scale factor, series terms/ratio and radius. Topics span real numbers, sets/functions, exponents and logarithms, linear equations, exterior and inscribed angles, trig waves, elevation, similar triangles, simultaneous equations, geometric series, mensuration, ogives and Heron's formula.
+- Registered `explanation-class-9-10` in `seed-learn-carousels.ts` with `kind: "EXPLANATION"`, `classLevelIds: ["class-9", "class-10"]`, `classBandIds: ["C9_10"]`, and `order: 1`. `npm run seed` and `AUTO_SEED=true` upsert it by slug and content hash.
+- `/api/v1/learn/carousels?classLevelId=class-9&kind=EXPLANATION` now returns the generic carousel plus the Class 9–10 lab; the frontend prefers the class-specific document.
 - Added `seedForumPosts()` to `src/app/utils/seed.ts`. It counts `forum_posts`, exits when at least one post exists, and otherwise creates **10 starter maths questions** (matrix multiplication, trig identity, quadratic, statistics, circle area, limits, integration, probability, Pythagoras, algebraic simplification) plus their starter comments. `$...$` maths in the bodies exercises the frontend KaTeX path.
 - Wired `seedForumPosts()` into both `seedDatabase()` (`npm run seed`) and `seedDatabaseIfEmpty()` (startup `AUTO_SEED=true`), outside the user/taxonomy/content checks so the forum seeds even when the rest of the database is already populated. The helper is idempotent and never overwrites edited posts.
 - Added `Visit` analytics: `POST /analytics/visit` records one page view per browser id/path (five-minute de-dupe), and `GET /analytics/visitors` returns unique visitors, page views, signed-in visitors and top pages.
@@ -71,6 +75,8 @@ npm run build                     # tsup bundle succeeds
 
 - `POST /chat/speech` with `lang: "en"` → `200 audio/mpeg` (≈98 KB for a test sentence); `lang: "bn"` → `422` by design.
 - `/health` reports `openrouter: configured`, `vision: configured`, `voice: configured`.
+- `class-9-10.html` syntax check passes; the frame harness renders **14 visuals / 25 modes / 325 frames** with no errors and reports the robot-first order.
+- The carousel seed ran successfully: `explanation-class-9-10` is active with `classLevelIds: ["class-9", "class-10"]` and `order: 1`; the collection returns both `explanation-all` and the Class 9–10 lab.
 - `seedForumPosts()` creates 10 posts + comments only when `forum_posts` is empty; a second run prints the skip message and leaves the collection unchanged.
 
 > `AUTO_SEED=true` seeds automatically on startup. If MongoDB Atlas is unreachable, whitelist the machine’s public IP under **Atlas → Network Access** and the retry loop seeds without a restart. The catalog audit still finds 14 packs, 180 chapters, 238 topics and 325 visualizations.

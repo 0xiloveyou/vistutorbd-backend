@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 9–10 Visual Lab | VizTutorBD</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#eef2f7;color:#0f172a}
+
+  /* featured hero */
+  .lab-hero{position:relative;overflow:hidden;background:
+    radial-gradient(900px 420px at 82% 18%,rgba(56,189,248,.20),transparent 62%),
+    radial-gradient(700px 360px at 10% 88%,rgba(251,191,36,.15),transparent 60%),
+    linear-gradient(135deg,#08111f 0%,#0f1f36 48%,#102a43 100%);color:#e6edf7;padding:34px 18px 30px}
+  .lab-hero:before{content:"";position:absolute;inset:0;background-image:
+    linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);background-size:34px 34px;
+    mask-image:linear-gradient(to bottom,#000,transparent 92%);pointer-events:none}
+  .lab-hero-grid{position:relative;max-width:1160px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:26px;align-items:center}
+  .lab-kicker{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#7dd3fc;
+    background:#0b2942;border:1px solid #0c4a6e;border-radius:999px;padding:6px 11px}
+  .lab-kicker i{width:7px;height:7px;border-radius:50%;background:#38bdf8;box-shadow:0 0 0 4px #38bdf822}
+  .lab-hero h1{font-size:clamp(28px,4vw,47px);line-height:1.04;letter-spacing:-.035em;margin:15px 0 10px;max-width:620px}
+  .lab-hero h1 em{font-style:normal;color:#fbbf24}
+  .lab-hero p{color:#b9c7d9;font-size:15px;line-height:1.6;max-width:590px;margin:0}
+  .lab-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+  .lab-chips span{font-size:12px;font-weight:700;color:#dbeafe;background:#0e2438;border:1px solid #1e3a52;border-radius:999px;padding:6px 11px}
+  .lab-stats{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px}
+  .lab-stats div{min-width:82px}
+  .lab-stats b{display:block;font-size:24px;color:#fff;line-height:1}
+  .lab-stats small{display:block;font-size:11px;color:#8fa6bd;margin-top:4px;font-weight:600;letter-spacing:.03em}
+  .lab-art{position:relative;min-height:245px;display:flex;align-items:center;justify-content:center}
+  .lab-art svg{width:100%;max-width:470px;height:auto;overflow:visible}
+  .lab-art .float{animation:labFloat 5.5s ease-in-out infinite}
+  .lab-art .float2{animation:labFloat 6.5s ease-in-out infinite reverse}
+  @keyframes labFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @media(max-width:820px){.lab-hero-grid{grid-template-columns:1fr}.lab-art{min-height:190px;max-width:430px;margin:0 auto}.lab-hero{padding-top:26px}}
+
+  /* carousel shell */
+  .vc{padding:30px 0 64px;background:linear-gradient(#eef2f7,#e2e8f0);overflow:hidden}
+  .vc-wrap{max-width:none;margin:0 auto;padding:0 16px}
+  .vc-heading{max-width:860px;margin:0 auto 22px;text-align:center}
+  .vc-heading .vc-kicker{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#0284c7;background:#e0f2fe;border-radius:999px;padding:6px 11px}
+  .vc-heading h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.03em;margin:12px 0 7px}
+  .vc-sub{text-align:center;color:#64748b;margin:0 auto;max-width:730px;line-height:1.55}
+
+  .vc-carousel{position:relative;outline:none}
+  .vc-viewport{overflow:hidden;padding:18px 0 26px;touch-action:pan-y}
+  .vc-track{display:flex;gap:22px;transition:transform .55s cubic-bezier(.65,0,.25,1);will-change:transform}
+  .vc-slide{flex:0 0 auto;min-width:0;background:#111a2e;border-radius:22px;padding:14px;box-shadow:0 18px 50px #0f172a33;
+    opacity:.42;transform:scale(.92);filter:saturate(.6);cursor:pointer;
+    transition:opacity .5s,transform .5s,filter .5s}
+  .vc-slide.on{opacity:1;transform:none;filter:none;cursor:default}
+  .vc-head{display:flex;align-items:center;gap:10px;color:#e6edf7;padding:2px 6px 12px}
+  .vc-count{background:#1e293b;color:#38bdf8;font-weight:700;font-size:13px;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .vc-head b{font-size:16px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .vc-band{margin-left:auto;background:#082f49;border:1px solid #0c4a6e;color:#7dd3fc;font-size:11px;
+    font-weight:700;letter-spacing:.02em;padding:4px 10px;border-radius:999px;white-space:nowrap;flex-shrink:0}
+  .vc-stage{border-radius:14px;overflow:hidden;background-color:#0b1220;
+    background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+    background-size:32px 32px}
+  .vc-stage svg{display:block;width:100%;height:auto}
+  .vc-stage svg text{font-family:"Segoe UI",system-ui,sans-serif}
+
+  .vc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;
+    border:0;background:#fff;color:#0f172a;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 6px 18px #0f172a30;
+    display:flex;align-items:center;justify-content:center;padding:0 0 4px}
+  .vc-arrow:hover{background:#38bdf8}
+  .vc-arrow.prev{left:6px}.vc-arrow.next{right:6px}
+
+  .vc-dots{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 auto 26px;max-width:720px;padding:0 14px}
+  .vc-dots button{width:10px;height:10px;padding:0;border:0;border-radius:999px;background:#94a3b8;cursor:pointer;transition:.3s}
+  .vc-dots button.on{width:30px;background:#0ea5e9}
+
+  .vc-panel{max-width:860px;margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;
+    padding:16px 18px;box-shadow:0 10px 30px #0f172a14;display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;justify-content:space-between}
+  .vc-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;font-weight:700;margin-bottom:6px}
+  .vc-btns{display:flex;gap:8px;flex-wrap:wrap}
+  .vc-btns button,.vc-modes button{border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;padding:9px 14px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+  .vc-btns button:hover,.vc-modes button:hover{background:#e0f2fe;border-color:#38bdf8}
+  .vc-btns button.main{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+  .vc-btns button.main:hover{background:#0284c7}
+  .vc-modes{display:flex;gap:8px;flex-wrap:wrap}
+  .vc-modes button.on{background:#0f172a;border-color:#0f172a;color:#fff}
+  .vc-info{flex:1 1 100%;display:flex;align-items:center;gap:12px;color:#64748b;font-size:13px}
+  .vc-prog{flex:1;height:5px;background:#e2e8f0;border-radius:5px;overflow:hidden}
+  .vc-prog i{display:block;height:100%;width:0;background:#0ea5e9}
+
+  .vc-try{max-width:860px;margin:0 auto 16px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;
+    padding:13px 18px;box-shadow:0 10px 30px #0f172a14;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
+  .vc-try[hidden]{display:none}
+  .vc-try>.vc-label{margin:0;white-space:nowrap}
+  .vc-try-body{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;flex:1}
+  .vc-try-row{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:#334155}
+  .vc-try-row input[type=range]{width:140px;accent-color:#0ea5e9;cursor:pointer}
+  .vc-try-row output{min-width:46px;font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px;color:#0f172a;
+    background:#f1f5f9;border-radius:8px;padding:3px 7px;text-align:center}
+  .vc-try-opts{display:flex;gap:6px;flex-wrap:wrap}
+  .vc-try-opts button{border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;border-radius:10px;
+    padding:7px 11px;font-size:13px;font-weight:600;cursor:pointer}
+  .vc-try-opts button:hover{background:#e0f2fe;border-color:#38bdf8}
+  .vc-try-opts button.on{background:#0f172a;border-color:#0f172a;color:#fff}
+  .vc-try-note{flex:1 1 100%;font-size:12px;color:#64748b}
+  @media(max-width:640px){.vc-arrow{width:34px;height:34px;font-size:20px}.vc-btns{display:grid;grid-template-columns:1fr 1fr;width:100%}
+    .vc-btns button{justify-content:center;padding:8px 10px;font-size:13px}
+    .vc-try-row input[type=range]{width:105px}.vc-band{display:none}
+    .vc-dots{gap:5px}.vc-dots button{width:7px;height:7px}.vc-dots button.on{width:18px}}
+</style>
+</head>
+<body>
+<main>
+  <section class="lab-hero" aria-label="Class 9 and 10 visual lab">
+    <div class="lab-hero-grid">
+      <div>
+        <span class="lab-kicker"><i></i> Class 9–10 · Visual Lab</span>
+        <h1>See the idea <em>before</em> the formula.</h1>
+        <p>Fourteen guided explanations built from the Class 9–10 syllabus: real numbers, sets, logarithms, equations, geometry, trigonometry, similarity, series, mensuration and statistics.</p>
+        <div class="lab-chips"><span>Robot-led explanations</span><span>Line-art proofs</span><span>Interactive parameters</span></div>
+        <div class="lab-stats">
+          <div><b>14</b><small>visual lessons</small></div>
+          <div><b>11</b><small>robot explainers</small></div>
+          <div><b>25</b><small>guided modes</small></div>
+        </div>
+      </div>
+      <div class="lab-art" aria-hidden="true">
+        <svg viewBox="0 0 470 300" role="presentation">
+          <defs>
+            <linearGradient id="heroGlow" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#38bdf8" stop-opacity=".22"/>
+              <stop offset="1" stop-color="#fbbf24" stop-opacity=".06"/>
+            </linearGradient>
+          </defs>
+          <circle cx="284" cy="150" r="126" fill="url(#heroGlow)" stroke="#38bdf8" stroke-opacity=".32"/>
+          <g opacity=".26" stroke="#94a3b8">
+            <path d="M40 250H430M40 200H430M40 150H430M40 100H430M40 50H430"/>
+            <path d="M80 40V270M130 40V270M180 40V270M230 40V270M280 40V270M330 40V270M380 40V270"/>
+          </g>
+          <g class="float">
+            <path d="M96 212L176 212L136 130Z" fill="none" stroke="#fbbf24" stroke-width="3"/>
+            <path d="M96 212H176" stroke="#fbbf24" stroke-width="3"/>
+            <path d="M136 130V212" stroke="#fbbf24" stroke-opacity=".5" stroke-dasharray="5 6"/>
+            <text x="146" y="222" fill="#fde68a" font-size="13" font-weight="700">a² + b² = c²</text>
+          </g>
+          <g class="float2">
+            <circle cx="284" cy="150" r="58" fill="none" stroke="#38bdf8" stroke-width="3"/>
+            <path d="M284 150L328 118" stroke="#e2e8f0" stroke-width="2.5"/>
+            <circle cx="328" cy="118" r="6" fill="#4ade80"/>
+            <text x="336" y="112" fill="#86efac" font-size="13" font-weight="700">(cos θ, sin θ)</text>
+          </g>
+          <g>
+            <path d="M48 54H206" stroke="#94a3b8" stroke-width="1" opacity=".4"/>
+            <path d="M48 78H174" stroke="#94a3b8" stroke-width="1" opacity=".4"/>
+            <path d="M48 102H190" stroke="#94a3b8" stroke-width="1" opacity=".4"/>
+            <text x="48" y="150" fill="#e2e8f0" font-size="14" font-weight="700">y = bˣ</text>
+            <text x="48" y="174" fill="#7dd3fc" font-size="14" font-weight="700">y = log_b x</text>
+          </g>
+          <g transform="translate(344 162)">
+            <ellipse cx="0" cy="86" rx="44" ry="8" fill="#000" opacity=".28"/>
+            <path d="M0 84L-12 44L12 44Z" fill="#fb923c"/>
+            <rect x="-30" y="2" width="60" height="48" rx="13" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2.5"/>
+            <rect x="-24" y="9" width="48" height="30" rx="10" fill="#0f172a"/>
+            <circle cx="-10" cy="23" r="4" fill="#38bdf8"/><circle cx="10" cy="23" r="4" fill="#38bdf8"/>
+            <rect x="-34" y="-20" width="68" height="28" rx="9" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2.5"/>
+            <rect x="-26" y="-13" width="52" height="14" rx="7" fill="#0f172a"/>
+            <circle cx="0" cy="-27" r="4" fill="#f472b6"/>
+            <path d="M30 24Q50 34 44 54" fill="none" stroke="#94a3b8" stroke-width="7" stroke-linecap="round"/>
+            <circle cx="44" cy="56" r="8" fill="#fde68a" stroke="#f59e0b" stroke-width="2"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="vc" class="vc" aria-label="Class 9 and 10 visual lessons">
+    <div class="vc-wrap">
+      <div class="vc-heading">
+        <span class="vc-kicker">Interactive carousel</span>
+        <h2>Fourteen connected explanations</h2>
+        <p class="vc-sub">Use the robot mode for a guided walkthrough, switch to line art for the clean proof, and drag the sliders to test the relationships yourself.</p>
+      </div>
+
+      <div class="vc-carousel" id="vcCar" tabindex="0" aria-roledescription="carousel">
+        <button class="vc-arrow prev" id="aPrev" aria-label="Previous lesson">&#8249;</button>
+        <div class="vc-viewport" id="vcView"><div class="vc-track" id="vcTrack"></div></div>
+        <button class="vc-arrow next" id="aNext" aria-label="Next lesson">&#8250;</button>
+      </div>
+      <div class="vc-dots" id="vcDots"></div>
+
+      <div class="vc-try" id="vcTry" hidden>
+        <div class="vc-label">Try it</div>
+        <div class="vc-try-body" id="vcTryBody"></div>
+      </div>
+
+      <div class="vc-panel">
+        <div>
+          <div class="vc-label">Playback</div>
+          <div class="vc-btns">
+            <button id="bPrev" aria-label="Previous lesson">‹ Back</button>
+            <button id="bPlay" class="main" aria-label="Pause or play">❚❚ Pause</button>
+            <button id="bRep" aria-label="Watch again">↺ Watch again</button>
+            <button id="bNext" aria-label="Next lesson">Next ›</button>
+          </div>
+        </div>
+        <div id="vcModeBox">
+          <div class="vc-label">Style</div>
+          <div class="vc-modes" id="vcModes"></div>
+        </div>
+        <div class="vc-info"><span id="vcInfo"></span><div class="vc-prog"><i id="vcFill"></i></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+const VISUALS=[];
+const S={vi:0,mi:0,t:0,playing:false,manual:false,last:0,adv:null,busy:false,ready:false,params:{}};
+window.registerVisual=v=>{VISUALS.push(v);if(S.ready) rebuild();};
+
+const $=s=>document.querySelector(s);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const prog=(t,a,b)=>clamp((t-a)/(b-a));
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+const lerp=(a,b,k)=>a+(b-a)*k;
+const f=n=>Math.round(n*10)/10;
+const CA='#fbbf24',CB='#4ade80',CC='#c4b5fd',CT='#38bdf8',INK='#e2e8f0';
+
+function path(d,o={}){
+  const {stroke=INK,w=2,fill='none',fo=1,op=1,draw=1}=o;
+  if(draw<=0) return '';
+  const dash=draw<1?` stroke-dasharray="1" stroke-dashoffset="${1-draw}"`:'';
+  return `<path d="${d}" pathLength="1" fill="${fill}" fill-opacity="${fo}" stroke="${stroke}" stroke-width="${w}" opacity="${op}" stroke-linejoin="round" stroke-linecap="round"${dash}/>`;
+}
+function txt(x,y,s,o={}){
+  const {size=18,fill=INK,anchor='middle',op=1,weight=700}=o;
+  if(op<=0) return '';
+  return `<text x="${f(x)}" y="${f(y)}" font-size="${size}" fill="${fill}" text-anchor="${anchor}" opacity="${op}" font-weight="${weight}">${s}</text>`;
+}
+const cap=(list,t)=>{let c=null;for(const e of list) if(e[0]<=t) c=e;return c;};
+function wrap(s,n){const out=[];let l='';for(const w of s.split(' ')){if((l+' '+w).trim().length>n){out.push(l);l=w;}else l=(l+' '+w).trim();}if(l)out.push(l);return out;}
+function typedPairs(lines,n){return lines.map(l=>{const k=clamp(n,0,l.length);n-=l.length;return [l.slice(0,k),l.slice(k)];});}
+function captionBar(t,list){
+  const c=cap(list,t); if(!c) return '';
+  const lines=wrap(c[1],74), n=Math.floor((t-c[0])*46);
+  const h=lines.length*24+16, y0=472-h;
+  let s=`<rect x="30" y="${y0}" width="740" height="${h}" rx="12" fill="#020617" opacity=".78"/>`;
+  typedPairs(lines,n).forEach((p,i)=>{
+    if(!p[0]) return;
+    s+=`<text x="400" y="${y0+28+i*24}" font-size="18" font-weight="500" fill="#f1f5f9" text-anchor="middle">${p[0]}<tspan opacity="0">${p[1]}</tspan></text>`;
+  });
+  return s;
+}
+
+const REST=[560,360],HOME=[648,318];
+function robotSvg(t,hx,hy,talking,happy,rp,rv){
+  const bob=happy?-Math.abs(Math.sin(t*6))*12:Math.sin(t*2.2)*4;
+  const cx=rp[0],cy=rp[1]+bob;
+  const spd=Math.hypot(rv[0],rv[1]);
+  const tilt=clamp(rv[0]*.04,-14,14), th=tilt*Math.PI/180;
+  const blink=(t%3.8)>3.65?.12:1, mo=talking?4+Math.abs(Math.sin(t*17))*8:3;
+  const ox=-36,oy=-20;
+  const sx=cx+ox*Math.cos(th)-oy*Math.sin(th), sy=cy+ox*Math.sin(th)+oy*Math.cos(th);
+  const dist=Math.hypot(hx-sx,hy-sy), sag=Math.min(50,dist*.45);
+  const mx=(sx+hx)/2,my=(sy+hy)/2+sag;
+  const flame=62+Math.sin(t*22)*5+clamp(spd/9,0,26);
+  const shR=clamp(30+(cy-170)*.07,26,48);
+  return `<g>
+  <ellipse cx="${f(cx)}" cy="410" rx="${f(shR)}" ry="7" fill="#000" opacity="${f(clamp(.34-(410-cy)*.0003,.15,.3))}"/>
+  <g transform="rotate(${f(tilt)} ${f(cx)} ${f(cy)})">
+  <path d="M${f(cx-12)} ${f(cy+36)}L${f(cx)} ${f(cy+flame)}L${f(cx+12)} ${f(cy+36)}Z" fill="#fb923c"/>
+  <path d="M${f(cx+36)} ${f(cy-20)}Q${f(cx+64)} ${f(cy)} ${f(cx+56)} ${f(cy+26)}" fill="none" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/>
+  <rect x="${f(cx-36)}" y="${f(cy-42)}" width="72" height="78" rx="16" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
+  <circle cx="${f(cx)}" cy="${f(cy-8)}" r="11" fill="#38bdf8" opacity="${f(.6+.4*Math.sin(t*4))}"/>
+  <rect x="${f(cx-8)}" y="${f(cy-52)}" width="16" height="12" fill="#94a3b8"/>
+  <line x1="${f(cx)}" y1="${f(cy-114)}" x2="${f(cx)}" y2="${f(cy-132)}" stroke="#94a3b8" stroke-width="4"/>
+  <circle cx="${f(cx)}" cy="${f(cy-137)}" r="7" fill="#f472b6"/>
+  <rect x="${f(cx-46)}" y="${f(cy-114)}" width="92" height="66" rx="22" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+  <rect x="${f(cx-35)}" y="${f(cy-104)}" width="70" height="46" rx="14" fill="#0f172a"/>
+  <ellipse cx="${f(cx-15)}" cy="${f(cy-86)}" rx="7" ry="${f(7*blink)}" fill="#38bdf8"/>
+  <ellipse cx="${f(cx+15)}" cy="${f(cy-86)}" rx="7" ry="${f(7*blink)}" fill="#38bdf8"/>
+  <rect x="${f(cx-9)}" y="${f(cy-72)}" width="18" height="${f(mo)}" rx="3" fill="#38bdf8"/>
+  <circle cx="${f(cx-27)}" cy="${f(cy-74)}" r="4" fill="#f472b6" opacity=".6"/><circle cx="${f(cx+27)}" cy="${f(cy-74)}" r="4" fill="#f472b6" opacity=".6"/>
+  </g>
+  <path d="M${f(sx)} ${f(sy)}Q${f(mx)} ${f(my)} ${f(hx)} ${f(hy)}" fill="none" stroke="#94a3b8" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="${f(hx)}" cy="${f(hy)}" r="12" fill="#fde68a" stroke="#f59e0b" stroke-width="3"/>
+  </g>`;
+}
+function robotPos(t,T){
+  let hx=0,hy=0;const N=7;
+  for(let j=0;j<N;j++){const p=handAt(T.hk,Math.max(0,t-j*.15));hx+=p[0];hy+=p[1];}
+  hx/=N;hy/=N;
+  const home=T.home||HOME;
+  let x=home[0]+.85*(hx-REST[0]), y=home[1]+.85*(hy-REST[1]);
+  x=clamp(x,T.minX??70,740);
+  const minY=170+150*clamp((x-350)/70);
+  y=clamp(y,minY,392);
+  return [x,y];
+}
+function handAt(k,t){
+  if(t<=k[0][0]) return [k[0][1],k[0][2]];
+  for(let i=0;i<k.length-1;i++){
+    const a=k[i],b=k[i+1];
+    if(t<=b[0]){const u=ease(prog(t,a[0],b[0]));return [lerp(a[1],b[1],u),lerp(a[2],b[2],u)];}
+  }
+  const l=k[k.length-1];return [l[1],l[2]];
+}
+function robotLayer(t,T,list){
+  const [hx,hy]=handAt(T.hk,t), c=cap(list,t);
+  const rp=robotPos(t,T), rq=robotPos(Math.max(0,t-.1),T);
+  const rv=[(rp[0]-rq[0])/.1,(rp[1]-rq[1])/.1];
+  let talking=false,bubble='';
+  if(c){
+    const lines=wrap(c[1],31),n=Math.floor((t-c[0])*28),total=lines.join('').length;
+    talking=n<total;
+    const h=lines.length*22+22,top=172-h;
+    const tx=clamp(rp[0]-10,510,750), tip=tx+clamp((rp[0]-tx)*.35,-40,40);
+    bubble=`<rect x="478" y="${top}" width="306" height="${h}" rx="14" fill="#f8fafc"/><path d="M${f(tx-13)} 171L${f(tx+13)} 171L${f(tip)} 198Z" fill="#f8fafc"/>`;
+    typedPairs(lines,n).forEach((p,i)=>{bubble+=`<text x="494" y="${top+28+i*22}" font-size="16" font-weight="600" fill="#0f172a">${p[0]}</text>`;});
+  }
+  return bubble+robotSvg(t,hx,hy,talking,t>=T.concl[0],rp,rv);
+}
+function robotMode(T,draw,list){return (t,p)=>draw(t,p)+robotLayer(t,T,list);}
+function artMode(draw,list,duration){return (t,p)=>draw(t,p)+captionBar(t,list);}
+
+function arcPath(cx,cy,r,a0,a1){
+  const p0=[cx+r*Math.cos(a0*Math.PI/180),cy+r*Math.sin(a0*Math.PI/180)];
+  const p1=[cx+r*Math.cos(a1*Math.PI/180),cy+r*Math.sin(a1*Math.PI/180)];
+  const large=Math.abs(a1-a0)>180?1:0, sweep=a1>a0?1:0;
+  return `M${f(p0[0])} ${f(p0[1])} A${f(r)} ${f(r)} 0 ${large} ${sweep} ${f(p1[0])} ${f(p1[1])}`;
+}
+
+/* 1. Real numbers: √2 on the number line */
+function drawSqrt2(t){
+  let s='';
+  const ox=90,oy=240,side=160,diag=Math.SQRT2*side,px=ox+diag;
+  s+=txt(40,42,'Where is √2 on the number line?',{size:26,anchor:'start'});
+  s+=path(`M${ox} ${oy}H${ox+side}V${oy-side}H${ox}Z`,{stroke:INK,w:2.5,draw:prog(t,.2,1.3)});
+  s+=path(`M${ox} ${oy}L${ox+side} ${oy-side}`,{stroke:CA,w:3,draw:prog(t,1.3,2.2)});
+  s+=path(`M${ox+side} ${oy-side}A${f(diag)} ${f(diag)} 0 0 1 ${f(px)} ${oy}`,{stroke:CB,w:3,draw:prog(t,2.2,3.3)});
+  s+=path(`M${f(px)} ${oy}V372`,{stroke:CB,w:2,op:.8,draw:prog(t,3.3,3.8)});
+  s+=txt(ox+side/2,oy+24,'1',{size:15,fill:'#94a3b8',op:prog(t,.8,1.2)});
+  s+=txt(ox-16,oy-side/2+5,'1',{size:15,fill:'#94a3b8',op:prog(t,.8,1.2)});
+  s+=txt(ox+side/2+22,oy-side/2-10,'√2',{size:20,fill:CA,op:prog(t,1.8,2.3)});
+  const nl=prog(t,3.7,4.5);
+  if(nl>0){
+    s+=`<line x1="90" y1="372" x2="${f(lerp(90,650,nl))}" y2="372" stroke="${INK}" stroke-width="2.5"/>`;
+    for(let i=0;i<=3;i++){
+      const x=90+i*160;
+      s+=`<line x1="${x}" y1="364" x2="${x}" y2="380" stroke="${INK}" stroke-width="2"/>`;
+      s+=txt(x,400,String(i),{size:15,fill:'#94a3b8'});
+    }
+    for(let i=0;i<7;i++){
+      const x=90+i*80;
+      s+=`<line x1="${x}" y1="368" x2="${x}" y2="376" stroke="#64748b" stroke-width="1.5"/>`;
+    }
+    const pt=prog(t,4.4,4.9);
+    if(pt>0) s+=`<circle cx="${f(px)}" cy="372" r="${f(6*pt)}" fill="${CT}"/>`;
+    s+=txt(px,350,'√2',{size:18,fill:CT,op:pt});
+    s+=txt(px,424,'1.41421356…',{size:13,fill:'#94a3b8',op:pt});
+  }
+  s+=txt(40,452,'Rational points are dense, but the irrationals fill every gap between them.',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,18,19)});
+  return s;
+}
+const CAP_A1=[
+[.4,"Start with a unit square: side 1, area 1."],
+[3,"Pythagoras gives the diagonal √(1² + 1²) = √2."],
+[7,"Swing that diagonal length onto the number line."],
+[11,"The point is √2 ≈ 1.41421356…, between 1 and 2."],
+[15,"If √2 = p/q in lowest terms, then 2q² = p²."],
+[18,"That forces p and q both even, contradicting lowest terms."],
+[21,"So √2 is irrational; rationals and irrationals together fill the real line."]
+];
+const CAP_R1=[
+[.5,"Let's locate √2 exactly on the number line."],
+[3,"This is a unit square: each side is 1."],
+[6,"Its diagonal is √(1² + 1²) = √2."],
+[9.5,"Swing the diagonal down onto the number line."],
+[13,"It lands at about 1.414, between 1 and 2."],
+[16,"But √2 is not a fraction: it is irrational."],
+[19,"Rationals and irrationals together make the real line."]
+];
+const T1={hk:[[0,170,170],[3,320,250],[7,320,360],[11,560,372],[15,320,220],[19,470,372],[22,470,372]],concl:[19.5,21.5],end:22,minX:430,home:[668,312]};
+registerVisual({
+  id:'real-numbers-sqrt2',rank:1,
+  title:'Real numbers: where exactly is √2?',
+  level:'Class 9–10 · Real numbers',
+  hint:'The square is 1 × 1. The diagonal is √2, and the arc carries that length to the number line.',
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T1.end,frame:robotMode(T1,drawSqrt2,CAP_R1)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawSqrt2,CAP_A1,24)}
+  ]
+});
+
+/* 2. Sets and functions: function machine */
+function drawFunction(t){
+  let s='';
+  s+=txt(40,42,'A function is a one-way rule',{size:26,anchor:'start'});
+  s+=`<defs><marker id="arwFn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#38bdf8"/></marker></defs>`;
+  s+=path(`M120 82H340V214H120Z`,{stroke:INK,w:2.5,draw:prog(t,.2,1.2)});
+  s+=path(`M34 148H120`,{stroke:'#94a3b8',w:2,draw:prog(t,.8,1.4)});
+  s+=path(`M340 148H430`,{stroke:'#94a3b8',w:2,draw:prog(t,.8,1.4)});
+  s+=txt(230,128,'f(x) = 2x + 1',{size:22,fill:CA,op:prog(t,1,1.5)});
+  s+=txt(230,158,'input → rule → output',{size:13,fill:'#94a3b8',op:prog(t,1.2,1.7)});
+  s+=`<circle cx="150" cy="188" r="13" fill="#0b1220" stroke="${CT}" stroke-width="2"/>`;
+  s+=`<circle cx="190" cy="188" r="13" fill="#0b1220" stroke="${CT}" stroke-width="2"/>`;
+  s+=`<circle cx="250" cy="188" r="13" fill="#0b1220" stroke="${CT}" stroke-width="2"/>`;
+  s+=`<circle cx="290" cy="188" r="13" fill="#0b1220" stroke="${CT}" stroke-width="2"/>`;
+  s+=txt(150,193,'+',{size:12,fill:CT});s+=txt(190,193,'+',{size:12,fill:CT});
+  s+=txt(250,193,'+',{size:12,fill:CT});s+=txt(290,193,'+',{size:12,fill:CT});
+  const pIn=prog(t,1.6,2.8), pOut=prog(t,3.0,4.2);
+  if(pIn>0) s+=`<circle cx="${f(lerp(58,230,pIn))}" cy="148" r="9" fill="${CT}"/>`;
+  if(pOut>0) s+=`<circle cx="${f(lerp(230,404,pOut))}" cy="148" r="9" fill="${CA}"/>`;
+  s+=txt(58,132,'3',{size:18,fill:CT,op:prog(t,1.5,1.9)});
+  s+=txt(404,132,'7',{size:18,fill:CA,op:prog(t,4,4.4)});
+  s+=txt(94,248,'Domain',{size:13,fill:'#94a3b8',anchor:'start'});
+  s+=txt(330,248,'Range',{size:13,fill:'#94a3b8',anchor:'start'});
+  const vals=[1,2,3,4], outs=[3,5,7,9];
+  const pm=prog(t,5.4,7.5);
+  for(let i=0;i<4;i++){
+    const y=286+i*30, o=prog(t,5.2+i*.18,5.8+i*.18);
+    s+=`<circle cx="100" cy="${y}" r="12" fill="#0f172a" stroke="${CC}" stroke-width="2" opacity="${o}"/>`;
+    s+=txt(100,y+4,String(vals[i]),{size:13,op:o});
+    s+=`<circle cx="330" cy="${y}" r="12" fill="#0f172a" stroke="${CB}" stroke-width="2" opacity="${o}"/>`;
+    s+=txt(330,y+4,String(outs[i]),{size:13,op:o});
+    if(pm>0) s+=`<line x1="112" y1="${y}" x2="${f(lerp(118,318,pm))}" y2="${y}" stroke="${CT}" stroke-width="2" marker-end="url(#arwFn)" opacity="${pm}"/>`;
+  }
+  s+=txt(215,414,'every input has exactly one arrow',{size:14,fill:'#94a3b8',op:prog(t,11,12)});
+  s+=txt(215,440,'Different inputs → different outputs: one-to-one',{size:14,fill:CB,op:prog(t,14,15)});
+  return s;
+}
+const CAP_A2=[
+[.4,"A function is a rule: every input in the domain gets exactly one output."],
+[4,"This machine uses f(x) = 2x + 1. Input 3 gives output 7."],
+[8,"The set of allowed inputs is the domain: {1, 2, 3, 4}."],
+[11.5,"The set of outputs is the range: {3, 5, 7, 9}."],
+[15,"Different inputs here give different outputs, so f is one-to-one."],
+[18,"On a graph, the vertical line test checks that each x has only one y."],
+[21,"If two inputs shared an output, the rule would still be a function, but not one-to-one."]
+];
+const CAP_R2=[
+[.5,"A function is a machine: one input, one output."],
+[3.5,"Here f(x) = 2x + 1. Input 3 gives 7."],
+[7,"The domain is the set of allowed inputs."],
+[10.5,"The range is the set of outputs it can produce."],
+[14,"3, 5, 7 and 9 are all different, so this function is one-to-one."],
+[18,"A graph must pass the vertical line test."]
+];
+const T2={hk:[[0,230,150],[3,58,148],[7,230,148],[11,100,310],[15,330,340],[19,215,410],[22,215,410]],concl:[19.5,21.5],end:22,minX:440,home:[670,310]};
+registerVisual({
+  id:'sets-functions',rank:2,
+  title:'Sets and functions: the one-way machine',
+  level:'Class 9–10 · Sets and functions',
+  hint:'Every domain value has exactly one arrow. That is the defining rule of a function.',
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T2.end,frame:robotMode(T2,drawFunction,CAP_R2)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawFunction,CAP_A2,24)}
+  ]
+});
+
+/* 3. Exponents and logarithms */
+function drawLogs(t,p={}){
+  const b=clamp(p.base??2,2,3), xh=Math.min(3,Math.log(9)/Math.log(b)), yh=Math.pow(b,xh);
+  const mx=x=>90+x*29, my=y=>340-y*26;
+  let s='';
+  s+=txt(40,42,'Powers and logarithms are inverses',{size:26,anchor:'start'});
+  for(let i=0;i<=5;i++){
+    s+=`<line x1="${mx(i*2)}" y1="80" x2="${mx(i*2)}" y2="340" stroke="#94a3b8" stroke-width="1" opacity=".1"/>`;
+    s+=`<line x1="90" y1="${my(i*2)}" x2="380" y2="${my(i*2)}" stroke="#94a3b8" stroke-width="1" opacity=".1"/>`;
+  }
+  s+=`<line x1="90" y1="340" x2="388" y2="340" stroke="${INK}" stroke-width="2"/>`;
+  s+=`<line x1="90" y1="332" x2="90" y2="72" stroke="${INK}" stroke-width="2"/>`;
+  for(let i=0;i<=5;i++){s+=txt(mx(i*2),358,String(i*2),{size:12,fill:'#94a3b8'});s+=txt(78,my(i*2)+4,String(i*2),{size:12,fill:'#94a3b8'});}
+  s+=path(`M90 340L380 80`,{stroke:'#64748b',w:1.5,op:.75,draw:prog(t,1.2,2.4)});
+  s+=txt(350,102,'y = x',{size:13,fill:'#94a3b8'});
+  const xe=Math.log(10)/Math.log(b), pe=prog(t,2,4.4);
+  if(pe>0){
+    let pts=[];
+    for(let k=0;k<=60;k++){const x=xe*k/60,y=Math.pow(b,x);if(y<=10)pts.push([mx(x),my(y)]);}
+    s+=path('M'+pts.map(q=>q.map(f).join(' ')).join('L'),{stroke:CA,w:3,draw:pe});
+    s+=txt(mx(Math.min(1.3,xe*.45)),my(Math.pow(b,Math.min(1.3,xe*.45)))-12,'y = bˣ',{size:16,fill:CA});
+  }
+  const pl=prog(t,4.6,7);
+  if(pl>0){
+    let pts=[];
+    for(let k=0;k<=70;k++){const x=1+k*9/70,y=Math.log(x)/Math.log(b);if(y<=10)pts.push([mx(x),my(y)]);}
+    s+=path('M'+pts.map(q=>q.map(f).join(' ')).join('L'),{stroke:CB,w:3,draw:pl});
+    s+=txt(mx(7.1),my(Math.log(7.1)/Math.log(b))-12,`y = log<tspan baseline-shift="sub" font-size="11">${b}</tspan> x`,{size:16,fill:CB});
+  }
+  const pp=prog(t,7.4,8.6);
+  if(pp>0){
+    s+=`<circle cx="${f(mx(xh))}" cy="${f(my(yh))}" r="${f(7*pp)}" fill="${CA}"/>`;
+    s+=`<circle cx="${f(mx(yh))}" cy="${f(my(xh))}" r="${f(7*pp)}" fill="${CB}"/>`;
+    s+=path(`M${f(mx(xh))} ${f(my(yh))}H${f(mx(yh))}V${f(my(xh))}`,{stroke:'#94a3b8',w:1.2,op:.55*pp});
+    s+=txt(mx(yh)+12,my(xh)-10,`(${f(yh)}, ${f(xh)})`,{size:13,anchor:'start',fill:CB,op:pp});
+  }
+  s+=txt(40,392,`${b}<tspan baseline-shift="super" font-size="12">${f(xh)}</tspan> = ${f(yh)}   ⇔   log<tspan baseline-shift="sub" font-size="12">${b}</tspan> ${f(yh)} = ${f(xh)}`,{size:18,anchor:'start',fill:CC,op:prog(t,8.2,9.2)});
+  s+=txt(40,424,'log(xy) = log x + log y     log(xⁿ) = n log x',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,14,15)});
+  s+=txt(40,450,'A logarithm answers: “what exponent produces this number?”',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,17,18)});
+  return s;
+}
+const CAP_A3=[
+[.4,"Powers and logarithms are inverse operations."],
+[3.5,"This curve is y = bˣ: input the exponent, output the power."],
+[7.5,"Reflect it in y = x to get y = log base b of x."],
+[11.5,"The point (3, 8) becomes (8, 3): log₂ 8 = 3."],
+[15.5,"Laws: log(xy) = log x + log y and log(xⁿ) = n log x."],
+[19,"Logs turn multiplication into addition, which is why they were used for calculation."]
+];
+const CAP_R3=[
+[.5,"A logarithm undoes a power."],
+[3,"This curve is y = bˣ: exponent in, power out."],
+[7,"Reflecting it in y = x gives y = log base b of x."],
+[11,"The point (3, 8) mirrors to (8, 3)."],
+[15,"So log₂ 8 = 3, because 2³ = 8."],
+[19,"Logs turn multiplication into addition."]
+];
+const T3={hk:[[0,180,150],[3,180,200],[7,320,200],[11,250,150],[15,140,392],[19,140,424],[22,140,424]],concl:[19.5,21.5],end:22,minX:430,home:[668,310]};
+registerVisual({
+  id:'exponents-logarithms',rank:3,
+  title:'Exponents and logarithms: inverse machines',
+  level:'Class 9–10 · Exponents and logarithms',
+  hint:'Change the base. The two curves stay mirror images in the line y = x.',
+  controls:[{id:'base',label:'Base b',type:'range',min:2,max:3,step:1,value:2}],
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T3.end,frame:robotMode(T3,drawLogs,CAP_R3)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawLogs,CAP_A3,24)}
+  ]
+});
+
+/* 4. Equations in one variable: balance method */
+function drawBalance(t){
+  let s='';
+  s+=txt(40,42,'An equation is a balance',{size:26,anchor:'start'});
+  const eqX=300,eqY=84;
+  const step1=prog(t,0,.1), step2=prog(t,5,6), step3=prog(t,9.5,10.5), step4=prog(t,15,16);
+  s+=txt(eqX,eqY,'3x + 2 = 11',{size:28,fill:step2>.5?CA:INK,op:step1>0?1:.4});
+  s+=txt(eqX,eqY+34,step2>.5?'3x = 9':step3>.5?'x = 3':step4>.5?'check: 3(3) + 2 = 11':'subtract 2 from both sides',{size:15,fill:step3>.5?CB:'#94a3b8',op:prog(t,4.8,5.4)});
+  s+=path(`M130 190H470`,{stroke:INK,w:3,draw:prog(t,.2,.9)});
+  s+=path(`M300 190L268 270H332Z`,{stroke:INK,w:2,fill:'#0f172a',draw:prog(t,.4,1.1)});
+  s+=path(`M300 270V330`,{stroke:INK,w:2.5,draw:prog(t,.6,1.2)});
+  s+=path(`M246 330H354`,{stroke:INK,w:2.5,draw:prog(t,.7,1.3)});
+  s+=path(`M150 190V246M450 190V246`,{stroke:'#94a3b8',w:1.5,draw:prog(t,1,1.5)});
+  s+=path(`M116 246Q150 286 184 246Z`,{stroke:INK,w:2,fill:'#0b1220',draw:prog(t,1.2,1.8)});
+  s+=path(`M416 246Q450 286 484 246Z`,{stroke:INK,w:2,fill:'#0b1220',draw:prog(t,1.2,1.8)});
+  const fade=1-prog(t,6,7.5);
+  for(let i=0;i<3;i++){
+    const x=118+i*34,y=224;
+    s+=`<rect x="${x}" y="${y}" width="28" height="28" rx="7" fill="${CC}" stroke="#a78bfa" opacity="${prog(t,1.8,2.4)}"/>`;
+    s+=txt(x+14,y+19,'x',{size:14,fill:'#0f172a',op:prog(t,1.8,2.4)});
+  }
+  for(let i=0;i<2;i++){
+    const x=132+i*28,y=260;
+    s+=`<circle cx="${x}" cy="${y}" r="10" fill="${CA}" opacity="${f(prog(t,2.2,2.8)*fade)}"/>`;
+    s+=txt(x,y+4,'1',{size:10,fill:'#0f172a',op:f(prog(t,2.2,2.8)*fade)});
+  }
+  const rightFade=1-prog(t,6,7.2);
+  for(let row=0;row<3;row++){
+    const count=row<2?4:3;
+    for(let i=0;i<count;i++){
+      const x=414+i*18+(row===2?10:0), y=222+row*18;
+      s+=`<circle cx="${x}" cy="${y}" r="8" fill="${CB}" opacity="${prog(t,2.4,3)*rightFade}"/>`;
+    }
+  }
+  const group=prog(t,10.5,12.5);
+  if(group>0){
+    for(let i=0;i<3;i++){
+      const x=104+i*36;
+      s+=path(`M${x} 208H${x+34}V262H${x}Z`,{stroke:CT,w:1.5,op:group,draw:1});
+    }
+    s+=path(`M400 208H552V278H400Z`,{stroke:CT,w:1.5,op:group,draw:1});
+    s+=txt(300,300,'divide both sides into 3 equal groups',{size:13,fill:'#94a3b8',op:prog(t,12,13)});
+  }
+  if(step3>.5) s+=txt(300,380,'x = 3',{size:34,fill:CB,op:step3});
+  if(step4>.5) s+=txt(300,416,'3(3) + 2 = 9 + 2 = 11 ✓',{size:16,fill:INK,op:step4});
+  s+=txt(40,452,'Inverse operations keep both sides equal.',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,18,19)});
+  return s;
+}
+const CAP_A4=[
+[.4,"An equation is a balance: the two sides have equal value."],
+[4,"Whatever you do to one side, you must do to the other."],
+[7.5,"Subtract 2 from both sides: 3x = 9."],
+[11.5,"Divide both sides by 3: x = 3."],
+[16,"Check: 3(3) + 2 = 11. The balance is still true."],
+[20,"This inverse-operation idea solves every linear equation."]
+];
+const CAP_R4=[
+[.5,"An equation is a balanced scale."],
+[4,"Do the same operation to both pans."],
+[7.5,"Take 2 away from each side: 3x = 9."],
+[11.5,"Split both sides into 3 groups: x = 3."],
+[16,"Check it: 3 times 3 plus 2 is 11."],
+[20,"Inverse operations preserve the balance."]
+];
+const T4={hk:[[0,150,230],[4,150,260],[7.5,450,240],[11.5,300,240],[16,300,84],[20,300,380],[23,300,380]],concl:[20.5,22.5],end:23,minX:430,home:[670,310]};
+registerVisual({
+  id:'equations-one-variable',rank:4,
+  title:'Equations in one variable: keep the balance',
+  level:'Class 9–10 · Equations in one variable',
+  hint:'Every move is an inverse operation applied to both sides at once.',
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T4.end,frame:robotMode(T4,drawBalance,CAP_R4)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawBalance,CAP_A4,24)}
+  ]
+});
+
+/* 5. Exterior angle theorem */
+function drawExterior(t){
+  const A=[170,110],B=[90,310],C=[370,310],D=[550,310];
+  let s='';
+  s+=txt(40,42,'Why is the exterior angle A + B?',{size:25,anchor:'start'});
+  s+=path(`M${A[0]} ${A[1]}L${B[0]} ${B[1]}L${C[0]} ${C[1]}Z`,{stroke:INK,w:2.5,draw:prog(t,.2,1.5)});
+  s+=path(`M${C[0]} ${C[1]}H${D[0]}`,{stroke:INK,w:2.5,draw:prog(t,1.5,2.5)});
+  const ang=(p,q)=>Math.atan2(q[1]-p[1],q[0]-p[0])*180/Math.PI;
+  const aAtB=ang(B,A), aAtCb=ang(C,B), aAtCa=ang(C,A), aAtCd=ang(C,D);
+  const aAtA1=ang(A,C), aAtA2=ang(A,B);
+  const pArc=prog(t,3,4);
+  if(pArc>0){
+    s+=path(arcPath(B[0],B[1],30,aAtB,aAtCb),{stroke:CB,w:2.5,draw:pArc});
+    s+=path(arcPath(A[0],A[1],32,aAtA1,aAtA2),{stroke:CA,w:2.5,draw:pArc});
+    s+=path(arcPath(C[0],C[1],34,aAtCa,aAtCb),{stroke:CC,w:2.5,draw:pArc});
+    s+=path(arcPath(C[0],C[1],56,aAtCa,aAtCd),{stroke:CT,w:3,draw:prog(t,4.5,5.5)});
+  }
+  s+=txt(A[0],A[1]-22,'A',{size:18,fill:CA});
+  s+=txt(B[0]-20,B[1]+6,'B',{size:18,fill:CB});
+  s+=txt(C[0]+2,C[1]+26,'C',{size:18,fill:CC});
+  s+=txt(D[0]+10,D[1]+6,'D',{size:18,fill:CT});
+  s+=txt(140,150,'∠A',{size:15,fill:CA,op:prog(t,3,4)});
+  s+=txt(125,285,'∠B',{size:15,fill:CB,op:prog(t,3,4)});
+  s+=txt(352,280,'∠C',{size:15,fill:CC,op:prog(t,3,4)});
+  s+=txt(470,270,'exterior ∠ACD',{size:15,fill:CT,op:prog(t,5,6)});
+  s+=txt(40,400,'exterior ∠ACD = ∠A + ∠B',{size:22,fill:CT,anchor:'start',op:prog(t,6,7)});
+  s+=txt(40,430,'Proof: ∠ACB + exterior = 180° and ∠A + ∠B + ∠ACB = 180°. Subtract ∠ACB.',{size:13,fill:'#94a3b8',anchor:'start',op:prog(t,13,14)});
+  return s;
+}
+const CAP_A5=[
+[.4,"Extend one side of a triangle to make an exterior angle."],
+[4.5,"The exterior angle equals the sum of the two opposite interior angles."],
+[8,"Proof: ∠ACB + exterior = 180°, because they form a straight line."],
+[12,"Also ∠A + ∠B + ∠ACB = 180°, the triangle angle sum."],
+[16,"Subtract the common angle ACB: exterior = A + B."],
+[20,"This works for every triangle, acute or obtuse."]
+];
+const CAP_R5=[
+[.5,"Extend one side of the triangle."],
+[4.5,"This new exterior angle equals A + B."],
+[8,"Why? The straight line gives 180°."],
+[12,"The triangle's own angles also give 180°."],
+[16,"Subtract the shared angle and the exterior is A + B."],
+[20,"That is the exterior angle theorem."]
+];
+const T5={hk:[[0,170,110],[5,90,310],[9,370,310],[13,550,310],[17,300,400],[20,300,430],[23,300,430]],concl:[20.5,22.5],end:23,minX:590,home:[700,318]};
+registerVisual({
+  id:'exterior-angle',rank:5,
+  title:'Lines and triangles: the exterior angle theorem',
+  level:'Class 9–10 · Lines, angles and triangles',
+  hint:'The exterior angle is the sum of the two interior angles opposite it.',
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T5.end,frame:robotMode(T5,drawExterior,CAP_R5)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawExterior,CAP_A5,24)}
+  ]
+});
+
+/* 6. Inscribed angle theorem */
+function drawInscribed(t,p={}){
+  const a=clamp(p.angle??120,40,180), cx=260,cy=240,r=130;
+  const pt=deg=>[cx+r*Math.cos(deg*Math.PI/180),cy+r*Math.sin(deg*Math.PI/180)];
+  const A=pt(90+a/2),B=pt(90-a/2),C=pt(270),O=[cx,cy];
+  const ang=(p,q)=>Math.atan2(q[1]-p[1],q[0]-p[0])*180/Math.PI;
+  let s='';
+  s+=txt(40,42,'Inscribed angle = half the central angle',{size:24,anchor:'start'});
+  s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${CT}" fill-opacity=".05" stroke="${CT}" stroke-width="2.5"/>`;
+  s+=path(arcPath(cx,cy,r,90-a/2,90+a/2),{stroke:CC,w:4,op:.8,draw:prog(t,1,2.5)});
+  s+=path(`M${O[0]} ${O[1]}L${A[0]} ${A[1]}M${O[0]} ${O[1]}L${B[0]} ${B[1]}`,{stroke:CA,w:2,draw:prog(t,2.5,3.5)});
+  s+=path(`M${C[0]} ${C[1]}L${A[0]} ${A[1]}M${C[0]} ${C[1]}L${B[0]} ${B[1]}`,{stroke:CB,w:2.5,draw:prog(t,3.5,4.5)});
+  const pArc=prog(t,4.8,5.8);
+  if(pArc>0){
+    s+=path(arcPath(cx,cy,30,ang(O,B),ang(O,A)),{stroke:CA,w:3,draw:pArc});
+    s+=path(arcPath(C[0],C[1],38,ang(C,A),ang(C,B)),{stroke:CB,w:3,draw:pArc});
+  }
+  s+=`<circle cx="${cx}" cy="${cy}" r="5" fill="${INK}"/>`;
+  s+=txt(cx-4,cy+22,'O',{size:16,fill:INK});
+  [['A',A,CA],['B',B,CB],['C',C,CC]].forEach(([n,q,c])=>{s+=`<circle cx="${f(q[0])}" cy="${f(q[1])}" r="5" fill="${c}"/>`;s+=txt(q[0]+8,q[1]-8,n,{size:16,fill:c,anchor:'start'});});
+  s+=txt(40,300,`central = ${Math.round(a)}°`,{size:14,fill:CA,anchor:'start'});
+  s+=txt(40,326,`inscribed = ${Math.round(a/2)}°`,{size:14,fill:CB,anchor:'start'});
+  s+=txt(40,392,`∠ACB = ½ ∠AOB = ${Math.round(a/2)}°`,{size:20,anchor:'start',fill:CC,op:prog(t,6,7)});
+  s+=txt(40,424,'Chord AB is the same for both angles; only the vertex moves.',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,10,11)});
+  s+=txt(40,450,a>=179?'AB is a diameter: the angle in a semicircle is 90°.':'If AB is a diameter, the inscribed angle becomes 90°.',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,17,18)});
+  return s;
+}
+const CAP_A6=[
+[.4,"A central angle has its vertex at the centre O."],
+[4,"An inscribed angle has its vertex on the circle."],
+[8,"Both stand on the same chord AB."],
+[12,"The inscribed angle is always half the central angle."],
+[16,"Why? Join C to O; the two triangles are isosceles."],
+[20,"If AB is a diameter, the central angle is 180°, so the inscribed angle is 90°."]
+];
+const CAP_R6=[
+[.5,"Both angles stand on the same chord AB."],
+[4,"The central angle is at the centre."],
+[8,"The inscribed angle is on the circle."],
+[12,"The inscribed one is always half the central one."],
+[16,"Join C to O to see two isosceles triangles."],
+[20,"If AB is a diameter, the angle is 90°."]
+];
+const T6={hk:[[0,260,240],[5,330,170],[9,260,110],[13,200,300],[17,260,240],[20,260,380],[23,260,380]],concl:[20.5,22.5],end:23,minX:430,home:[670,310]};
+registerVisual({
+  id:'inscribed-angle',rank:6,
+  title:'Circle: the inscribed angle theorem',
+  level:'Class 9–10 · Circle',
+  hint:'Drag the central angle. The inscribed angle stays exactly half of it.',
+  controls:[{id:'angle',label:'Central angle',type:'range',min:40,max:180,step:10,value:120,suffix:'°'}],
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T6.end,frame:robotMode(T6,drawInscribed,CAP_R6)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawInscribed,CAP_A6,24)}
+  ]
+});
+
+/* 7. Unit circle to sine and cosine waves */
+function drawTrigWaves(t,p={}){
+  const deg=Math.round(clamp(p.angle??60,0,360)), rad=deg*Math.PI/180;
+  const cx=205,cy=250,r=105,px=cx+r*Math.cos(rad),py=cy-r*Math.sin(rad);
+  const gx=400,gw=350,gy=250,amp=82;
+  let s='';
+  s+=txt(40,40,'From the unit circle to sine and cosine',{size:24,anchor:'start'});
+  for(let k=-1;k<=1;k++){
+    s+=`<line x1="${cx+k*r}" y1="${cy-r}" x2="${cx+k*r}" y2="${cy+r}" stroke="#94a3b8" stroke-width="1" opacity=".12"/>`;
+    s+=`<line x1="${cx-r}" y1="${cy+k*r}" x2="${cx+r}" y2="${cy+k*r}" stroke="#94a3b8" stroke-width="1" opacity=".12"/>`;
+  }
+  s+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${CT}" fill-opacity=".05" stroke="${CT}" stroke-width="2.5"/>`;
+  s+=`<line x1="${cx-r-12}" y1="${cy}" x2="${cx+r+12}" y2="${cy}" stroke="${INK}" stroke-width="2"/>`;
+  s+=`<line x1="${cx}" y1="${cy-r-12}" x2="${cx}" y2="${cy+r+12}" stroke="${INK}" stroke-width="2"/>`;
+  s+=path(arcPath(cx,cy,28,0,-deg),{stroke:CC,w:2.5,draw:1});
+  s+=`<line x1="${cx}" y1="${cy}" x2="${f(px)}" y2="${f(py)}" stroke="${CA}" stroke-width="3"/>`;
+  s+=`<line x1="${f(px)}" y1="${f(py)}" x2="${f(px)}" y2="${cy}" stroke="${CT}" stroke-width="3"/>`;
+  s+=`<line x1="${cx}" y1="${cy}" x2="${f(px)}" y2="${cy}" stroke="${CB}" stroke-width="5" opacity=".85"/>`;
+  s+=`<circle cx="${f(px)}" cy="${f(py)}" r="7" fill="${CA}" stroke="#0b1220" stroke-width="2"/>`;
+  s+=txt(cx,cy+r+28,`θ = ${deg}°`,{size:15,fill:CC});
+  s+=txt(cx+r*.55,cy+22,'cos θ',{size:13,fill:CB});
+  s+=txt(px+12,(py+cy)/2,'sin θ',{size:13,fill:CT,anchor:'start'});
+  s+=`<line x1="${gx}" y1="${gy}" x2="${gx+gw}" y2="${gy}" stroke="${INK}" stroke-width="2"/>`;
+  s+=`<line x1="${gx}" y1="${gy-amp-16}" x2="${gx}" y2="${gy+amp+16}" stroke="${INK}" stroke-width="2"/>`;
+  for(let d=0;d<=360;d+=90){
+    const x=gx+(d/360)*gw;
+    s+=`<line x1="${f(x)}" y1="${gy-4}" x2="${f(x)}" y2="${gy+4}" stroke="#94a3b8" stroke-width="1.5"/>`;
+    s+=txt(x,gy+amp+34,`${d}°`,{size:11,fill:'#94a3b8'});
+  }
+  const sinePts=[],cosPts=[];
+  for(let d=0;d<=360;d+=4){const q=d*Math.PI/180,x=gx+(d/360)*gw;sinePts.push([x,gy-amp*Math.sin(q)]);cosPts.push([x,gy-amp*Math.cos(q)]);}
+  s+=path('M'+sinePts.map(q=>q.map(f).join(' ')).join('L'),{stroke:CT,w:2.5});
+  s+=path('M'+cosPts.map(q=>q.map(f).join(' ')).join('L'),{stroke:CB,w:2.5});
+  const vx=gx+(deg/360)*gw;
+  s+=`<line x1="${f(vx)}" y1="${gy-amp-14}" x2="${f(vx)}" y2="${gy+amp+14}" stroke="${CA}" stroke-width="1.5" opacity=".7"/>`;
+  s+=`<circle cx="${f(vx)}" cy="${f(gy-amp*Math.sin(rad))}" r="6" fill="${CT}"/>`;
+  s+=`<circle cx="${f(vx)}" cy="${f(gy-amp*Math.cos(rad))}" r="6" fill="${CB}"/>`;
+  s+=txt(gx+gw-4,gy-amp-24,'sin θ',{size:13,fill:CT,anchor:'end'});
+  s+=txt(gx+gw-4,gy+amp+54,'cos θ',{size:13,fill:CB,anchor:'end'});
+  s+=txt(40,404,`sin θ = ${Math.sin(rad).toFixed(3)}     cos θ = ${Math.cos(rad).toFixed(3)}`,{size:18,anchor:'start',fill:INK});
+  s+=txt(40,432,"The y-coordinate traces sine; the x-coordinate traces cosine.",{size:14,anchor:'start',fill:'#94a3b8'});
+  s+=txt(40,456,"Both repeat every 360°, with amplitude 1 and midline 0.",{size:14,anchor:'start',fill:'#94a3b8'});
+  return s;
+}
+registerVisual({
+  id:'trig-waves',rank:7,
+  title:'Trigonometric ratios: circle to waves',
+  level:'Class 9–10 · Trigonometric ratios',
+  hint:'Drag the angle. The point on the circle and the points on the waves always agree.',
+  controls:[{id:'angle',label:'Angle θ',type:'range',min:0,max:360,step:5,value:60,suffix:'°'}],
+  modes:[{id:'explore',label:'Explore',duration:10,frame:drawTrigWaves}]
+});
+
+/* 8. Angle of elevation */
+function drawElevation(t,p={}){
+  const d=clamp(p.d??40,20,60), ang=clamp(p.angle??30,15,60);
+  const baseX=80+d*5, topY=360-220*Math.tan(ang*Math.PI/180);
+  const obs=[80,360], top=[baseX,topY], foot=[baseX,360];
+  let s='';
+  s+=txt(40,42,'Angle of elevation: height from a distance',{size:24,anchor:'start'});
+  s+=`<line x1="40" y1="360" x2="620" y2="360" stroke="${INK}" stroke-width="2"/>`;
+  s+=path(`M${foot[0]} ${foot[1]}V${top[1]}`,{stroke:CA,w:4,draw:prog(t,1,2)});
+  s+=path(`M${obs[0]} ${obs[1]}L${top[0]} ${top[1]}`,{stroke:CT,w:2.5,draw:prog(t,2,3.2)});
+  s+=path(`M${obs[0]} ${obs[1]}H${foot[0]}`,{stroke:'#94a3b8',w:1.5,draw:prog(t,1.5,2.5)});
+  s+=`<rect x="${foot[0]-1}" y="${foot[1]-12}" width="12" height="12" fill="none" stroke="${INK}" stroke-width="1.5"/>`;
+  const pa=prog(t,3.4,4.4);
+  if(pa>0) s+=path(arcPath(obs[0],obs[1],46,0,-ang),{stroke:CB,w:3,draw:pa});
+  s+=txt(obs[0]+52,obs[1]-14,`θ = ${ang}°`,{size:15,fill:CB,anchor:'start'});
+  s+=txt((obs[0]+foot[0])/2,384,`d = ${d} m`,{size:15,fill:'#94a3b8'});
+  s+=txt(foot[0]+12,(top[1]+foot[1])/2,`h ≈ ${(d*Math.tan(ang*Math.PI/180)).toFixed(1)} m`,{size:15,fill:CA,anchor:'start'});
+  s+=`<circle cx="${obs[0]}" cy="${obs[1]}" r="7" fill="${CT}"/>`;
+  s+=txt(obs[0]-2,obs[1]+24,'observer',{size:12,fill:'#94a3b8'});
+  s+=txt(40,424,`tan θ = h / d   →   h = d tan θ = ${d} × tan ${ang}° ≈ ${(d*Math.tan(ang*Math.PI/180)).toFixed(1)} m`,{size:17,anchor:'start',fill:CC,op:prog(t,5,6)});
+  s+=txt(40,452,'Angle of depression is measured downward from the horizontal, but uses the same triangle.',{size:13,anchor:'start',fill:'#94a3b8',op:prog(t,13,14)});
+  return s;
+}
+const CAP_A8=[
+[.4,"From a point on the ground, look up at the top of a tower."],
+[4.5,"The angle between the horizontal and your line of sight is the angle of elevation."],
+[9,"The triangle is right-angled, so tan θ = opposite / adjacent = h / d."],
+[13,"Multiply both sides by d: h = d tan θ."],
+[17,"Example: d = 40 m and θ = 30° give h = 40 tan 30° ≈ 23.1 m."],
+[21,"Angles of depression use the same triangle, measured downward from the horizontal."]
+];
+const CAP_R8=[
+[.5,"Look up at the top of the tower."],
+[4.5,"This angle is the angle of elevation."],
+[9,"The triangle is right-angled."],
+[13,"So tan θ equals height over distance."],
+[17,"Multiply: height = distance times tan θ."],
+[21,"Depression angles use the same right triangle."]
+];
+const T8={hk:[[0,80,360],[5,380,300],[9,300,250],[13,260,200],[17,260,420],[21,260,450],[24,260,450]],concl:[21.5,23.5],end:24,minX:600,home:[700,318]};
+registerVisual({
+  id:'angle-elevation',rank:8,
+  title:'Distance and elevation: measuring a tower',
+  level:'Class 9–10 · Distance and elevation',
+  hint:'Change the distance and angle. The height is always d tan θ.',
+  controls:[
+    {id:'d',label:'Distance d',type:'range',min:20,max:60,step:5,value:40,suffix:' m'},
+    {id:'angle',label:'Angle θ',type:'range',min:15,max:60,step:5,value:30,suffix:'°'}
+  ],
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T8.end,frame:robotMode(T8,drawElevation,CAP_R8)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawElevation,CAP_A8,24)}
+  ]
+});
+
+/* 9. Similar triangles */
+function drawSimilar(t,p={}){
+  const k=clamp(p.k??2,1,2), u=30;
+  const S1=[[90,320],[180,320],[90,200]];
+  const bx=330,by=320;
+  const S2=[[bx,by],[bx+90*k,by],[bx,by-120*k]];
+  const tri=(P,c,draw)=>path(`M${P[0][0]} ${P[0][1]}L${P[1][0]} ${P[1][1]}L${P[2][0]} ${P[2][1]}Z`,{stroke:c,w:3,draw});
+  let s='';
+  s+=txt(40,42,'Similar triangles: lengths × k, areas × k²',{size:23,anchor:'start'});
+  s+=tri(S1,CT,prog(t,.2,1.2));
+  s+=tri(S2,CB,prog(t,1.2,2.2));
+  s+=txt(135,342,'3',{size:14,fill:CT});s+=txt(76,262,'4',{size:14,fill:CT,anchor:'end'});s+=txt(146,250,'5',{size:14,fill:CT});
+  s+=txt(bx+45*k,344,`${f(3*k)}`,{size:14,fill:CB});s+=txt(bx-12,by-60*k,`${f(4*k)}`,{size:14,fill:CB,anchor:'end'});s+=txt(bx+48*k,by-68*k,`${f(5*k)}`,{size:14,fill:CB});
+  s+=txt(135,382,'area = 6',{size:15,fill:CT,op:prog(t,6,7)});
+  s+=txt(bx+45*k+70,382,`area = ${f(6*k*k)}`,{size:15,fill:CB,op:prog(t,7,8)});
+  s+=txt(40,412,`scale factor k = ${f(k)}`,{size:18,anchor:'start',fill:CA,op:prog(t,9,10)});
+  s+=txt(40,440,`perimeter: 12 → ${f(12*k)}     area: 6 → ${f(6*k*k)} = 6k²`,{size:15,anchor:'start',fill:'#94a3b8',op:prog(t,11,12)});
+  s+=path(`M90 308H102V320`,{stroke:CA,w:2,op:prog(t,4,5)});
+  s+=path(`M${bx} ${by-12}H${bx+12}V${by}`,{stroke:CA,w:2,op:prog(t,5,6)});
+  return s;
+}
+const CAP_A9=[
+[.4,"Similar triangles have the same shape: equal angles and proportional sides."],
+[4.5,"Each side of the large triangle is k times the matching side."],
+[9,"Perimeters scale by k, because every side is multiplied by k."],
+[13,"Areas scale by k², because area is two-dimensional."],
+[17,"Here k = 2: sides 3, 4, 5 become 6, 8, 10."],
+[21,"Area grows from 6 to 24, a factor of 4. Volumes of similar solids scale by k³."]
+];
+const CAP_R9=[
+[.5,"Similar triangles have equal angles."],
+[4.5,"Every side is multiplied by the same k."],
+[9,"Perimeters scale by k."],
+[13,"Areas scale by k squared."],
+[17,"Here k is 2, so area becomes 4 times bigger."],
+[21,"Volumes would scale by k cubed."]
+];
+const T9={hk:[[0,130,260],[5,200,320],[9,250,280],[13,430,200],[17,430,382],[21,250,440],[24,250,440]],concl:[21.5,23.5],end:24,minX:590,home:[700,318]};
+registerVisual({
+  id:'similar-triangles',rank:9,
+  title:'Ratio and similarity: lengths, areas and volume',
+  level:'Class 9–10 · Ratio, similarity and symmetry',
+  hint:'Change k. Side lengths follow k, areas follow k², and volumes would follow k³.',
+  controls:[{id:'k',label:'Scale factor k',type:'range',min:1,max:2,step:0.25,value:2}],
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T9.end,frame:robotMode(T9,drawSimilar,CAP_R9)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawSimilar,CAP_A9,24)}
+  ]
+});
+
+/* 10. Simultaneous equations */
+function drawSimultaneous(t){
+  const mx=x=>100+x*45,my=y=>330-y*45;
+  let s='';
+  s+=txt(40,42,'Two equations, two lines, one solution',{size:24,anchor:'start'});
+  for(let i=0;i<=6;i++){
+    s+=`<line x1="${mx(i)}" y1="60" x2="${mx(i)}" y2="330" stroke="#94a3b8" stroke-width="1" opacity=".09"/>`;
+    s+=`<line x1="100" y1="${my(i)}" x2="370" y2="${my(i)}" stroke="#94a3b8" stroke-width="1" opacity=".09"/>`;
+  }
+  s+=`<line x1="100" y1="330" x2="380" y2="330" stroke="${INK}" stroke-width="2"/>`;
+  s+=`<line x1="100" y1="322" x2="100" y2="52" stroke="${INK}" stroke-width="2"/>`;
+  for(let i=0;i<=6;i++){s+=txt(mx(i),350,String(i),{size:11,fill:'#94a3b8'});s+=txt(88,my(i)+4,String(i),{size:11,fill:'#94a3b8'});}
+  s+=path(`M${mx(0)} ${my(7)}L${mx(3.5)} ${my(0)}`,{stroke:CA,w:3,draw:prog(t,1,2.5)});
+  s+=path(`M${mx(2)} ${my(0)}L${mx(6)} ${my(4)}`,{stroke:CB,w:3,draw:prog(t,2.5,4)});
+  const pp=prog(t,4.2,5.2);
+  if(pp>0){
+    s+=`<circle cx="${mx(3)}" cy="${my(1)}" r="${f(8*pp)}" fill="${CT}" stroke="#0b1220" stroke-width="2"/>`;
+    s+=path(`M${mx(3)} ${my(1)}V330M${mx(3)} ${my(1)}H100`,{stroke:CT,w:1.2,op:.5*pp});
+    s+=txt(mx(3)+12,my(1)-10,'(3, 1)',{size:15,fill:CT,anchor:'start',op:pp});
+  }
+  s+=txt(42,96,'2x + y = 7',{size:18,anchor:'start',fill:CA,op:prog(t,1,1.5)});
+  s+=txt(42,124,'x − y = 2',{size:18,anchor:'start',fill:CB,op:prog(t,2,2.5)});
+  s+=txt(42,392,'Add: 3x = 9 → x = 3',{size:17,anchor:'start',fill:CC,op:prog(t,7,8)});
+  s+=txt(42,420,'Substitute: 3 − y = 2 → y = 1',{size:17,anchor:'start',fill:CC,op:prog(t,11,12)});
+  s+=txt(42,448,'Parallel lines: no solution. Same line: infinitely many.',{size:13,anchor:'start',fill:'#94a3b8',op:prog(t,18,19)});
+  return s;
+}
+const CAP_A10=[
+[.4,"Each equation in two variables is a straight line."],
+[4,"The pair is solved by the point where the lines meet."],
+[8,"Add the equations to eliminate y: 3x = 9."],
+[12,"So x = 3. Substitute into x − y = 2 to get y = 1."],
+[16,"The lines cross at (3, 1): one point, one solution."],
+[20,"Parallel lines never meet, so there is no solution."],
+[23,"The same line twice gives infinitely many solutions."]
+];
+const CAP_R10=[
+[.5,"Each equation is a straight line."],
+[4,"The solution is where the lines cross."],
+[8,"Add the equations: 3x = 9."],
+[12,"So x = 3, and then y = 1."],
+[16,"They cross at (3, 1). One solution."],
+[20,"Parallel lines would mean no solution."]
+];
+const T10={hk:[[0,150,280],[5,250,280],[9,250,100],[13,100,330],[17,235,285],[21,235,440],[24,235,440]],concl:[21.5,23.5],end:24,minX:430,home:[670,310]};
+registerVisual({
+  id:'simultaneous-equations',rank:10,
+  title:'Simultaneous equations: the intersection',
+  level:'Class 9–10 · Simultaneous equations',
+  hint:'Elimination finds the same point that the two lines share on the graph.',
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T10.end,frame:robotMode(T10,drawSimultaneous,CAP_R10)},
+    {id:'art',label:'Line art',duration:26,frame:artMode(drawSimultaneous,CAP_A10,26)}
+  ]
+});
+
+/* 11. Finite geometric series */
+function drawGeoSeries(t,p={}){
+  const r=clamp(p.r??0.5,1/3,2/3), n=Math.round(clamp(p.n??4,1,10));
+  const x0=90,barY=196,barW=340,barH=82;
+  const filled=barW*(1-Math.pow(r,n));
+  const colors=[CA,CB,CC,CT];
+  let s='';
+  s+=txt(40,42,'Finite geometric series: a + ar + ar² + …',{size:23,anchor:'start'});
+  s+=`<rect x="${x0}" y="${barY}" width="${barW}" height="${barH}" rx="10" fill="#0f172a" stroke="#334155" stroke-width="2"/>`;
+  let cx=x0;
+  for(let i=0;i<n;i++){
+    const w=barW*(1-r)*Math.pow(r,i);
+    if(w<.5) break;
+    s+=`<rect x="${f(cx)}" y="${barY}" width="${f(w)}" height="${barH}" fill="${colors[i%4]}" opacity=".9"/>`;
+    if(w>26) s+=txt(cx+w/2,barY+barH/2+5,i===0?'a':`ar${i>1?'^'+i:''}`,{size:13,fill:'#0f172a'});
+    cx+=w;
+  }
+  s+=`<rect x="${f(cx)}" y="${barY}" width="${f(x0+barW-cx)}" height="${barH}" fill="#94a3b8" opacity=".18"/>`;
+  s+=`<line x1="${x0+barW}" y1="${barY-16}" x2="${x0+barW}" y2="${barY+barH+16}" stroke="${CT}" stroke-width="2" stroke-dasharray="5 5"/>`;
+  s+=txt(x0,barY-28,'limiting sum  a / (1 − r)',{size:14,fill:CT,anchor:'start'});
+  s+=txt(x0+barW+10,barY+barH/2+5,'→',{size:18,fill:CT,anchor:'start'});
+  const sn=(1-Math.pow(r,n))/(1-r);
+  s+=txt(40,344,`n = ${n}     S_n = ${sn.toFixed(4)}`,{size:20,anchor:'start',fill:INK});
+  s+=txt(40,380,`S_n = a(1 − rⁿ) / (1 − r)`,{size:18,anchor:'start',fill:CC});
+  s+=txt(40,412,`remaining fraction = rⁿ = ${Math.pow(r,n).toFixed(4)}`,{size:15,anchor:'start',fill:'#94a3b8'});
+  s+=txt(40,440,r<1?'Since |r| < 1, rⁿ → 0, so S∞ = a / (1 − r).':'If |r| ≥ 1, the infinite series does not settle.',{size:15,anchor:'start',fill:'#94a3b8'});
+  return s;
+}
+const CAP_A11=[
+[.4,"A geometric series multiplies by the same ratio r each time."],
+[4,"a, ar, ar², … with |r| < 1 eventually becomes tiny."],
+[8,"The first n terms fill 1 − rⁿ of the whole limiting sum."],
+[12,"Formula: S_n = a(1 − rⁿ) / (1 − r)."],
+[16,"As n grows, rⁿ → 0, so the infinite sum is a / (1 − r)."],
+[20,"Here r = 1/2: 1 + 1/2 + 1/4 + … = 2."]
+];
+const CAP_R11=[
+[.5,"Each term multiplies by the same ratio r."],
+[4,"With |r| smaller than 1, the terms shrink."],
+[8,"The first n terms fill 1 minus r to the n."],
+[12,"That gives the finite sum formula."],
+[16,"As n grows, the leftover shrinks to zero."],
+[20,"So the infinite sum is a over 1 minus r."]
+];
+const T11={hk:[[0,130,210],[5,200,240],[9,300,240],[13,470,160],[17,300,380],[21,200,440],[24,200,440]],concl:[21.5,23.5],end:24,minX:430,home:[670,310]};
+registerVisual({
+  id:'geometric-series',rank:11,
+  title:'Finite series: the geometric sum',
+  level:'Class 9–10 · Finite series',
+  hint:'Change n and r. The unfilled part is exactly rⁿ of the limiting sum.',
+  controls:[
+    {id:'n',label:'Terms n',type:'range',min:1,max:10,step:1,value:4},
+    {id:'r',label:'Ratio r',type:'options',value:0.5,options:[{label:'1/2',value:0.5},{label:'1/3',value:1/3},{label:'2/3',value:2/3}]}
+  ],
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T11.end,frame:robotMode(T11,drawGeoSeries,CAP_R11)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawGeoSeries,CAP_A11,24)}
+  ]
+});
+
+/* 12. Mensuration: cylinder, cone and sphere */
+function drawMensuration(t,p={}){
+  const r=clamp(p.r??3,1,5), rad=20+r*6, h=2*rad;
+  let s='';
+  s+=txt(40,42,'Mensuration: three solids, one radius',{size:24,anchor:'start'});
+  s+=txt(40,68,'Keep height h = 2r so the volumes can be compared directly.',{size:14,anchor:'start',fill:'#94a3b8'});
+  const cylX=140,coneX=370,sphX=600,baseY=300;
+  s+=`<ellipse cx="${cylX}" cy="${baseY}" rx="${rad}" ry="${rad*.3}" fill="#0f172a" stroke="${CT}" stroke-width="3"/>`;
+  s+=path(`M${cylX-rad} ${baseY}V${baseY-h}M${cylX+rad} ${baseY}V${baseY-h}`,{stroke:CT,w:3});
+  s+=`<ellipse cx="${cylX}" cy="${baseY-h}" rx="${rad}" ry="${rad*.3}" fill="#0f172a" stroke="${CT}" stroke-width="3"/>`;
+  s+=`<ellipse cx="${coneX}" cy="${baseY}" rx="${rad}" ry="${rad*.3}" fill="#0f172a" stroke="${CB}" stroke-width="3"/>`;
+  s+=path(`M${coneX-rad} ${baseY}L${coneX} ${baseY-h}L${coneX+rad} ${baseY}`,{stroke:CB,w:3});
+  s+=`<circle cx="${sphX}" cy="${baseY-h/2}" r="${rad}" fill="#0f172a" stroke="${CA}" stroke-width="3"/>`;
+  s+=`<ellipse cx="${sphX}" cy="${baseY-h/2}" rx="${rad}" ry="${rad*.34}" fill="none" stroke="${CA}" stroke-width="1.6" opacity=".65"/>`;
+  s+=txt(cylX,baseY+34,'cylinder',{size:15,fill:CT});
+  s+=txt(coneX,baseY+34,'cone',{size:15,fill:CB});
+  s+=txt(sphX,baseY+34,'sphere',{size:15,fill:CA});
+  s+=txt(cylX,baseY+58,`V = 2πr³`,{size:14,fill:CT});
+  s+=txt(coneX,baseY+58,`V = ⅔πr³`,{size:14,fill:CB});
+  s+=txt(sphX,baseY+58,`V = 4/3πr³`,{size:14,fill:CA});
+  const barX=90,barY=372,barMax=240;
+  const vols=[2*Math.PI,2*Math.PI/3,4*Math.PI/3];
+  const cols=[CT,CB,CA];
+  const names=['cylinder','cone','sphere'];
+  vols.forEach((v,i)=>{
+    const w=barMax*(v/(2*Math.PI)), y=barY+i*24;
+    s+=`<rect x="${barX}" y="${y}" width="${f(w)}" height="15" rx="7" fill="${cols[i]}" opacity=".9"/>`;
+    s+=txt(barX-8,y+12,names[i],{size:12,fill:cols[i],anchor:'end'});
+    s+=txt(barX+w+8,y+12,`${v.toFixed(3)}πr³`,{size:12,fill:'#94a3b8',anchor:'start'});
+  });
+  s+=txt(40,456,'Sphere = 2 cones = ⅔ of the cylinder. Every volume scales with r³.',{size:14,anchor:'start',fill:'#94a3b8'});
+  return s;
+}
+registerVisual({
+  id:'mensuration-solids',rank:12,
+  title:'Mensuration: cone, sphere and cylinder',
+  level:'Class 9–10 · Mensuration',
+  hint:'Change the radius. The relative volumes stay in the same ratio: 3 : 1 : 2.',
+  controls:[{id:'r',label:'Radius r',type:'range',min:1,max:5,step:1,value:3}],
+  modes:[{id:'explore',label:'Explore',duration:10,frame:drawMensuration}]
+});
+
+/* 13. Statistics: cumulative frequency ogive */
+function drawOgive(t){
+  const rows=[['0–10','4','4'],['10–20','8','12'],['20–30','12','24'],['30–40','10','34'],['40–50','6','40']];
+  let s='';
+  s+=txt(40,42,'Statistics: cumulative frequency and the median',{size:23,anchor:'start'});
+  const x0=60,y0=84,w=280,rh=36;
+  s+=`<rect x="${x0}" y="${y0}" width="${w}" height="${rh}" fill="#0f172a" stroke="#334155" stroke-width="2"/>`;
+  s+=txt(x0+70,y0+23,'class',{size:13,fill:'#94a3b8'});
+  s+=txt(x0+175,y0+23,'f',{size:13,fill:'#94a3b8'});
+  s+=txt(x0+235,y0+23,'cf',{size:13,fill:'#94a3b8'});
+  rows.forEach((row,i)=>{
+    const y=y0+rh+i*rh;
+    s+=`<rect x="${x0}" y="${y}" width="${w}" height="${rh}" fill="${i%2?'#0f172a':'#0b1220'}" stroke="#334155" stroke-width="1"/>`;
+    s+=txt(x0+70,y+23,row[0],{size:13,fill:INK});
+    s+=txt(x0+175,y+23,row[1],{size:13,fill:CT});
+    s+=txt(x0+235,y+23,row[2],{size:13,fill:CB});
+  });
+  s+=txt(x0+70,y0+rh+rows.length*rh+24,'total N = 40',{size:13,fill:'#94a3b8'});
+  const gx=400,gw=320,gy=330,gh=240;
+  s+=`<line x1="${gx}" y1="${gy}" x2="${gx+gw}" y2="${gy}" stroke="${INK}" stroke-width="2"/>`;
+  s+=`<line x1="${gx}" y1="${gy}" x2="${gx}" y2="${gy-gh}" stroke="${INK}" stroke-width="2"/>`;
+  for(let i=0;i<=5;i++){
+    const x=gx+i*gw/5, y=gy-i*gh/4;
+    s+=`<line x1="${f(x)}" y1="${gy}" x2="${f(x)}" y2="${gy+5}" stroke="#94a3b8" stroke-width="1"/>`;
+    s+=txt(x,gy+22,String(i*10),{size:11,fill:'#94a3b8'});
+    if(i<=4){s+=`<line x1="${gx-5}" y1="${f(y)}" x2="${gx}" y2="${f(y)}" stroke="#94a3b8" stroke-width="1"/>`;s+=txt(gx-12,y+4,String(i*10),{size:11,fill:'#94a3b8',anchor:'end'});}
+  }
+  const pts=[[0,0],[10,4],[20,12],[30,24],[40,34],[50,40]];
+  const mx=v=>gx+(v/50)*gw,my=v=>gy-(v/40)*gh;
+  const pd=prog(t,2,6);
+  if(pd>0) s+=path('M'+pts.map(q=>[mx(q[0]),my(q[1])].map(f).join(' ')).join('L'),{stroke:CC,w:3,draw:pd});
+  pts.slice(1).forEach(q=>{s+=`<circle cx="${f(mx(q[0]))}" cy="${f(my(q[1]))}" r="4" fill="${CC}" opacity="${prog(t,2.5,6)}"/>`;});
+  const pm=prog(t,8,10);
+  if(pm>0){
+    s+=`<line x1="${gx}" y1="${f(my(20))}" x2="${f(mx(26.67))}" y2="${f(my(20))}" stroke="${CA}" stroke-width="2" stroke-dasharray="6 5"/>`;
+    s+=`<line x1="${f(mx(26.67))}" y1="${f(my(20))}" x2="${f(mx(26.67))}" y2="${gy}" stroke="${CA}" stroke-width="2" stroke-dasharray="6 5"/>`;
+    s+=`<circle cx="${f(mx(26.67))}" cy="${f(my(20))}" r="6" fill="${CA}"/>`;
+    s+=txt(gx+10,my(20)-10,'N/2 = 20',{size:13,fill:CA,anchor:'start'});
+    s+=txt(mx(26.67)+8,gy-8,'median ≈ 26.7',{size:13,fill:CA,anchor:'start'});
+  }
+  s+=txt(gx,gy-gh-14,'cumulative frequency',{size:13,fill:'#94a3b8'});
+  s+=txt(gx+gw,gy+44,'upper boundary',{size:13,fill:'#94a3b8',anchor:'end'});
+  s+=txt(40,400,'Median class: 20–30, where cf reaches N/2 = 20.',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,11,12)});
+  return s;
+}
+const CAP_A13=[
+[.4,"Grouped data is summarized in a frequency table."],
+[4,"Cumulative frequency counts how many values lie below each upper boundary."],
+[8,"Plot cumulative frequency against the upper boundary to draw an ogive."],
+[12,"The median is at N/2 = 20 on the cumulative frequency axis."],
+[16,"On the ogive, cf = 20 gives a median of about 26.7."],
+[20,"The same graph gives quartiles at N/4 and 3N/4."]
+];
+registerVisual({
+  id:'statistics-ogive',rank:13,
+  title:'Statistics: the ogive and the median',
+  level:'Class 9–10 · Statistics',
+  hint:'The median is the value where the cumulative frequency reaches N/2.',
+  modes:[{id:'art',label:'Line art',duration:24,frame:artMode(drawOgive,CAP_A13,24)}]
+});
+
+/* 14. Heron's formula */
+function drawHeron(t){
+  const A=[170,148],B=[90,340],C=[314,340],F=[170,340];
+  let s='';
+  s+=txt(40,42,"Heron's formula: area from three sides",{size:24,anchor:'start'});
+  s+=path(`M${A[0]} ${A[1]}L${B[0]} ${B[1]}L${C[0]} ${C[1]}Z`,{stroke:INK,w:3,draw:prog(t,.2,1.4)});
+  s+=path(`M${A[0]} ${A[1]}V${F[1]}`,{stroke:'#94a3b8',w:1.5,draw:prog(t,2,2.8)});
+  s+=`<rect x="${F[0]-1}" y="${F[1]-12}" width="12" height="12" fill="none" stroke="#94a3b8" stroke-width="1.3" opacity="${prog(t,2.5,3)}"/>`;
+  s+=txt(130,242,'13',{size:15,fill:CA});
+  s+=txt(250,242,'15',{size:15,fill:CB});
+  s+=txt(202,362,'14',{size:15,fill:CT});
+  s+=txt(184,248,'12',{size:14,fill:'#94a3b8',anchor:'start'});
+  s+=txt(40,82,'s = (a + b + c) / 2 = (13 + 14 + 15) / 2 = 21',{size:17,anchor:'start',fill:CC,op:prog(t,4,5)});
+  s+=txt(40,112,'Area = √(s(s−a)(s−b)(s−c))',{size:18,anchor:'start',fill:INK,op:prog(t,7,8)});
+  s+=txt(40,142,'= √(21 · 8 · 7 · 6)',{size:18,anchor:'start',fill:INK,op:prog(t,10,11)});
+  s+=txt(40,172,'= √7056 = 84',{size:22,anchor:'start',fill:CB,op:prog(t,13,14)});
+  s+=txt(40,202,'The altitude to side 14 is 12, so ½ · 14 · 12 = 84.',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,16,17)});
+  s+=txt(40,232,'No height is needed — only the three side lengths.',{size:14,anchor:'start',fill:'#94a3b8',op:prog(t,19,20)});
+  s+=txt(40,410,'Heron works for every triangle, including obtuse ones.',{size:13,anchor:'start',fill:'#94a3b8',op:prog(t,21,22)});
+  return s;
+}
+const CAP_A14=[
+[.4,"Heron's formula finds a triangle's area from its three sides."],
+[4,"First compute the semiperimeter s = (a + b + c) / 2."],
+[8,"For 13, 14, 15: s = (13 + 14 + 15) / 2 = 21."],
+[12,"Area = √(s(s−a)(s−b)(s−c)) = √(21 · 8 · 7 · 6)."],
+[16,"21 · 8 · 7 · 6 = 7056, and √7056 = 84."],
+[20,"So the area is 84 square units; the altitude to side 14 is 12."]
+];
+const CAP_R14=[
+[.5,"Heron finds area from three sides."],
+[4,"First find the semiperimeter s."],
+[8,"For 13, 14 and 15, s is 21."],
+[12,"Multiply s and the three differences."],
+[16,"The square root of 7056 is 84."],
+[20,"So the area is 84 square units."]
+];
+const T14={hk:[[0,170,148],[5,90,340],[9,314,340],[13,170,340],[17,300,172],[21,300,410],[24,300,410]],concl:[21.5,23.5],end:24,minX:430,home:[670,310]};
+registerVisual({
+  id:'heron-formula',rank:14,
+  title:"Area theorems: Heron's formula",
+  level:'Class 9–10 · Area related theorems',
+  hint:'Semiperimeter first, then multiply and take the square root.',
+  modes:[
+    {id:'robot',label:'Robot explains',duration:T14.end,frame:robotMode(T14,drawHeron,CAP_R14)},
+    {id:'art',label:'Line art',duration:24,frame:artMode(drawHeron,CAP_A14,24)}
+  ]
+});
+
+const track=$('#vcTrack'),view=$('#vcView'),svgs=[],slides=[];
+const cur=()=>VISUALS[S.vi].modes[S.mi];
+const previewT=v=>v.modes[0].preview!=null?v.modes[0].preview:v.modes[0].duration*.9;
+function paramsFor(v){const o={};(v.controls||[]).forEach(c=>{o[c.id]=c.value;});return o;}
+
+function buildControls(){
+  const v=VISUALS[S.vi],box=$('#vcTry'),body=$('#vcTryBody'),cs=v.controls||[];
+  body.innerHTML='';
+  if(!cs.length){box.hidden=true;return;}
+  box.hidden=false;
+  const rows=[];
+  const refresh=()=>rows.forEach(r=>{
+    const val=S.params[r.c.id]!=null?S.params[r.c.id]:r.c.value;
+    r.inp.value=val;r.out.textContent=r.fmt(val);
+  });
+  cs.forEach(c=>{
+    if(c.type==='options'){
+      const row=document.createElement('div');row.className='vc-try-row';
+      const name=document.createElement('span');name.textContent=c.label;
+      const opts=document.createElement('div');opts.className='vc-try-opts';
+      c.options.forEach(o=>{
+        const b=document.createElement('button');b.type='button';b.textContent=o.label;
+        b.className=(S.params[c.id]!=null?S.params[c.id]:c.value)===o.value?'on':'';
+        b.onclick=()=>{S.params[c.id]=o.value;[...opts.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');render();};
+        opts.appendChild(b);
+      });
+      row.append(name,opts);body.appendChild(row);
+      return;
+    }
+    const row=document.createElement('label');row.className='vc-try-row';
+    const name=document.createElement('span');name.textContent=c.label;
+    const inp=document.createElement('input');inp.type='range';
+    inp.min=c.min;inp.max=c.max;inp.step=c.step;
+    inp.value=S.params[c.id]!=null?S.params[c.id]:c.value;
+    inp.setAttribute('aria-label',v.title+' — '+c.label);
+    const out=document.createElement('output');
+    const fmt=val=>(Math.round(val*100)/100)+(c.suffix||'');
+    out.textContent=fmt(inp.value);
+    inp.oninput=()=>{
+      S.params[c.id]=parseFloat(inp.value);
+      if(v.sync) v.sync(S.params);
+      refresh();render();
+    };
+    rows.push({c,inp,out,fmt});
+    row.append(name,inp,out);body.appendChild(row);
+  });
+  const note=document.createElement('div');note.className='vc-try-note';note.textContent=v.hint||'';
+  body.appendChild(note);
+}
+
+function rebuild(){
+  VISUALS.sort((a,b)=>{
+    const ar=(a.modes||[]).some(m=>m.id==='robot')?0:1;
+    const br=(b.modes||[]).some(m=>m.id==='robot')?0:1;
+    return ar-br||((a.rank??99)-(b.rank??99));
+  });
+  track.innerHTML='';svgs.length=0;slides.length=0;
+  if(!Object.keys(S.params).length&&VISUALS.length) S.params=paramsFor(VISUALS[S.vi]);
+  VISUALS.forEach((v,i)=>{
+    const sl=document.createElement('div');sl.className='vc-slide';
+    sl.innerHTML='<div class="vc-head"><span class="vc-count">'+(i+1)+' / '+VISUALS.length+'</span><b>'+v.title+'</b>'
+      +(v.level?'<span class="vc-band">'+v.level+'</span>':'')+'</div>'
+      +'<div class="vc-stage"><svg viewBox="0 0 800 480" role="img" aria-label="'+v.title+'"></svg></div>';
+    sl.onclick=()=>{if(i!==S.vi) go(i);};
+    track.appendChild(sl);slides.push(sl);svgs.push(sl.querySelector('svg'));
+  });
+  buildDots();buildModes();buildControls();layout();renderAll();ui();
+}
+function layout(){
+  const w=view.clientWidth||800, sw=w<640?w-44:Math.min(w*.62,760), gap=22;
+  slides.forEach((sl,i)=>{sl.style.flexBasis=sw+'px';sl.classList.toggle('on',i===S.vi);});
+  track.style.transform='translateX('+((w-sw)/2-S.vi*(sw+gap))+'px)';
+}
+function renderAll(){
+  VISUALS.forEach((v,i)=>{
+    const act=i===S.vi, m=act?cur():v.modes[0];
+    svgs[i].innerHTML=m.frame(act?Math.min(S.t,m.duration):previewT(v),act?S.params:paramsFor(v));
+  });
+  progress();
+}
+function render(){
+  const m=cur();
+  svgs[S.vi].innerHTML=m.frame(Math.min(S.t,m.duration),S.params);
+  progress();
+}
+function progress(){
+  const m=cur();
+  $('#vcFill').style.width=(clamp(S.t/m.duration)*100)+'%';
+  $('#vcInfo').textContent='Lesson '+(S.vi+1)+' of '+VISUALS.length+'  ·  '+Math.floor(S.t)+'s / '+Math.round(m.duration)+'s';
+}
+function ui(){$('#bPlay').textContent=S.playing?'❚❚ Pause':'▶ Play';}
+function buildModes(){
+  const v=VISUALS[S.vi],box=$('#vcModes');box.innerHTML='';
+  $('#vcModeBox').style.display=v.modes.length>1?'':'none';
+  v.modes.forEach((m,i)=>{
+    const b=document.createElement('button');b.textContent=m.label;b.className=i===S.mi?'on':'';
+    b.onclick=()=>{S.mi=i;S.t=0;clearTimeout(S.adv);buildModes();render();if(!S.playing) play();};
+    box.appendChild(b);
+  });
+}
+function buildDots(){
+  const d=$('#vcDots');d.innerHTML='';
+  VISUALS.forEach((v,i)=>{
+    const b=document.createElement('button');b.title=v.title;b.setAttribute('aria-label',v.title);
+    b.className=i===S.vi?'on':'';b.onclick=()=>go(i);d.appendChild(b);
+  });
+}
+function tick(ts){
+  if(!S.playing) return;
+  S.t+=Math.max(0,(ts-S.last)/1000);S.last=ts;
+  if(S.t>=cur().duration){S.t=cur().duration;S.playing=false;render();ui();onEnd();return;}
+  render();requestAnimationFrame(tick);
+}
+function play(){
+  if(S.playing) return;
+  clearTimeout(S.adv);S.manual=false;
+  if(S.t>=cur().duration) S.t=0;
+  S.playing=true;S.last=performance.now();ui();requestAnimationFrame(tick);
+}
+function pause(manual=true){S.playing=false;if(manual) S.manual=true;clearTimeout(S.adv);ui();}
+function onEnd(){clearTimeout(S.adv);S.adv=setTimeout(()=>{if(!S.manual) go(S.vi+1);},2400);}
+function go(i,auto=true){
+  if(S.busy||!VISUALS.length) return;
+  S.busy=true;clearTimeout(S.adv);S.playing=false;
+  S.vi=(i+VISUALS.length)%VISUALS.length;S.mi=0;S.t=0;
+  S.params=paramsFor(VISUALS[S.vi]);
+  buildDots();buildModes();buildControls();layout();renderAll();ui();
+  setTimeout(()=>{S.busy=false;if(auto) play();},560);
+}
+
+$('#bPlay').onclick=()=>S.playing?pause(true):play();
+$('#bRep').onclick=()=>{clearTimeout(S.adv);S.t=0;if(S.playing) render();else play();};
+$('#bNext').onclick=$('#aNext').onclick=()=>go(S.vi+1);
+$('#bPrev').onclick=$('#aPrev').onclick=()=>go(S.vi-1);
+$('#vcCar').onkeydown=e=>{if(e.key==='ArrowRight') go(S.vi+1);if(e.key==='ArrowLeft') go(S.vi-1);};
+let sx=null;
+view.addEventListener('pointerdown',e=>{sx=e.clientX;});
+view.addEventListener('pointerup',e=>{
+  if(sx===null) return; const dx=e.clientX-sx; sx=null;
+  if(Math.abs(dx)>50) go(S.vi+(dx<0?1:-1));
+});
+window.addEventListener('resize',layout);
+
+S.ready=true;rebuild();
+
+new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    if(!S.manual&&!S.playing&&!S.busy){ S.t>=cur().duration?go(S.vi+1):play(); }
+  } else if(S.playing){ pause(false); }
+}),{threshold:.35}).observe($('#vcCar'));
+
+if(window.parent!==window){
+  const reportHeight=()=>window.parent.postMessage(
+    {type:'learn-carousel-height',height:document.documentElement.scrollHeight},
+    '*'
+  );
+  const observer=new ResizeObserver(()=>requestAnimationFrame(reportHeight));
+  observer.observe(document.documentElement);
+  window.addEventListener('load',reportHeight);
+  window.addEventListener('resize',reportHeight);
+  reportHeight();
+}
+})();
+</script>
+</body>
+</html>

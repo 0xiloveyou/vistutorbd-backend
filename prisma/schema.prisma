@@ -89,6 +89,14 @@ enum KnowledgeKind {
   STEP
 }
 
+// A learn carousel is either a guided visual explanation or an interactive
+// question/answer game. The HTML is kept in MongoDB so the public site never
+// ships scrapeable carousel source files.
+enum LearnCarouselKind {
+  EXPLANATION
+  QUESTION
+}
+
 enum QuestionMode {
   MCQ
   TYPED
@@ -271,6 +279,33 @@ model Visualization {
   @@index([kind])
   @@index([status])
   @@map("visualizations")
+}
+
+// ---------------------------------------------------------------------------
+// Learn page carousels (visual explanations + question/answer games)
+// ---------------------------------------------------------------------------
+// The interactive lesson markup is stored as a single self-contained HTML
+// document. `classLevelIds` uses the special value "all" for shared carousels
+// (for example the explanation carousel that spans every class).
+model LearnCarousel {
+  id            String            @id @default(auto()) @map("_id") @db.ObjectId
+  slug          String            @unique
+  kind          LearnCarouselKind
+  classLevelIds String[]
+  classBandIds  String[]
+  title         LocalizedText
+  summary       LocalizedText?
+  html          String
+  source        String            @default("")
+  contentHash   String            @default("")
+  order         Int               @default(0)
+  isActive      Boolean           @default(true)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@index([kind])
+  @@index([isActive])
+  @@map("learn_carousels")
 }
 
 // ---------------------------------------------------------------------------
