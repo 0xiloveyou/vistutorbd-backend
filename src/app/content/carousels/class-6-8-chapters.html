@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Class 6-8 with Bolt</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f1f5f9;color:#0f172a}
+  .bnf{font-family:"Noto Sans Bengali","Nirmala UI","Kalpurush","SolaimanLipi",system-ui,sans-serif}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .top{text-align:center;padding:30px 16px 0}
+  .top h1{margin:0;font-size:clamp(22px,3.4vw,34px)}
+  .top p{margin:8px 0 0;color:#64748b;font-size:15px}
+
+  /* ===== visual lessons carousel ===== */
+  .vc{padding:18px 0 72px;background:linear-gradient(#f1f5f9,#e2e8f0);overflow:hidden}
+  .vc-wrap{max-width:none;margin:0 auto;padding:0 16px}
+
+  .vc-carousel{position:relative;outline:none}
+  .vc-viewport{overflow:hidden;padding:18px 0 26px;touch-action:pan-y}
+  .vc-track{display:flex;gap:22px;transition:transform .55s cubic-bezier(.65,0,.25,1);will-change:transform}
+  .vc-slide{flex:0 0 auto;background:#111a2e;border-radius:22px;padding:14px;box-shadow:0 18px 50px #0f172a33;
+    opacity:.42;transform:scale(.92);filter:saturate(.6);cursor:pointer;
+    transition:opacity .5s,transform .5s,filter .5s}
+  .vc-slide.on{opacity:1;transform:none;filter:none;cursor:default}
+  .vc-head{display:flex;align-items:center;gap:10px;color:#e6edf7;padding:2px 6px 12px}
+  .vc-count{background:#1e293b;color:#38bdf8;font-weight:700;font-size:13px;padding:4px 10px;border-radius:999px}
+  .vc-head b{font-size:16px}
+
+  .vc-body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px}
+  .vc-slide.stack .vc-body{grid-template-columns:1fr}
+  .vc-stage{border-radius:14px;overflow:hidden;background-color:#0b1220;
+    background-image:linear-gradient(rgba(148,163,184,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.07) 1px,transparent 1px);
+    background-size:32px 32px}
+  .vc-stage svg{display:block;width:100%;height:auto}
+  .vc-stage svg text{font-family:"Segoe UI","Segoe UI Symbol","Cambria Math",system-ui,sans-serif}
+
+  /* Bolt's comment panel */
+  .vc-cm{position:relative;background:#0b1220;border-radius:14px;overflow:hidden;min-height:0}
+  .vc-slide.stack .vc-cm{height:250px}
+  .cm-in{position:absolute;inset:0;display:flex;flex-direction:column;padding:10px 10px 12px}
+  .cm-top{display:flex;align-items:center;gap:8px;color:#94a3b8;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:0 2px 8px;border-bottom:1px solid #1e293b}
+  .cm-feed{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;overflow:hidden;padding-top:8px;
+    -webkit-mask-image:linear-gradient(transparent,#000 18%);mask-image:linear-gradient(transparent,#000 18%)}
+  .cm{display:flex;gap:8px;align-items:flex-end}
+  .cm-av{flex:0 0 30px;width:30px;height:30px;border-radius:50%;background:#e2e8f0;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .cm-bb{background:#1e293b;color:#f1f5f9;border-radius:14px 14px 14px 4px;padding:8px 11px;font-size:14px;line-height:1.45;min-width:0}
+  .cm.old .cm-bb{opacity:.55}
+  .cm-bb .en,.cm-bb .bn{display:block;overflow-wrap:anywhere}
+  .cm-bb .bn{font-family:"Noto Sans Bengali","Nirmala UI","Kalpurush","SolaimanLipi",system-ui,sans-serif;color:#fde68a;font-size:15px}
+  .cm-bb .en + .bn{margin-top:6px;padding-top:6px;border-top:1px dashed #334155}
+  .cm-bb i{font-style:normal;color:#38bdf8}
+  .cm-hint{color:#64748b;font-size:13px;text-align:center;padding:6px}
+
+  .vc-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;
+    border:0;background:#fff;color:#0f172a;font-size:28px;line-height:1;cursor:pointer;box-shadow:0 6px 18px #0f172a30;
+    display:flex;align-items:center;justify-content:center;padding:0 0 4px}
+  .vc-arrow:hover{background:#38bdf8}
+  .vc-arrow.prev{left:6px}.vc-arrow.next{right:6px}
+
+  .vc-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:0 0 26px;padding:0 16px}
+  .vc-dots button{width:10px;height:10px;padding:0;border:0;border-radius:999px;background:#94a3b8;cursor:pointer;transition:.3s}
+  .vc-dots button.on{width:30px;background:#0ea5e9}
+
+  .vc-panel{max-width:980px;margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:20px;
+    padding:16px 18px;box-shadow:0 10px 30px #0f172a14;display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px 26px;justify-content:space-between}
+  .vc-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;font-weight:700;margin-bottom:6px}
+  .vc-btns,.vc-modes{display:flex;gap:8px;flex-wrap:wrap}
+  .vc-btns button,.vc-modes button{border:1px solid #cbd5e1;background:#f8fafc;color:#0f172a;padding:9px 14px;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px;font-family:inherit}
+  .vc-modes button.on{background:#0f172a;border-color:#0f172a;color:#fff}
+  .vc-btns button:hover,.vc-modes button:hover{background:#e0f2fe;border-color:#38bdf8}
+  .vc-modes button.on:hover{background:#0f172a}
+  .vc-btns button.main{background:#0ea5e9;border-color:#0ea5e9;color:#fff}
+  .vc-btns button.main:hover{background:#0284c7}
+  #bVoice.on{background:#16a34a;border-color:#16a34a;color:#fff}
+  .vc-note{font-size:11px;color:#b45309;margin-top:6px;max-width:230px;line-height:1.3}
+  .vc-info{flex:1 1 100%;display:flex;align-items:center;gap:12px;color:#64748b;font-size:13px}
+  .vc-prog{flex:1;height:5px;background:#e2e8f0;border-radius:5px;overflow:hidden}
+  .vc-prog i{display:block;height:100%;width:0;background:#0ea5e9}
+  @media(max-width:640px){.vc-arrow{width:38px;height:38px;font-size:22px}.vc-btns button,.vc-modes button{padding:8px 10px;font-size:13px}}
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <h1>Class 6-8 Visual Explanations</h1>
+    <p>Class 6&ndash;8 &middot; 30 chapters &middot; Bolt draws, speaks and comments in English and <span class="bnf">বাংলা</span></p>
+  </header>
+
+  <section id="vc" class="vc" aria-label="Classes 6 to 8: animated lessons">
+    <h2 class="sr">Classes 6, 7 and 8 with Bolt the robot</h2>
+    <div class="vc-wrap">
+
+      <div class="vc-carousel" id="vcCar" tabindex="0" aria-roledescription="carousel">
+        <button class="vc-arrow prev" id="aPrev" aria-label="Previous lesson">&#8249;</button>
+        <div class="vc-viewport" id="vcView"><div class="vc-track" id="vcTrack"></div></div>
+        <button class="vc-arrow next" id="aNext" aria-label="Next lesson">&#8250;</button>
+      </div>
+      <div class="vc-dots" id="vcDots"></div>
+
+      <div class="vc-panel">
+        <div>
+          <div class="vc-label">Playback</div>
+          <div class="vc-btns">
+            <button id="bPrev" aria-label="Previous lesson">⏮ Back</button>
+            <button id="bPlay" class="main" aria-label="Pause or play">⏸ Pause</button>
+            <button id="bRep"  aria-label="Watch again">⟲ Watch again</button>
+            <button id="bNext" aria-label="Next lesson">Next ⏭</button>
+          </div>
+        </div>
+        <div>
+          <div class="vc-label">Language</div>
+          <div class="vc-modes bnf" id="vcLang"></div>
+        </div>
+        <div>
+          <div class="vc-label">Voice</div>
+          <div class="vc-btns"><button id="bVoice" aria-label="Turn Bolt's voice on or off">🔇 Voice off</button></div>
+          <div class="vc-note" id="vcVoiceNote"></div>
+        </div>
+        <div id="vcModeBox">
+          <div class="vc-label">Style</div>
+          <div class="vc-modes" id="vcModes"></div>
+        </div>
+        <div class="vc-info"><span id="vcInfo"></span><div class="vc-prog"><i id="vcFill"></i></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+/* =====================================================================
+   HOW TO ADD A NEW LESSON
+   lesson('id','Slide title','Heading drawn on the board',A=>{
+     A.say('English comment','বাংলা মন্তব্য');          // comment bubble + voice + talking
+     A.text(x,y,'hello',{size:22,c:'#fbbf24'});          // Bolt writes it with the pen
+     const g=A.mat(cx,cy,[[1,2],[3,4]],{cw:56,rh:44,size:24,col:(i,j)=>...});   // matrix (optional)
+     A.box(g.cell(i,j),colour);  A.arrow(..); A.circle(..); A.rect(..); A.line(..); A.ell(..); A.pts([[x,y],..],{c,w,fill,fo});
+   });
+   Everything is drawn by Bolt's pen in the order you call it. The stage is 800 x 480.
+   ===================================================================== */
+const VISUALS=[];
+const S={vi:0,mi:0,t:0,playing:false,manual:false,last:0,adv:null,busy:false,ready:false,lang:'both',voice:false,sp:null};
+window.registerVisual=v=>{VISUALS.push(v);if(S.ready) rebuild();};
+
+/* ---------- tiny helpers ---------- */
+const $=s=>document.querySelector(s);
+const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const prog=(t,a,b)=>clamp((t-a)/(b-a));
+const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+const lerp=(a,b,k)=>a+(b-a)*k;
+const f=n=>Math.round(n*10)/10;
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function path(d,o={}){
+  const {stroke='#e2e8f0',w=2,fill='none',fo=1,op=1,draw=1}=o;
+  if(draw<=0) return '';
+  const dash=draw<1?` stroke-dasharray="1" stroke-dashoffset="${1-draw}"`:'';
+  return `<path d="${d}" pathLength="1" fill="${fill}" fill-opacity="${fo}" stroke="${stroke}" stroke-width="${w}" opacity="${op}" stroke-linejoin="round" stroke-linecap="round"${dash}/>`;
+}
+function txt(x,y,s,o={}){
+  const {size=18,fill='#e2e8f0',anchor='middle',op=1,weight=700}=o;
+  if(op<=0) return '';
+  return `<text x="${f(x)}" y="${f(y)}" font-size="${size}" fill="${fill}" text-anchor="${anchor}" opacity="${op}" font-weight="${weight}">${esc(s)}</text>`;
+}
+const cap=(list,t)=>{let c=null;for(const e of list) if(e[0]<=t) c=e;return c;};
+const capIdx=(list,t)=>{let k=-1;for(let i=0;i<list.length;i++) if(list[i][0]<=t) k=i;return k;};
+/* how long one comment stays on screen (same for every language mode, so timing never changes) */
+const ctime=c=>(c[1].length+c[2].length)/20+.35;
+
+const AM='#fbbf24',SK='#38bdf8',GR='#4ade80',PK='#f472b6',VI='#c4b5fd',RD='#f87171',INK='#e2e8f0',MU='#94a3b8';
+
+/* =====================================================================
+   BOLT: cute robot with rocket shoes, holding a pen
+   ===================================================================== */
+function robotSvg(t,cx,cy,tilt,sgn,spd,pen,talking,happy,ink,s){
+  const th=tilt*Math.PI/180;
+  const ox=34*sgn, oy=-20;
+  const sx=cx+s*(ox*Math.cos(th)-oy*Math.sin(th)), sy=cy+s*(ox*Math.sin(th)+oy*Math.cos(th));
+  const hx=pen[0]+16, hy=pen[1]-30;
+  const dist=Math.hypot(hx-sx,hy-sy), sag=Math.min(36,dist*.28);
+  const mx=(sx+hx)/2, my=(sy+hy)/2+sag;
+  const fl=30+Math.sin(t*25)*5+clamp(spd/10,0,26);
+  const blink=(t%3.8)>3.65?.12:1, mo=talking?4+Math.abs(Math.sin(t*17))*8:3;
+  const ex=clamp((pen[0]-cx)/90,-1,1)*3, ey=clamp((pen[1]-cy)/120,-1,1)*2;
+  let b='';
+  [-14,14].forEach(x=>{
+    const sd=x<0?-1:1;
+    b+=`<path d="M${x-7} 70Q${x-3} ${f(70+fl*.6)} ${x} ${f(70+fl)}Q${x+3} ${f(70+fl*.6)} ${x+7} 70Z" fill="#fb923c"/><path d="M${x-3} 70L${x} ${f(70+fl*.62)}L${x+3} 70Z" fill="#fde047"/>`;
+    b+=`<rect x="${x-4}" y="34" width="8" height="16" fill="#94a3b8"/>`;
+    b+=`<rect x="${x-6}" y="64" width="12" height="7" rx="2" fill="#475569"/><rect x="${x-12}" y="48" width="24" height="18" rx="6" fill="#f87171" stroke="#b91c1c" stroke-width="2"/>`;
+    b+=`<path d="M${x+sd*12} 52L${x+sd*23} 67L${x+sd*12} 64Z" fill="#fbbf24" stroke="#b45309" stroke-width="1.5" stroke-linejoin="round"/>`;
+  });
+  b+=`<path d="M${-ox} -20Q${f(-ox*1.45)} 4 ${f(-ox*1.25)} 24" fill="none" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/><circle cx="${f(-ox*1.25)}" cy="26" r="8" fill="#fde68a" stroke="#f59e0b" stroke-width="2.5"/>`;
+  b+=`<rect x="-36" y="-42" width="72" height="78" rx="16" fill="#cbd5e1" stroke="#94a3b8" stroke-width="3"/>
+  <circle cx="0" cy="-8" r="11" fill="#38bdf8" opacity="${f(.6+.4*Math.sin(t*4))}"/>
+  <rect x="-8" y="-52" width="16" height="12" fill="#94a3b8"/>
+  <line x1="0" y1="-114" x2="0" y2="-132" stroke="#94a3b8" stroke-width="4"/>
+  <circle cx="0" cy="-137" r="7" fill="#f472b6"/>
+  <rect x="-46" y="-114" width="92" height="66" rx="22" fill="#e2e8f0" stroke="#94a3b8" stroke-width="3"/>
+  <rect x="-35" y="-104" width="70" height="46" rx="14" fill="#0f172a"/>
+  <ellipse cx="${f(-15+ex)}" cy="${f(-86+ey)}" rx="7" ry="${f(7*blink)}" fill="#38bdf8"/>
+  <ellipse cx="${f(15+ex)}" cy="${f(-86+ey)}" rx="7" ry="${f(7*blink)}" fill="#38bdf8"/>
+  <rect x="-9" y="-72" width="18" height="${f(mo)}" rx="3" fill="#38bdf8"/>
+  <circle cx="-27" cy="-74" r="4" fill="#f472b6" opacity=".6"/><circle cx="27" cy="-74" r="4" fill="#f472b6" opacity=".6"/>`;
+  const px=pen[0],py=pen[1];
+  let o=`<g transform="translate(${f(cx)} ${f(cy)}) rotate(${f(tilt)}) scale(${s})">${b}</g>`;
+  o+=`<path d="M${f(sx)} ${f(sy)}Q${f(mx)} ${f(my)} ${f(hx)} ${f(hy)}" fill="none" stroke="#94a3b8" stroke-width="9" stroke-linecap="round"/>`;
+  o+=`<line x1="${f(px+5)}" y1="${f(py-10)}" x2="${f(px+27)}" y2="${f(py-52)}" stroke="#f472b6" stroke-width="8" stroke-linecap="round"/>`;
+  o+=`<path d="M${f(px)} ${f(py)}L${f(px+2)} ${f(py-10)}L${f(px+9)} ${f(py-8)}Z" fill="#e2e8f0"/>`;
+  if(ink) o+=`<circle cx="${f(px)}" cy="${f(py)}" r="9" fill="${ink}" opacity=".25"/><circle cx="${f(px)}" cy="${f(py)}" r="3.5" fill="${ink}"/>`;
+  o+=`<circle cx="${f(hx)}" cy="${f(hy)}" r="11" fill="#fde68a" stroke="#f59e0b" stroke-width="3"/>`;
+  return o;
+}
+
+/* =====================================================================
+   LESSON ENGINE: every element is drawn by the pen, in order.
+   ===================================================================== */
+function mkP(pts){const cum=[0];for(let i=1;i<pts.length;i++) cum.push(cum[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));return {pts,cum,len:cum[cum.length-1]||1};}
+function ptAt(P,u){
+  const g=u*P.len;let i=1;
+  while(i<P.pts.length-1&&P.cum[i]<g) i++;
+  const a=P.pts[i-1],b=P.pts[i],sl=P.cum[i]-P.cum[i-1]||1,k=clamp((g-P.cum[i-1])/sl);
+  return [a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k];
+}
+const epts=(cx,cy,rx,ry,n=48)=>{const p=[];for(let i=0;i<=n;i++){const a=-Math.PI/2+i*2*Math.PI/n;p.push([cx+rx*Math.cos(a),cy+ry*Math.sin(a)]);}return p;};
+const rpts=(x,y,w,h)=>[[x,y],[x+w,y],[x+w,y+h],[x,y+h],[x,y]];
+const dstr=pts=>'M'+pts.map(p=>f(p[0])+' '+f(p[1])).join('L');
+
+function elPos(e,u){return e.k==='s'?ptAt(e.P,u):[e.xs+e.w*u,e.yy];}
+function penAt(L,t){
+  const E=L.els,R=L.rest;let i=-1;
+  for(let k=0;k<E.length;k++){if(E[k].t0<=t) i=k; else break;}
+  if(i<0){const e=E[0],u=ease(prog(t,e.t0-e.tr,e.t0));return [lerp(R[0],e.start[0],u),lerp(R[1],e.start[1],u)];}
+  const e=E[i];
+  if(t<=e.t1) return elPos(e,prog(t,e.t0,e.t1));
+  const nx=E[i+1];
+  if(!nx){const u=ease(prog(t,e.t1+.6,e.t1+2.4));return [lerp(e.end[0],R[0],u),lerp(e.end[1],R[1],u)];}
+  const u=ease(prog(t,nx.t0-nx.tr,nx.t0));
+  return [lerp(e.end[0],nx.start[0],u),lerp(e.end[1],nx.start[1],u)];
+}
+function bodyAt(L,t){
+  let x=0,y=0,sd=0;const N=9;
+  for(let j=0;j<N;j++){
+    const p=penAt(L,Math.max(0,t-j*.11)), side=clamp((640-p[0])/60,-1,1);
+    x+=p[0]+side*85; y+=p[1]-48; sd+=side;
+  }
+  x=clamp(x/N,62,738); y=clamp(y/N,168,330); sd/=N;
+  const E=L.els,last=E[E.length-1];
+  const u=Math.max(1-ease(prog(t,.2,E[0].t0)),ease(prog(t,last.t1+.6,last.t1+2.4)));
+  return [lerp(x,L.park[0],u),lerp(y,L.park[1],u),lerp(sd,1,u),lerp(.72,.5,u)];
+}
+function drawEl(e,t){
+  const p=prog(t,e.t0,e.t1); if(p<=0) return '';
+  if(e.k==='s'){
+    let s='';
+    if(e.fill){const q=prog(t,e.t1,e.t1+.5);if(q>0) s+=path(e.d+'Z',{stroke:'none',fill:e.fill,fo:e.fo*q,w:0});}
+    return s+path(e.d,{stroke:e.c,w:e.w,draw:p});
+  }
+  const n=Math.floor(p*e.s.length+1e-6); if(n<=0) return '';
+  const body=n>=e.s.length?esc(e.s):`${esc(e.s.slice(0,n))}<tspan opacity="0">${esc(e.s.slice(n))}</tspan>`;
+  return `<text x="${f(e.x)}" y="${f(e.y)}" font-size="${e.size}" fill="${e.c}" text-anchor="${e.anchor}" font-weight="${e.weight}">${body}</text>`;
+}
+
+function lesson(id,title,head,build){
+  const els=[],caps=[];let c=.5,last=null,ls=null,park=[762,100];
+  const restOf=()=>[park[0]-26,park[1]+46];
+  const add=(e,dur)=>{
+    if(!last) last=restOf();
+    const d=Math.hypot(e.start[0]-last[0],e.start[1]-last[1]);
+    e.tr=clamp(d/520,.08,1); e.t0=c+e.tr; e.t1=e.t0+dur; c=e.t1+.04; last=e.end; els.push(e);
+  };
+  const A={
+    park(x,y){park=[x,y];},
+    say(en,bn){ if(ls) c=Math.max(c,ls[0]+ctime(ls)); const e=[c,en,bn]; caps.push(e); ls=e; },
+    pts(P,o={},dur=.8){
+      add({k:'s',d:dstr(P),c:o.c||INK,w:o.w||3,fill:o.fill,fo:o.fo||.2,P:mkP(P),start:P[0],end:P[P.length-1]},dur);
+    },
+    line(x1,y1,x2,y2,o={},dur=.5){A.pts([[x1,y1],[x2,y2]],o,dur);},
+    arrow(x1,y1,x2,y2,o={},dur=.5){
+      A.line(x1,y1,x2,y2,o,dur);
+      const a=Math.atan2(y2-y1,x2-x1),h=11;
+      A.pts([[x2-h*Math.cos(a-.5),y2-h*Math.sin(a-.5)],[x2,y2],[x2-h*Math.cos(a+.5),y2-h*Math.sin(a+.5)]],o,.2);
+    },
+    dashed(x1,y1,x2,y2,o={},dur=.9){
+      const l=Math.hypot(x2-x1,y2-y1),ux=(x2-x1)/l,uy=(y2-y1)/l;let d='';
+      for(let k=0;k<l;k+=11){const e=Math.min(k+6,l);d+=`M${f(x1+ux*k)} ${f(y1+uy*k)}L${f(x1+ux*e)} ${f(y1+uy*e)}`;}
+      add({k:'s',d,c:o.c||INK,w:o.w||2,P:mkP([[x1,y1],[x2,y2]]),start:[x1,y1],end:[x2,y2]},dur);
+    },
+    circle(cx,cy,r,o={},dur=.8){A.pts(epts(cx,cy,r,r),o,dur);},
+    ell(cx,cy,rx,ry,o={},dur=1){A.pts(epts(cx,cy,rx,ry),o,dur);},
+    rect(x,y,w,h,o={},dur=.8){A.pts(rpts(x,y,w,h),o,dur);},
+    text(x,y,s,o={},dur){
+      const size=o.size||20,anchor=o.anchor||'middle',w=s.length*size*.56;
+      const xs=anchor==='middle'?x-w/2:anchor==='end'?x-w:x, yy=y-size*.3;
+      add({k:'t',x,y,s,size,c:o.c||INK,anchor,weight:o.weight||700,xs,w,yy,start:[xs,yy],end:[xs+w,yy]},dur||(.25+s.length*.05));
+    },
+    /* a matrix: brackets (or |bars|) + entries, drawn by the pen. returns its geometry */
+    mat(cx,cy,M,o={},dur=.16){
+      const cw=o.cw||56,rh=o.rh||44,size=o.size||22,R=M.length,C=M[0].length,W=C*cw,H=R*rh,x0=cx-W/2,y0=cy-H/2;
+      const col=o.col||(()=>INK),bc=o.bc||MU;
+      if(o.bar){
+        A.line(x0,y0-4,x0,y0+H+4,{c:bc,w:3},.3); A.line(x0+W,y0-4,x0+W,y0+H+4,{c:bc,w:3},.3);
+      }else{
+        A.pts([[x0+8,y0-4],[x0-2,y0-4],[x0-2,y0+H+4],[x0+8,y0+H+4]],{c:bc,w:3},.35);
+        A.pts([[x0+W-8,y0-4],[x0+W+2,y0-4],[x0+W+2,y0+H+4],[x0+W-8,y0+H+4]],{c:bc,w:3},.35);
+      }
+      M.forEach((r,i)=>r.forEach((v,j)=>{
+        A.text(x0+cw*(j+.5),y0+rh*(i+.5)+size*.35,String(v),{size,c:col(i,j,v)},dur);
+      }));
+      return {x0,y0,W,H,cw,rh,cx:j=>x0+cw*(j+.5),cy:i=>y0+rh*(i+.5),cell:(i,j)=>[x0+cw*j+3,y0+rh*i+3,cw-6,rh-6]};
+    },
+    box(r,c){A.rect(r[0],r[1],r[2],r[3],{c,w:2.5,fill:c,fo:.17},.3);}
+  };
+  build(A);
+  const endT=Math.max(c,ls?ls[0]+ctime(ls):0), D=endT+3.4;
+  const L={els,caps,D,head,park,rest:restOf()};
+  const mk=robot=>t=>{
+    let s=txt(400,34,head,{size:22});
+    els.forEach(e=>{s+=drawEl(e,t);});
+    if(!robot) return s;
+    const pen=penAt(L,t), body=bodyAt(L,t), bq=bodyAt(L,Math.max(0,t-.1));
+    const vx=(body[0]-bq[0])/.1, vy=(body[1]-bq[1])/.1;
+    let ink=null;
+    for(const e of els) if(e.t0<=t&&t<=e.t1){ink=e.c;break;}
+    const cp=cap(caps,t), talking=!!cp&&(t-cp[0])<ctime(cp);
+    const happy=t>=D-3.2, bob=happy?-Math.abs(Math.sin(t*6))*12:Math.sin(t*2.2)*4;
+    s+=robotSvg(t,body[0],body[1]+bob,clamp(vx*.03,-12,12),-body[2],Math.hypot(vx,vy),pen,talking,happy,ink,body[3]);
+    return s;
+  };
+  registerVisual({id,title,caps,modes:[
+    {id:'robot',label:'🤖 Bolt draws',duration:D,frame:mk(true)},
+    {id:'art',label:'✏️ Line art',duration:D,frame:mk(false)}]});
+}
+
+/* =====================================================================
+   THE LESSONS: Classes 6, 7 and 8, one visual explanation per chapter
+   ===================================================================== */
+const axes=(A,ox,oy,L,R,U,D)=>{A.arrow(ox-L,oy,ox+R,oy,{c:MU,w:2},.4);A.arrow(ox,oy+D,ox,oy-U,{c:MU,w:2},.4);};
+const NOTE=(A,y,s)=>A.text(400,y,'Note: '+s,{size:18,c:AM});
+const angDeg=(c,p)=>Math.atan2(p[1]-c[1],p[0]-c[0])*180/Math.PI;
+function arcPts(cx,cy,r,a0,a1,n=24){
+  const pts=[]; for(let i=0;i<=n;i++){const t=(a0+(a1-a0)*i/n)*Math.PI/180;pts.push([cx+r*Math.cos(t),cy+r*Math.sin(t)]);}
+  return pts;
+}
+
+/* =====================================================================
+   CLASS 6
+   ===================================================================== */
+
+/* 1 ─────────────────────────────────────────── Natural numbers and fractions */
+lesson('c6-01','Natural numbers and fractions','Natural numbers and fractions on one line',A=>{
+  A.say("Natural numbers count objects: 1, 2, 3 and so on. A fraction splits one whole into equal parts.",
+        "স্বাভাবিক সংখ্যা বস্তু গণনা করে: ১, ২, ৩...। ভগ্নাংশ একটিকে সমান ভাগে ভাগ করে।");
+  A.rect(120,150,180,45,{c:SK,w:2.5,fill:SK,fo:.22},.4);
+  A.line(210,150,210,195,{c:INK,w:2},.2);
+  A.text(165,178,'1/2',{size:20,c:SK});
+  A.rect(120,215,180,45,{c:GR,w:2.5,fill:GR,fo:.22},.4);
+  [165,210,255].forEach(x=>A.line(x,215,x,260,{c:INK,w:2},.2));
+  A.text(165,243,'2/4',{size:20,c:GR});
+  A.text(350,178,'1/2',{size:21,c:SK});
+  A.text(350,243,'2/4',{size:21,c:GR});
+  A.text(455,210,'same value',{size:19,c:AM});
+  A.say("On a number line the whole numbers are equally spaced marks. Fractions sit between them.",
+        "সংখ্যারেখায় পূর্ণসংখ্যাগুলো সমান দূরত্বে থাকে। ভগ্নাংশগুলো তাদের মাঝে বসে।");
+  A.line(80,320,720,320,{c:MU,w:3},.7);
+  for(let i=0;i<=4;i++){
+    const x=120+i*180;
+    A.line(x,310,x,330,{c:MU,w:2},.2);
+    A.text(x,350,String(i),{size:18,c:INK});
+  }
+  for(let i=0;i<=4;i++){
+    const x=120+i*45;
+    A.line(x,314,x,326,{c:PK,w:1.5},.15);
+    if(i>0&&i<4)A.text(x,375,(i===2?'1/2':i+'/4'),{size:17,c:PK});
+  }
+  A.say("Mark 1/2 and 2/4. They land on the same point, so the two fractions are equal.",
+        "১/২ ও ২/৪ চিহ্নিত করো। তারা একই বিন্দুতে পড়ে, তাই ভগ্নাংশ দুটি সমান।");
+  A.circle(210,320,7,{c:PK,w:2,fill:PK,fo:1},.3);
+  A.circle(300,320,7,{c:GR,w:2,fill:GR,fo:1},.3);
+  A.circle(480,320,7,{c:GR,w:2,fill:GR,fo:1},.3);
+  A.circle(660,320,7,{c:GR,w:2,fill:GR,fo:1},.3);
+  A.text(300,300,'1',{size:16,c:GR});
+  A.text(480,300,'2',{size:16,c:GR});
+  A.text(660,300,'3',{size:16,c:GR});
+  NOTE(A,440,'1/2 and 2/4 name the same point on the line.');
+});
+
+/* 2 ─────────────────────────────────────────── Ratios and percentages */
+lesson('c6-02','Ratios and percentages','Ratios and percentages compare parts',A=>{
+  A.say("A ratio compares parts of the same whole. Here the parts are in the ratio 2 : 3.",
+        "অনুপাত একই সম্পূর্ণের অংশগুলো তুলনা করে। এখানে অংশ দুটি ২ : ৩ অনুপাতে।");
+  A.rect(100,180,160,60,{c:SK,w:2.5,fill:SK,fo:.28},.4);
+  A.rect(260,180,240,60,{c:GR,w:2.5,fill:GR,fo:.28},.4);
+  A.text(180,218,'2 parts',{size:19,c:INK});
+  A.text(380,218,'3 parts',{size:19,c:INK});
+  A.text(300,145,'2 : 3',{size:30,c:AM});
+  A.say("A percentage compares a part with 100. Forty out of one hundred is 40%.",
+        "শতকরা একটি অংশকে ১০০-এর সঙ্গে তুলনা করে। একশোর চল্লিশ ভাগ হলো ৪০%।");
+  A.rect(540,130,180,72,{c:SK,w:2,fill:SK,fo:.55},.5);
+  for(let i=0;i<=10;i++){
+    A.line(540+i*18,130,540+i*18,310,{c:MU,w:1},.1);
+    A.line(540,130+i*18,720,130+i*18,{c:MU,w:1},.1);
+  }
+  A.text(630,350,'40%',{size:30,c:SK});
+  A.say("The ratio 2 : 3 is the same as 40% : 60%, because two parts out of five is forty percent.",
+        "২ : ৩ অনুপাতটি ৪০% : ৬০%-এর সমান, কারণ পাঁচ ভাগের দুই ভাগ চল্লিশ শতাংশ।");
+  A.text(300,300,'2 : 3 = 40% : 60%',{size:22,c:GR});
+  A.text(300,345,'part-to-part ratio',{size:19,c:MU});
+  A.say("Percent means per hundred, so 40% is 40/100, which simplifies to 2/5.",
+        "শতকরা মানে প্রতি একশোতে, তাই ৪০% = ৪০/১০০, যা সরল করে ২/৫ হয়।");
+  A.text(630,390,'40% = 40/100 = 2/5',{size:19,c:AM});
+  NOTE(A,440,'percent means "per hundred".');
+});
+
+/* 3 ─────────────────────────────────────────── Integers */
+lesson('c6-03','Integers','Integers: moving left and right on the line',A=>{
+  A.say("Integers include the positive numbers, zero and the negative numbers.",
+        "পূর্ণসংখ্যার মধ্যে ধনাত্মক সংখ্যা, শূন্য ও ঋণাত্মক সংখ্যা থাকে।");
+  A.line(80,330,720,330,{c:MU,w:3},.7);
+  for(let i=-4;i<=4;i++){
+    const x=160+(i+4)*65;
+    A.line(x,320,x,340,{c:MU,w:2},.15);
+    A.text(x,362,String(i),{size:18,c:INK});
+  }
+  A.say("Adding a positive number moves you to the right. Start at negative three and add five.",
+        "ধনাত্মক সংখ্যা যোগ করলে ডানদিকে এগোও। ঋণাত্মক তিন থেকে শুরু করে পাঁচ যোগ করো।");
+  A.arrow(225,280,550,280,{c:AM,w:3},.5);
+  A.text(388,262,'+5',{size:20,c:AM});
+  A.circle(225,330,7,{c:PK,w:2,fill:PK,fo:1},.25);
+  A.circle(550,330,7,{c:GR,w:2,fill:GR,fo:1},.25);
+  A.say("Negative three plus five is two. Subtracting three from two moves left to negative one.",
+        "ঋণাত্মক তিন যোগ পাঁচ সমান দুই। দুই থেকে তিন বিয়োগ করলে বাঁদিকে গিয়ে ঋণাত্মক এক হয়।");
+  A.arrow(550,235,355,235,{c:PK,w:3},.5);
+  A.text(452,218,'-3',{size:20,c:PK});
+  A.circle(355,330,7,{c:PK,w:2,fill:PK,fo:1},.25);
+  A.text(400,145,'-3 + 5 = 2',{size:28,c:AM});
+  A.text(400,185,'2 - 3 = -1',{size:24,c:PK});
+  A.say("The arrows show the moves: right for adding, left for subtracting.",
+        "তীরগুলো চালনা দেখায়: যোগে ডানে, বিয়োগে বাঁয়ে।");
+  NOTE(A,430,'adding moves right; subtracting moves left.');
+});
+
+/* 4 ─────────────────────────────────────────── Algebraic expressions */
+lesson('c6-04','Algebraic expressions','Terms, coefficients and like terms',A=>{
+  A.say("An algebraic expression joins numbers and letters with operations. Each part is a term.",
+        "বীজগাণিতিক রাশি সংখ্যা ও অক্ষরকে চিহ্ন দিয়ে জোড়ে। প্রতিটি অংশ একটি পদ।");
+  A.rect(130,165,100,62,{c:SK,w:2.5,fill:SK,fo:.18},.35);
+  A.rect(250,165,100,62,{c:GR,w:2.5,fill:GR,fo:.18},.35);
+  A.rect(370,165,100,62,{c:PK,w:2.5,fill:PK,fo:.18},.35);
+  A.rect(490,165,100,62,{c:AM,w:2.5,fill:AM,fo:.18},.35);
+  A.text(180,205,'3x',{size:26,c:SK});
+  A.text(300,205,'2y',{size:26,c:GR});
+  A.text(420,205,'-x',{size:26,c:PK});
+  A.text(540,205,'+4',{size:26,c:AM});
+  A.say("Like terms have the same letter and the same power. 3x and -x are like terms.",
+        "সদৃশ পদে একই অক্ষর ও একই ঘাত থাকে। ৩x ও -x সদৃশ পদ।");
+  A.arrow(180,230,290,285,{c:AM,w:2},.35);
+  A.arrow(420,230,310,285,{c:AM,w:2},.35);
+  A.text(300,320,'3x - x = 2x',{size:25,c:SK});
+  A.say("The coefficient is the number in front of a letter. In 3x the coefficient is three.",
+        "সহগ হলো অক্ষরের সামনের সংখ্যা। ৩x-এ সহগ তিন।");
+  A.text(400,365,'2x + 2y + 4',{size:30,c:GR});
+  A.say("Combine only like terms. The y term and the constant stay as they are.",
+        "শুধু সদৃশ পদ একত্র করো। y পদটি ও ধ্রুবকটি অপরিবর্তিত থাকে।");
+  NOTE(A,435,'only like terms can be combined.');
+});
+
+/* 5 ─────────────────────────────────────────── Simple equations */
+lesson('c6-05','Simple equations','An equation is a balance',A=>{
+  A.say("An equation is a balance: both sides have the same value. Here x + 3 balances 8.",
+        "সমীকরণ একটি দাঁড়িপাল্লা: দুই পাশের মান সমান। এখানে x + 3 ও 8 সমান।");
+  A.line(240,210,560,210,{c:AM,w:4},.5);
+  A.line(280,210,280,285,{c:MU,w:2},.3);
+  A.line(520,210,520,285,{c:MU,w:2},.3);
+  A.rect(220,285,120,42,{c:SK,w:2.5,fill:SK,fo:.16},.4);
+  A.rect(460,285,120,42,{c:GR,w:2.5,fill:GR,fo:.16},.4);
+  A.text(280,313,'x + 3',{size:24,c:SK});
+  A.text(520,313,'8',{size:24,c:GR});
+  A.line(400,250,400,350,{c:MU,w:3},.3);
+  A.line(350,350,450,350,{c:MU,w:3},.3);
+  A.circle(400,250,5,{c:AM,w:2,fill:AM,fo:1},.2);
+  A.say("Subtract three from both sides. The balance stays level if you do the same to both sides.",
+        "দুই পাশ থেকে তিন বিয়োগ করো। দুই পাশে একই কাজ করলে দাঁড়িপাল্লা সমান থাকে।");
+  A.text(400,390,'x + 3 = 8',{size:28,c:AM});
+  A.say("The left side becomes x and the right side becomes five. So x equals five.",
+        "বাঁ পাশ হয় x এবং ডান পাশ হয় পাঁচ। তাই x সমান পাঁচ।");
+  A.text(400,435,'x = 5',{size:32,c:GR});
+  NOTE(A,468,'do the same operation to both sides.');
+});
+
+/* 6 ─────────────────────────────────────────── Basic concepts of geometry */
+lesson('c6-06','Basic concepts of geometry','Point, line, ray, segment and angle',A=>{
+  A.say("Geometry starts with a point. A point shows an exact position and has no size.",
+        "জ্যামিতি শুরু হয় বিন্দু দিয়ে। বিন্দু একটি নির্দিষ্ট অবস্থান দেখায়, এর আকার নেই।");
+  A.circle(180,150,7,{c:AM,w:2,fill:AM,fo:1},.3);
+  A.text(180,120,'point P',{size:19,c:AM});
+  A.text(180,185,'point',{size:18,c:MU});
+  A.say("A line goes straight forever in both directions. A ray starts at one point and goes on.",
+        "রেখা দুই দিকে অনন্তকাল সোজা চলে। রশ্মি এক বিন্দু থেকে শুরু হয়ে চলতে থাকে।");
+  A.line(100,240,300,240,{c:SK,w:3},.5);
+  A.pts([[112,234],[100,240],[112,246]],{c:SK,w:2},.2);
+  A.pts([[288,234],[300,240],[288,246]],{c:SK,w:2},.2);
+  A.text(200,275,'line',{size:18,c:SK});
+  A.arrow(100,320,300,320,{c:GR,w:3},.5);
+  A.circle(100,320,5,{c:GR,w:2,fill:GR,fo:1},.2);
+  A.text(200,355,'ray',{size:18,c:GR});
+  A.say("A segment has two endpoints. An angle is made by two rays that meet at a vertex.",
+        "রেখাংশের দুই প্রান্তবিন্দু থাকে। দুই রশ্মি একটি শীর্ষবিন্দুতে মিললে কোণ হয়।");
+  A.line(420,150,620,150,{c:PK,w:3},.5);
+  A.circle(420,150,6,{c:PK,w:2,fill:PK,fo:1},.2);
+  A.circle(620,150,6,{c:PK,w:2,fill:PK,fo:1},.2);
+  A.text(520,185,'segment',{size:18,c:PK});
+  A.line(480,340,420,270,{c:AM,w:3},.4);
+  A.line(480,340,620,330,{c:AM,w:3},.4);
+  A.pts(arcPts(480,340,60,-130,-4,24),{c:AM,w:2.5},.4);
+  A.text(540,395,'angle',{size:18,c:AM});
+  A.say("Labels help us name the parts, so a diagram can be read without guessing.",
+        "লেবেল দিলে অংশগুলো চেনা যায়, তাই চিত্র না দেখে অনুমান করতে হয় না।");
+  NOTE(A,445,'a point marks position; a line has no endpoints.');
+});
+
+/* 7 ─────────────────────────────────────────── Practical geometry */
+lesson('c6-07','Practical geometry','Bisect an angle with compass arcs',A=>{
+  A.say("Start with angle AOB. The two rays OA and OB are the sides of the angle.",
+        "কোণ AOB দিয়ে শুরু করো। OA ও OB দুই রশ্মি কোণের বাহু।");
+  A.line(200,380,600,380,{c:GR,w:3},.6);
+  A.line(200,380,500,180,{c:GR,w:3},.6);
+  A.pts(arcPts(200,380,70,-34,0,20),{c:AM,w:2.5},.3);
+  A.circle(200,380,6,{c:AM,w:2,fill:AM,fo:1},.2);
+  A.text(185,405,'O',{size:20,c:AM});
+  A.text(615,390,'A',{size:20,c:GR});
+  A.text(508,170,'B',{size:20,c:GR});
+  A.say("With the compass at O, mark equal distances P on OA and Q on OB.",
+        "O-তে কম্পাস রেখে OA-তে P ও OB-তে Q সমান দূরত্বে চিহ্নিত করো।");
+  A.circle(320,380,6,{c:SK,w:2,fill:SK,fo:1},.2);
+  A.circle(300,313,6,{c:SK,w:2,fill:SK,fo:1},.2);
+  A.text(325,400,'P',{size:18,c:SK});
+  A.text(285,305,'Q',{size:18,c:SK});
+  A.say("Draw an arc from P and another arc from Q. Their crossing point lies inside the angle.",
+        "P থেকে একটি চাপ ও Q থেকে আরেকটি চাপ আঁকো। তাদের ছেদবিন্দু কোণের ভেতরে থাকে।");
+  A.pts(arcPts(320,380,170,-60,10,18),{c:SK,w:2.5},.5);
+  A.pts(arcPts(300,313,170,-35,25,18),{c:PK,w:2.5},.5);
+  A.circle(469,299,6,{c:PK,w:2,fill:PK,fo:1},.3);
+  A.say("Join O to the crossing point. This ray splits the angle into two equal angles.",
+        "O থেকে ছেদবিন্দু পর্যন্ত যোগ করো। এই রশ্মি কোণটিকে দুই সমান কোণে ভাগ করে।");
+  A.line(200,380,650,245,{c:PK,w:3},.6);
+  A.text(570,235,'angle bisector',{size:18,c:PK});
+  A.text(400,425,'the two small angles are equal',{size:18,c:GR});
+  NOTE(A,458,'an angle bisector divides an angle into two equal parts.');
+});
+
+/* 8 ─────────────────────────────────────────── Information and data */
+lesson('c6-08','Information and data','Tally, frequency and a bar chart',A=>{
+  A.say("A tally chart counts how often each item appears. The count is called the frequency.",
+        "ট্যালি ছক গোনে প্রতিটি বস্তু কতবার এসেছে। এই গণনাকে কম্পাঙ্ক বলা হয়।");
+  A.line(80,120,320,120,{c:MU,w:2},.2);
+  A.line(80,150,320,150,{c:MU,w:2},.2);
+  A.line(80,185,320,185,{c:MU,w:2},.2);
+  A.line(80,220,320,220,{c:MU,w:2},.2);
+  A.line(80,255,320,255,{c:MU,w:2},.2);
+  A.line(80,290,320,290,{c:MU,w:2},.2);
+  A.line(200,120,200,290,{c:MU,w:2},.2);
+  A.text(140,140,'item',{size:18,c:MU});
+  A.text(260,140,'count',{size:18,c:MU});
+  ['A','B','C','D'].forEach((v,i)=>{
+    A.text(140,176+i*35,v,{size:20,c:SK});
+    A.text(260,176+i*35,String([4,7,5,3][i]),{size:20,c:AM});
+  });
+  A.say("A bar chart shows the same frequencies as bars. Taller bars mean larger frequencies.",
+        "বার চার্ট একই কম্পাঙ্ক বার হিসেবে দেখায়। উঁচু বার বড় কম্পাঙ্ক বোঝায়।");
+  A.arrow(420,380,720,380,{c:MU,w:2},.3);
+  A.arrow(420,380,420,120,{c:MU,w:2},.3);
+  A.rect(440,280,45,100,{c:SK,w:2,fill:SK,fo:.35},.35);
+  A.rect(510,220,45,160,{c:GR,w:2,fill:GR,fo:.35},.35);
+  A.rect(580,260,45,120,{c:AM,w:2,fill:AM,fo:.35},.35);
+  A.rect(650,320,45,60,{c:PK,w:2,fill:PK,fo:.35},.35);
+  ['A','B','C','D'].forEach((v,i)=>A.text(462+i*70,405,v,{size:18,c:MU}));
+  A.say("Read the height from the scale, not from the width. The bars are equally wide.",
+        "উচ্চতা স্কেল থেকে পড়ো, প্রস্থ থেকে নয়। বারগুলোর প্রস্থ সমান।");
+  A.text(570,430,'total = 4 + 7 + 5 + 3 = 19',{size:19,c:GR});
+  A.say("Always label the axes and give the chart a title, so the data can be understood.",
+        "অক্ষগুলো লেবেল করো ও চার্টের শিরোনাম দাও, যাতে উপাত্ত বোঝা যায়।");
+  NOTE(A,460,'the tallest bar shows the most frequent item.');
+});
+
+/* =====================================================================
+   CLASS 7
+   ===================================================================== */
+
+/* 1 ─────────────────────────────────────────── Integers */
+lesson('c7-01','Integers','Multiplying and dividing integers',A=>{
+  A.say("The sign rules are the same for multiplication and division. Same signs give a positive result.",
+        "গুণ ও ভাগে চিহ্নের নিয়ম একই। একই চিহ্ন হলে ফল ধনাত্মক হয়।");
+  A.line(100,120,700,120,{c:MU,w:2},.2);
+  A.line(100,200,700,200,{c:MU,w:2},.2);
+  A.line(100,280,700,280,{c:MU,w:2},.2);
+  A.line(400,120,400,280,{c:MU,w:2},.2);
+  A.text(250,165,'(+) x (+) = +',{size:24,c:GR});
+  A.text(550,165,'(-) x (-) = +',{size:24,c:GR});
+  A.say("Different signs give a negative result. One negative sign is enough to flip the answer.",
+        "ভিন্ন চিহ্ন হলে ফল ঋণাত্মক হয়। একটি ঋণাত্মক চিহ্নই উত্তর উল্টে দিতে পারে।");
+  A.text(250,245,'(+) x (-) = -',{size:24,c:PK});
+  A.text(550,245,'(-) x (+) = -',{size:24,c:PK});
+  A.say("The same rule works when you divide. Check the signs before you calculate.",
+        "ভাগ করার সময়ও একই নিয়ম কাজ করে। হিসাব করার আগে চিহ্ন দেখো।");
+  A.text(400,330,'-6 x -4 = +24',{size:26,c:AM});
+  A.text(400,375,'18 / -3 = -6',{size:26,c:PK});
+  A.text(400,415,'same signs: positive   different signs: negative',{size:18,c:MU});
+  NOTE(A,455,'two negatives make a positive when you multiply or divide.');
+});
+
+/* 2 ─────────────────────────────────────────── Rational and irrational numbers */
+lesson('c7-02','Rational and irrational numbers','Rationals repeat or end; irrationals never do',A=>{
+  A.say("A rational number can be written as a fraction p/q, where p and q are integers and q is not zero.",
+        "মূলদ সংখ্যা p/q আকারে লেখা যায়, যেখানে p ও q পূর্ণসংখ্যা এবং q শূন্য নয়।");
+  A.rect(90,140,200,190,{c:SK,w:2.5,fill:SK,fo:.12},.4);
+  A.rect(310,140,200,190,{c:GR,w:2.5,fill:GR,fo:.12},.4);
+  A.rect(530,140,200,190,{c:PK,w:2.5,fill:PK,fo:.12},.4);
+  A.text(190,185,'1/4',{size:28,c:SK});
+  A.text(190,230,'0.25',{size:22,c:INK});
+  A.text(190,275,'terminating',{size:18,c:MU});
+  A.text(190,310,'rational',{size:18,c:SK});
+  A.text(410,185,'1/3',{size:28,c:GR});
+  A.text(410,230,'0.333...',{size:22,c:INK});
+  A.text(410,275,'recurring',{size:18,c:MU});
+  A.text(410,310,'rational',{size:18,c:GR});
+  A.say("A rational decimal either ends or repeats a block of digits forever.",
+        "মূলদ দশমিক হয় শেষ হয়, নয়তো অঙ্কের একটি ব্লক অনন্তকাল পুনরাবৃত্তি করে।");
+  A.text(630,185,'√2',{size:30,c:PK});
+  A.text(630,230,'1.414...',{size:22,c:INK});
+  A.text(630,275,'never repeats',{size:18,c:MU});
+  A.text(630,310,'irrational',{size:18,c:PK});
+  A.say("An irrational number cannot be written as a fraction. Its decimal never ends and never repeats.",
+        "অমূলদ সংখ্যা ভগ্নাংশে লেখা যায় না। এর দশমিক কখনো শেষ হয় না, পুনরাবৃত্তিও করে না।");
+  A.text(400,375,'rational: p/q, q ≠ 0',{size:22,c:GR});
+  A.text(400,415,'irrational: cannot be written as p/q',{size:20,c:PK});
+  NOTE(A,455,'a decimal that ends or repeats is rational.');
+});
+
+/* 3 ─────────────────────────────────────────── Congruence and similarity */
+lesson('c7-03','Congruence and similarity','Congruent: same size; similar: same shape',A=>{
+  A.say("Congruent shapes have exactly the same shape and the same size. One fits on the other.",
+        "সর্বসম আকৃতির আকার ও মাপ একই এবং একটিকে অন্যটির উপর রাখা যায়।");
+  A.pts([[100,300],[220,300],[160,190],[100,300]],{c:SK,w:3,fill:SK,fo:.12},.8);
+  A.pts([[270,300],[390,300],[330,190],[270,300]],{c:SK,w:3,fill:SK,fo:.12},.8);
+  A.text(245,120,'congruent',{size:24,c:SK});
+  A.text(245,340,'same size',{size:18,c:SK});
+  A.say("Similar shapes have the same angles, but the sides may be different lengths.",
+        "সদৃশ আকৃতির কোণগুলো সমান, তবে বাহুর দৈর্ঘ্য ভিন্ন হতে পারে।");
+  A.pts([[470,300],[530,300],[500,230],[470,300]],{c:GR,w:3,fill:GR,fo:.12},.8);
+  A.pts([[570,330],[710,330],[640,170],[570,330]],{c:GR,w:3,fill:GR,fo:.12},.8);
+  A.text(590,120,'similar',{size:24,c:GR});
+  A.text(590,365,'same shape',{size:18,c:GR});
+  A.say("In similar shapes the matching sides are in the same ratio. The matching angles are equal.",
+        "সদৃশ আকৃতিতে অনুরূপ বাহুগুলো একই অনুপাতে থাকে। অনুরূপ কোণগুলো সমান।");
+  A.text(400,410,'congruent: same shape and size',{size:18,c:SK});
+  A.text(400,440,'similar: same shape, proportional sides',{size:18,c:GR});
+  NOTE(A,470,'congruent shapes are a special case of similar shapes.');
+});
+
+/* 4 ─────────────────────────────────────────── Multiplication and division of algebraic expressions */
+lesson('c7-04','Algebraic multiplication','Area model for (x + 2)(x + 3)',A=>{
+  A.say("Multiply algebraic expressions by using an area model. Each rectangle is one product.",
+        "বীজগাণিতিক রাশি গুণ করতে ক্ষেত্রফল মডেল ব্যবহার করো। প্রতিটি আয়তক্ষেত্র একটি গুণফল।");
+  A.rect(200,100,180,180,{c:SK,w:2.5,fill:SK,fo:.15},.4);
+  A.rect(380,100,60,180,{c:AM,w:2.5,fill:AM,fo:.15},.4);
+  A.rect(200,280,180,90,{c:GR,w:2.5,fill:GR,fo:.15},.4);
+  A.rect(380,280,60,90,{c:PK,w:2.5,fill:PK,fo:.15},.4);
+  A.text(290,190,'x²',{size:30,c:SK});
+  A.text(410,190,'2x',{size:24,c:AM});
+  A.text(290,325,'3x',{size:24,c:GR});
+  A.text(410,325,'6',{size:24,c:PK});
+  A.say("The side lengths are x + 2 and x + 3. The four small areas are x squared, 2x, 3x and 6.",
+        "বাহুর দৈর্ঘ্য x + ২ ও x + ৩। চারটি ছোট ক্ষেত্রফল x², ২x, ৩x ও ৬।");
+  A.text(290,88,'x',{size:19,c:SK});
+  A.text(410,88,'2',{size:19,c:AM});
+  A.text(185,190,'x',{size:19,c:GR,anchor:'end'});
+  A.text(185,325,'3',{size:19,c:PK,anchor:'end'});
+  A.say("Add the four areas and collect like terms. The two middle terms combine into 5x.",
+        "চারটি ক্ষেত্রফল যোগ করে সদৃশ পদ একত্র করো। দুই মধ্যপদ মিলে ৫x হয়।");
+  A.text(620,170,'(x + 2)(x + 3)',{size:21,c:AM});
+  A.text(620,215,'= x² + 5x + 6',{size:21,c:GR});
+  A.text(620,260,'x² + 2x + 3x + 6',{size:18,c:MU});
+  A.say("This model also works for division: factor the area and match the known side.",
+        "এই মডেল ভাগেও কাজ করে: ক্ষেত্রফল উৎপাদকে ভেঙে জানা বাহুর সঙ্গে মিলাও।");
+  NOTE(A,430,'multiply every part by every part, then add like terms.');
+});
+
+/* 5 ─────────────────────────────────────────── Algebraic fractions */
+lesson('c7-05','Algebraic fractions','Simplify by factoring, then cancel',A=>{
+  A.say("An algebraic fraction has a polynomial on top and a polynomial below the line.",
+        "বীজগাণিতিক ভগ্নাংশের উপরে ও নিচে বহুপদ থাকে।");
+  A.text(400,120,'x² - 9',{size:30,c:SK});
+  A.line(325,142,475,142,{c:SK,w:2.5},.2);
+  A.text(400,175,'x + 3',{size:26,c:SK});
+  A.say("Factor the top. x squared minus nine is a difference of squares: (x - 3)(x + 3).",
+        "উপরের রাশি উৎপাদকে ভাঙো। x² বিয়োগ ৯ একটি বর্গের অন্তর: (x - ৩)(x + ৩)।");
+  A.text(400,235,'= (x - 3)(x + 3) / (x + 3)',{size:22,c:MU});
+  A.say("The factor x plus 3 appears on the top and the bottom, so cancel it.",
+        "x যোগ ৩ উৎপাদকটি উপরে ও নিচে আছে, তাই সেটি কেটে দাও।");
+  A.text(400,295,'= x - 3',{size:32,c:GR});
+  A.text(400,340,'x ≠ -3',{size:22,c:PK});
+  A.say("State the excluded value. x cannot be minus three, because it makes the denominator zero.",
+        "নিষিদ্ধ মান লেখো। x ঋণাত্মক তিন হতে পারে না, কারণ তখন হর শূন্য হয়।");
+  A.text(400,385,'cancel a common factor, not a common term',{size:18,c:AM});
+  NOTE(A,430,'factor first, then cancel common factors.');
+});
+
+/* 6 ─────────────────────────────────────────── Simple equations */
+lesson('c7-06','Simple equations','Solve by doing the same to both sides',A=>{
+  A.say("Solve an equation by undoing operations. Keep both sides balanced at every step.",
+        "সমীকরণ সমাধান করতে ক্রিয়াগুলো উল্টাও। প্রতিটি ধাপে দুই পাশ সমান রাখো।");
+  A.rect(280,110,240,55,{c:SK,w:2.5,fill:SK,fo:.12},.4);
+  A.text(400,143,'2x - 5 = 11',{size:26,c:SK});
+  A.arrow(400,165,400,205,{c:AM,w:2.5},.3);
+  A.text(510,185,'add 5',{size:17,c:AM});
+  A.say("First add five to both sides. The minus five disappears and the right side becomes sixteen.",
+        "প্রথমে দুই পাশে পাঁচ যোগ করো। বিয়োগ পাঁচ চলে যায় এবং ডান পাশ হয় ষোলো।");
+  A.rect(280,205,240,55,{c:GR,w:2.5,fill:GR,fo:.12},.4);
+  A.text(400,238,'2x = 16',{size:26,c:GR});
+  A.arrow(400,260,400,300,{c:AM,w:2.5},.3);
+  A.text(520,280,'divide by 2',{size:17,c:AM});
+  A.say("Then divide both sides by two. The coefficient of x becomes one, so x is eight.",
+        "তারপর দুই পাশকে দুই দিয়ে ভাগ করো। x-এর সহগ এক হয়, তাই x আট।");
+  A.rect(280,300,240,55,{c:PK,w:2.5,fill:PK,fo:.12},.4);
+  A.text(400,333,'x = 8',{size:30,c:PK});
+  A.say("Check the answer in the original equation: two times eight minus five is eleven.",
+        "মূল সমীকরণে উত্তর মিলাও: দুই গুণ আট বিয়োগ পাঁচ সমান এগারো।");
+  A.text(400,395,'check: 2(8) - 5 = 11',{size:20,c:MU});
+  NOTE(A,440,'undo operations in reverse order.');
+});
+
+/* 7 ─────────────────────────────────────────── Set */
+lesson('c7-07','Set','Union, intersection and the Venn diagram',A=>{
+  A.say("A set is a collection of distinct objects. A Venn diagram shows two sets as overlapping circles.",
+        "সেট হলো আলাদা আলাদা বস্তুর সংগ্রহ। ভেন চিত্রে দুই সেটকে পরস্পর ছেদকারী বৃত্ত হিসেবে দেখানো হয়।");
+  A.ell(330,250,105,105,{c:SK,w:3,fill:SK,fo:.14},.9);
+  A.ell(470,250,105,105,{c:GR,w:3,fill:GR,fo:.14},.9);
+  A.text(245,125,'A',{size:24,c:SK});
+  A.text(555,125,'B',{size:24,c:GR});
+  A.text(285,265,'1, 2',{size:20,c:INK});
+  A.text(400,265,'3',{size:22,c:AM});
+  A.text(515,265,'4, 5',{size:20,c:INK});
+  A.say("The overlapping part is the intersection. It contains the elements that are in both sets.",
+        "ছেদ অংশটি হলো ছেদসেট। এতে সেই উপাদান থাকে যা দুই সেটেই আছে।");
+  A.text(400,80,'A ∪ B',{size:26,c:AM});
+  A.text(400,390,'A ∪ B = {1, 2, 3, 4, 5}',{size:20,c:AM});
+  A.say("The union contains everything in A or B. Do not write a shared element twice.",
+        "সংযোগ সেটে A বা B-এর সব উপাদান থাকে। সাধারণ উপাদান দুইবার লেখো না।");
+  A.text(400,425,'A ∩ B = {3}',{size:20,c:GR});
+  A.say("Count the regions carefully: A only, B only, and the overlap.",
+        "অঞ্চলগুলো ভালো করে গোনো: শুধু A, শুধু B এবং ছেদ অংশ।");
+  NOTE(A,468,'the intersection is shared by both sets.');
+});
+
+/* 8 ─────────────────────────────────────────── Quadrilateral */
+lesson('c7-08','Quadrilateral','The angles of a quadrilateral add to 360°',A=>{
+  A.say("A quadrilateral has four sides and four angles. A diagonal divides it into two triangles.",
+        "চতুর্ভুজের চারটি বাহু ও চারটি কোণ থাকে। একটি কর্ণ এটিকে দুইটি ত্রিভুজে ভাগ করে।");
+  A.pts([[200,150],[620,120],[680,340],[240,400],[200,150]],{c:GR,w:3,fill:GR,fo:.10},1);
+  A.dashed(200,150,680,340,{c:PK,w:2.5},.7);
+  A.text(185,135,'A',{size:20,c:GR});
+  A.text(630,110,'B',{size:20,c:GR});
+  A.text(695,350,'C',{size:20,c:GR});
+  A.text(225,425,'D',{size:20,c:GR});
+  A.text(235,180,'1',{size:18,c:AM});
+  A.text(590,155,'2',{size:18,c:AM});
+  A.text(640,320,'3',{size:18,c:AM});
+  A.text(270,370,'4',{size:18,c:AM});
+  A.say("Each triangle has an angle sum of 180 degrees. Two triangles give 180 plus 180.",
+        "প্রতিটি ত্রিভুজের কোণের সমষ্টি ১৮০ ডিগ্রি। দুই ত্রিভুজে ১৮০ যোগ ১৮০।");
+  A.text(500,210,'180°',{size:19,c:AM});
+  A.text(360,300,'180°',{size:19,c:AM});
+  A.say("So the four angles of the quadrilateral add to 360 degrees, whatever its shape.",
+        "তাই চতুর্ভুজের চার কোণের সমষ্টি ৩৬০ ডিগ্রি, এর আকৃতি যাই হোক।");
+  A.text(400,435,'180° + 180° = 360°',{size:24,c:AM});
+  NOTE(A,468,'a diagonal splits a quadrilateral into two triangles.');
+});
+
+/* 9 ─────────────────────────────────────────── Pythagoras theorem */
+lesson('c7-09','Pythagoras theorem','Pythagoras: a² + b² = c²',A=>{
+  A.say("In a right triangle, the side opposite the right angle is the hypotenuse.",
+        "সমকোণী ত্রিভুজে সমকোণের বিপরীত বাহুটি অতিভুজ।");
+  A.pts([[300,380],[300,180],[560,380],[300,380]],{c:SK,w:3,fill:SK,fo:.10},.9);
+  A.rect(300,362,18,18,{c:MU,w:2},.2);
+  A.text(285,280,'3',{size:20,c:AM});
+  A.text(430,405,'4',{size:20,c:AM});
+  A.text(430,290,'5',{size:20,c:PK});
+  A.say("The two shorter sides are the legs. Their squares add to the square of the hypotenuse.",
+        "ছোট দুই বাহু পাদ। তাদের বর্গের যোগফল অতিভুজের বর্গের সমান।");
+  A.text(400,110,'3² + 4² = 5²',{size:30,c:AM});
+  A.text(400,155,'9 + 16 = 25',{size:24,c:GR});
+  A.say("The 3-4-5 triangle is a famous right triangle because all three sides are whole numbers.",
+        "৩-৪-৫ ত্রিভুজ একটি বিখ্যাত সমকোণী ত্রিভুজ, কারণ তিন বাহুই পূর্ণসংখ্যা।");
+  A.text(400,435,'the hypotenuse is the longest side',{size:18,c:MU});
+  A.say("Use the theorem to find a missing side when the other two sides are known.",
+        "অন্য দুই বাহু জানা থাকলে অজানা বাহু বের করতে উপপাদ্যটি ব্যবহার করো।");
+  NOTE(A,468,'Pythagoras holds only for right triangles.');
+});
+
+/* 10 ────────────────────────────────────────── Circle */
+lesson('c7-10','Circle','Radius, diameter and chord',A=>{
+  A.say("A circle is the set of points at the same distance from its centre.",
+        "বৃত্ত হলো কেন্দ্র থেকে সমান দূরত্বে থাকা বিন্দুগুলোর সেট।");
+  A.circle(360,250,150,{c:MU,w:3,fill:SK,fo:.05},1);
+  A.line(210,250,510,250,{c:AM,w:3},.5);
+  A.line(360,250,456,135,{c:SK,w:3},.5);
+  A.line(248,150,472,150,{c:PK,w:3},.5);
+  A.circle(360,250,5,{c:AM,w:2,fill:AM,fo:1},.2);
+  A.text(195,255,'A',{size:19,c:AM,anchor:'end'});
+  A.text(525,255,'B',{size:19,c:AM,anchor:'start'});
+  A.text(340,236,'O',{size:19,c:AM,anchor:'end'});
+  A.text(430,185,'r',{size:22,c:SK});
+  A.text(360,120,'chord',{size:19,c:PK});
+  A.say("The diameter passes through the centre. It is twice the radius.",
+        "ব্যাস কেন্দ্র দিয়ে যায়। এটি ব্যাসার্ধের দ্বিগুণ।");
+  A.text(360,285,'diameter',{size:19,c:AM});
+  A.say("A chord joins two points on the circle. A diameter is the longest chord.",
+        "জ্যা বৃত্তের দুই বিন্দুকে জোড়ে। ব্যাস হলো বৃহত্তম জ্যা।");
+  A.text(400,395,'C = 2πr',{size:28,c:GR});
+  A.text(400,435,'d = 2r',{size:20,c:AM});
+  A.say("The circumference is the distance around the circle, measured in length units.",
+        "পরিধি হলো বৃত্তের চারদিকের দূরত্ব, যা দৈর্ঘ্যের এককে মাপা হয়।");
+  NOTE(A,468,'a chord joins two points on the circle.');
+});
+
+/* 11 ────────────────────────────────────────── Information and data */
+lesson('c7-11','Information and data','Mean, median and mode',A=>{
+  A.say("The mean, median and mode are three measures of the centre of a data set.",
+        "গড়, মধ্যক ও সংখ্যাগুরু মান উপাত্তের কেন্দ্রের তিনটি পরিমাপ।");
+  A.text(400,120,'2, 4, 4, 6, 9',{size:28,c:AM});
+  A.rect(110,180,180,130,{c:SK,w:2.5,fill:SK,fo:.12},.4);
+  A.rect(310,180,180,130,{c:GR,w:2.5,fill:GR,fo:.12},.4);
+  A.rect(510,180,180,130,{c:PK,w:2.5,fill:PK,fo:.12},.4);
+  A.text(200,215,'mean',{size:22,c:SK});
+  A.text(200,260,'5',{size:32,c:SK});
+  A.text(200,295,'25 ÷ 5',{size:16,c:MU});
+  A.text(400,215,'median',{size:22,c:GR});
+  A.text(400,260,'4',{size:32,c:GR});
+  A.text(400,295,'middle value',{size:16,c:MU});
+  A.text(600,215,'mode',{size:22,c:PK});
+  A.text(600,260,'4',{size:32,c:PK});
+  A.text(600,295,'most frequent',{size:16,c:MU});
+  A.say("Add the values and divide by how many there are to find the mean.",
+        "গড় বের করতে সব মান যোগ করে মানের সংখ্যা দিয়ে ভাগ করো।");
+  A.text(400,360,'sum = 25, so mean = 25 ÷ 5 = 5',{size:20,c:AM});
+  A.say("Order the data to find the median. The mode is the value that appears most often.",
+        "মধ্যক বের করতে উপাত্ত সাজাও। সংখ্যাগুরু মান হলো সবচেয়ে বেশি আসা মান।");
+  A.text(400,400,'ordered: 2, 4, 4, 6, 9',{size:20,c:MU});
+  NOTE(A,445,'the median is the middle value after ordering.');
+});
+
+/* =====================================================================
+   CLASS 8
+   ===================================================================== */
+
+/* 1 ─────────────────────────────────────────── Patterns */
+lesson('c8-01','Patterns','Find the rule and the nth term',A=>{
+  A.say("A number pattern follows a rule. Here each term is four more than the one before.",
+        "সংখ্যার প্যাটার্ন একটি নিয়ম অনুসরণ করে। এখানে প্রতিটি পদ আগেরটির চেয়ে চার বেশি।");
+  [3,7,11,15,19].forEach((v,i)=>{
+    A.rect(90+i*110,150,80,60,{c:SK,w:2.5,fill:SK,fo:.14},.35);
+    A.text(130+i*110,188,String(v),{size:24,c:SK});
+    if(i<4){
+      A.arrow(170+i*110,180,200+i*110,180,{c:AM,w:2},.25);
+      A.text(185+i*110,135,'+4',{size:16,c:AM});
+    }
+  });
+  A.say("The common difference is four. A pattern with a constant difference is linear.",
+        "সাধারণ অন্তর চার। যে প্যাটার্নে অন্তর সমান থাকে সেটি রৈখিক।");
+  A.text(400,285,'nth term = 4n - 1',{size:30,c:AM});
+  A.say("Test the rule: for n = 1 it gives 3, and for n = 5 it gives 19.",
+        "নিয়মটি মিলাও: n = ১ হলে ৩, আর n = ৫ হলে ১৯ হয়।");
+  A.text(400,335,'n = 5  →  4(5) - 1 = 19',{size:20,c:GR});
+  A.text(400,380,'start at 3 and add 4 each time',{size:20,c:MU});
+  A.say("Once you know the rule, you can find any term without listing every term before it.",
+        "নিয়ম জানলে আগের সব পদ না লিখেও যেকোনো পদ বের করা যায়।");
+  NOTE(A,430,'a linear pattern has a constant difference.');
+});
+
+/* 2 ─────────────────────────────────────────── Profits */
+lesson('c8-02','Profits','Cost, selling price, profit and loss',A=>{
+  A.say("Cost price is what a shop pays. Selling price is what a customer pays.",
+        "ক্রয়মূল্য হলো দোকান যে দাম দেয়। বিক্রয়মূল্য হলো ক্রেতা যে দাম দেয়।");
+  A.rect(100,140,260,190,{c:GR,w:2.5,fill:GR,fo:.10},.5);
+  A.rect(440,140,260,190,{c:RD,w:2.5,fill:RD,fo:.10},.5);
+  A.text(230,175,'profit',{size:24,c:GR});
+  A.text(230,215,'CP = 200',{size:19,c:INK});
+  A.text(230,245,'SP = 250',{size:19,c:INK});
+  A.text(230,275,'profit = 50',{size:19,c:GR});
+  A.text(230,305,'profit % = 25%',{size:19,c:GR});
+  A.text(570,175,'loss',{size:24,c:RD});
+  A.text(570,215,'CP = 200',{size:19,c:INK});
+  A.text(570,245,'SP = 160',{size:19,c:INK});
+  A.text(570,275,'loss = 40',{size:19,c:RD});
+  A.text(570,305,'loss % = 20%',{size:19,c:RD});
+  A.say("Profit is selling price minus cost price. Loss is cost price minus selling price.",
+        "লাভ হলো বিক্রয়মূল্য বিয়োগ ক্রয়মূল্য। ক্ষতি হলো ক্রয়মূল্য বিয়োগ বিক্রয়মূল্য।");
+  A.text(400,370,'profit % = profit / CP × 100',{size:22,c:AM});
+  A.text(400,405,'loss % = loss / CP × 100',{size:22,c:PK});
+  A.say("Percentage profit and percentage loss are always calculated on the cost price.",
+        "শতকরা লাভ ও শতকরা ক্ষতি সর্বদা ক্রয়মূল্যের উপর হিসাব করা হয়।");
+  NOTE(A,445,'profit = SP - CP; loss = CP - SP.');
+});
+
+/* 3 ─────────────────────────────────────────── Measurement */
+lesson('c8-03','Measurement','Area and perimeter of a rectangle',A=>{
+  A.say("Area measures the space inside a shape. Perimeter measures the distance around it.",
+        "ক্ষেত্রফল আকৃতির ভেতরের জায়গা মাপে। পরিসীমা চারদিকের দূরত্ব মাপে।");
+  A.rect(180,160,440,200,{c:SK,w:3,fill:SK,fo:.08},.7);
+  A.text(400,145,'11 m',{size:20,c:SK});
+  A.text(165,265,'5 m',{size:20,c:SK,anchor:'end'});
+  A.text(400,270,'Area = 11 × 5 = 55 m²',{size:24,c:GR});
+  A.say("Multiply length by width to get the area. The units are square metres.",
+        "ক্ষেত্রফল পেতে দৈর্ঘ্যকে প্রস্থ দিয়ে গুণ করো। একক বর্গমিটার।");
+  A.text(400,410,'Perimeter = 2(11 + 5) = 32 m',{size:22,c:AM});
+  A.say("Add the four sides to get the perimeter. Opposite sides of a rectangle are equal.",
+        "পরিসীমা পেতে চার বাহু যোগ করো। আয়তক্ষেত্রের বিপরীত বাহু সমান।");
+  NOTE(A,455,'area uses square units; perimeter uses length units.');
+});
+
+/* 4 ─────────────────────────────────────────── Algebraic formulae and applications */
+lesson('c8-04','Algebraic formulae','The identity (a + b)² = a² + 2ab + b²',A=>{
+  A.say("The square of a sum can be shown as a large square split into four rectangles.",
+        "যোগফলের বর্গকে চারটি আয়তক্ষেত্রে বিভক্ত বড় বর্গ হিসেবে দেখানো যায়।");
+  A.rect(220,100,160,160,{c:SK,w:2.5,fill:SK,fo:.16},.4);
+  A.rect(380,100,80,160,{c:AM,w:2.5,fill:AM,fo:.16},.4);
+  A.rect(220,260,160,80,{c:VI,w:2.5,fill:VI,fo:.16},.4);
+  A.rect(380,260,80,80,{c:PK,w:2.5,fill:PK,fo:.16},.4);
+  A.text(300,180,'a²',{size:28,c:SK});
+  A.text(420,180,'ab',{size:24,c:AM});
+  A.text(300,300,'ab',{size:24,c:VI});
+  A.text(420,300,'b²',{size:24,c:PK});
+  A.say("The four parts are a squared, ab, ab and b squared. The two ab parts combine.",
+        "চারটি অংশ হলো a², ab, ab ও b²। দুইটি ab অংশ একত্র হয়।");
+  A.text(300,88,'a',{size:19,c:SK});
+  A.text(420,88,'b',{size:19,c:AM});
+  A.text(205,180,'a',{size:19,c:SK,anchor:'end'});
+  A.text(205,300,'b',{size:19,c:VI,anchor:'end'});
+  A.say("So the area is a squared plus 2ab plus b squared. This identity is true for every value.",
+        "তাই ক্ষেত্রফল a² যোগ ২ab যোগ b²। এই অভেদ প্রতিটি মানের জন্য সত্য।");
+  A.text(620,160,'(a + b)²',{size:24,c:AM});
+  A.text(620,205,'= a² + 2ab + b²',{size:20,c:GR});
+  A.text(620,250,'a² + ab + ab + b²',{size:17,c:MU});
+  A.say("The identity helps you expand expressions without multiplying every term separately.",
+        "এই অভেদ প্রতিটি পদ আলাদা না গুণেও রাশি বিস্তৃত করতে সাহায্য করে।");
+  NOTE(A,420,'the two ab rectangles give 2ab.');
+});
+
+/* 5 ─────────────────────────────────────────── Algebraic fractions */
+lesson('c8-05','Algebraic fractions','Add and subtract algebraic fractions',A=>{
+  A.say("To add algebraic fractions, first find a common denominator.",
+        "বীজগাণিতিক ভগ্নাংশ যোগ করতে প্রথমে সাধারণ হর বের করো।");
+  A.text(300,140,'1',{size:28,c:SK});
+  A.line(265,158,335,158,{c:SK,w:2.5},.2);
+  A.text(300,188,'x - 1',{size:22,c:SK});
+  A.text(370,170,'+',{size:28,c:INK});
+  A.text(440,140,'2',{size:28,c:GR});
+  A.line(405,158,475,158,{c:GR,w:2.5},.2);
+  A.text(440,188,'x + 2',{size:22,c:GR});
+  A.say("The common denominator is (x - 1)(x + 2). Multiply each numerator by the missing factor.",
+        "সাধারণ হর (x - ১)(x + ২)। প্রতিটি লবকে অনুপস্থিত উৎপাদক দিয়ে গুণ করো।");
+  A.text(400,250,'= ((x + 2) + 2(x - 1)) / ((x - 1)(x + 2))',{size:19,c:MU});
+  A.say("Simplify the numerator. x plus 2 plus 2x minus 2 becomes 3x.",
+        "লব সরল করো। x যোগ ২ যোগ ২x বিয়োগ ২ হয়ে ৩x হয়।");
+  A.text(400,310,'= 3x / (x² + x - 2)',{size:28,c:GR});
+  A.text(400,350,'x ≠ 1,   x ≠ -2',{size:20,c:PK});
+  A.say("State the excluded values. They make a denominator zero, so the fraction is undefined.",
+        "নিষিদ্ধ মানগুলো লেখো। সেগুলো হর শূন্য করে, তাই ভগ্নাংশটি অসংজ্ঞায়িত।");
+  A.text(400,395,'common denominator: (x - 1)(x + 2)',{size:18,c:AM});
+  NOTE(A,435,'factor first, then cancel common factors.');
+});
+
+/* 6 ─────────────────────────────────────────── Simple simultaneous equations */
+lesson('c8-06','Simple simultaneous equations','Two equations, one intersection',A=>{
+  A.say("Two equations in two variables can be solved together. Each equation is a straight line.",
+        "দুই চলকের দুই সমীকরণ একসঙ্গে সমাধান করা যায়। প্রতিটি সমীকরণ একটি সরলরেখা।");
+  axes(A,180,400,80,420,300,30);
+  A.line(180,120,460,400,{c:SK,w:3.5},.9);
+  A.text(535,120,'x + y = 7',{size:21,c:SK,anchor:'start'});
+  A.line(220,400,460,160,{c:GR,w:3.5},.9);
+  A.text(535,170,'x - y = 1',{size:21,c:GR,anchor:'start'});
+  A.say("The lines cross at the point that satisfies both equations. That point is the solution.",
+        "রেখা দুটি যে বিন্দুতে ছেদ করে সেটি দুই সমীকরণই সিদ্ধ করে। সেই বিন্দুই সমাধান।");
+  A.circle(340,280,9,{c:PK,w:3,fill:PK,fo:.7},.4);
+  A.dashed(340,280,340,400,{c:MU,w:1.5},.3);
+  A.dashed(340,280,180,280,{c:MU,w:1.5},.3);
+  A.text(340,420,'4',{size:18,c:MU});
+  A.text(165,285,'3',{size:18,c:MU});
+  A.text(610,250,'(4, 3)',{size:26,c:PK,anchor:'start'});
+  A.say("Here x equals four and y equals three. Check: four plus three is seven.",
+        "এখানে x সমান চার ও y সমান তিন। মিলাও: চার যোগ তিন সাত।");
+  A.text(400,440,'4 + 3 = 7  and  4 - 3 = 1',{size:20,c:GR});
+  NOTE(A,468,'the intersection satisfies both equations.');
+});
+
+/* 7 ─────────────────────────────────────────── Set */
+lesson('c8-07','Set','Subsets and set operations',A=>{
+  A.say("The universal set contains every element under discussion. A and B are subsets of U.",
+        "সার্বিক সেটে আলোচনার সব উপাদান থাকে। A ও B হলো U-এর উপসেট।");
+  A.rect(100,130,600,250,{c:MU,w:2.5,fill:SK,fo:.04},.7);
+  A.text(120,155,'U',{size:22,c:MU,anchor:'start'});
+  A.ell(320,260,100,100,{c:SK,w:3,fill:SK,fo:.14},.8);
+  A.ell(480,260,100,100,{c:GR,w:3,fill:GR,fo:.14},.8);
+  A.text(250,145,'A',{size:22,c:SK});
+  A.text(550,145,'B',{size:22,c:GR});
+  A.text(270,280,'1, 2',{size:19,c:INK});
+  A.text(400,280,'3',{size:21,c:AM});
+  A.text(530,280,'4, 5',{size:19,c:INK});
+  A.text(640,350,'6',{size:20,c:PK});
+  A.say("The union contains everything in A or B. The intersection contains what is in both.",
+        "সংযোগ সেটে A বা B-এর সবকিছু থাকে। ছেদসেটে থাকে যা দুই সেটেই আছে।");
+  A.text(400,405,'A ∪ B = {1, 2, 3, 4, 5}',{size:20,c:AM});
+  A.text(400,440,'A ∩ B = {3}',{size:20,c:GR});
+  A.say("The element 6 is in U but outside both A and B. It belongs to the complement of A ∪ B.",
+        "উপাদান ৬ হলো U-তে কিন্তু A ও B-এর বাইরে। এটি A ∪ B-এর পূরক সেটে আছে।");
+  NOTE(A,470,'A ⊂ U means every element of A is in U.');
+});
+
+/* 8 ─────────────────────────────────────────── Quadrilateral */
+lesson('c8-08','Quadrilateral','Parallelogram: opposite sides and angles',A=>{
+  A.say("A parallelogram has two pairs of parallel sides. Opposite sides are equal.",
+        "সামান্তরিকের দুই জোড়া সমান্তরাল বাহু থাকে। বিপরীত বাহু সমান।");
+  A.pts([[200,340],[380,180],[620,180],[440,340],[200,340]],{c:GR,w:3,fill:GR,fo:.08},1);
+  A.line(285,250,295,263,{c:AM,w:3},.2);
+  A.line(525,250,535,263,{c:AM,w:3},.2);
+  A.line(495,170,505,190,{c:SK,w:3},.2);
+  A.line(315,330,325,350,{c:SK,w:3},.2);
+  A.text(185,355,'A',{size:20,c:GR});
+  A.text(370,165,'B',{size:20,c:GR});
+  A.text(630,165,'C',{size:20,c:GR});
+  A.text(445,360,'D',{size:20,c:GR});
+  A.text(245,320,'α',{size:20,c:AM});
+  A.text(415,205,'β',{size:20,c:SK});
+  A.text(585,205,'α',{size:20,c:AM});
+  A.text(485,320,'β',{size:20,c:SK});
+  A.say("Opposite angles are equal. Adjacent angles add to 180 degrees.",
+        "বিপরীত কোণ সমান। সন্নিহিত কোণের যোগফল ১৮০ ডিগ্রি।");
+  A.text(400,400,'opposite sides equal · opposite angles equal',{size:18,c:GR});
+  A.text(400,435,'co-interior angles add to 180°',{size:18,c:AM});
+  A.say("The tick marks show the equal sides. The Greek letters show the equal angles.",
+        "টিক চিহ্ন সমান বাহু দেখায়। গ্রিক অক্ষর সমান কোণ দেখায়।");
+  NOTE(A,468,'a parallelogram has two pairs of parallel sides.');
+});
+
+/* 9 ─────────────────────────────────────────── Pythagoras theorem */
+lesson('c8-09','Pythagoras theorem','Prove Pythagoras with areas',A=>{
+  A.say("Pythagoras can be seen with squares built on the three sides of a right triangle.",
+        "সমকোণী ত্রিভুজের তিন বাহুর উপর বর্গ আঁকলে পিথাগোরাসের সূত্র দেখা যায়।");
+  A.pts([[230,230],[320,230],[320,320],[230,320],[230,230]],{c:SK,w:2.5,fill:SK,fo:.16},.7);
+  A.text(275,275,'9',{size:24,c:SK});
+  A.pts([[320,320],[440,320],[440,440],[320,440],[320,320]],{c:GR,w:2.5,fill:GR,fo:.16},.7);
+  A.text(380,380,'16',{size:24,c:GR});
+  A.pts([[320,230],[410,110],[530,200],[440,320],[320,230]],{c:PK,w:2.5,fill:PK,fo:.16},.8);
+  A.text(425,215,'25',{size:24,c:PK});
+  A.pts([[320,230],[440,320],[320,320],[320,230]],{c:AM,w:3,fill:AM,fo:.10},.8);
+  A.text(305,275,'3',{size:19,c:AM,anchor:'end'});
+  A.text(380,337,'4',{size:19,c:AM});
+  A.text(375,297,'5',{size:19,c:AM});
+  A.say("The square on the vertical leg has area nine. The square on the horizontal leg has area sixteen.",
+        "লম্ব পাদের উপর বর্গের ক্ষেত্রফল নয়। অনুভূমিক পাদের উপর বর্গের ক্ষেত্রফল ষোলো।");
+  A.say("The square on the hypotenuse has area twenty-five. Nine plus sixteen equals twenty-five.",
+        "অতিভুজের উপর বর্গের ক্ষেত্রফল পঁচিশ। নয় যোগ ষোলো সমান পঁচিশ।");
+  A.text(650,300,'9 + 16 = 25',{size:22,c:AM});
+  A.text(650,340,'3² + 4² = 5²',{size:20,c:GR});
+  A.say("This is why the squares of the two legs add to the square of the hypotenuse.",
+        "এই কারণেই দুই পাদের বর্গের যোগফল অতিভুজের বর্গের সমান।");
+  NOTE(A,465,'the square on the hypotenuse equals the sum of the other two squares.');
+});
+
+/* 10 ────────────────────────────────────────── Circle */
+lesson('c8-10','Circle','Tangent is perpendicular to the radius',A=>{
+  A.say("A tangent is a line that touches a circle at exactly one point.",
+        "স্পর্শক এমন রেখা যা বৃত্তকে ঠিক এক বিন্দুতে স্পর্শ করে।");
+  A.circle(360,250,140,{c:MU,w:3,fill:SK,fo:.05},1);
+  A.line(200,390,520,390,{c:GR,w:3},.6);
+  A.line(360,250,360,390,{c:PK,w:3},.5);
+  A.rect(360,372,18,18,{c:AM,w:2},.2);
+  A.circle(360,250,5,{c:AM,w:2,fill:AM,fo:1},.2);
+  A.circle(360,390,6,{c:AM,w:2,fill:AM,fo:1},.2);
+  A.text(345,240,'O',{size:19,c:AM,anchor:'end'});
+  A.text(375,408,'T',{size:19,c:AM});
+  A.text(375,320,'radius',{size:18,c:PK});
+  A.text(460,425,'tangent',{size:18,c:GR});
+  A.say("The radius drawn to the point of contact is perpendicular to the tangent.",
+        "স্পর্শবিন্দুতে আঁকা ব্যাসার্ধ স্পর্শকের উপর লম্ব।");
+  A.text(400,445,'OT ⊥ tangent at T',{size:24,c:AM});
+  A.say("The right-angle mark at T shows the perpendicular. This is true for every tangent.",
+        "T-তে সমকোণ চিহ্ন লম্ব বোঝায়। প্রতিটি স্পর্শকের জন্য এটি সত্য।");
+  NOTE(A,470,'a tangent touches the circle at exactly one point.');
+});
+
+/* 11 ────────────────────────────────────────── Information and data */
+lesson('c8-11','Information and data','Histogram and the shape of data',A=>{
+  A.say("A histogram groups data into intervals and shows the frequency of each interval.",
+        "হিস্টোগ্রাম উপাত্তকে শ্রেণিতে ভাগ করে প্রতিটি শ্রেণির কম্পাঙ্ক দেখায়।");
+  A.arrow(120,380,700,380,{c:MU,w:2},.4);
+  A.arrow(120,380,120,120,{c:MU,w:2},.4);
+  A.text(160,110,'frequency',{size:18,c:MU,anchor:'start'});
+  A.rect(160,300,70,80,{c:SK,w:2,fill:SK,fo:.30},.35);
+  A.rect(250,240,70,140,{c:GR,w:2,fill:GR,fo:.30},.35);
+  A.rect(340,200,70,180,{c:AM,w:2,fill:AM,fo:.30},.35);
+  A.rect(430,260,70,120,{c:PK,w:2,fill:PK,fo:.30},.35);
+  A.rect(520,320,70,60,{c:VI,w:2,fill:VI,fo:.30},.35);
+  ['0-10','10-20','20-30','30-40','40-50'].forEach((v,i)=>A.text(195+i*90,408,v,{size:15,c:MU}));
+  A.say("The tallest bar is the interval with the highest frequency. It is the mode class.",
+        "সবচেয়ে উঁচু বার হলো সবচেয়ে বেশি কম্পাঙ্কের শ্রেণি। এটি সংখ্যাগুরু শ্রেণি।");
+  A.text(400,445,'highest bar = most frequent class',{size:18,c:GR});
+  A.say("Histogram bars touch because the intervals are continuous on the number line.",
+        "হিস্টোগ্রামের বারগুলো স্পর্শ করে, কারণ শ্রেণিগুলো সংখ্যারেখায় ধারাবাহিক।");
+  NOTE(A,470,'bar height shows frequency, not the value.');
+});
+
+// __C678_APPEND__
+
+/* =====================================================================
+   COMMENT BUBBLES (English / বাংলা) + VOICE
+   ===================================================================== */
+const feeds=[],cmKey=[];
+function renderCm(i,t){
+  const feed=feeds[i]; if(!feed) return;
+  const caps=VISUALS[i].caps, idx=capIdx(caps,t), lang=S.lang;
+  const cur=idx>=0?caps[idx]:null, n=cur?Math.floor((t-cur[0])*45):0;
+  const key=idx+':'+(cur?Math.min(n,300):0)+':'+lang;
+  if(cmKey[i]===key) return; cmKey[i]=key;
+  if(idx<0){feed.innerHTML='<div class="cm-hint">Press play — Bolt will explain here.<br><span class="bnf">প্লে চাপো — বোল্ট এখানে বুঝিয়ে দেবে।</span></div>';return;}
+  let h='';
+  for(let k=Math.max(0,idx-2);k<=idx;k++){
+    const c=caps[k], last=k===idx;
+    let en=c[1], bn=c[2], enC='', bnC='';
+    if(last){
+      if(lang==='both'){
+        if(n<en.length){en=en.slice(0,n);enC='<i>▍</i>';bn='';}
+        else if(n-en.length<bn.length){bn=bn.slice(0,n-en.length);bnC='<i>▍</i>';}
+      }else if(lang==='en'){ if(n<en.length){en=en.slice(0,n);enC='<i>▍</i>';} }
+      else { if(n<bn.length){bn=bn.slice(0,n);bnC='<i>▍</i>';} }
+    }
+    let body='';
+    if(lang!=='bn' && en) body+='<span class="en">'+esc(en)+enC+'</span>';
+    if(lang!=='en' && (bn||bnC)) body+='<span class="bn">'+esc(bn)+bnC+'</span>';
+    h+='<div class="cm'+(last?'':' old')+'"><div class="cm-av">🤖</div><div class="cm-bb">'+body+'</div></div>';
+  }
+  feed.innerHTML=h;
+}
+
+function speakCap(c){
+  if(!('speechSynthesis' in window)) return;
+  const ss=window.speechSynthesis; ss.cancel();
+  const parts=S.lang==='en'?[['en',c[1]]]:S.lang==='bn'?[['bn',c[2]]]:[['en',c[1]],['bn',c[2]]];
+  const vs=ss.getVoices();
+  parts.forEach(([lg,tx])=>{
+    const u=new SpeechSynthesisUtterance(tx);
+    u.lang=lg==='bn'?'bn-BD':'en-US';
+    const v=vs.find(x=>x.lang.toLowerCase().replace('_','-').startsWith(lg));
+    if(v) u.voice=v;
+    u.rate=.95; u.pitch=1.1;
+    ss.speak(u);
+  });
+}
+function stopVoice(){ if('speechSynthesis' in window) window.speechSynthesis.cancel(); S.sp=null; }
+function checkSpeak(){
+  if(!S.voice||!S.playing) return;
+  const caps=VISUALS[S.vi].caps, i=capIdx(caps,S.t), key=S.vi+':'+S.mi+':'+i;
+  if(i<0||key===S.sp) return;
+  S.sp=key; speakCap(caps[i]);
+}
+function voiceNote(){
+  const el=$('#vcVoiceNote');
+  if(!('speechSynthesis' in window)){el.textContent='Voice is not supported in this browser.';return;}
+  const hasBn=speechSynthesis.getVoices().some(v=>/^bn/i.test(v.lang));
+  el.textContent=hasBn?'':'No Bangla voice found on this device. Install one in your system settings to hear Bangla.';
+}
+
+/* =====================================================================
+   CAROUSEL ENGINE
+   ===================================================================== */
+const track=$('#vcTrack'),view=$('#vcView'),svgs=[],slides=[];
+const cur=()=>VISUALS[S.vi].modes[S.mi];
+const previewT=v=>v.modes[0].duration*.92;
+
+function rebuild(){
+  track.innerHTML='';svgs.length=0;slides.length=0;feeds.length=0;cmKey.length=0;
+  VISUALS.forEach((v,i)=>{
+    const sl=document.createElement('div');sl.className='vc-slide';
+    sl.innerHTML='<div class="vc-head"><span class="vc-count">'+(i+1)+' / '+VISUALS.length+'</span><b>'+esc(v.title)+'</b></div>'
+      +'<div class="vc-body"><div class="vc-stage"><svg viewBox="0 0 800 480" role="img" aria-label="'+esc(v.title)+'"></svg></div>'
+      +'<div class="vc-cm"><div class="cm-in"><div class="cm-top"><span>🤖</span> Bolt says · <span class="bnf">বোল্ট বলছে</span></div><div class="cm-feed" aria-live="polite"></div></div></div></div>';
+    sl.onclick=()=>{if(i!==S.vi) go(i);};
+    track.appendChild(sl);slides.push(sl);svgs.push(sl.querySelector('svg'));feeds.push(sl.querySelector('.cm-feed'));
+  });
+  buildDots();buildModes();buildLang();layout();renderAll();ui();
+}
+function layout(){
+  const w=view.clientWidth||800, sw=w<700?w*.9:Math.min(w*.84,1120), gap=22;
+  slides.forEach((sl,i)=>{sl.style.flexBasis=sw+'px';sl.classList.toggle('on',i===S.vi);sl.classList.toggle('stack',sw<860);});
+  track.style.transform='translateX('+((w-sw)/2-S.vi*(sw+gap))+'px)';
+}
+function renderAll(){
+  VISUALS.forEach((v,i)=>{
+    const act=i===S.vi, m=act?cur():v.modes[0], t=act?Math.min(S.t,m.duration):previewT(v);
+    svgs[i].innerHTML=m.frame(t);cmKey[i]=null;renderCm(i,t);
+  });
+  progress();
+}
+function render(){
+  const m=cur(), t=Math.min(S.t,m.duration);
+  svgs[S.vi].innerHTML=m.frame(t);
+  renderCm(S.vi,t);
+  progress();
+}
+function progress(){
+  const m=cur();
+  $('#vcFill').style.width=(clamp(S.t/m.duration)*100)+'%';
+  $('#vcInfo').textContent='Lesson '+(S.vi+1)+' of '+VISUALS.length+'  ·  '+Math.floor(S.t)+'s / '+Math.round(m.duration)+'s';
+}
+function ui(){
+  $('#bPlay').textContent=S.playing?'⏸ Pause':'▶ Play';
+  const bv=$('#bVoice');bv.textContent=S.voice?'🔊 Voice on':'🔇 Voice off';bv.classList.toggle('on',S.voice);
+}
+function buildModes(){
+  const v=VISUALS[S.vi],box=$('#vcModes');box.innerHTML='';
+  v.modes.forEach((m,i)=>{
+    const b=document.createElement('button');b.textContent=m.label;b.className=i===S.mi?'on':'';
+    b.onclick=()=>{S.mi=i;S.t=0;clearTimeout(S.adv);stopVoice();buildModes();renderAll();if(!S.playing) play();};
+    box.appendChild(b);
+  });
+}
+function buildLang(){
+  const box=$('#vcLang');box.innerHTML='';
+  [['en','English'],['bn','বাংলা'],['both','English + বাংলা']].forEach(([id,label])=>{
+    const b=document.createElement('button');b.textContent=label;b.className=id===S.lang?'on':'';
+    b.onclick=()=>{S.lang=id;S.sp=null;if('speechSynthesis' in window) speechSynthesis.cancel();buildLang();renderAll();};
+    box.appendChild(b);
+  });
+}
+function buildDots(){
+  const d=$('#vcDots');d.innerHTML='';
+  VISUALS.forEach((v,i)=>{
+    const b=document.createElement('button');b.title=v.title;b.setAttribute('aria-label',v.title);
+    b.className=i===S.vi?'on':'';b.onclick=()=>go(i);d.appendChild(b);
+  });
+}
+function tick(ts){
+  if(!S.playing) return;
+  S.t+=(ts-S.last)/1000;S.last=ts;
+  if(S.t>=cur().duration){S.t=cur().duration;S.playing=false;render();ui();onEnd();return;}
+  checkSpeak();render();requestAnimationFrame(tick);
+}
+function play(){
+  if(S.playing) return;
+  clearTimeout(S.adv);S.manual=false;
+  if(S.t>=cur().duration){S.t=0;S.sp=null;}
+  S.playing=true;S.last=performance.now();ui();requestAnimationFrame(tick);
+}
+function pause(manual=true){S.playing=false;if(manual) S.manual=true;clearTimeout(S.adv);stopVoice();ui();}
+function onEnd(){clearTimeout(S.adv);S.adv=setTimeout(()=>{if(!S.manual) go(S.vi+1);},2200);}
+function go(i,auto=true){
+  if(S.busy||!VISUALS.length) return;
+  S.busy=true;clearTimeout(S.adv);S.playing=false;stopVoice();
+  S.vi=(i+VISUALS.length)%VISUALS.length;S.t=0;
+  buildDots();buildModes();layout();renderAll();ui();
+  setTimeout(()=>{S.busy=false;if(auto) play();},560);
+}
+
+$('#bPlay').onclick=()=>S.playing?pause(true):play();
+$('#bRep').onclick=()=>{clearTimeout(S.adv);stopVoice();S.t=0;if(S.playing) render();else play();};
+$('#bVoice').onclick=()=>{S.voice=!S.voice;S.sp=null;if(!S.voice) stopVoice();ui();voiceNote();};
+$('#bNext').onclick=$('#aNext').onclick=()=>go(S.vi+1);
+$('#bPrev').onclick=$('#aPrev').onclick=()=>go(S.vi-1);
+$('#vcCar').onkeydown=e=>{if(e.key==='ArrowRight') go(S.vi+1);if(e.key==='ArrowLeft') go(S.vi-1);};
+let sx=null;
+view.addEventListener('pointerdown',e=>{sx=e.clientX;});
+view.addEventListener('pointerup',e=>{
+  if(sx===null) return; const dx=e.clientX-sx; sx=null;
+  if(Math.abs(dx)>50) go(S.vi+(dx<0?1:-1));
+});
+window.addEventListener('resize',layout);
+if('speechSynthesis' in window){ speechSynthesis.addEventListener('voiceschanged',voiceNote); }
+voiceNote();
+
+const qp=new URLSearchParams(location.search);
+if(qp.has('lesson')){S.vi=clamp((parseInt(qp.get('lesson'),10)||1)-1,0,VISUALS.length-1);S.manual=true;}
+if(qp.has('t')){S.t=Math.max(0,parseFloat(qp.get('t'))||0);}
+if(qp.has('static')){const st=document.createElement('style');st.textContent='.vc-track,.vc-slide{transition:none!important}';document.head.appendChild(st);}
+S.ready=true;rebuild();
+
+new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){
+    if(!S.manual&&!S.playing&&!S.busy){ S.t>=cur().duration?go(S.vi+1):play(); }
+  } else if(S.playing){ pause(false); }
+}),{threshold:.4}).observe($('#vcCar'));
+})();
+</script>
+</body>
+</html>
+
