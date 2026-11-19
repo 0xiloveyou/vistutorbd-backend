@@ -309,6 +309,60 @@ model LearnCarousel {
 }
 
 // ---------------------------------------------------------------------------
+// New content library (the only source of truth for chapter visualizations)
+// ---------------------------------------------------------------------------
+// Chapters are synced from `content-library/all-class-content-new`. A chapter
+// may be linked to one generated visualization that must be authored from
+// `content-library/art-rules/Example.html` and comply with its RULES.md.
+model LibraryChapter {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  chapterId        String   @unique // class-1.01 | class-11.p1.01
+  classLevelId     String // class-1 ... class-12
+  classBandId      String // PLAY_NURSERY | C1_5 | C6_8 | C9_10 | C11_12
+  classOrder       Int      @default(0)
+  chapterNo        Int
+  paper            String? // p1 | p2 for Class 11–12
+  titleEn          String
+  titleBn          String   @default("")
+  printedPages     String   @default("")
+  pdfPages         String   @default("")
+  ocrQuality       String   @default("")
+  bookSlug         String   @default("")
+  sourceMd         String
+  sourceQuestions  String   @default("")
+  setCount         Int      @default(0)
+  questionCount    Int      @default(0)
+  order            Int      @default(0)
+  visualizationSlug String  @default("")
+  contentHash      String   @default("")
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([classLevelId])
+  @@index([classBandId])
+  @@index([classOrder, order])
+  @@map("library_chapters")
+}
+
+model LibraryVisualization {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  slug         String       @unique
+  chapterId    String       @unique
+  classLevelId String
+  title        LocalizedText
+  html         String
+  source       String       @default("")
+  contentHash  String       @default("")
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([classLevelId])
+  @@map("library_visualizations")
+}
+
+// ---------------------------------------------------------------------------
 // Knowledge base for RAG
 // ---------------------------------------------------------------------------
 

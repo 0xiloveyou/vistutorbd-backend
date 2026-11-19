@@ -1,0 +1,19 @@
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+MongoDB client initialised.
+{"timestamp":"2026-11-18T10:15:00.882Z","level":"info","event":"database_client_initialised"}
+Redis connected successfully.
+Nodemailer connected successfully.
+[cron] Visitor report scheduled (0 */6 * * *, timezone Asia/Dhaka).
+[cron] Scheduled jobs registered.
+VisTutorBd API running on http://localhost:5000 (port 5000)
+{"timestamp":"2026-11-18T10:15:04.352Z","level":"success","event":"server_started","port":5000,"environment":"development"}
+[seed] Users already exist — skipping user seed.
+[seed] Taxonomy already exists — skipping taxonomy seed.
+{"timestamp":"2026-11-18T10:15:36.907Z","level":"success","event":"http_request","requestId":"acac80e0-8888-463c-aa81-91190fbd529c","method":"GET","path":"/api/v1/library/classes","statusCode":200,"durationMs":1073,"ip":"::1"}
+{"timestamp":"2026-11-18T10:15:42.878Z","level":"success","event":"http_request","requestId":"0bd29e97-ed72-47b1-9a2b-ac2f051dfb83","method":"GET","path":"/api/v1/library/classes/class-6/chapters","statusCode":200,"durationMs":407,"ip":"::1"}
+{"timestamp":"2026-11-18T10:15:43.370Z","level":"success","event":"http_request","requestId":"b654d723-0d8d-4812-afa2-86829348404a","method":"GET","path":"/api/v1/library/chapters/class-6.01","statusCode":200,"durationMs":363,"ip":"::1"}
+{"timestamp":"2026-11-18T10:15:43.781Z","level":"error","event":"unhandled_request_error","method":"GET","path":"/api/v1/library/chapters/class-6.01/visualization","statusCode":404,"errorName":"Error","message":"No visualization has been published for this chapter yet.","stack":"Error: No visualization has been published for this chapter yet.\n    at <anonymous> (E:\\Project\\vistutorbd\\vistutorbd-backend\\src\\app\\module\\library\\library.service.ts:103:15)\n    at async <anonymous> (E:\\Project\\vistutorbd\\vistutorbd-backend\\src\\app\\module\\library\\library.controller.ts:41:37)\n    at async <anonymous> (E:\\Project\\vistutorbd\\vistutorbd-backend\\src\\app\\utils\\catchAsync.ts:6:13)"}
+{"timestamp":"2026-11-18T10:15:43.781Z","level":"error","event":"http_request","requestId":"2addad01-6d44-4400-99f8-71ae3d1ca587","method":"GET","path":"/api/v1/library/chapters/class-6.01/visualization","statusCode":404,"durationMs":382,"ip":"::1"}
+[library] Synced 163 chapter(s) across 14 class(es); 0 visualization(s) linked.
+[seed] Forum posts already exist — skipping forum seed.
+[seed] Database is ready.

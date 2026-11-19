@@ -1,0 +1,3422 @@
+[
+  {
+    "title": {
+      "en": "Numbers and counting",
+      "bn": "সংখ্যা ও গণনা"
+    },
+    "summary": {
+      "en": "Meet numbers 1 to 100, count objects and find missing numbers.",
+      "bn": "১ থেকে ১০০ পর্যন্ত সংখ্যার সঙ্গে পরিচিত হও, বস্তু গুনো আর হারানো সংখ্যা খোঁজো।"
+    },
+    "id": "6af6d84eea4f67e511c1ff87",
+    "classLevelId": "play",
+    "parentId": null,
+    "slug": "numbers",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:28:46.660Z",
+    "updatedAt": "2026-11-15T06:40:49.781Z"
+  },
+  {
+    "title": {
+      "en": "Adding and taking away",
+      "bn": "যোগ ও বিয়োগ"
+    },
+    "summary": {
+      "en": "Join groups, take some away and tell addition and subtraction stories.",
+      "bn": "দল এক করি, কিছু সরিয়ে নিই আর যোগ-বিয়োগের গল্প বলি।"
+    },
+    "id": "6af6d851ea4f67e511c1ff8c",
+    "classLevelId": "play",
+    "parentId": null,
+    "slug": "add-subtract",
+    "icon": "➕",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:28:49.019Z",
+    "updatedAt": "2026-11-15T06:40:51.671Z"
+  },
+  {
+    "title": {
+      "en": "Comparing and measuring",
+      "bn": "তুলনা ও মাপ"
+    },
+    "summary": {
+      "en": "Compare big and small, long and short, more and less, heavy and light.",
+      "bn": "বড়-ছোট, লম্বা-খাটো, বেশি-কম আর ভারী-হালকা তুলনা করি।"
+    },
+    "id": "6af6d853ea4f67e511c1ff91",
+    "classLevelId": "play",
+    "parentId": null,
+    "slug": "compare",
+    "icon": "⚖️",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:28:51.179Z",
+    "updatedAt": "2026-11-15T06:40:53.456Z"
+  },
+  {
+    "title": {
+      "en": "Shapes around us",
+      "bn": "আমাদের চারপাশে আকৃতি"
+    },
+    "summary": {
+      "en": "Meet circles, triangles and quadrilaterals, then build and trace them.",
+      "bn": "বৃত্ত, ত্রিভুজ আর চতুর্ভুজের সঙ্গে পরিচিত হও, তারপর সাজাও ও ট্রেস করো।"
+    },
+    "id": "6af6d856ea4f67e511c1ff96",
+    "classLevelId": "play",
+    "parentId": null,
+    "slug": "shapes",
+    "icon": "🔷",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:28:54.057Z",
+    "updatedAt": "2026-11-15T06:40:55.280Z"
+  },
+  {
+    "title": {
+      "en": "Time and money",
+      "bn": "সময় ও টাকা"
+    },
+    "summary": {
+      "en": "Learn the parts of the day, read o'clock times and use Taka coins.",
+      "bn": "দিনের অংশ, ঘড়ির সময় আর টাকার কয়েন ব্যবহার শিখি।"
+    },
+    "id": "6af6d858ea4f67e511c1ff9b",
+    "classLevelId": "play",
+    "parentId": null,
+    "slug": "time-money",
+    "icon": "🕒",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:28:56.113Z",
+    "updatedAt": "2026-11-15T06:40:57.199Z"
+  },
+  {
+    "title": {
+      "en": "Counting to 20",
+      "bn": "২০ পর্যন্ত গোনা"
+    },
+    "summary": {
+      "en": "Count objects up to 20 and build teen numbers.",
+      "bn": "২০ পর্যন্ত বস্তু গুনি আর কিশোর সংখ্যা তৈরি করি।"
+    },
+    "id": "6af6d876ea4f67e511c1ffdc",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "counting-20",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:26.026Z",
+    "updatedAt": "2026-11-15T06:41:20.867Z"
+  },
+  {
+    "title": {
+      "en": "Numbers to 100",
+      "bn": "১০০ পর্যন্ত সংখ্যা"
+    },
+    "summary": {
+      "en": "Read, write and skip-count numbers up to 100.",
+      "bn": "১০০ পর্যন্ত সংখ্যা পড়ি, লিখি আর লাফিয়ে গুনি।"
+    },
+    "id": "6af6d878ea4f67e511c1ffe0",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "numbers-1-100",
+    "icon": "💯",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:28.295Z",
+    "updatedAt": "2026-11-15T06:41:22.305Z"
+  },
+  {
+    "title": {
+      "en": "Before, after and between",
+      "bn": "আগে, পরে ও মাঝে"
+    },
+    "summary": {
+      "en": "Find the numbers around a given number.",
+      "bn": "একটি সংখ্যার আশপাশের সংখ্যা খুঁজি।"
+    },
+    "id": "6af6d87aea4f67e511c1ffe4",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "before-after-between",
+    "icon": "↔️",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:30.043Z",
+    "updatedAt": "2026-11-15T06:41:23.746Z"
+  },
+  {
+    "title": {
+      "en": "More, less and equal",
+      "bn": "বেশি, কম ও সমান"
+    },
+    "summary": {
+      "en": "Compare groups and numbers with >, < and =.",
+      "bn": ">, < আর = দিয়ে দল ও সংখ্যা তুলনা করি।"
+    },
+    "id": "6af6d87bea4f67e511c1ffe8",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "compare-numbers",
+    "icon": "⚖️",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:31.688Z",
+    "updatedAt": "2026-11-15T06:41:25.204Z"
+  },
+  {
+    "title": {
+      "en": "Ordering numbers",
+      "bn": "সংখ্যা সাজানো"
+    },
+    "summary": {
+      "en": "Arrange numbers from smallest to biggest.",
+      "bn": "ছোট থেকে বড় ক্রমে সংখ্যা সাজাই।"
+    },
+    "id": "6af6d87dea4f67e511c1ffec",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "order-numbers",
+    "icon": "🚂",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:33.229Z",
+    "updatedAt": "2026-11-15T06:41:26.643Z"
+  },
+  {
+    "title": {
+      "en": "Addition with objects",
+      "bn": "বস্তু দিয়ে যোগ"
+    },
+    "summary": {
+      "en": "Join groups and add numbers up to 10.",
+      "bn": "দল মিলিয়ে ১০ পর্যন্ত যোগ করি।"
+    },
+    "id": "6af6d87eea4f67e511c1fff0",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "addition-objects-10",
+    "icon": "➕",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:34.560Z",
+    "updatedAt": "2026-11-15T06:41:28.069Z"
+  },
+  {
+    "title": {
+      "en": "Subtraction with objects",
+      "bn": "বস্তু দিয়ে বিয়োগ"
+    },
+    "summary": {
+      "en": "Take away objects and count what remains.",
+      "bn": "বস্তু সরিয়ে বাকিগুলো গুনি।"
+    },
+    "id": "6af6d880ea4f67e511c1fff4",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "subtraction-objects-10",
+    "icon": "➖",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:36.109Z",
+    "updatedAt": "2026-11-15T06:41:29.479Z"
+  },
+  {
+    "title": {
+      "en": "Two-digit addition",
+      "bn": "দুই অঙ্কের যোগ"
+    },
+    "summary": {
+      "en": "Add tens and ones with blocks and jumps.",
+      "bn": "ব্লক আর লাফ দিয়ে দশক-একক যোগ করি।"
+    },
+    "id": "6af6d881ea4f67e511c1fff8",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "two-digit-addition",
+    "icon": "🧱",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:37.756Z",
+    "updatedAt": "2026-11-15T06:41:30.899Z"
+  },
+  {
+    "title": {
+      "en": "Tens and ones",
+      "bn": "দশক ও একক"
+    },
+    "summary": {
+      "en": "See what each digit means in a two-digit number.",
+      "bn": "দুই অঙ্কের সংখ্যায় প্রতিটি অঙ্কের মান দেখি।"
+    },
+    "id": "6af6d883ea4f67e511c1fffc",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "tens-ones",
+    "icon": "🔟",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:39.399Z",
+    "updatedAt": "2026-11-15T06:41:32.302Z"
+  },
+  {
+    "title": {
+      "en": "Measuring",
+      "bn": "পরিমাপ"
+    },
+    "summary": {
+      "en": "Measure length, weight and capacity.",
+      "bn": "দৈর্ঘ্য, ওজন আর ধারণক্ষমতা মাপি।"
+    },
+    "id": "6af6d885ea4f67e511c20000",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "measuring",
+    "icon": "📏",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:40.873Z",
+    "updatedAt": "2026-11-15T06:41:33.772Z"
+  },
+  {
+    "title": {
+      "en": "Shapes",
+      "bn": "আকৃতি"
+    },
+    "summary": {
+      "en": "Recognise shapes and their sides and corners.",
+      "bn": "আকৃতি, বাহু আর কোণা চিনি।"
+    },
+    "id": "6af6d886ea4f67e511c20004",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "shapes",
+    "icon": "🔺",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:42.857Z",
+    "updatedAt": "2026-11-15T06:41:35.182Z"
+  },
+  {
+    "title": {
+      "en": "Patterns",
+      "bn": "নকশা"
+    },
+    "summary": {
+      "en": "Continue colour, shape and number patterns.",
+      "bn": "রং, আকৃতি আর সংখ্যার নকশা চালিয়ে যাই।"
+    },
+    "id": "6af6d889ea4f67e511c20008",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "patterns",
+    "icon": "🔁",
+    "order": 12,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:44.952Z",
+    "updatedAt": "2026-11-15T06:41:36.603Z"
+  },
+  {
+    "title": {
+      "en": "Time",
+      "bn": "সময়"
+    },
+    "summary": {
+      "en": "Days of the week, day/night and o'clock times.",
+      "bn": "সপ্তাহের দিন, দিন-রাত আর ঘণ্টার সময়।"
+    },
+    "id": "6af6d88aea4f67e511c2000c",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "time",
+    "icon": "🕐",
+    "order": 13,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:46.494Z",
+    "updatedAt": "2026-11-15T06:41:38.138Z"
+  },
+  {
+    "title": {
+      "en": "Money",
+      "bn": "টাকা"
+    },
+    "summary": {
+      "en": "Recognise coins and notes and make amounts.",
+      "bn": "কয়েন-নোট চিনি আর টাকার পরিমাণ বানাই।"
+    },
+    "id": "6af6d88cea4f67e511c20010",
+    "classLevelId": "nursery",
+    "parentId": null,
+    "slug": "money",
+    "icon": "💰",
+    "order": 14,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:29:48.241Z",
+    "updatedAt": "2026-11-15T06:41:39.577Z"
+  },
+  {
+    "title": {
+      "en": "Comparison",
+      "bn": "তুলনা"
+    },
+    "summary": {
+      "en": "Compare size, length and quantity.",
+      "bn": "আকার, দৈর্ঘ্য ও পরিমাণ তুলনা করি।"
+    },
+    "id": "6af6d8b9ea4f67e511c20073",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-comparison",
+    "icon": "⚖️",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:33.789Z",
+    "updatedAt": "2026-11-15T06:42:15.477Z"
+  },
+  {
+    "title": {
+      "en": "Counting",
+      "bn": "গণনা"
+    },
+    "summary": {
+      "en": "Count objects and skip count.",
+      "bn": "বস্তু গুনি আর লাফিয়ে গুনি।"
+    },
+    "id": "6af6d8bbea4f67e511c20077",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-counting",
+    "icon": "🔢",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:35.435Z",
+    "updatedAt": "2026-11-15T06:42:17.008Z"
+  },
+  {
+    "title": {
+      "en": "Numbers 1 to 10",
+      "bn": "সংখ্যা ১ থেকে ১০"
+    },
+    "summary": {
+      "en": "Recognise and order numbers to ten.",
+      "bn": "দশ পর্যন্ত সংখ্যা চিনি ও সাজাই।"
+    },
+    "id": "6af6d8bdea4f67e511c2007b",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-numbers-1-10",
+    "icon": "🔟",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:37.335Z",
+    "updatedAt": "2026-11-15T06:42:18.454Z"
+  },
+  {
+    "title": {
+      "en": "Concept of addition",
+      "bn": "যোগের ধারণা"
+    },
+    "summary": {
+      "en": "Join groups and count the total.",
+      "bn": "দল মিলিয়ে মোট গুনি।"
+    },
+    "id": "6af6d8bfea4f67e511c2007f",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-addition-concept",
+    "icon": "➕",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:39.031Z",
+    "updatedAt": "2026-11-15T06:42:19.906Z"
+  },
+  {
+    "title": {
+      "en": "Concept of subtraction",
+      "bn": "বিয়োগের ধারণা"
+    },
+    "summary": {
+      "en": "Take away and count what remains.",
+      "bn": "সরিয়ে নিয়ে বাকিটা গুনি।"
+    },
+    "id": "6af6d8c0ea4f67e511c20083",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-subtraction-concept",
+    "icon": "➖",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:40.677Z",
+    "updatedAt": "2026-11-15T06:42:21.322Z"
+  },
+  {
+    "title": {
+      "en": "Numbers 11 to 20",
+      "bn": "সংখ্যা ১১ থেকে ২০"
+    },
+    "summary": {
+      "en": "Teen numbers as ten plus ones.",
+      "bn": "কিশোর সংখ্যা দশ আর একক।"
+    },
+    "id": "6af6d8c2ea4f67e511c20087",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-numbers-11-20",
+    "icon": "🔢",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:42.171Z",
+    "updatedAt": "2026-11-15T06:42:22.793Z"
+  },
+  {
+    "title": {
+      "en": "Addition 11 to 20",
+      "bn": "যোগ ১১ থেকে ২০"
+    },
+    "summary": {
+      "en": "Make ten and use blocks to add.",
+      "bn": "দশ বানিয়ে ও ব্লক দিয়ে যোগ করি।"
+    },
+    "id": "6af6d8c4ea4f67e511c2008b",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-addition-11-20",
+    "icon": "➕",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:43.968Z",
+    "updatedAt": "2026-11-15T06:42:24.255Z"
+  },
+  {
+    "title": {
+      "en": "Subtraction 11 to 20",
+      "bn": "বিয়োগ ১১ থেকে ২০"
+    },
+    "summary": {
+      "en": "Take from ten and count back.",
+      "bn": "দশ থেকে নাও আর পিছিয়ে গোনো।"
+    },
+    "id": "6af6d8c5ea4f67e511c2008f",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-subtraction-11-20",
+    "icon": "➖",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:45.613Z",
+    "updatedAt": "2026-11-15T06:42:25.737Z"
+  },
+  {
+    "title": {
+      "en": "Numbers 21 to 40",
+      "bn": "সংখ্যা ২১ থেকে ৪০"
+    },
+    "summary": {
+      "en": "Read, order and compare numbers to 40.",
+      "bn": "৪০ পর্যন্ত সংখ্যা পড়ি, সাজাই ও তুলনা করি।"
+    },
+    "id": "6af6d8c7ea4f67e511c20093",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-numbers-21-40",
+    "icon": "🔢",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:47.193Z",
+    "updatedAt": "2026-11-15T06:42:27.197Z"
+  },
+  {
+    "title": {
+      "en": "Place value",
+      "bn": "স্থানীয় মান"
+    },
+    "summary": {
+      "en": "Tens and ones decide each digit's value.",
+      "bn": "দশক ও একক প্রতিটি অঙ্কের মান ঠিক করে।"
+    },
+    "id": "6af6d8c9ea4f67e511c20097",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-place-value",
+    "icon": "🧱",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:48.985Z",
+    "updatedAt": "2026-11-15T06:42:28.675Z"
+  },
+  {
+    "title": {
+      "en": "Let us do (practice)",
+      "bn": "চলো করি (অনুশীলন)"
+    },
+    "summary": {
+      "en": "Mixed practice with a spinner and error hunt.",
+      "bn": "চাকা আর ভুল-খোঁজা দিয়ে মিশ্র অনুশীলন।"
+    },
+    "id": "6af6d8caea4f67e511c2009b",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-practice-1",
+    "icon": "🎯",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:50.857Z",
+    "updatedAt": "2026-11-15T06:42:30.157Z"
+  },
+  {
+    "title": {
+      "en": "Geometry",
+      "bn": "জ্যামিতি"
+    },
+    "summary": {
+      "en": "Shapes, solids and their properties.",
+      "bn": "আকৃতি, ঘনবস্তু আর তাদের ধর্ম।"
+    },
+    "id": "6af6d8ccea4f67e511c2009f",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-geometry",
+    "icon": "🔺",
+    "order": 12,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:52.407Z",
+    "updatedAt": "2026-11-15T06:42:31.585Z"
+  },
+  {
+    "title": {
+      "en": "Pattern",
+      "bn": "ধারা"
+    },
+    "summary": {
+      "en": "Continue colour, shape and number patterns.",
+      "bn": "রং, আকৃতি ও সংখ্যার ধারা চালিয়ে যাই।"
+    },
+    "id": "6af6d8ceea4f67e511c200a3",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-pattern",
+    "icon": "🔁",
+    "order": 13,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:54.043Z",
+    "updatedAt": "2026-11-15T06:42:33.107Z"
+  },
+  {
+    "title": {
+      "en": "Numbers 41 to 100",
+      "bn": "সংখ্যা ৪১ থেকে ১০০"
+    },
+    "summary": {
+      "en": "Read, build and compare big numbers.",
+      "bn": "বড় সংখ্যা পড়ি, বানাই ও তুলনা করি।"
+    },
+    "id": "6af6d8cfea4f67e511c200a7",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-numbers-41-100",
+    "icon": "💯",
+    "order": 14,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:55.690Z",
+    "updatedAt": "2026-11-15T06:42:34.619Z"
+  },
+  {
+    "title": {
+      "en": "Addition",
+      "bn": "যোগ"
+    },
+    "summary": {
+      "en": "Column addition with and without carry.",
+      "bn": "হাতে রাখা সহ ও ছাড়া কলাম যোগ।"
+    },
+    "id": "6af6d8d1ea4f67e511c200ab",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-addition",
+    "icon": "➕",
+    "order": 15,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:57.333Z",
+    "updatedAt": "2026-11-15T06:42:36.057Z"
+  },
+  {
+    "title": {
+      "en": "Subtraction",
+      "bn": "বিয়োগ"
+    },
+    "summary": {
+      "en": "Column subtraction with and without borrow.",
+      "bn": "ধার নেওয়া সহ ও ছাড়া কলাম বিয়োগ।"
+    },
+    "id": "6af6d8d2ea4f67e511c200af",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-subtraction",
+    "icon": "➖",
+    "order": 16,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:30:58.760Z",
+    "updatedAt": "2026-11-15T06:42:37.522Z"
+  },
+  {
+    "title": {
+      "en": "Bangladeshi currency",
+      "bn": "বাংলাদেশি মুদ্রা"
+    },
+    "summary": {
+      "en": "Coins, notes, amounts and change.",
+      "bn": "কয়েন, নোট, পরিমাণ আর ফেরত।"
+    },
+    "id": "6af6d8d4ea4f67e511c200b3",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-currency",
+    "icon": "💰",
+    "order": 17,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:00.418Z",
+    "updatedAt": "2026-11-15T06:42:39.056Z"
+  },
+  {
+    "title": {
+      "en": "Let us do (practice)",
+      "bn": "চলো করি (অনুশীলন)"
+    },
+    "summary": {
+      "en": "A review quest and a mistake hunt.",
+      "bn": "পুনরালোচনা অভিযান আর ভুল-খোঁজা।"
+    },
+    "id": "6af6d8d6ea4f67e511c200b7",
+    "classLevelId": "class-1",
+    "parentId": null,
+    "slug": "c1-practice-2",
+    "icon": "🎯",
+    "order": 18,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:02.063Z",
+    "updatedAt": "2026-11-15T06:42:40.511Z"
+  },
+  {
+    "title": {
+      "en": "Numbers and place values",
+      "bn": "সংখ্যা ও স্থানীয় মান"
+    },
+    "summary": {
+      "en": "Read, compare and place two-digit numbers.",
+      "bn": "দুই অঙ্কের সংখ্যা পড়ি, তুলনা করি ও স্থাপন করি।"
+    },
+    "id": "6af6d8ebea4f67e511c200e5",
+    "classLevelId": "class-2",
+    "parentId": null,
+    "slug": "c2-numbers-place-values",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:23.803Z",
+    "updatedAt": "2026-11-15T06:42:57.493Z"
+  },
+  {
+    "title": {
+      "en": "Addition and subtraction",
+      "bn": "যোগ ও বিয়োগ"
+    },
+    "summary": {
+      "en": "Add and subtract with lines, blocks and fact families.",
+      "bn": "রেখা, ব্লক আর তথ্য পরিবার দিয়ে যোগ-বিয়োগ করি।"
+    },
+    "id": "6af6d8efea4f67e511c200ee",
+    "classLevelId": "class-2",
+    "parentId": null,
+    "slug": "c2-add-subtract",
+    "icon": "➕",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:27.768Z",
+    "updatedAt": "2026-11-15T06:43:00.688Z"
+  },
+  {
+    "title": {
+      "en": "Multiplication",
+      "bn": "গুণ"
+    },
+    "summary": {
+      "en": "Equal groups and arrays.",
+      "bn": "সমান দল আর অ্যারে।"
+    },
+    "id": "6af6d8f2ea4f67e511c200f6",
+    "classLevelId": "class-2",
+    "parentId": null,
+    "slug": "c2-multiplication",
+    "icon": "✖️",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:30.747Z",
+    "updatedAt": "2026-11-15T06:43:03.523Z"
+  },
+  {
+    "title": {
+      "en": "Geometric shapes and patterns",
+      "bn": "জ্যামিতিক আকৃতি ও নকশা"
+    },
+    "summary": {
+      "en": "Shape properties and pattern building.",
+      "bn": "আকৃতির ধর্ম আর নকশা তৈরি।"
+    },
+    "id": "6af6d8f4ea4f67e511c200f9",
+    "classLevelId": "class-2",
+    "parentId": null,
+    "slug": "c2-shapes-patterns",
+    "icon": "🔺",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:31.983Z",
+    "updatedAt": "2026-11-15T06:43:04.591Z"
+  },
+  {
+    "title": {
+      "en": "Measurement",
+      "bn": "পরিমাপ"
+    },
+    "summary": {
+      "en": "Length, weight, liquid and time.",
+      "bn": "দৈর্ঘ্য, ওজন, তরল আর সময়।"
+    },
+    "id": "6af6d8f5ea4f67e511c200fd",
+    "classLevelId": "class-2",
+    "parentId": null,
+    "slug": "c2-measurement",
+    "icon": "📏",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:33.502Z",
+    "updatedAt": "2026-11-15T06:43:06.024Z"
+  },
+  {
+    "title": {
+      "en": "Currency",
+      "bn": "মুদ্রা"
+    },
+    "summary": {
+      "en": "Notes, coins and shopping.",
+      "bn": "নোট, কয়েন আর কেনাকাটা।"
+    },
+    "id": "6af6d8f8ea4f67e511c20103",
+    "classLevelId": "class-2",
+    "parentId": null,
+    "slug": "c2-currency",
+    "icon": "💰",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:36.302Z",
+    "updatedAt": "2026-11-15T06:43:08.236Z"
+  },
+  {
+    "title": {
+      "en": "Data",
+      "bn": "তথ্য"
+    },
+    "summary": {
+      "en": "Collect and arrange data.",
+      "bn": "তথ্য সংগ্রহ ও সাজাই।"
+    },
+    "id": "6af6d8f9ea4f67e511c20106",
+    "classLevelId": "class-2",
+    "parentId": null,
+    "slug": "c2-data",
+    "icon": "📊",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:31:37.843Z",
+    "updatedAt": "2026-11-15T06:43:09.310Z"
+  },
+  {
+    "title": {
+      "en": "Numbers",
+      "bn": "সংখ্যা"
+    },
+    "summary": {
+      "en": "Four-digit place value and comparison.",
+      "bn": "চার অঙ্কের স্থানীয় মান ও তুলনা।"
+    },
+    "id": "6af6d91cea4f67e511c2014d",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-numbers",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:12.593Z",
+    "updatedAt": "2026-11-15T06:43:35.832Z"
+  },
+  {
+    "title": {
+      "en": "Addition",
+      "bn": "যোগ"
+    },
+    "summary": {
+      "en": "Column addition with carrying.",
+      "bn": "হাতে রাখা দিয়ে স্তম্ভ যোগ।"
+    },
+    "id": "6af6d91eea4f67e511c20151",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-addition",
+    "icon": "➕",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:14.534Z",
+    "updatedAt": "2026-11-15T06:43:37.337Z"
+  },
+  {
+    "title": {
+      "en": "Subtraction",
+      "bn": "বিয়োগ"
+    },
+    "summary": {
+      "en": "Column subtraction with borrowing.",
+      "bn": "ধার নিয়ে স্তম্ভ বিয়োগ।"
+    },
+    "id": "6af6d920ea4f67e511c20154",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-subtraction",
+    "icon": "➖",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:16.312Z",
+    "updatedAt": "2026-11-15T06:43:38.509Z"
+  },
+  {
+    "title": {
+      "en": "Addition and subtraction relation",
+      "bn": "যোগ-বিয়োগের সম্পর্ক"
+    },
+    "summary": {
+      "en": "Fact families and missing numbers.",
+      "bn": "তথ্য পরিবার ও অজানা সংখ্যা।"
+    },
+    "id": "6af6d921ea4f67e511c20157",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-add-sub-relation",
+    "icon": "🔁",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:17.837Z",
+    "updatedAt": "2026-11-15T06:43:39.601Z"
+  },
+  {
+    "title": {
+      "en": "Multiplication",
+      "bn": "গুণ"
+    },
+    "summary": {
+      "en": "Arrays, tables and place-value products.",
+      "bn": "অ্যারে, নামতা ও স্থানীয় মানের গুণফল।"
+    },
+    "id": "6af6d923ea4f67e511c2015a",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-multiplication",
+    "icon": "✖️",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:19.070Z",
+    "updatedAt": "2026-11-15T06:43:40.673Z"
+  },
+  {
+    "title": {
+      "en": "Division",
+      "bn": "ভাগ"
+    },
+    "summary": {
+      "en": "Sharing, grouping and remainders.",
+      "bn": "ভাগ করা, দল বাঁধা ও ভাগশেষ।"
+    },
+    "id": "6af6d924ea4f67e511c2015d",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-division",
+    "icon": "➗",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:20.818Z",
+    "updatedAt": "2026-11-15T06:43:41.912Z"
+  },
+  {
+    "title": {
+      "en": "Multiplication and division relation",
+      "bn": "গুণ-ভাগের সম্পর্ক"
+    },
+    "summary": {
+      "en": "Inverse facts and missing factors.",
+      "bn": "বিপরীত তথ্য ও অজানা গুণনীয়ক।"
+    },
+    "id": "6af6d926ea4f67e511c20160",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-mul-div-relation",
+    "icon": "🔄",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:21.957Z",
+    "updatedAt": "2026-11-15T06:43:42.989Z"
+  },
+  {
+    "title": {
+      "en": "Four operations problems",
+      "bn": "চার কাজের সমস্যা"
+    },
+    "summary": {
+      "en": "Choose the operation for a story.",
+      "bn": "গল্পের জন্য কাজ বেছে নাও।"
+    },
+    "id": "6af6d927ea4f67e511c20163",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-four-operations",
+    "icon": "🧩",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:22.929Z",
+    "updatedAt": "2026-11-15T06:43:44.107Z"
+  },
+  {
+    "title": {
+      "en": "Fractions",
+      "bn": "ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Equal parts of a whole and of a group.",
+      "bn": "সম্পূর্ণ ও দলের সমান ভাগ।"
+    },
+    "id": "6af6d928ea4f67e511c20166",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-fractions",
+    "icon": "🍕",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:24.622Z",
+    "updatedAt": "2026-11-15T06:43:45.209Z"
+  },
+  {
+    "title": {
+      "en": "Bangladeshi currency",
+      "bn": "বাংলাদেশি মুদ্রা"
+    },
+    "summary": {
+      "en": "Bills, change and price comparison.",
+      "bn": "বিল, ফেরত ও দাম তুলনা।"
+    },
+    "id": "6af6d92aea4f67e511c20169",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-currency",
+    "icon": "💰",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:26.164Z",
+    "updatedAt": "2026-11-15T06:43:46.337Z"
+  },
+  {
+    "title": {
+      "en": "Measurement",
+      "bn": "পরিমাপ"
+    },
+    "summary": {
+      "en": "Length, time and perimeter.",
+      "bn": "দৈর্ঘ্য, সময় ও পরিসীমা।"
+    },
+    "id": "6af6d92cea4f67e511c2016c",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-measurement",
+    "icon": "📏",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:28.612Z",
+    "updatedAt": "2026-11-15T06:43:47.502Z"
+  },
+  {
+    "title": {
+      "en": "Geometry",
+      "bn": "জ্যামিতি"
+    },
+    "summary": {
+      "en": "Lines, angles and symmetry.",
+      "bn": "রেখা, কোণ ও প্রতিসাম্য।"
+    },
+    "id": "6af6d92dea4f67e511c2016f",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-geometry",
+    "icon": "📐",
+    "order": 12,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:29.763Z",
+    "updatedAt": "2026-11-15T06:43:48.637Z"
+  },
+  {
+    "title": {
+      "en": "Data collection and arrangement",
+      "bn": "তথ্য সংগ্রহ ও সাজানো"
+    },
+    "summary": {
+      "en": "Bar graphs, pictographs and questions.",
+      "bn": "বার গ্রাফ, চিত্রলেখ ও প্রশ্ন।"
+    },
+    "id": "6af6d92fea4f67e511c20172",
+    "classLevelId": "class-3",
+    "parentId": null,
+    "slug": "c3-data",
+    "icon": "📊",
+    "order": 13,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:32:30.997Z",
+    "updatedAt": "2026-11-15T06:43:49.719Z"
+  },
+  {
+    "title": {
+      "en": "Numbers and place value",
+      "bn": "সংখ্যা ও স্থানীয় মান"
+    },
+    "summary": {
+      "en": "Large numbers with Bangla grouping.",
+      "bn": "বাংলা গ্রুপিংসহ বড় সংখ্যা।"
+    },
+    "id": "6af6d955ea4f67e511c201bd",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-numbers-place-value",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:09.141Z",
+    "updatedAt": "2026-11-15T06:44:17.763Z"
+  },
+  {
+    "title": {
+      "en": "Addition and subtraction",
+      "bn": "যোগ ও বিয়োগ"
+    },
+    "summary": {
+      "en": "Multi-carry, multi-borrow and estimation.",
+      "bn": "একাধিক হাত, ধার ও আন্দাজ।"
+    },
+    "id": "6af6d956ea4f67e511c201c0",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-add-subtract",
+    "icon": "➕",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:10.786Z",
+    "updatedAt": "2026-11-15T06:44:18.838Z"
+  },
+  {
+    "title": {
+      "en": "Multiplication",
+      "bn": "গুণ"
+    },
+    "summary": {
+      "en": "Area model, column method and place shifts.",
+      "bn": "ক্ষেত্রফল মডেল, স্তম্ভ পদ্ধতি ও স্থান সরণ।"
+    },
+    "id": "6af6d958ea4f67e511c201c3",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-multiplication",
+    "icon": "✖️",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:12.020Z",
+    "updatedAt": "2026-11-15T06:44:19.913Z"
+  },
+  {
+    "title": {
+      "en": "Division",
+      "bn": "ভাগ"
+    },
+    "summary": {
+      "en": "Long division and checking.",
+      "bn": "দীর্ঘ ভাগ ও মিলানো।"
+    },
+    "id": "6af6d959ea4f67e511c201c6",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-division",
+    "icon": "➗",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:13.086Z",
+    "updatedAt": "2026-11-15T06:44:21.023Z"
+  },
+  {
+    "title": {
+      "en": "Mathematical sentence",
+      "bn": "গাণিতিক বাক্য"
+    },
+    "summary": {
+      "en": "Equations, balance and operation order.",
+      "bn": "সমীকরণ, ভারসাম্য ও কাজের ক্রম।"
+    },
+    "id": "6af6d95bea4f67e511c201c9",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-math-sentence",
+    "icon": "⚖️",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:14.899Z",
+    "updatedAt": "2026-11-15T06:44:22.143Z"
+  },
+  {
+    "title": {
+      "en": "Multiples and factors",
+      "bn": "গুণিতক ও গুণনীয়ক"
+    },
+    "summary": {
+      "en": "Multiples, factors and primes.",
+      "bn": "গুণিতক, গুণনীয়ক ও মৌলিক।"
+    },
+    "id": "6af6d95cea4f67e511c201cc",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-multiples-factors",
+    "icon": "🧮",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:16.442Z",
+    "updatedAt": "2026-11-15T06:44:23.206Z"
+  },
+  {
+    "title": {
+      "en": "Common fractions",
+      "bn": "সাধারণ ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Equivalent, compare, add and mixed numbers.",
+      "bn": "সমান, তুলনা, যোগ ও মিশ্র সংখ্যা।"
+    },
+    "id": "6af6d95eea4f67e511c201cf",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-common-fractions",
+    "icon": "🍕",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:17.983Z",
+    "updatedAt": "2026-11-15T06:44:24.255Z"
+  },
+  {
+    "title": {
+      "en": "Decimal fractions",
+      "bn": "দশমিক ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Tenths, hundredths and decimal operations.",
+      "bn": "দশমিক, শতাংশ ও দশমিক কাজ।"
+    },
+    "id": "6af6d95fea4f67e511c201d2",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-decimals",
+    "icon": "🔟",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:19.510Z",
+    "updatedAt": "2026-11-15T06:44:25.352Z"
+  },
+  {
+    "title": {
+      "en": "Measurement",
+      "bn": "পরিমাপ"
+    },
+    "summary": {
+      "en": "Length, time, perimeter and area.",
+      "bn": "দৈর্ঘ্য, সময়, পরিসীমা ও ক্ষেত্রফল।"
+    },
+    "id": "6af6d960ea4f67e511c201d5",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-measurement",
+    "icon": "📏",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:20.862Z",
+    "updatedAt": "2026-11-15T06:44:26.385Z"
+  },
+  {
+    "title": {
+      "en": "Geometry",
+      "bn": "জ্যামিতি"
+    },
+    "summary": {
+      "en": "Angles, triangles and circles.",
+      "bn": "কোণ, ত্রিভুজ ও বৃত্ত।"
+    },
+    "id": "6af6d962ea4f67e511c201d8",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-geometry",
+    "icon": "📐",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:22.199Z",
+    "updatedAt": "2026-11-15T06:44:27.459Z"
+  },
+  {
+    "title": {
+      "en": "Data collection and arrangement",
+      "bn": "তথ্য সংগ্রহ ও সাজানো"
+    },
+    "summary": {
+      "en": "Frequency tables, bar graphs and mean.",
+      "bn": "পরিসংখ্যান সারণি, বার গ্রাফ ও গড়।"
+    },
+    "id": "6af6d963ea4f67e511c201db",
+    "classLevelId": "class-4",
+    "parentId": null,
+    "slug": "c4-data",
+    "icon": "📊",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:23.433Z",
+    "updatedAt": "2026-11-15T06:44:28.531Z"
+  },
+  {
+    "title": {
+      "en": "Multiplication and Division",
+      "bn": "গুণ ও ভাগ"
+    },
+    "summary": {
+      "en": "Multiplication and Division",
+      "bn": "গুণ ও ভাগ"
+    },
+    "id": "6af6d987ea4f67e511c2022b",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-01-multiplication-division",
+    "icon": "✖️",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:33:59.417Z",
+    "updatedAt": "2026-11-15T06:44:59.578Z"
+  },
+  {
+    "title": {
+      "en": "Mathematical Sentences",
+      "bn": "গাণিতিক বাক্য"
+    },
+    "summary": {
+      "en": "Mathematical Sentences",
+      "bn": "গাণিতিক বাক্য"
+    },
+    "id": "6af6d988ea4f67e511c2022e",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-02-mathematical-sentences",
+    "icon": "⚖️",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:00.421Z",
+    "updatedAt": "2026-11-15T06:45:00.970Z"
+  },
+  {
+    "title": {
+      "en": "Multiples and Factors",
+      "bn": "গুণিতক ও গুণনীয়ক"
+    },
+    "summary": {
+      "en": "Multiples and Factors",
+      "bn": "গুণিতক ও গুণনীয়ক"
+    },
+    "id": "6af6d98aea4f67e511c20231",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-03-multiples-factors",
+    "icon": "🧮",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:01.986Z",
+    "updatedAt": "2026-11-15T06:45:02.089Z"
+  },
+  {
+    "title": {
+      "en": "Common Fractions",
+      "bn": "সাধারণ ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Common Fractions",
+      "bn": "সাধারণ ভগ্নাংশ"
+    },
+    "id": "6af6d98bea4f67e511c20234",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-04-common-fractions",
+    "icon": "🍕",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:03.838Z",
+    "updatedAt": "2026-11-15T06:45:03.336Z"
+  },
+  {
+    "title": {
+      "en": "Decimal Fractions",
+      "bn": "দশমিক ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Decimal Fractions",
+      "bn": "দশমিক ভগ্নাংশ"
+    },
+    "id": "6af6d98dea4f67e511c20237",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-05-decimal-fractions",
+    "icon": "🔟",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:05.173Z",
+    "updatedAt": "2026-11-15T06:45:04.643Z"
+  },
+  {
+    "title": {
+      "en": "Percentage",
+      "bn": "শতকরা"
+    },
+    "summary": {
+      "en": "Percentage",
+      "bn": "শতকরা"
+    },
+    "id": "6af6d98fea4f67e511c2023a",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-06-percentage",
+    "icon": "％",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:07.067Z",
+    "updatedAt": "2026-11-15T06:45:05.720Z"
+  },
+  {
+    "title": {
+      "en": "Average",
+      "bn": "গড়"
+    },
+    "summary": {
+      "en": "Average",
+      "bn": "গড়"
+    },
+    "id": "6af6d990ea4f67e511c2023d",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-07-average",
+    "icon": "📊",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:08.770Z",
+    "updatedAt": "2026-11-15T06:45:06.805Z"
+  },
+  {
+    "title": {
+      "en": "Measurement",
+      "bn": "পরিমাপ"
+    },
+    "summary": {
+      "en": "Measurement",
+      "bn": "পরিমাপ"
+    },
+    "id": "6af6d992ea4f67e511c20240",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-08-measurement",
+    "icon": "📏",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:10.312Z",
+    "updatedAt": "2026-11-15T06:45:07.943Z"
+  },
+  {
+    "title": {
+      "en": "Geometry",
+      "bn": "জ্যামিতি"
+    },
+    "summary": {
+      "en": "Geometry",
+      "bn": "জ্যামিতি"
+    },
+    "id": "6af6d993ea4f67e511c20243",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-09-geometry",
+    "icon": "📐",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:11.783Z",
+    "updatedAt": "2026-11-15T06:45:09.094Z"
+  },
+  {
+    "title": {
+      "en": "Data Arrangement",
+      "bn": "তথ্য সাজানো"
+    },
+    "summary": {
+      "en": "Data Arrangement",
+      "bn": "তথ্য সাজানো"
+    },
+    "id": "6af6d995ea4f67e511c20246",
+    "classLevelId": "class-5",
+    "parentId": null,
+    "slug": "c5-10-data-arrangement",
+    "icon": "📈",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:13.089Z",
+    "updatedAt": "2026-11-15T06:45:10.206Z"
+  },
+  {
+    "title": {
+      "en": "Natural Numbers and Fractions",
+      "bn": "স্বাভাবিক সংখ্যা ও ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Natural Numbers and Fractions",
+      "bn": "স্বাভাবিক সংখ্যা ও ভগ্নাংশ"
+    },
+    "id": "6af6d9baea4f67e511c2029d",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-01-natural-numbers-fractions",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:50.819Z",
+    "updatedAt": "2026-11-13T09:44:53.900Z"
+  },
+  {
+    "title": {
+      "en": "Ratios and Percentages",
+      "bn": "অনুপাত ও শতকরা"
+    },
+    "summary": {
+      "en": "Ratios and Percentages",
+      "bn": "অনুপাত ও শতকরা"
+    },
+    "id": "6af6d9bcea4f67e511c202a0",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-02-ratios-percentages",
+    "icon": "％",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:52.154Z",
+    "updatedAt": "2026-11-13T09:44:55.130Z"
+  },
+  {
+    "title": {
+      "en": "Integers",
+      "bn": "পূর্ণসংখ্যা"
+    },
+    "summary": {
+      "en": "Integers",
+      "bn": "পূর্ণসংখ্যা"
+    },
+    "id": "6af6d9bdea4f67e511c202a3",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-03-integers",
+    "icon": "➕",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:53.368Z",
+    "updatedAt": "2026-11-13T09:44:56.598Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশি"
+    },
+    "summary": {
+      "en": "Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশি"
+    },
+    "id": "6af6d9beea4f67e511c202a6",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-04-algebraic-expressions",
+    "icon": "🧮",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:54.621Z",
+    "updatedAt": "2026-11-13T09:44:57.760Z"
+  },
+  {
+    "title": {
+      "en": "Simple Equations",
+      "bn": "সরল সমীকরণ"
+    },
+    "summary": {
+      "en": "Simple Equations",
+      "bn": "সরল সমীকরণ"
+    },
+    "id": "6af6d9c0ea4f67e511c202a9",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-05-simple-equations",
+    "icon": "⚖️",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:56.059Z",
+    "updatedAt": "2026-11-13T09:44:58.933Z"
+  },
+  {
+    "title": {
+      "en": "Basic Concepts of Geometry",
+      "bn": "জ্যামিতির মৌলিক ধারণা"
+    },
+    "summary": {
+      "en": "Basic Concepts of Geometry",
+      "bn": "জ্যামিতির মৌলিক ধারণা"
+    },
+    "id": "6af6d9c1ea4f67e511c202ac",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-06-basic-geometry",
+    "icon": "📐",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:57.293Z",
+    "updatedAt": "2026-11-13T09:45:00.172Z"
+  },
+  {
+    "title": {
+      "en": "Practical Geometry",
+      "bn": "ব্যবহারিক জ্যামিতি"
+    },
+    "summary": {
+      "en": "Practical Geometry",
+      "bn": "ব্যবহারিক জ্যামিতি"
+    },
+    "id": "6af6d9c2ea4f67e511c202af",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-07-practical-geometry",
+    "icon": "🧭",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:58.526Z",
+    "updatedAt": "2026-11-13T09:45:01.436Z"
+  },
+  {
+    "title": {
+      "en": "Information and Data",
+      "bn": "তথ্য ও উপাত্ত"
+    },
+    "summary": {
+      "en": "Information and Data",
+      "bn": "তথ্য ও উপাত্ত"
+    },
+    "id": "6af6d9c3ea4f67e511c202b2",
+    "classLevelId": "class-6",
+    "parentId": null,
+    "slug": "c6-08-information-data",
+    "icon": "📊",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:34:59.658Z",
+    "updatedAt": "2026-11-13T09:45:02.661Z"
+  },
+  {
+    "title": {
+      "en": "Integers",
+      "bn": "পূর্ণসংখ্যা"
+    },
+    "summary": {
+      "en": "Integers",
+      "bn": "পূর্ণসংখ্যা"
+    },
+    "id": "6af6d9e5ea4f67e511c20302",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-01-integers",
+    "icon": "➕",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:33.168Z",
+    "updatedAt": "2026-11-13T09:45:37.589Z"
+  },
+  {
+    "title": {
+      "en": "Rational and Irrational Numbers",
+      "bn": "মূলদ ও অমূলদ সংখ্যা"
+    },
+    "summary": {
+      "en": "Rational and Irrational Numbers",
+      "bn": "মূলদ ও অমূলদ সংখ্যা"
+    },
+    "id": "6af6d9e6ea4f67e511c20305",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-02-rational-irrational",
+    "icon": "√",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:34.298Z",
+    "updatedAt": "2026-11-13T09:45:38.718Z"
+  },
+  {
+    "title": {
+      "en": "Congruence and Similarity",
+      "bn": "সর্বসমতা ও সদৃশতা"
+    },
+    "summary": {
+      "en": "Congruence and Similarity",
+      "bn": "সর্বসমতা ও সদৃশতা"
+    },
+    "id": "6af6d9e7ea4f67e511c20308",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-03-congruence-similarity",
+    "icon": "🔺",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:35.554Z",
+    "updatedAt": "2026-11-13T09:45:39.953Z"
+  },
+  {
+    "title": {
+      "en": "Multiplication and Division of Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশির গুণ ও ভাগ"
+    },
+    "summary": {
+      "en": "Multiplication and Division of Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশির গুণ ও ভাগ"
+    },
+    "id": "6af6d9e8ea4f67e511c2030b",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-04-algebraic-multiplication",
+    "icon": "✖️",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:36.783Z",
+    "updatedAt": "2026-11-13T09:45:41.188Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Fractions",
+      "bn": "বীজগাণিতিক ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Algebraic Fractions",
+      "bn": "বীজগাণিতিক ভগ্নাংশ"
+    },
+    "id": "6af6d9eaea4f67e511c2030e",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-05-algebraic-fractions",
+    "icon": "➗",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:37.999Z",
+    "updatedAt": "2026-11-13T09:45:42.421Z"
+  },
+  {
+    "title": {
+      "en": "Simple Equations",
+      "bn": "সরল সমীকরণ"
+    },
+    "summary": {
+      "en": "Simple Equations",
+      "bn": "সরল সমীকরণ"
+    },
+    "id": "6af6d9ebea4f67e511c20311",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-06-simple-equations",
+    "icon": "⚖️",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:39.245Z",
+    "updatedAt": "2026-11-13T09:45:43.656Z"
+  },
+  {
+    "title": {
+      "en": "Set",
+      "bn": "সেট"
+    },
+    "summary": {
+      "en": "Set",
+      "bn": "সেট"
+    },
+    "id": "6af6d9ecea4f67e511c20314",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-07-set",
+    "icon": "🔵",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:40.465Z",
+    "updatedAt": "2026-11-13T09:45:44.840Z"
+  },
+  {
+    "title": {
+      "en": "Quadrilateral",
+      "bn": "চতুর্ভুজ"
+    },
+    "summary": {
+      "en": "Quadrilateral",
+      "bn": "চতুর্ভুজ"
+    },
+    "id": "6af6d9edea4f67e511c20317",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-08-quadrilateral",
+    "icon": "⬛",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:41.706Z",
+    "updatedAt": "2026-11-13T09:45:46.022Z"
+  },
+  {
+    "title": {
+      "en": "Pythagoras Theorem",
+      "bn": "পিথাগোরাসের উপপাদ্য"
+    },
+    "summary": {
+      "en": "Pythagoras Theorem",
+      "bn": "পিথাগোরাসের উপপাদ্য"
+    },
+    "id": "6af6d9efea4f67e511c2031a",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-09-pythagoras",
+    "icon": "📐",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:43.558Z",
+    "updatedAt": "2026-11-13T09:45:47.257Z"
+  },
+  {
+    "title": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "summary": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "id": "6af6d9f0ea4f67e511c2031d",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-10-circle",
+    "icon": "⭕",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:44.565Z",
+    "updatedAt": "2026-11-13T09:45:48.488Z"
+  },
+  {
+    "title": {
+      "en": "Information and Data",
+      "bn": "তথ্য ও উপাত্ত"
+    },
+    "summary": {
+      "en": "Information and Data",
+      "bn": "তথ্য ও উপাত্ত"
+    },
+    "id": "6af6d9f1ea4f67e511c20320",
+    "classLevelId": "class-7",
+    "parentId": null,
+    "slug": "c7-11-information-data",
+    "icon": "📊",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:35:45.825Z",
+    "updatedAt": "2026-11-13T09:45:49.723Z"
+  },
+  {
+    "title": {
+      "en": "Patterns",
+      "bn": "নকশা / ধারা"
+    },
+    "summary": {
+      "en": "Patterns",
+      "bn": "নকশা / ধারা"
+    },
+    "id": "6af6da18ea4f67e511c20374",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-01-patterns",
+    "icon": "🔁",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:23.948Z",
+    "updatedAt": "2026-11-13T09:46:23.759Z"
+  },
+  {
+    "title": {
+      "en": "Profits",
+      "bn": "লাভ-ক্ষতি"
+    },
+    "summary": {
+      "en": "Profits",
+      "bn": "লাভ-ক্ষতি"
+    },
+    "id": "6af6da19ea4f67e511c20377",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-02-profits",
+    "icon": "💰",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:25.180Z",
+    "updatedAt": "2026-11-13T09:46:24.992Z"
+  },
+  {
+    "title": {
+      "en": "Measurement",
+      "bn": "পরিমাপ"
+    },
+    "summary": {
+      "en": "Measurement",
+      "bn": "পরিমাপ"
+    },
+    "id": "6af6da1aea4f67e511c2037a",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-03-measurement",
+    "icon": "📏",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:26.323Z",
+    "updatedAt": "2026-11-13T09:46:26.225Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Formulae and Applications",
+      "bn": "বীজগাণিতিক সূত্র ও প্রয়োগ"
+    },
+    "summary": {
+      "en": "Algebraic Formulae and Applications",
+      "bn": "বীজগাণিতিক সূত্র ও প্রয়োগ"
+    },
+    "id": "6af6da1bea4f67e511c2037d",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-04-algebraic-formulae",
+    "icon": "🧮",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:27.549Z",
+    "updatedAt": "2026-11-13T09:46:27.438Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Fractions",
+      "bn": "বীজগাণিতিক ভগ্নাংশ"
+    },
+    "summary": {
+      "en": "Algebraic Fractions",
+      "bn": "বীজগাণিতিক ভগ্নাংশ"
+    },
+    "id": "6af6da1dea4f67e511c20380",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-05-algebraic-fractions",
+    "icon": "➗",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:29.064Z",
+    "updatedAt": "2026-11-13T09:46:28.908Z"
+  },
+  {
+    "title": {
+      "en": "Simple Simultaneous Equations",
+      "bn": "সরল সহসমীকরণ"
+    },
+    "summary": {
+      "en": "Simple Simultaneous Equations",
+      "bn": "সরল সহসমীকরণ"
+    },
+    "id": "6af6da1eea4f67e511c20383",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-06-simultaneous-equations",
+    "icon": "⚖️",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:30.629Z",
+    "updatedAt": "2026-11-13T09:46:30.134Z"
+  },
+  {
+    "title": {
+      "en": "Set",
+      "bn": "সেট"
+    },
+    "summary": {
+      "en": "Set",
+      "bn": "সেট"
+    },
+    "id": "6af6da1fea4f67e511c20386",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-07-set",
+    "icon": "🔵",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:31.862Z",
+    "updatedAt": "2026-11-13T09:46:31.368Z"
+  },
+  {
+    "title": {
+      "en": "Quadrilateral",
+      "bn": "চতুর্ভুজ"
+    },
+    "summary": {
+      "en": "Quadrilateral",
+      "bn": "চতুর্ভুজ"
+    },
+    "id": "6af6da20ea4f67e511c20389",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-08-quadrilateral",
+    "icon": "⬛",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:32.891Z",
+    "updatedAt": "2026-11-13T09:46:32.604Z"
+  },
+  {
+    "title": {
+      "en": "Pythagoras Theorem",
+      "bn": "পিথাগোরাসের উপপাদ্য"
+    },
+    "summary": {
+      "en": "Pythagoras Theorem",
+      "bn": "পিথাগোরাসের উপপাদ্য"
+    },
+    "id": "6af6da22ea4f67e511c2038c",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-09-pythagoras",
+    "icon": "📐",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:34.122Z",
+    "updatedAt": "2026-11-13T09:46:33.740Z"
+  },
+  {
+    "title": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "summary": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "id": "6af6da23ea4f67e511c2038f",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-10-circle",
+    "icon": "⭕",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:35.460Z",
+    "updatedAt": "2026-11-13T09:46:34.970Z"
+  },
+  {
+    "title": {
+      "en": "Information and Data",
+      "bn": "তথ্য ও উপাত্ত"
+    },
+    "summary": {
+      "en": "Information and Data",
+      "bn": "তথ্য ও উপাত্ত"
+    },
+    "id": "6af6da25ea4f67e511c20392",
+    "classLevelId": "class-8",
+    "parentId": null,
+    "slug": "c8-11-information-data",
+    "icon": "📊",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:36:37.207Z",
+    "updatedAt": "2026-11-13T09:46:36.206Z"
+  },
+  {
+    "title": {
+      "en": "Real Numbers",
+      "bn": "বাস্তব সংখ্যা"
+    },
+    "summary": {
+      "en": "Real Numbers",
+      "bn": "বাস্তব সংখ্যা"
+    },
+    "id": "6af6da6aea4f67e511c20431",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-01-real-numbers",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:46.079Z",
+    "updatedAt": "2026-11-13T09:47:40.177Z"
+  },
+  {
+    "title": {
+      "en": "Sets and Functions",
+      "bn": "সেট ও ফাংশন"
+    },
+    "summary": {
+      "en": "Sets and Functions",
+      "bn": "সেট ও ফাংশন"
+    },
+    "id": "6af6da6bea4f67e511c20434",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-02-sets-functions",
+    "icon": "🔵",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:47.824Z",
+    "updatedAt": "2026-11-13T09:47:41.370Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশি"
+    },
+    "summary": {
+      "en": "Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশি"
+    },
+    "id": "6af6da6cea4f67e511c20437",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-03-algebraic-expressions",
+    "icon": "🧮",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:48.846Z",
+    "updatedAt": "2026-11-13T09:47:42.391Z"
+  },
+  {
+    "title": {
+      "en": "Exponents and Logarithms",
+      "bn": "সূচক ও লগারিদম"
+    },
+    "summary": {
+      "en": "Exponents and Logarithms",
+      "bn": "সূচক ও লগারিদম"
+    },
+    "id": "6af6da6eea4f67e511c2043a",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-04-exponents-logarithms",
+    "icon": "📈",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:50.293Z",
+    "updatedAt": "2026-11-13T09:47:43.472Z"
+  },
+  {
+    "title": {
+      "en": "Equations in One Variable",
+      "bn": "এক চলকবিশিষ্ট সমীকরণ"
+    },
+    "summary": {
+      "en": "Equations in One Variable",
+      "bn": "এক চলকবিশিষ্ট সমীকরণ"
+    },
+    "id": "6af6da70ea4f67e511c2043d",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-05-equations-one-variable",
+    "icon": "⚖️",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:51.937Z",
+    "updatedAt": "2026-11-13T09:47:44.699Z"
+  },
+  {
+    "title": {
+      "en": "Lines, Angles and Triangles",
+      "bn": "রেখা, কোণ ও ত্রিভুজ"
+    },
+    "summary": {
+      "en": "Lines, Angles and Triangles",
+      "bn": "রেখা, কোণ ও ত্রিভুজ"
+    },
+    "id": "6af6da71ea4f67e511c20440",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-06-lines-angles-triangles",
+    "icon": "📐",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:53.148Z",
+    "updatedAt": "2026-11-13T09:47:45.934Z"
+  },
+  {
+    "title": {
+      "en": "Practical Geometry",
+      "bn": "ব্যবহারিক জ্যামিতি"
+    },
+    "summary": {
+      "en": "Practical Geometry",
+      "bn": "ব্যবহারিক জ্যামিতি"
+    },
+    "id": "6af6da72ea4f67e511c20443",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-07-practical-geometry",
+    "icon": "🧭",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:54.263Z",
+    "updatedAt": "2026-11-13T09:47:47.167Z"
+  },
+  {
+    "title": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "summary": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "id": "6af6da73ea4f67e511c20446",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-08-circle",
+    "icon": "⭕",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:55.535Z",
+    "updatedAt": "2026-11-13T09:47:48.280Z"
+  },
+  {
+    "title": {
+      "en": "Trigonometric Ratio",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "summary": {
+      "en": "Trigonometric Ratio",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "id": "6af6da74ea4f67e511c20449",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-09-trigonometric-ratio",
+    "icon": "📐",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:56.771Z",
+    "updatedAt": "2026-11-13T09:47:49.532Z"
+  },
+  {
+    "title": {
+      "en": "Distance and Elevation",
+      "bn": "দূরত্ব ও উন্নতি"
+    },
+    "summary": {
+      "en": "Distance and Elevation",
+      "bn": "দূরত্ব ও উন্নতি"
+    },
+    "id": "6af6da76ea4f67e511c2044c",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-10-distance-elevation",
+    "icon": "🗼",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:58.003Z",
+    "updatedAt": "2026-11-13T09:47:50.767Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Ratio and Proportion",
+      "bn": "বীজগাণিতিক অনুপাত ও সমানুপাত"
+    },
+    "summary": {
+      "en": "Algebraic Ratio and Proportion",
+      "bn": "বীজগাণিতিক অনুপাত ও সমানুপাত"
+    },
+    "id": "6af6da77ea4f67e511c2044f",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-11-algebraic-ratio-proportion",
+    "icon": "➗",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:37:59.236Z",
+    "updatedAt": "2026-11-13T09:47:52.006Z"
+  },
+  {
+    "title": {
+      "en": "Simple Simultaneous Equations in Two Variables",
+      "bn": "দুই চলকবিশিষ্ট সরল সহসমীকরণ"
+    },
+    "summary": {
+      "en": "Simple Simultaneous Equations in Two Variables",
+      "bn": "দুই চলকবিশিষ্ট সরল সহসমীকরণ"
+    },
+    "id": "6af6da78ea4f67e511c20452",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-12-simultaneous-equations",
+    "icon": "🧮",
+    "order": 12,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:38:00.469Z",
+    "updatedAt": "2026-11-13T09:47:53.203Z"
+  },
+  {
+    "title": {
+      "en": "Finite Series",
+      "bn": "সসীম ধারা"
+    },
+    "summary": {
+      "en": "Finite Series",
+      "bn": "সসীম ধারা"
+    },
+    "id": "6af6da7aea4f67e511c20455",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-13-finite-series",
+    "icon": "➕",
+    "order": 13,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:38:02.425Z",
+    "updatedAt": "2026-11-13T09:47:54.384Z"
+  },
+  {
+    "title": {
+      "en": "Ratio, Similarity and Symmetry",
+      "bn": "অনুপাত, সদৃশতা ও প্রতিসমতা"
+    },
+    "summary": {
+      "en": "Ratio, Similarity and Symmetry",
+      "bn": "অনুপাত, সদৃশতা ও প্রতিসমতা"
+    },
+    "id": "6af6da7bea4f67e511c20458",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-14-ratio-similarity-symmetry",
+    "icon": "🔺",
+    "order": 14,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:38:03.558Z",
+    "updatedAt": "2026-11-13T09:47:55.614Z"
+  },
+  {
+    "title": {
+      "en": "Area Related Theorems and Constructions",
+      "bn": "ক্ষেত্রফল সম্পর্কিত উপপাদ্য ও অঙ্কন"
+    },
+    "summary": {
+      "en": "Area Related Theorems and Constructions",
+      "bn": "ক্ষেত্রফল সম্পর্কিত উপপাদ্য ও অঙ্কন"
+    },
+    "id": "6af6da7dea4f67e511c2045b",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-15-area-theorems",
+    "icon": "📏",
+    "order": 15,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:38:05.095Z",
+    "updatedAt": "2026-11-13T09:47:56.848Z"
+  },
+  {
+    "title": {
+      "en": "Mensuration",
+      "bn": "পরিমিতি"
+    },
+    "summary": {
+      "en": "Mensuration",
+      "bn": "পরিমিতি"
+    },
+    "id": "6af6da7eea4f67e511c2045e",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-16-mensuration",
+    "icon": "🧊",
+    "order": 16,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:38:06.328Z",
+    "updatedAt": "2026-11-13T09:47:58.185Z"
+  },
+  {
+    "title": {
+      "en": "Statistics",
+      "bn": "পরিসংখ্যান"
+    },
+    "summary": {
+      "en": "Statistics",
+      "bn": "পরিসংখ্যান"
+    },
+    "id": "6af6da7fea4f67e511c20461",
+    "classLevelId": "class-9",
+    "parentId": null,
+    "slug": "c9-17-statistics",
+    "icon": "📊",
+    "order": 17,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:38:07.664Z",
+    "updatedAt": "2026-11-13T09:47:59.425Z"
+  },
+  {
+    "title": {
+      "en": "Real Numbers",
+      "bn": "বাস্তব সংখ্যা"
+    },
+    "summary": {
+      "en": "Real Numbers",
+      "bn": "বাস্তব সংখ্যা"
+    },
+    "id": "6af6db9095e80a5c63525177",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-01-real-numbers",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:40.431Z",
+    "updatedAt": "2026-11-13T09:49:05.252Z"
+  },
+  {
+    "title": {
+      "en": "Sets and Functions",
+      "bn": "সেট ও ফাংশন"
+    },
+    "summary": {
+      "en": "Sets and Functions",
+      "bn": "সেট ও ফাংশন"
+    },
+    "id": "6af6db9195e80a5c6352517a",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-02-sets-functions",
+    "icon": "🔵",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:41.664Z",
+    "updatedAt": "2026-11-13T09:49:06.469Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশি"
+    },
+    "summary": {
+      "en": "Algebraic Expressions",
+      "bn": "বীজগাণিতিক রাশি"
+    },
+    "id": "6af6db9395e80a5c6352517d",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-03-algebraic-expressions",
+    "icon": "🧮",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:42.903Z",
+    "updatedAt": "2026-11-13T09:49:07.704Z"
+  },
+  {
+    "title": {
+      "en": "Exponents and Logarithms",
+      "bn": "সূচক ও লগারিদম"
+    },
+    "summary": {
+      "en": "Exponents and Logarithms",
+      "bn": "সূচক ও লগারিদম"
+    },
+    "id": "6af6db9495e80a5c63525180",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-04-exponents-logarithms",
+    "icon": "📈",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:44.542Z",
+    "updatedAt": "2026-11-13T09:49:08.937Z"
+  },
+  {
+    "title": {
+      "en": "Equations in One Variable",
+      "bn": "এক চলকবিশিষ্ট সমীকরণ"
+    },
+    "summary": {
+      "en": "Equations in One Variable",
+      "bn": "এক চলকবিশিষ্ট সমীকরণ"
+    },
+    "id": "6af6db9595e80a5c63525183",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-05-equations-one-variable",
+    "icon": "⚖️",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:45.672Z",
+    "updatedAt": "2026-11-13T09:49:10.170Z"
+  },
+  {
+    "title": {
+      "en": "Lines, Angles and Triangles",
+      "bn": "রেখা, কোণ ও ত্রিভুজ"
+    },
+    "summary": {
+      "en": "Lines, Angles and Triangles",
+      "bn": "রেখা, কোণ ও ত্রিভুজ"
+    },
+    "id": "6af6db9795e80a5c63525186",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-06-lines-angles-triangles",
+    "icon": "📐",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:46.908Z",
+    "updatedAt": "2026-11-13T09:49:11.282Z"
+  },
+  {
+    "title": {
+      "en": "Practical Geometry",
+      "bn": "ব্যবহারিক জ্যামিতি"
+    },
+    "summary": {
+      "en": "Practical Geometry",
+      "bn": "ব্যবহারিক জ্যামিতি"
+    },
+    "id": "6af6db9895e80a5c63525189",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-07-practical-geometry",
+    "icon": "🧭",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:48.143Z",
+    "updatedAt": "2026-11-13T09:49:12.537Z"
+  },
+  {
+    "title": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "summary": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "id": "6af6db9995e80a5c6352518c",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-08-circle",
+    "icon": "⭕",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:49.377Z",
+    "updatedAt": "2026-11-13T09:49:13.898Z"
+  },
+  {
+    "title": {
+      "en": "Trigonometric Ratio",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "summary": {
+      "en": "Trigonometric Ratio",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "id": "6af6db9a95e80a5c6352518f",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-09-trigonometric-ratio",
+    "icon": "📐",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:50.609Z",
+    "updatedAt": "2026-11-13T09:49:15.208Z"
+  },
+  {
+    "title": {
+      "en": "Distance and Elevation",
+      "bn": "দূরত্ব ও উন্নতি"
+    },
+    "summary": {
+      "en": "Distance and Elevation",
+      "bn": "দূরত্ব ও উন্নতি"
+    },
+    "id": "6af6db9b95e80a5c63525192",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-10-distance-elevation",
+    "icon": "🗼",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:51.843Z",
+    "updatedAt": "2026-11-13T09:49:16.545Z"
+  },
+  {
+    "title": {
+      "en": "Algebraic Ratio and Proportion",
+      "bn": "বীজগাণিতিক অনুপাত ও সমানুপাত"
+    },
+    "summary": {
+      "en": "Algebraic Ratio and Proportion",
+      "bn": "বীজগাণিতিক অনুপাত ও সমানুপাত"
+    },
+    "id": "6af6db9d95e80a5c63525195",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-11-algebraic-ratio-proportion",
+    "icon": "➗",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:53.287Z",
+    "updatedAt": "2026-11-13T09:49:17.741Z"
+  },
+  {
+    "title": {
+      "en": "Simple Simultaneous Equations in Two Variables",
+      "bn": "দুই চলকবিশিষ্ট সরল সহসমীকরণ"
+    },
+    "summary": {
+      "en": "Simple Simultaneous Equations in Two Variables",
+      "bn": "দুই চলকবিশিষ্ট সরল সহসমীকরণ"
+    },
+    "id": "6af6db9e95e80a5c63525198",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-12-simultaneous-equations",
+    "icon": "🧮",
+    "order": 12,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:54.721Z",
+    "updatedAt": "2026-11-13T09:49:18.866Z"
+  },
+  {
+    "title": {
+      "en": "Finite Series",
+      "bn": "সসীম ধারা"
+    },
+    "summary": {
+      "en": "Finite Series",
+      "bn": "সসীম ধারা"
+    },
+    "id": "6af6dba095e80a5c6352519b",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-13-finite-series",
+    "icon": "➕",
+    "order": 13,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:55.954Z",
+    "updatedAt": "2026-11-13T09:49:20.042Z"
+  },
+  {
+    "title": {
+      "en": "Ratio, Similarity and Symmetry",
+      "bn": "অনুপাত, সদৃশতা ও প্রতিসমতা"
+    },
+    "summary": {
+      "en": "Ratio, Similarity and Symmetry",
+      "bn": "অনুপাত, সদৃশতা ও প্রতিসমতা"
+    },
+    "id": "6af6dba195e80a5c6352519e",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-14-ratio-similarity-symmetry",
+    "icon": "🔺",
+    "order": 14,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:57.291Z",
+    "updatedAt": "2026-11-13T09:49:21.276Z"
+  },
+  {
+    "title": {
+      "en": "Area Related Theorems and Constructions",
+      "bn": "ক্ষেত্রফল সম্পর্কিত উপপাদ্য ও অঙ্কন"
+    },
+    "summary": {
+      "en": "Area Related Theorems and Constructions",
+      "bn": "ক্ষেত্রফল সম্পর্কিত উপপাদ্য ও অঙ্কন"
+    },
+    "id": "6af6dba395e80a5c635251a1",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-15-area-theorems",
+    "icon": "📏",
+    "order": 15,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:42:58.938Z",
+    "updatedAt": "2026-11-13T09:49:22.509Z"
+  },
+  {
+    "title": {
+      "en": "Mensuration",
+      "bn": "পরিমিতি"
+    },
+    "summary": {
+      "en": "Mensuration",
+      "bn": "পরিমিতি"
+    },
+    "id": "6af6dba495e80a5c635251a4",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-16-mensuration",
+    "icon": "🧊",
+    "order": 16,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:43:00.171Z",
+    "updatedAt": "2026-11-13T09:49:23.745Z"
+  },
+  {
+    "title": {
+      "en": "Statistics",
+      "bn": "পরিসংখ্যান"
+    },
+    "summary": {
+      "en": "Statistics",
+      "bn": "পরিসংখ্যান"
+    },
+    "id": "6af6dba595e80a5c635251a7",
+    "classLevelId": "class-10",
+    "parentId": null,
+    "slug": "c10-17-statistics",
+    "icon": "📊",
+    "order": 17,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:43:01.714Z",
+    "updatedAt": "2026-11-13T09:49:24.853Z"
+  },
+  {
+    "title": {
+      "en": "Real Numbers and Inequalities",
+      "bn": "বাস্তব সংখ্যা ও অসমতা"
+    },
+    "summary": {
+      "en": "Real Numbers and Inequalities",
+      "bn": "বাস্তব সংখ্যা ও অসমতা"
+    },
+    "id": "6af6dc1495e80a5c635252b4",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-01-real-numbers-inequalities",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:44:52.093Z",
+    "updatedAt": "2026-11-13T09:51:14.791Z"
+  },
+  {
+    "title": {
+      "en": "Linear Programming",
+      "bn": "রৈখিক প্রোগ্রামিং"
+    },
+    "summary": {
+      "en": "Linear Programming",
+      "bn": "রৈখিক প্রোগ্রামিং"
+    },
+    "id": "6af6dc1595e80a5c635252b7",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-02-linear-programming",
+    "icon": "📈",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:44:53.384Z",
+    "updatedAt": "2026-11-13T09:51:15.916Z"
+  },
+  {
+    "title": {
+      "en": "Complex Numbers",
+      "bn": "জটিল সংখ্যা"
+    },
+    "summary": {
+      "en": "Complex Numbers",
+      "bn": "জটিল সংখ্যা"
+    },
+    "id": "6af6dc1795e80a5c635252ba",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-03-complex-numbers",
+    "icon": "🧮",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:44:55.027Z",
+    "updatedAt": "2026-11-13T09:51:17.153Z"
+  },
+  {
+    "title": {
+      "en": "Polynomials and Polynomial Equations",
+      "bn": "বহুপদী ও বহুপদী সমীকরণ"
+    },
+    "summary": {
+      "en": "Polynomials and Polynomial Equations",
+      "bn": "বহুপদী ও বহুপদী সমীকরণ"
+    },
+    "id": "6af6dc1895e80a5c635252bd",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-04-polynomials",
+    "icon": "📉",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:44:56.261Z",
+    "updatedAt": "2026-11-13T09:51:18.384Z"
+  },
+  {
+    "title": {
+      "en": "Binomial Expansion",
+      "bn": "দ্বিপদী বিস্তার"
+    },
+    "summary": {
+      "en": "Binomial Expansion",
+      "bn": "দ্বিপদী বিস্তার"
+    },
+    "id": "6af6dc1995e80a5c635252c0",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-05-binomial-expansion",
+    "icon": "🔺",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:44:57.458Z",
+    "updatedAt": "2026-11-13T09:51:19.521Z"
+  },
+  {
+    "title": {
+      "en": "Conics",
+      "bn": "কনিক"
+    },
+    "summary": {
+      "en": "Conics",
+      "bn": "কনিক"
+    },
+    "id": "6af6dc1a95e80a5c635252c3",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-06-conics",
+    "icon": "⭕",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:44:58.731Z",
+    "updatedAt": "2026-11-13T09:51:20.743Z"
+  },
+  {
+    "title": {
+      "en": "Inverse Trigonometric Functions and Trigonometric Equations",
+      "bn": "বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ"
+    },
+    "summary": {
+      "en": "Inverse Trigonometric Functions and Trigonometric Equations",
+      "bn": "বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ"
+    },
+    "id": "6af6dc1c95e80a5c635252c6",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-07-inverse-trig",
+    "icon": "📐",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:00.065Z",
+    "updatedAt": "2026-11-13T09:51:21.985Z"
+  },
+  {
+    "title": {
+      "en": "Statics",
+      "bn": "স্থিতিবিদ্যা"
+    },
+    "summary": {
+      "en": "Statics",
+      "bn": "স্থিতিবিদ্যা"
+    },
+    "id": "6af6dc1d95e80a5c635252c9",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-08-statics",
+    "icon": "⚖️",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:01.436Z",
+    "updatedAt": "2026-11-13T09:51:23.218Z"
+  },
+  {
+    "title": {
+      "en": "Motion of a Particle in a Plane",
+      "bn": "তলে কণার গতি"
+    },
+    "summary": {
+      "en": "Motion of a Particle in a Plane",
+      "bn": "তলে কণার গতি"
+    },
+    "id": "6af6dc1f95e80a5c635252cc",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-09-motion-plane",
+    "icon": "🎯",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:03.045Z",
+    "updatedAt": "2026-11-13T09:51:24.357Z"
+  },
+  {
+    "title": {
+      "en": "Measures of Dispersion and Probability",
+      "bn": "বিচ্ছুরণ ও সম্ভাবনা"
+    },
+    "summary": {
+      "en": "Measures of Dispersion and Probability",
+      "bn": "বিচ্ছুরণ ও সম্ভাবনা"
+    },
+    "id": "6af6dc2095e80a5c635252cf",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-10-dispersion-probability",
+    "icon": "🎲",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:04.314Z",
+    "updatedAt": "2026-11-13T09:51:25.584Z"
+  },
+  {
+    "title": {
+      "en": "Vectors",
+      "bn": "ভেক্টর"
+    },
+    "summary": {
+      "en": "Vectors",
+      "bn": "ভেক্টর"
+    },
+    "id": "6af6dc2195e80a5c635252d2",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-11-vectors",
+    "icon": "➡️",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:05.518Z",
+    "updatedAt": "2026-11-13T09:51:26.817Z"
+  },
+  {
+    "title": {
+      "en": "Straight Lines",
+      "bn": "সরলরেখা"
+    },
+    "summary": {
+      "en": "Straight Lines",
+      "bn": "সরলরেখা"
+    },
+    "id": "6af6dc2395e80a5c635252d5",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-12-straight-lines",
+    "icon": "📏",
+    "order": 12,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:06.950Z",
+    "updatedAt": "2026-11-13T09:51:28.359Z"
+  },
+  {
+    "title": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "summary": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "id": "6af6dc2495e80a5c635252d8",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-13-circle",
+    "icon": "⭕",
+    "order": 13,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:08.186Z",
+    "updatedAt": "2026-11-13T09:51:29.569Z"
+  },
+  {
+    "title": {
+      "en": "Permutations and Combinations",
+      "bn": "বিন্যাস ও সমাবেশ"
+    },
+    "summary": {
+      "en": "Permutations and Combinations",
+      "bn": "বিন্যাস ও সমাবেশ"
+    },
+    "id": "6af6dc2595e80a5c635252db",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-14-permutations-combinations",
+    "icon": "🔀",
+    "order": 14,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:09.420Z",
+    "updatedAt": "2026-11-13T09:51:30.725Z"
+  },
+  {
+    "title": {
+      "en": "Trigonometric Ratios",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "summary": {
+      "en": "Trigonometric Ratios",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "id": "6af6dc2695e80a5c635252de",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-15-trigonometric-ratios",
+    "icon": "📐",
+    "order": 15,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:10.654Z",
+    "updatedAt": "2026-11-13T09:51:31.960Z"
+  },
+  {
+    "title": {
+      "en": "Trigonometric Ratios of Associated and Compound Angles",
+      "bn": "সংযুক্ত ও যৌগিক কোণের ত্রিকোণমিতিক অনুপাত"
+    },
+    "summary": {
+      "en": "Trigonometric Ratios of Associated and Compound Angles",
+      "bn": "সংযুক্ত ও যৌগিক কোণের ত্রিকোণমিতিক অনুপাত"
+    },
+    "id": "6af6dc2795e80a5c635252e1",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-16-compound-angles",
+    "icon": "🔁",
+    "order": 16,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:11.887Z",
+    "updatedAt": "2026-11-13T09:51:33.192Z"
+  },
+  {
+    "title": {
+      "en": "Functions and Graphs of Functions",
+      "bn": "ফাংশন ও ফাংশনের গ্রাফ"
+    },
+    "summary": {
+      "en": "Functions and Graphs of Functions",
+      "bn": "ফাংশন ও ফাংশনের গ্রাফ"
+    },
+    "id": "6af6dc2995e80a5c635252e4",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-17-functions-graphs",
+    "icon": "📊",
+    "order": 17,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:13.531Z",
+    "updatedAt": "2026-11-13T09:51:34.410Z"
+  },
+  {
+    "title": {
+      "en": "Differentiation",
+      "bn": "অন্তরীকরণ"
+    },
+    "summary": {
+      "en": "Differentiation",
+      "bn": "অন্তরীকরণ"
+    },
+    "id": "6af6dc2a95e80a5c635252e7",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-18-differentiation",
+    "icon": "📈",
+    "order": 18,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:14.868Z",
+    "updatedAt": "2026-11-13T09:51:35.510Z"
+  },
+  {
+    "title": {
+      "en": "Integration",
+      "bn": "সমাকলন"
+    },
+    "summary": {
+      "en": "Integration",
+      "bn": "সমাকলন"
+    },
+    "id": "6af6dc2c95e80a5c635252ea",
+    "classLevelId": "class-11",
+    "parentId": null,
+    "slug": "c11-19-integration",
+    "icon": "∫",
+    "order": 19,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:45:16.192Z",
+    "updatedAt": "2026-11-13T09:51:36.790Z"
+  },
+  {
+    "title": {
+      "en": "Real Numbers and Inequalities",
+      "bn": "বাস্তব সংখ্যা ও অসমতা"
+    },
+    "summary": {
+      "en": "Real Numbers and Inequalities",
+      "bn": "বাস্তব সংখ্যা ও অসমতা"
+    },
+    "id": "6af6dc9a95e80a5c635253f7",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-01-real-numbers-inequalities",
+    "icon": "🔢",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:06.858Z",
+    "updatedAt": "2026-11-13T09:53:26.180Z"
+  },
+  {
+    "title": {
+      "en": "Linear Programming",
+      "bn": "রৈখিক প্রোগ্রামিং"
+    },
+    "summary": {
+      "en": "Linear Programming",
+      "bn": "রৈখিক প্রোগ্রামিং"
+    },
+    "id": "6af6dc9c95e80a5c635253fa",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-02-linear-programming",
+    "icon": "📈",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:08.193Z",
+    "updatedAt": "2026-11-13T09:53:27.516Z"
+  },
+  {
+    "title": {
+      "en": "Complex Numbers",
+      "bn": "জটিল সংখ্যা"
+    },
+    "summary": {
+      "en": "Complex Numbers",
+      "bn": "জটিল সংখ্যা"
+    },
+    "id": "6af6dc9d95e80a5c635253fd",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-03-complex-numbers",
+    "icon": "🧮",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:09.428Z",
+    "updatedAt": "2026-11-13T09:53:28.704Z"
+  },
+  {
+    "title": {
+      "en": "Polynomials and Polynomial Equations",
+      "bn": "বহুপদী ও বহুপদী সমীকরণ"
+    },
+    "summary": {
+      "en": "Polynomials and Polynomial Equations",
+      "bn": "বহুপদী ও বহুপদী সমীকরণ"
+    },
+    "id": "6af6dc9e95e80a5c63525400",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-04-polynomials",
+    "icon": "📉",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:10.623Z",
+    "updatedAt": "2026-11-13T09:53:29.881Z"
+  },
+  {
+    "title": {
+      "en": "Binomial Expansion",
+      "bn": "দ্বিপদী বিস্তার"
+    },
+    "summary": {
+      "en": "Binomial Expansion",
+      "bn": "দ্বিপদী বিস্তার"
+    },
+    "id": "6af6dc9f95e80a5c63525403",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-05-binomial-expansion",
+    "icon": "🔺",
+    "order": 5,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:11.794Z",
+    "updatedAt": "2026-11-13T09:53:31.117Z"
+  },
+  {
+    "title": {
+      "en": "Conics",
+      "bn": "কনিক"
+    },
+    "summary": {
+      "en": "Conics",
+      "bn": "কনিক"
+    },
+    "id": "6af6dca195e80a5c63525406",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-06-conics",
+    "icon": "⭕",
+    "order": 6,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:13.132Z",
+    "updatedAt": "2026-11-13T09:53:32.348Z"
+  },
+  {
+    "title": {
+      "en": "Inverse Trigonometric Functions and Trigonometric Equations",
+      "bn": "বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ"
+    },
+    "summary": {
+      "en": "Inverse Trigonometric Functions and Trigonometric Equations",
+      "bn": "বিপরীত ত্রিকোণমিতিক ফাংশন ও ত্রিকোণমিতিক সমীকরণ"
+    },
+    "id": "6af6dca295e80a5c63525409",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-07-inverse-trig",
+    "icon": "📐",
+    "order": 7,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:14.365Z",
+    "updatedAt": "2026-11-13T09:53:33.581Z"
+  },
+  {
+    "title": {
+      "en": "Statics",
+      "bn": "স্থিতিবিদ্যা"
+    },
+    "summary": {
+      "en": "Statics",
+      "bn": "স্থিতিবিদ্যা"
+    },
+    "id": "6af6dca395e80a5c6352540c",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-08-statics",
+    "icon": "⚖️",
+    "order": 8,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:15.598Z",
+    "updatedAt": "2026-11-13T09:53:34.815Z"
+  },
+  {
+    "title": {
+      "en": "Motion of a Particle in a Plane",
+      "bn": "তলে কণার গতি"
+    },
+    "summary": {
+      "en": "Motion of a Particle in a Plane",
+      "bn": "তলে কণার গতি"
+    },
+    "id": "6af6dca495e80a5c6352540f",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-09-motion-plane",
+    "icon": "🎯",
+    "order": 9,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:16.753Z",
+    "updatedAt": "2026-11-13T09:53:36.048Z"
+  },
+  {
+    "title": {
+      "en": "Measures of Dispersion and Probability",
+      "bn": "বিচ্ছুরণ ও সম্ভাবনা"
+    },
+    "summary": {
+      "en": "Measures of Dispersion and Probability",
+      "bn": "বিচ্ছুরণ ও সম্ভাবনা"
+    },
+    "id": "6af6dca695e80a5c63525412",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-10-dispersion-probability",
+    "icon": "🎲",
+    "order": 10,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:17.963Z",
+    "updatedAt": "2026-11-13T09:53:37.384Z"
+  },
+  {
+    "title": {
+      "en": "Vectors",
+      "bn": "ভেক্টর"
+    },
+    "summary": {
+      "en": "Vectors",
+      "bn": "ভেক্টর"
+    },
+    "id": "6af6dca795e80a5c63525415",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-11-vectors",
+    "icon": "➡️",
+    "order": 11,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:19.196Z",
+    "updatedAt": "2026-11-13T09:53:38.618Z"
+  },
+  {
+    "title": {
+      "en": "Straight Lines",
+      "bn": "সরলরেখা"
+    },
+    "summary": {
+      "en": "Straight Lines",
+      "bn": "সরলরেখা"
+    },
+    "id": "6af6dca895e80a5c63525418",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-12-straight-lines",
+    "icon": "📏",
+    "order": 12,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:20.430Z",
+    "updatedAt": "2026-11-13T09:53:39.851Z"
+  },
+  {
+    "title": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "summary": {
+      "en": "Circle",
+      "bn": "বৃত্ত"
+    },
+    "id": "6af6dca995e80a5c6352541b",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-13-circle",
+    "icon": "⭕",
+    "order": 13,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:21.669Z",
+    "updatedAt": "2026-11-13T09:53:40.878Z"
+  },
+  {
+    "title": {
+      "en": "Permutations and Combinations",
+      "bn": "বিন্যাস ও সমাবেশ"
+    },
+    "summary": {
+      "en": "Permutations and Combinations",
+      "bn": "বিন্যাস ও সমাবেশ"
+    },
+    "id": "6af6dcaa95e80a5c6352541e",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-14-permutations-combinations",
+    "icon": "🔀",
+    "order": 14,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:22.867Z",
+    "updatedAt": "2026-11-13T09:53:41.884Z"
+  },
+  {
+    "title": {
+      "en": "Trigonometric Ratios",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "summary": {
+      "en": "Trigonometric Ratios",
+      "bn": "ত্রিকোণমিতিক অনুপাত"
+    },
+    "id": "6af6dcac95e80a5c63525421",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-15-trigonometric-ratios",
+    "icon": "📐",
+    "order": 15,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:24.031Z",
+    "updatedAt": "2026-11-13T09:53:43.041Z"
+  },
+  {
+    "title": {
+      "en": "Trigonometric Ratios of Associated and Compound Angles",
+      "bn": "সংযুক্ত ও যৌগিক কোণের ত্রিকোণমিতিক অনুপাত"
+    },
+    "summary": {
+      "en": "Trigonometric Ratios of Associated and Compound Angles",
+      "bn": "সংযুক্ত ও যৌগিক কোণের ত্রিকোণমিতিক অনুপাত"
+    },
+    "id": "6af6dcad95e80a5c63525424",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-16-compound-angles",
+    "icon": "🔁",
+    "order": 16,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:25.280Z",
+    "updatedAt": "2026-11-13T09:53:44.382Z"
+  },
+  {
+    "title": {
+      "en": "Functions and Graphs of Functions",
+      "bn": "ফাংশন ও ফাংশনের গ্রাফ"
+    },
+    "summary": {
+      "en": "Functions and Graphs of Functions",
+      "bn": "ফাংশন ও ফাংশনের গ্রাফ"
+    },
+    "id": "6af6dcae95e80a5c63525427",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-17-functions-graphs",
+    "icon": "📊",
+    "order": 17,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:26.501Z",
+    "updatedAt": "2026-11-13T09:53:45.608Z"
+  },
+  {
+    "title": {
+      "en": "Differentiation",
+      "bn": "অন্তরীকরণ"
+    },
+    "summary": {
+      "en": "Differentiation",
+      "bn": "অন্তরীকরণ"
+    },
+    "id": "6af6dcaf95e80a5c6352542a",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-18-differentiation",
+    "icon": "📈",
+    "order": 18,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:27.638Z",
+    "updatedAt": "2026-11-13T09:53:47.001Z"
+  },
+  {
+    "title": {
+      "en": "Integration",
+      "bn": "সমাকলন"
+    },
+    "summary": {
+      "en": "Integration",
+      "bn": "সমাকলন"
+    },
+    "id": "6af6dcb095e80a5c6352542d",
+    "classLevelId": "class-12",
+    "parentId": null,
+    "slug": "c12-19-integration",
+    "icon": "∫",
+    "order": 19,
+    "isActive": true,
+    "createdAt": "2026-11-13T09:47:28.676Z",
+    "updatedAt": "2026-11-13T09:53:48.179Z"
+  }
+]

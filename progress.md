@@ -1,6 +1,6 @@
 # Backend progress
 
-_Last updated: Next-plan merged content bank, 15 game/visual/Q&A carousels on `/learn`, seeded MongoDB carousels, forum/analytics/reporting work._
+_Last updated: Content-library reset — old content archived and purged from MongoDB, new manifest sync and library API, `/learn` rebuilt around a floating chapter menu._
 
 ## Status
 
@@ -44,10 +44,28 @@ _Last updated: Next-plan merged content bank, 15 game/visual/Q&A carousels on `/
 | Class 10 content | ✅ | 17 chapters, 17 topics, 17 visualizations (`content/class-10/` + shared book) |
 | Class 11 content | ✅ | 19 chapters, 19 topics, 19 visualizations (`content/class-11/` + shared book) |
 | Class 12 content | ✅ | 19 chapters, 19 topics, 19 visualizations (`content/class-12/` + shared book) |
-| Tests | OK | 16 unit tests for the math engine, generators, next-plan activity bank and generated carousels (`npm test`) |
-| Docs | ✅ | `README.md`, `docs/api/*` |
+| Content library | ✅ | Manifest sync publishes 163 chapters across 14 classes; `library_visualizations` stays empty until approved HTML is added |
+| Library API | ✅ | `/api/v1/library/classes`, `/classes/:classId/chapters`, `/chapters/:chapterId`, `/chapters/:chapterId/visualization` |
+| Legacy archive | ✅ | Old app content, root HTML and seeds under `legacy-content/`; old MongoDB content backed up then purged |
+| Tests | OK | Unit tests for the math engine and generators (`npm test`) |
+| Docs | ✅ | `README.md`, `docs/api/*`, `content-library/README.md`, `legacy-content/README.md` |
+
+> **Legacy notice.** The class-content, Learn carousel and next-plan rows below describe the archived pre-library pipeline. Those files now live under `legacy-content/` and are no longer seeded or served.
 
 ## Latest update
+
+### Content-library reset and new Learn pipeline
+
+- Adopted `content-library/all-class-content-new/` as the only chapter source and `content-library/art-rules/RULES.md` (`Example.html`) as the mandatory visualization contract. `content-library/generated-visualizations/` is the only accepted HTML output folder.
+- Moved the old app content, backend-root class/chapter/visualization docs, project-root `content/` HTML, old seed scripts and old scripts into `legacy-content/` with a README map. The leftover `public/next plan/` source (byte-identical to the already-archived next-plan sources) is now `legacy-content/old-public-next-plan/`, so the active `public/` folder holds only the companion and logo assets.
+- Added `LibraryChapter` (`library_chapters`) and `LibraryVisualization` (`library_visualizations`) to Prisma; ran `prisma generate` and `db push`.
+- Added `src/app/module/library/` and mounted `/api/v1/library/*`.
+- Added `src/app/utils/library-sync.ts` plus `library:sync`, `content:validate` and `content:archive` scripts. Sync reads `site-manifest.json`, validates HTML against the art rules, reports height, injects the height bridge and autoplay/loop support, then upserts chapters/visualizations.
+- Removed old content/carousel seeding from `seed.ts`; the seed now calls `syncLibraryChapters()`.
+- Ran the library sync: **163 chapters, 0 visualizations** (no approved HTML exists yet).
+- Ran the archive script: old categories, chapters, topics, visualizations and learn carousels were backed up under `legacy-content/mongodb-backup/2026-11-18T09-19-42-114Z/` and deleted. Users, forum posts and chat data were kept.
+- Verified the database now holds 0 legacy content rows and 163 library chapters.
+- Frontend `/learn` now uses the library API with a class picker, floating hamburger chapter drawer and a `SecureCarouselFrame` player. A missing visualization renders a "being prepared" panel.
 
 ### Next-plan merge and the first game/visual/Q&A cycle
 

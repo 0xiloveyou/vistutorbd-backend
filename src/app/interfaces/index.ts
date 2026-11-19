@@ -139,6 +139,9 @@ export interface IChatPayload {
   stepIndex?: number;
   params?: Record<string, unknown>;
   topicSlug?: string;
+  chapterId?: string;
+  figureId?: string;
+  page?: number;
 }
 
 export interface IQuizConfigPayload {

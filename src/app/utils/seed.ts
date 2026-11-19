@@ -1,11 +1,9 @@
 import { Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import config from "../config";
-import { CONTENT_PACKS } from "../content";
-import { seedLearnCarousels } from "./seed-learn-carousels";
 import { prisma } from "../lib/prisma";
 import { CLASS_BANDS, CLASS_LEVELS, COMPANIONS } from "../lib/taxonomy";
-import { seedClassContent } from "./seed-class-content";
+import { syncLibraryChapters } from "./library-sync";
 
 type SeedUserInput = {
   name: string;
@@ -191,12 +189,6 @@ export const seedQuestionTemplates = async () => {
   }
 
   console.log(`Seeded ${templates.length} question template(s).`);
-};
-
-export const seedContent = async () => {
-  for (const pack of CONTENT_PACKS) {
-    await seedClassContent(pack);
-  }
 };
 
 type SeedForumComment = {
@@ -399,8 +391,7 @@ export const seedDatabase = async () => {
   await seedTaxonomy();
   await seedCompanions();
   await seedQuestionTemplates();
-  await seedContent();
-  await seedLearnCarousels();
+  await syncLibraryChapters();
   await seedForumPosts();
 };
 
@@ -421,27 +412,10 @@ export const seedDatabaseIfEmpty = async () => {
     await seedTaxonomy();
     await seedCompanions();
     await seedQuestionTemplates();
-    await seedContent();
   } else {
     console.log("[seed] Taxonomy already exists — skipping taxonomy seed.");
-    const counts = await Promise.all(
-      CONTENT_PACKS.map((pack) =>
-        prisma.topic.count({ where: { classLevelId: pack.levelId } }),
-      ),
-    );
-    const missing = CONTENT_PACKS.filter((_, index) => counts[index] === 0);
-    if (missing.length === 0) {
-      console.log("[seed] All class content already exists — skipping content seed.");
-    } else {
-      for (const pack of missing) {
-        await seedClassContent(pack);
-      }
-    }
   }
 
-  // Learn carousels and forum starter content are independent of
-  // users/taxonomy, so they still seed when the rest of the database is already
-  // populated. Both helpers are idempotent.
-  await seedLearnCarousels();
+  await syncLibraryChapters();
   await seedForumPosts();
 };

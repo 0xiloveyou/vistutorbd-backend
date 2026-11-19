@@ -108,6 +108,7 @@ Both keys are required when creating content. Readers should fall back to `en` w
 | Users | [users.md](users.md) |
 | Learner state | [user-state.md](user-state.md) |
 | Taxonomy | [taxonomy.md](taxonomy.md) |
+| Library | `GET /library/classes`, `GET /library/classes/:classId/chapters`, `GET /library/chapters/:chapterId`, `GET /library/chapters/:chapterId/visualization` |
 | Topics | [topics.md](topics.md) |
 | Visualizations | [visualizations.md](visualizations.md) |
 | Quiz | [quiz.md](quiz.md) |

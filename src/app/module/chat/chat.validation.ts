@@ -10,6 +10,9 @@ const ChatZodSchema = z.object({
   stepIndex: z.coerce.number().int().min(0).optional(),
   params: z.record(z.string(), z.unknown()).optional(),
   topicSlug: z.string().trim().optional(),
+  chapterId: z.string().trim().optional(),
+  figureId: z.string().trim().optional(),
+  page: z.coerce.number().int().positive().optional(),
 });
 
 const ImageProblemZodSchema = z.object({

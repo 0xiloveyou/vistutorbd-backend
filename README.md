@@ -2,9 +2,9 @@
 
 Express 5 + TypeScript REST API for **VisTutorBd**, a visualization-first math platform covering Play, Nursery and Class 1â€“12 in English and Bangla.
 
-The backend owns accounts and roles, the class taxonomy, topics and lesson blocks, visualization specs, deterministic question generation, quiz attempts, learner state, the grounded AI chat, the RAG knowledge base and moderation. The Next.js client lives in `../frontend`.
+The backend owns accounts and roles, the class taxonomy, the content library, visualization specs, deterministic question generation, quiz attempts, learner state, the grounded AI chat, the RAG knowledge base and moderation. The Next.js client lives in `../vistutorbd`.
 
-> **Skeleton phase.** The API surface, data model, auth, quiz engine, chat shell and docs are complete. Content (real chapters, topics and visualization specs) is added in the content phase.
+> **Content-library phase.** The old class/category/chapter content has been archived under `legacy-content/` and removed from MongoDB. New content now comes only from `content-library/all-class-content-new/` and compliant visualization HTML under `content-library/generated-visualizations/`, following `content-library/art-rules/RULES.md`.
 
 ## Stack
 
@@ -26,7 +26,7 @@ npm install
 cp .env.example .env      # fill in DATABASE_URL and secrets
 npx prisma generate
 npm run db:push           # MongoDB has no migrations
-npm run seed              # bands, levels, templates, demo accounts
+npm run seed              # bands, levels, templates, demo accounts + library chapters
 npm run dev
 ```
 
@@ -36,12 +36,18 @@ npm run dev
 | `npm run build` | Bundle with tsup into `dist/` |
 | `npm start` | Run `dist/server.js` |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm test` | Unit tests for the math engine, generators and next-plan carousels |
+| `npm test` | Unit tests for the math engine and generators |
 | `npm run db:generate` | Generate Prisma Client |
 | `npm run db:push` | Push the schema to MongoDB |
 | `npm run db:studio` | Open Prisma Studio |
-| `npm run seed` | Idempotent configuration seed |
-| `npm run content:next-plan` | Regenerate the 15 next-plan game/visual/Q&A carousel documents |
+| `npm run seed` | Idempotent configuration seed + library chapter sync |
+| `npm run library:sync` | Sync `library_chapters` from the class-content manifest |
+| `npm run figure:pages` | Render chapter PDF pages to backend-only reference JPEGs |
+| `npm run figure:extract` | Extract line-art figure briefs from stored reference page images |
+| `npm run figure:link` | Attach page-matched figure ids to figure-dependent questions |
+| `npm run figure:validate` | Validate every chapter figure brief |
+| `npm run content:validate` | Validate every visualization against `art-rules/RULES.md` |
+| `npm run content:archive` | Back up and purge the legacy MongoDB content collections |
 | `npm run lint:check` / `lint:fix` | Biome lint |
 | `npm run format:check` / `format:fix` | Biome format |
 
@@ -75,7 +81,8 @@ Optional services degrade gracefully:
 ## Project structure
 
 ```text
-prisma/schema.prisma              Users, taxonomy, topics, visualizations, knowledge, quiz, chat, moderation, visits
+prisma/schema.prisma              Users, taxonomy, library chapters/visualizations, knowledge, quiz, chat,
+                                  moderation, visits
 src/server.ts                     Connect services, optional seed, cron, listen
 src/app.ts                        Express app and /api/v1 route mounting
 src/app/config/                   Typed env parsing
@@ -83,16 +90,20 @@ src/app/lib/                      prisma, redis, mail, google, jwt, cookies, ope
                                   mathEngine, questionGenerator, taxonomy, cron
 src/app/middleware/               checkAuth (auth/optionalAuth), validateRequest, rateLimit, errors
 src/app/module/<feature>/         route â†’ controller â†’ service â†’ validation
+src/app/module/library/           Library classes, chapters and visualization reads
 src/app/scripts/seed.ts           Configuration seed entry point
-src/app/content/next-plan/        Merged folder 1+2+3 content bank, runtime and generator
-src/app/content/carousels/        Carousel HTML seeded into MongoDB (15 next-plan files included)
+src/app/scripts/library-sync.ts   Manifest → library_chapters sync
+src/app/scripts/validate-visualizations.ts  Art-rule validation for generated HTML
+src/app/scripts/archive-legacy.ts Legacy MongoDB backup + purge
+src/app/utils/library-sync.ts     Manifest parsing, validation and autoplay/height injection
 src/app/templates/                EJS email templates
-reference-data/                    Reference material only, never served at runtime
-  legacy-json/                     Old JSON lessons kept only as format reference
-  examples/                        Old AI/ML JSON reading list
-  legacy-site/                     Original Express/static site
-  static-visualization-notes/      Prompt + skill notes for visualizations
-docs/api/                          API reference
+content-library/
+  all-class-content-new/          Sole source for class/chapter metadata (site-manifest.json)
+  art-rules/                      Mandatory RULES.md and Example.html authoring contract
+  generated-visualizations/       Sole source for approved per-chapter HTML
+legacy-content/                   Archived old app content, old root HTML, old seeds and DB backup
+reference-data/                   Reference material only, never served at runtime
+docs/api/                         API reference
 ```
 
 ## Roles
@@ -141,6 +152,7 @@ Base path: `/api/v1`. Health is also available at `/health`.
 | Users | `/user` | [docs/api/users.md](docs/api/users.md) |
 | Learner state | `/user-state` | [docs/api/user-state.md](docs/api/user-state.md) |
 | Taxonomy | `/taxonomy` | [docs/api/taxonomy.md](docs/api/taxonomy.md) |
+| Library | `/library` | `GET /classes`, `GET /classes/:classId/chapters`, `GET /chapters/:chapterId`, `GET /chapters/:chapterId/visualization` |
 | Topics | `/topics` | [docs/api/topics.md](docs/api/topics.md) |
 | Visualizations | `/visualizations` | [docs/api/visualizations.md](docs/api/visualizations.md) |
 | Quiz | `/quiz` | [docs/api/quiz.md](docs/api/quiz.md) |
@@ -163,44 +175,55 @@ See [docs/api/README.md](docs/api/README.md) for conventions, enums and role rul
 4. Two question templates: `addition.singleDigit` (Play/Nursery) and `addition.twoDigit` (Class 1â€“5).
 5. `ADMIN`, `MODERATOR` and demo `USER` accounts from env.
 6. When `forum_posts` is empty, 10 starter forum questions with maths (`$...$`) and starter comments. Existing posts are never overwritten.
-7. Learn carousels from `src/app/content/carousels/`: the generic `explanation-all` document, the Class 9–10 `explanation-class-9-10` visual lab, and the 15 next-plan activities (five games, five visual explanations, five Q&A sets). They are upserted by slug and content hash, then served through `/api/v1/learn/*`.
+7. Library chapters from `content-library/all-class-content-new/Class Content Library/_data/site-manifest.json`. The sync writes `library_chapters` and links any approved `library_visualizations`; it never creates lesson HTML.
 
-The class content packs (`play` … `class-12`) are also seeded idempotently, so `AUTO_SEED=true` fills empty collections on startup and never overwrites edited data. Startup seeding runs after the API starts and retries for a few minutes if Atlas is unreachable; whitelist the machine's public IP under **Atlas → Network Access** if it cannot connect.
+The library sync is idempotent and runs from both `npm run seed` and `npm run library:sync`. `AUTO_SEED=true` fills empty collections on startup and never overwrites edited data. Startup seeding runs after the API starts and retries for a few minutes if Atlas is unreachable; whitelist the machine's public IP under **Atlas → Network Access** if it cannot connect.
 
-## Next-plan content cycle
+## Content library pipeline
 
-The material in `public/next plan/1`, `/2` and `/3` is stored as a typed bank in `src/app/content/next-plan/`:
+All new content comes from the two root folders that were adopted in this pass:
 
-| Source | Folder | Stored as |
-| --- | --- | --- |
-| Game pattern + Bolt companion | `/1` (`game.html`) | `runtime/engine.js`, `runtime/engine.css`, `runtime/robot.svg` |
-| Concept map | `/2` | `source/concept-map.txt` → `catalog.generated.json` (75 cards) |
-| Idea bank | `/3` | `source/idea-bank.txt` → `catalog.generated.json` (148 rows, 32 game ideas, 14 templates) |
+| Source | Purpose |
+| --- | --- |
+| `content-library/all-class-content-new/` | Class/chapter metadata and source Markdown, including `_data/site-manifest.json` |
+| `content-library/art-rules/RULES.md` | Mandatory authoring contract for every visualization |
+| `content-library/art-rules/Example.html` | Approved Lesson Studio template (`makeLesson`, `A.page`, `A.say`, `CFG`) |
+| `content-library/generated-visualizations/` | Only accepted location for per-chapter visualization HTML |
 
-- `merge-sources.mjs` reproduces `catalog.generated.json`; the original prose stays in `source/` for provenance.
-- `activities/games.ts`, `activities/visuals.ts` and `activities/questions.ts` hold the typed activity data. `activities/index.ts` exports the combined list.
-- `generate.ts` injects one activity plus the group/kind labels into the shared runtime and writes a standalone document per activity. The runtime payload is `window.__NEXT_PLAN__ = { activity, groupLabel, kindLabel }`.
-- Bolt is the default style everywhere (`defaultStyle: "robot"`); Play & Nursery hides the style switch so the robot cannot be turned off.
-- `carousels.ts` converts activities into `LearnCarousel` seeds: visuals use `EXPLANATION`, games and Q&A use `QUESTION`. `seed-learn-carousels.ts` appends these seeds to the original carousel list.
-
-Build order is one cycle per group: **game → visual → Q&A** for Play & Nursery, Class 1–5, 6–8, 9–10 and 11–12. The 15 carousel slugs are:
-
-```text
-next-game-play-nursery      next-visual-play-nursery      next-question-play-nursery
-next-game-class-1-5         next-visual-class-1-5         next-question-class-1-5
-next-game-class-6-8         next-visual-class-6-8         next-question-class-6-8
-next-game-class-9-10        next-visual-class-9-10        next-question-class-9-10
-next-game-class-11-12       next-visual-class-11-12       next-question-class-11-12
-```
+Workflow:
 
 ```bash
-npm run content:next-plan   # rebuild the 15 HTML files + manifest.generated.json
+# 1. Put approved HTML in content-library/generated-visualizations/
+# 2. Validate it against RULES.md (fails on missing height bridge, loop, etc.)
+npm run content:validate
+
+# 3. Sync chapters + publish the HTML into MongoDB
+npm run library:sync
+
+# 4. Typecheck the backend
 npm run typecheck
-npm test
-npm run learn:seed          # upsert the carousel documents (needs MongoDB)
 ```
 
-`manifest.generated.json` records the slug, file, kind, group, cycle and title of every generated activity and is useful for CI checks.
+### Figures
+
+Scanned diagrams are backend reference material only. The figure scripts run
+with Bun. Render pages, extract a structured brief, then validate it:
+
+```bash
+npm run figure:pages -- --class class-8 --chapter ch-08-quadrilateral
+npm run figure:extract -- --class class-8 --chapter ch-08-quadrilateral
+npm run figure:link -- --class class-8 --chapter ch-08-quadrilateral
+npm run figure:validate
+```
+
+The brief is stored at
+`classes/<class>/chapters/figures/<chapter-file>.figures.json`. Chat injects it
+as text; lessons must redraw it with line art and must not embed the scans.
+`mupdf` is used only by this dev-time renderer and is AGPL-3.0 licensed.
+
+The sync stores the chapter manifest, reports the tallest accepted frame, injects the runtime height bridge, and adds autoplay/loop support (`#bRep` restarts when `#scrub` reaches the end). A chapter with no approved HTML remains visible but returns **404** from `/library/chapters/:chapterId/visualization`; the Learn page shows a "visualization being prepared" panel instead of a broken player.
+
+The old content never returns to MongoDB: `npm run content:archive` wrote a dated JSON backup under `legacy-content/mongodb-backup/` and deleted the old categories, chapters, topics, visualizations and learn carousels. See `legacy-content/README.md` for the archive map.
 
 ### Visitor report
 
@@ -209,6 +232,7 @@ Every six hours (`VISITOR_REPORT_CRON`, default `0 */6 * * *`) the backend count
 ## Notes
 
 - MongoDB has no migration files; use `db:push`.
+- Old content is archived under `legacy-content/` and is not seeded or served. Do not edit the archive; add new chapters/HTML through `content-library/`.
 - Reference ids (`chapterId`, `topicId`, `userId`, â€¦) are plain strings with no Prisma relations, matching the existing MongoDB style.
 - Google-only accounts have no password and must use Google login.
 - The chat model never computes quiz answers: generated answers are verified by `lib/mathEngine.ts`.
