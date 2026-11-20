@@ -108,6 +108,12 @@ docs/api/                         API reference
 docs/prisma-mongodb-schema-reference.txt  Entity, field, constraint and relationship reference
 ```
 
+## Database ERD
+
+![VisTutorBD MongoDB entity relationship diagram](docs/erd-diagram.png)
+
+Field-level details are in the [Prisma and MongoDB schema reference](docs/prisma-mongodb-schema-reference.txt).
+
 ## Roles
 
 | Role | Capabilities |
