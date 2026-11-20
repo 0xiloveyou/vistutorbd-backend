@@ -20,6 +20,7 @@
     "figure:link": "bun src/app/scripts/link-figures.ts",
     "figure:validate": "bun src/app/scripts/validate-figures.ts",
     "content:validate": "tsx src/app/scripts/validate-visualizations.ts",
+    "content:coverage": "tsx src/app/scripts/audit-coverage.ts",
     "content:archive": "tsx src/app/scripts/archive-legacy.ts",
     "format:check": "biome format ./src",
     "format:fix": "biome format --write ./src",
