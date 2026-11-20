@@ -1,4 +1,4 @@
-﻿# Math Learning Platform â€” Backend
+﻿# VisTutorBD Backend: API and Database
 
 Express 5 + TypeScript REST API for **VisTutorBd**, a visualization-first math platform covering Play, Nursery and Class 1â€“12 in English and Bangla.
 
@@ -18,6 +18,12 @@ The backend owns accounts and roles, the class taxonomy, the content library, vi
 - OpenRouter for chat and embeddings, with a deterministic local embedding stub
 - mathjs answer verification and seeded question generators
 - node-cron maintenance jobs
+
+## Database ERD
+
+![VisTutorBD MongoDB entity relationship diagram](docs/erd-diagram.png)
+
+Field-level details are in the [Prisma and MongoDB schema reference](docs/prisma-mongodb-schema-reference.txt).
 
 ## Setup
 
@@ -107,12 +113,6 @@ reference-data/                   Reference material only, never served at runti
 docs/api/                         API reference
 docs/prisma-mongodb-schema-reference.txt  Entity, field, constraint and relationship reference
 ```
-
-## Database ERD
-
-![VisTutorBD MongoDB entity relationship diagram](docs/erd-diagram.png)
-
-Field-level details are in the [Prisma and MongoDB schema reference](docs/prisma-mongodb-schema-reference.txt).
 
 ## Roles
 
