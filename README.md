@@ -53,7 +53,7 @@ npm run dev
 
 ## Environment
 
-All variables live in `.env.example`; `.env` is intentionally left for the operator to fill.
+All variables live in `.env.example`; `.env` is intentionally left for the operator to fill. The example admin and learner credentials are showcase-only and match the frontend one-click demo buttons. On startup, automatic seeding creates any missing configured accounts even when other users already exist; existing users are left unchanged. If the database is unreachable, restart the backend or run `npm run seed` after connectivity is restored.
 
 | Group | Variables |
 | --- | --- |

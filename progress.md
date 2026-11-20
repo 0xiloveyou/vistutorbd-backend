@@ -1,5 +1,12 @@
 # Backend progress
 
+## Demo account setup — 2026-11-20
+
+- Set backend `.env` demo identities/passwords to match `/demo-user` and `/demo-admin` in the frontend.
+- Updated `.env.example` and setup notes with matching showcase-only credentials and a production rotation reminder.
+- Changed automatic seeding to check for missing configured users on populated databases; existing accounts remain untouched.
+- Ran `npm run seed`, but the configured MongoDB host could not resolve from this environment (`os error 10051`, network unreachable). Seeding must complete after backend database connectivity is available; restart the backend or run `npm run seed` then.
+
 _Last updated: Content-library reset — old content archived and purged from MongoDB, new manifest sync and library API, `/learn` rebuilt around a floating chapter menu._
 
 ## Status

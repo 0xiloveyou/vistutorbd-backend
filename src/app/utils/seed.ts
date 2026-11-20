@@ -400,12 +400,10 @@ export const seedDatabaseIfEmpty = async () => {
   // the second query running and produces an extra unhandled rejection.
   const userCount = await prisma.user.count();
 
-  if (userCount === 0) {
-    await seedRoles();
-  } else {
-    console.log("[seed] Users already exist — skipping user seed.");
-  }
-
+  // Ensure configured demo/admin accounts exist even in a populated database.
+  // seedUser leaves existing accounts and their credentials untouched.
+  await seedRoles();
+  if (userCount > 0) console.log("[seed] Existing users preserved; configured missing accounts checked.");
   const bandCount = await prisma.classBand.count();
 
   if (bandCount === 0) {
