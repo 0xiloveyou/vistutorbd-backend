@@ -17,6 +17,8 @@ const isDatabaseUnavailable = (error: unknown) => {
   const text = errorText(error);
   return (
     text.includes("Server selection timeout") ||
+    text.includes("server monitor timeout") ||
+    text.includes("TransientTransactionError") ||
     text.includes("ReplicaSetNoPrimary") ||
     text.includes("tlsv1 alert internal error") ||
     text.includes("TLSV1_ALERT_INTERNAL_ERROR") ||

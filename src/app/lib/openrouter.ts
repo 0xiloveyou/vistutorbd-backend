@@ -210,6 +210,7 @@ const requestSpeech = async (options: {
  */
 export const speechCompletion = async (options: {
   text: string;
+  lang?: "en" | "bn";
   format?: string;
 }) => {
   if (!config.openrouter_api_key) {
@@ -247,7 +248,9 @@ export const speechCompletion = async (options: {
   console.error("[openrouter] all speech models failed:", failures);
   throw new AppError(
     502,
-    "Voice is temporarily unavailable. Please try again in a moment.",
+    config.node_env === "development"
+      ? `Voice is temporarily unavailable: ${failures.join(" | ")}`
+      : "Voice is temporarily unavailable. Please try again in a moment.",
   );
 };
 

@@ -77,8 +77,8 @@ export default {
     process.env.EMBEDDING_MODEL ||
     "nvidia/nemotron-3-embed-1b:free",
 
-  // Free text-to-speech (OpenRouter /audio/speech). The primary model handles
-  // English; Bangla uses the browser's built-in voice from the client.
+  // Free text-to-speech (OpenRouter /audio/speech). Put multilingual models
+  // first so Bangla requests get the best available route.
   openrouter_tts_models: csv(
     process.env.OPENROUTER_TTS_MODELS ||
       process.env.OPENROUTER_TTS_MODEL ||

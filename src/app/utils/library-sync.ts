@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import path from "node:path";
+import type { Prisma } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 
 export const LIBRARY_ROOT = path.join(process.cwd(), "content-library");
@@ -156,10 +157,9 @@ const findVisualizationFile = async (
   chapterId: string,
 ) => {
   const base = path.basename(mdPath, path.extname(mdPath));
-  const candidates = [
-    path.join(GENERATED_VIZ_ROOT, classLevelId, `${base}.html`),
-    path.join(GENERATED_VIZ_ROOT, classLevelId, `${chapterId}.html`),
-  ];
+  const directory = path.join(GENERATED_VIZ_ROOT, classLevelId);
+  const names = [`${base}.html`, `${chapterId}.html`];
+  const candidates = names.map((name) => path.join(directory, name));
 
   for (const candidate of candidates) {
     try {
@@ -168,8 +168,69 @@ const findVisualizationFile = async (
     } catch {}
   }
 
+  // Fall back to a case-insensitive match so a file saved as `CH-01-Foo.html`
+  // still publishes on case-sensitive hosts (Linux/Vercel).
+  try {
+    const entries = await readdir(directory);
+    const wanted = new Set(names.map((name) => name.toLowerCase()));
+    const match = entries.find((entry) => wanted.has(entry.toLowerCase()));
+    if (match) return path.join(directory, match);
+  } catch {}
+
   return null;
 };
+
+/**
+ * Atlas occasionally drops a write with a transient monitor timeout. One lost
+ * write should not abort the whole seed, otherwise a newly added visualization
+ * never reaches MongoDB. Retry a few times before surfacing the error.
+ */
+const isTransientDbError = (error: unknown) => {
+  const text = error instanceof Error ? error.message : String(error);
+  return (
+    text.includes("server monitor timeout") ||
+    text.includes("TransientTransactionError") ||
+    text.includes("interrupted due to") ||
+    text.includes("ECONNRESET") ||
+    text.includes("ETIMEDOUT") ||
+    text.includes("ReplicaSetNoPrimary")
+  );
+};
+
+const withDbRetry = async <T>(
+  operation: () => Promise<T>,
+  attempts = 3,
+  delayMs = 2_000,
+): Promise<T> => {
+  let lastError: unknown;
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await operation();
+    } catch (error) {
+      lastError = error;
+
+      if (!isTransientDbError(error) || attempt === attempts) {
+        throw error;
+      }
+
+      console.warn(
+        `[library] Transient MongoDB error (attempt ${attempt}/${attempts}); retrying in ${
+          (delayMs * attempt) / 1000
+        }s.`,
+      );
+      await new Promise((resolve) => setTimeout(resolve, delayMs * attempt));
+    }
+  }
+
+  throw lastError;
+};
+
+const upsertChapter = (args: Prisma.LibraryChapterUpsertArgs) =>
+  withDbRetry(() => prisma.libraryChapter.upsert(args));
+
+const upsertVisualization = (args: Prisma.LibraryVisualizationUpsertArgs) =>
+  withDbRetry(() => prisma.libraryVisualization.upsert(args));
 
 export type LibrarySyncResult = {
   classes: number;
@@ -255,7 +316,7 @@ export const syncLibraryChapters = async (): Promise<LibrarySyncResult> => {
 
       activeChapterIds.add(chapter.chapterId);
 
-      await prisma.libraryChapter.upsert({
+      await upsertChapter({
         where: { chapterId: chapter.chapterId },
         update: {
           classLevelId: manifestClass.id,
@@ -316,7 +377,7 @@ export const syncLibraryChapters = async (): Promise<LibrarySyncResult> => {
           isActive: true,
         };
 
-        await prisma.libraryVisualization.upsert({
+        await upsertVisualization({
           where: { slug: visualizationSlug },
           update: data,
           create: { slug: visualizationSlug, ...data },
@@ -326,21 +387,27 @@ export const syncLibraryChapters = async (): Promise<LibrarySyncResult> => {
     }
   }
 
-  const stale = await prisma.libraryChapter.findMany({
-    where: { chapterId: { notIn: [...activeChapterIds] } },
-    select: { chapterId: true, visualizationSlug: true },
-  });
+  const stale = await withDbRetry(() =>
+    prisma.libraryChapter.findMany({
+      where: { chapterId: { notIn: [...activeChapterIds] } },
+      select: { chapterId: true, visualizationSlug: true },
+    }),
+  );
 
   for (const chapter of stale) {
-    await prisma.libraryChapter.update({
-      where: { chapterId: chapter.chapterId },
-      data: { isActive: false },
-    });
-    if (chapter.visualizationSlug) {
-      await prisma.libraryVisualization.updateMany({
+    await withDbRetry(() =>
+      prisma.libraryChapter.update({
         where: { chapterId: chapter.chapterId },
         data: { isActive: false },
-      });
+      }),
+    );
+    if (chapter.visualizationSlug) {
+      await withDbRetry(() =>
+        prisma.libraryVisualization.updateMany({
+          where: { chapterId: chapter.chapterId },
+          data: { isActive: false },
+        }),
+      );
     }
   }
 

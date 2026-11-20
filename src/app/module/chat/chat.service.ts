@@ -385,22 +385,17 @@ const speak = async (payload: {
   lang?: "en" | "bn";
   format?: string;
 }) => {
-  // The free OpenRouter TTS model is English-only in practice and returns a
-  // silent frame for Bangla. The client uses the free browser voice instead.
-  if (payload.lang === "bn") {
-    throw new AppError(
-      httpStatus.UNPROCESSABLE_ENTITY,
-      "Bangla speech is generated on the device. Use the browser voice.",
-    );
-  }
-
   const text = toSpeakableText(payload.text).slice(0, 4000);
 
   if (!text) {
     throw new AppError(httpStatus.BAD_REQUEST, "Text to speak is required.");
   }
 
-  return speechCompletion({ text, format: payload.format });
+  return speechCompletion({
+    text,
+    lang: payload.lang ?? "en",
+    format: payload.format,
+  });
 };
 
 export const ChatService = {
