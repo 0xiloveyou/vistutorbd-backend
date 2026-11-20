@@ -1,4 +1,4 @@
-﻿# VisTutorBD Backend: API and Database
+﻿# VisTutorBD Backend
 
 Express 5 + TypeScript REST API for **VisTutorBd**, a visualization-first math platform covering Play, Nursery and Class 1â€“12 in English and Bangla.
 

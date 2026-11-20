@@ -59,7 +59,12 @@ const countDistinct = (visits: Array<{ visitorId: string }>) =>
 
 /** Public homepage metrics; expose aggregate counts only. */
 const getPublicStats = async () => {
-  const [visitors, publishedVisualizations, chapterVisualizations] =
+  const [
+    visitors,
+    publishedVisualizations,
+    chapterVisualizations,
+    legacyCarousels,
+  ] =
     await Promise.all([
       prisma.visit.findMany({
         distinct: ["visitorId"],
@@ -68,6 +73,14 @@ const getPublicStats = async () => {
       prisma.visualization.count({ where: { status: "PUBLISHED" } }),
       prisma.libraryVisualization.findMany({
         where: { isActive: true },
+        select: { html: true },
+      }),
+      prisma.learnCarousel.findMany({
+        where: {
+          isActive: true,
+          kind: "EXPLANATION",
+          slug: { startsWith: "legacy-" },
+        },
         select: { html: true },
       }),
     ]);
@@ -79,10 +92,16 @@ const getPublicStats = async () => {
       total + (visualization.html.match(/A\.page\(/g)?.length ?? 0),
     0,
   );
+  const legacyLessonCount = legacyCarousels.reduce(
+    (total, carousel) =>
+      total + (carousel.html.match(/(?:^|\n)\s*lesson\(\s*['"]/g)?.length ?? 0),
+    0,
+  );
 
   return {
     uniqueVisitors: visitors.length,
-    visualizations: publishedVisualizations + chapterVisualizationPages,
+    visualizations:
+      publishedVisualizations + chapterVisualizationPages + legacyLessonCount,
   };
 };
 
