@@ -233,7 +233,8 @@ Every six hours (`VISITOR_REPORT_CRON`, default `0 */6 * * *`) the backend count
 ## Notes
 
 - MongoDB has no migration files; use `db:push`.
-- Old content is archived under `legacy-content/` and is not seeded or served. Do not edit the archive; add new chapters/HTML through `content-library/`.
+- Old content is archived under `legacy-content/` and is not seeded or served, except for the Class 1–5 compatibility page listed below. Add new chapter lessons through `content-library/`.
+- The archived Class 1–5 carousel is available as a compatibility page at `/legacy/visual-lessons/class-1-5`; it is linked from the `/learn` chapter menu for Classes 1–5 while the new chapter visualizations are prepared.
 - Reference ids (`chapterId`, `topicId`, `userId`, â€¦) are plain strings with no Prisma relations, matching the existing MongoDB style.
 - Google-only accounts have no password and must use Google login.
 - The chat model never computes quiz answers: generated answers are verified by `lib/mathEngine.ts`.

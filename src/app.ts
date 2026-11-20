@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { type Application } from "express";
 import httpStatus from "http-status";
+import path from "node:path";
 import config from "./app/config";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
@@ -68,6 +69,18 @@ app.get("/", (_req, res) => {
 });
 
 app.get("/health", HealthController.health);
+
+app.get("/legacy/visual-lessons/class-1-5", (_req, res, next) => {
+  res.sendFile(
+    path.resolve(
+      process.cwd(),
+      "legacy-content/old-resource/class-1-5-visual-explanations.html",
+    ),
+    (error) => {
+      if (error) next(error);
+    },
+  );
+});
 
 app.use(notFound);
 app.use(globalErrorHandler);

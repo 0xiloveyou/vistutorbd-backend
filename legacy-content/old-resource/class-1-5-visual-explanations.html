@@ -337,6 +337,10 @@ function lesson(id,title,head,build){
 /* =====================================================================
    CLASS 1-5: helper kit
    ===================================================================== */
+const axes=(A,ox,oy,L,R,U,D)=>{
+  A.arrow(ox-L,oy,ox+R,oy,{c:MU,w:2},.4);
+  A.arrow(ox,oy+D,ox,oy-U,{c:MU,w:2},.4);
+};
 const NOTE=(A,y,s)=>A.text(400,y,'Note: '+s,{size:18,c:AM});
 const card=(A,x,y,w,h,c,label,sub,size=34)=>{
   A.rect(x,y,w,h,{c,w:3,fill:c,fo:.14},.3);
