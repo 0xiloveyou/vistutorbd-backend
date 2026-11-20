@@ -4,7 +4,7 @@ Express 5 + TypeScript REST API for **VisTutorBd**, a visualization-first math p
 
 The backend owns accounts and roles, the class taxonomy, the content library, visualization specs, deterministic question generation, quiz attempts, learner state, the grounded AI chat, the RAG knowledge base and moderation. The Next.js client lives in `../vistutorbd`.
 
-> **Content-library phase.** The old class/category/chapter content has been archived under `legacy-content/` and removed from MongoDB. New content now comes only from `content-library/all-class-content-new/` and compliant visualization HTML under `content-library/generated-visualizations/`, following `content-library/art-rules/RULES.md`.
+> **Content-library phase.** The old taxonomy content is archived under `legacy-content/` and removed from MongoDB. Chapter content comes from `content-library/all-class-content-new/` and compliant visualization HTML under `content-library/generated-visualizations/`. Five standalone legacy carousels sync separately from `legacy-content/old-resource/` for the home hero and legacy lessons menu.
 
 ## Stack
 
@@ -224,7 +224,7 @@ as text; lessons must redraw it with line art and must not embed the scans.
 
 The sync stores the chapter manifest, reports the tallest accepted frame, injects the runtime height bridge, and adds autoplay/loop support (`#bRep` restarts when `#scrub` reaches the end). A chapter with no approved HTML remains visible but returns **404** from `/library/chapters/:chapterId/visualization`; the Learn page shows a "visualization being prepared" panel instead of a broken player.
 
-The old content never returns to MongoDB: `npm run content:archive` wrote a dated JSON backup under `legacy-content/mongodb-backup/` and deleted the old categories, chapters, topics, visualizations and learn carousels. See `legacy-content/README.md` for the archive map.
+`npm run content:archive` wrote a dated JSON backup under `legacy-content/mongodb-backup/` and deleted the old categories, chapters, topics, visualizations and learn carousels. `npm run library:sync` now imports the five standalone lesson HTML files from `legacy-content/old-resource/` as class-aware `LearnCarousel` records. See `legacy-content/README.md` for the archive map.
 
 ### Visitor report
 
@@ -233,8 +233,7 @@ Every six hours (`VISITOR_REPORT_CRON`, default `0 */6 * * *`) the backend count
 ## Notes
 
 - MongoDB has no migration files; use `db:push`.
-- Old content is archived under `legacy-content/` and is not seeded or served, except for the Class 1–5 compatibility page listed below. Add new chapter lessons through `content-library/`.
-- The archived Class 1–5 carousel is available as a compatibility page at `/legacy/visual-lessons/class-1-5`; it is linked from the `/learn` chapter menu for Classes 1–5 while the new chapter visualizations are prepared.
+- Old source files stay under `legacy-content/`. The five standalone visual lesson HTML files there are synced into MongoDB as class-aware `LearnCarousel` records by `npm run library:sync`; they appear on the home hero and in the `/learn` menu. Add new chapter lessons through `content-library/`.
 - Reference ids (`chapterId`, `topicId`, `userId`, â€¦) are plain strings with no Prisma relations, matching the existing MongoDB style.
 - Google-only accounts have no password and must use Google login.
 - The chat model never computes quiz answers: generated answers are verified by `lib/mathEngine.ts`.

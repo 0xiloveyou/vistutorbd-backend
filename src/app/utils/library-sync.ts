@@ -19,6 +19,59 @@ export const GENERATED_VIZ_ROOT = path.join(
   LIBRARY_ROOT,
   "generated-visualizations",
 );
+export const LEGACY_CAROUSEL_ROOT = path.join(
+  process.cwd(),
+  "legacy-content",
+  "old-resource",
+);
+
+const LEGACY_CAROUSELS = [
+  {
+    file: "play-nursery-visual-explanations.html",
+    slug: "legacy-play-nursery",
+    title: { en: "Play & Nursery Visual Lessons", bn: "Play & Nursery Visual Lessons" },
+    summary: { en: "Foundational visual math lessons with Bolt.", bn: "Foundational visual math lessons with Bolt." },
+    classLevelIds: ["play", "nursery"],
+    classBandIds: ["PLAY_NURSERY"],
+    order: 10,
+  },
+  {
+    file: "class-1-5-visual-explanations.html",
+    slug: "legacy-class-1-5",
+    title: { en: "Class 1–5 Visual Explanations", bn: "Class 1–5 Visual Explanations" },
+    summary: { en: "Visual math explanations for Classes 1–5.", bn: "Visual math explanations for Classes 1–5." },
+    classLevelIds: ["class-1", "class-2", "class-3", "class-4", "class-5"],
+    classBandIds: ["C1_5"],
+    order: 20,
+  },
+  {
+    file: "class-6-8-visual-explanations.html",
+    slug: "legacy-class-6-8",
+    title: { en: "Class 6–8 Visual Explanations", bn: "Class 6–8 Visual Explanations" },
+    summary: { en: "Visual math explanations for Classes 6–8.", bn: "Visual math explanations for Classes 6–8." },
+    classLevelIds: ["class-6", "class-7", "class-8"],
+    classBandIds: ["C6_8"],
+    order: 30,
+  },
+  {
+    file: "class-9-10-visual-explanations.html",
+    slug: "legacy-class-9-10",
+    title: { en: "Class 9–10 Visual Explanations", bn: "Class 9–10 Visual Explanations" },
+    summary: { en: "Visual math explanations for Classes 9–10.", bn: "Visual math explanations for Classes 9–10." },
+    classLevelIds: ["class-9", "class-10"],
+    classBandIds: ["C9_10"],
+    order: 40,
+  },
+  {
+    file: "differentiation1.html",
+    slug: "legacy-differentiation",
+    title: { en: "Calculus Foundations", bn: "Calculus Foundations" },
+    summary: { en: "Visual introductions to limits, derivatives, and calculus.", bn: "Visual introductions to limits, derivatives, and calculus." },
+    classLevelIds: ["class-11", "class-12"],
+    classBandIds: ["C11_12"],
+    order: 50,
+  },
+] as const;
 
 type ManifestChapter = {
   no: number;
@@ -236,26 +289,29 @@ export type LibrarySyncResult = {
   classes: number;
   chapters: number;
   visualizations: number;
+  legacyCarousels: number;
   skippedVisualizations: { file: string; reason: string }[];
 };
 
 export const syncLibraryChapters = async (): Promise<LibrarySyncResult> => {
-  let manifest: Manifest;
+  let manifest: Manifest = { classes: [] };
+  let manifestAvailable = false;
 
   try {
     manifest = await readJson<Manifest>(LIBRARY_MANIFEST);
+    manifestAvailable = true;
   } catch (error) {
     console.warn(
       `[library] Site manifest is not available at ${LIBRARY_MANIFEST}.`,
       error instanceof Error ? error.message : error,
     );
-    return { classes: 0, chapters: 0, visualizations: 0, skippedVisualizations: [] };
   }
 
   const result: LibrarySyncResult = {
     classes: 0,
     chapters: 0,
     visualizations: 0,
+    legacyCarousels: 0,
     skippedVisualizations: [],
   };
 
@@ -387,12 +443,14 @@ export const syncLibraryChapters = async (): Promise<LibrarySyncResult> => {
     }
   }
 
-  const stale = await withDbRetry(() =>
-    prisma.libraryChapter.findMany({
-      where: { chapterId: { notIn: [...activeChapterIds] } },
-      select: { chapterId: true, visualizationSlug: true },
-    }),
-  );
+  const stale = manifestAvailable
+    ? await withDbRetry(() =>
+        prisma.libraryChapter.findMany({
+          where: { chapterId: { notIn: [...activeChapterIds] } },
+          select: { chapterId: true, visualizationSlug: true },
+        }),
+      )
+    : [];
 
   for (const chapter of stale) {
     await withDbRetry(() =>
@@ -411,8 +469,44 @@ export const syncLibraryChapters = async (): Promise<LibrarySyncResult> => {
     }
   }
 
+  for (const legacy of LEGACY_CAROUSELS) {
+    const file = path.join(LEGACY_CAROUSEL_ROOT, legacy.file);
+    let raw: string;
+    try {
+      raw = await readFile(file, "utf8");
+    } catch (error) {
+      console.warn(
+        `[library] Legacy carousel is missing: ${legacy.file}`,
+        error instanceof Error ? error.message : error,
+      );
+      continue;
+    }
+
+    const data = {
+      kind: "EXPLANATION" as const,
+      classLevelIds: [...legacy.classLevelIds],
+      classBandIds: [...legacy.classBandIds],
+      title: { ...legacy.title },
+      summary: { ...legacy.summary },
+      html: addRuntime(raw),
+      source: path.join("legacy-content", "old-resource", legacy.file).replace(/\\/g, "/"),
+      contentHash: hash(raw),
+      order: legacy.order,
+      isActive: true,
+    };
+
+    await withDbRetry(() =>
+      prisma.learnCarousel.upsert({
+        where: { slug: legacy.slug },
+        update: data,
+        create: { slug: legacy.slug, ...data },
+      }),
+    );
+    result.legacyCarousels += 1;
+  }
+
   console.log(
-    `[library] Synced ${result.chapters} chapter(s) across ${result.classes} class(es); ${result.visualizations} visualization(s) linked.`,
+    `[library] Synced ${result.chapters} chapter(s) across ${result.classes} class(es); ${result.visualizations} chapter visualization(s) and ${result.legacyCarousels} legacy carousel(s) stored.`,
   );
 
   for (const skipped of result.skippedVisualizations) {

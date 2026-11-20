@@ -1,11 +1,12 @@
 # Archived standalone lesson carousels
 
 These HTML files were moved from the project-root `old resource/` folder into
-the backend archive. They are retained for reference and are not served or
-seeded by the current backend. Current lessons belong in
-`content-library/generated-visualizations/` and must follow
-`content-library/art-rules/RULES.md`.
+the backend archive. `bun run library:sync` stores the five standalone lesson
+carousels in MongoDB as class-aware `LearnCarousel` records for the home hero
+and the `/learn` legacy lessons menu. They remain separate from chapter
+visualizations, which belong in `content-library/generated-visualizations/`
+and must follow `content-library/art-rules/RULES.md`.
 
-The Class 9–10 carousel had three malformed object properties (`c=PK`) that
-prevented its inline script from parsing. They are corrected to `c:PK` so the
-archived page can run when opened directly.
+The Class 1–5 carousel needs its local `axes()` drawing helper; it is present
+in the archived file so its lesson script completes initialization. The
+Class 9–10 carousel's malformed object properties are corrected as well.
