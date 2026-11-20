@@ -41,6 +41,17 @@ const visitorSummary = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const publicStats = catchAsync(async (_req: Request, res: Response) => {
+  const data = await AnalyticsService.getPublicStats();
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Public homepage stats fetched.",
+    data,
+  });
+});
+
 const sendReport = catchAsync(async (req: Request, res: Response) => {
   const date =
     typeof req.body?.date === "string" && req.body.date.trim()
@@ -60,5 +71,6 @@ const sendReport = catchAsync(async (req: Request, res: Response) => {
 export const AnalyticsController = {
   recordVisit,
   visitorSummary,
+  publicStats,
   sendReport,
 };

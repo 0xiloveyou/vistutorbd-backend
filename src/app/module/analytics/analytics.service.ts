@@ -57,6 +57,27 @@ const recordVisit = async (payload: VisitInput) => {
 const countDistinct = (visits: Array<{ visitorId: string }>) =>
   new Set(visits.map((visit) => visit.visitorId)).size;
 
+/** Public homepage metrics; expose aggregate counts only. */
+const getPublicStats = async () => {
+  const [
+    visitors,
+    publishedVisualizations,
+    chapterVisualizations,
+  ] = await Promise.all([
+    prisma.visit.findMany({
+      distinct: ["visitorId"],
+      select: { visitorId: true },
+    }),
+    prisma.visualization.count({ where: { status: "PUBLISHED" } }),
+    prisma.libraryVisualization.count({ where: { isActive: true } }),
+  ]);
+
+  return {
+    uniqueVisitors: visitors.length,
+    visualizations: publishedVisualizations + chapterVisualizations,
+  };
+};
+
 export const buildVisitorSummary = async (input: VisitSummaryInput = {}) => {
   const range = input.date
     ? getZonedDayRangeFromIso(config.report_timezone, input.date)
@@ -166,6 +187,7 @@ export const sendVisitorReport = async (date?: string) => {
 
 export const AnalyticsService = {
   recordVisit,
+  getPublicStats,
   buildVisitorSummary,
   sendVisitorReport,
 };

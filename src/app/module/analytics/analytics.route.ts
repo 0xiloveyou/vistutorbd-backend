@@ -16,6 +16,8 @@ router.post(
   AnalyticsController.recordVisit,
 );
 
+router.get("/public-stats", AnalyticsController.publicStats);
+
 router.get(
   "/visitors",
   auth(Role.ADMIN, Role.MODERATOR),
