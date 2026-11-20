@@ -2110,6 +2110,12 @@ function voiceNote(){
   el.textContent=hasBn?'':'No Bangla voice found on this device. Install one in your system settings to hear Bangla.';
 }
 
+// Feature the former third explanation first in the default carousel order.
+const featuredVisualIndex = VISUALS.findIndex((visual) => visual.id === 'c910-03');
+if (featuredVisualIndex > 0) {
+  VISUALS.unshift(VISUALS.splice(featuredVisualIndex, 1)[0]);
+}
+
 /* =====================================================================
    CAROUSEL ENGINE
    ===================================================================== */

@@ -1,0 +1,540 @@
+================================================================================
+ MATH LEARNING PLATFORM - FULL ENTITY / FIELD / TYPE / CONSTRAINTS REFERENCE
+ (MongoDB + Prisma 6.19) - every entity, every field, columnar format
+================================================================================
+
+LEGEND
+  PK   = primary key
+  UQ   = unique
+  IX   = indexed
+  EN   = enum-like (string constrained by convention)
+  EM   = embedded composite
+  DEF  = default value
+  MDB  = no native varchar; sizes below are practical/conventional, not enforced
+
+================================================================================
+ SHARED COMPOSITE TYPES
+================================================================================
+
+LocalizedText
+  en | String | text | no | -
+  bn | String | text | no | -
+
+LessonBlock  (EM inside Topic.lesson[])
+  id        | String        | id          | no | -
+  type      | String        | EN: text|formula|example|visualization|callout|quiz | no | -
+  order     | Int           | -           | no | -
+  title     | LocalizedText | -           | yes| -
+  body      | LocalizedText | -           | yes| -
+  formula   | String        | text        | yes| -
+  vizId     | String        | id          | yes| -
+  audioText | LocalizedText | -           | yes| -
+  companion | String        | short key (~32) | yes | -
+
+================================================================================
+ ENUMS
+================================================================================
+Role              : ADMIN | MODERATOR | USER
+UserStatus        : ACTIVE | BLOCKED | DELETED
+AuthProvider      : GOOGLE | CREDENTIAL
+ContentStatus     : DRAFT | REVIEW | PUBLISHED | ARCHIVED
+VisualizationKind : STATIC | ANIMATED | STEPPER | SLIDER_GRAPH | SCENE
+KnowledgeKind     : CONCEPT | WORKED_EXAMPLE | MISCONCEPTION | FORMULA | HINT | GLOSSARY | STEP
+LearnCarouselKind : EXPLANATION | QUESTION
+QuestionMode      : MCQ | TYPED
+TimeMode          : UNLIMITED | BASIC | MEDIUM | HARD | CUSTOM
+ChatRole          : SYSTEM | USER | ASSISTANT
+ReportStatus      : OPEN | REVIEWING | RESOLVED | DISMISSED
+
+================================================================================
+ 1. USER  ->  table "users"
+================================================================================
+ Field                | Type         | Size/Char note                  | Null | Default
+ ---------------------+--------------+---------------------------------+------+-----------
+ id                   | ObjectId PK  | 24 hex (enforced)               | no   | auto
+ name                 | String       | ~1-120                          | no   | -
+ email                | String UQ    | ~254, email format              | no   | -
+ password             | String       | bcrypt hash ~60                 | yes  | -
+ googleId             | String       | ~21-255                         | yes  | -
+ authProvider         | AuthProvider | EN: GOOGLE|CREDENTIAL           | no   | CREDENTIAL
+ emailVerified        | Boolean      | -                               | no   | false
+ role                 | Role         | EN: ADMIN|MODERATOR|USER        | no   | USER
+ status               | UserStatus   | EN: ACTIVE|BLOCKED|DELETED      | no   | ACTIVE
+ needPasswordChange   | Boolean      | -                               | no   | false
+ imageUrl             | String       | URL ~2048                       | no   | ""
+ preferredLang        | String       | "en"|"bn" (2)                   | no   | "en"
+ preferredTheme       | String       | palette token id (~32)          | no   | "indigo"
+ classBandId          | String       | id (~32)                        | yes  | -
+ classLevelId         | String       | id (~32)                        | yes  | -
+ companionEnabled     | Boolean      | -                               | no   | false
+ soundEnabled         | Boolean      | -                               | no   | true
+ isDeleted            | Boolean      | -                               | no   | false
+ deletedAt            | DateTime     | -                               | yes  | -
+ createdAt            | DateTime     | -                               | no   | now()
+ updatedAt            | DateTime     | -                               | no   | @updatedAt
+ IX: role, status
+
+================================================================================
+ 2. CLASSBAND  ->  table "class_bands"
+================================================================================
+ Field      | Type         | Size/Char note                                  | Null | Default
+ -----------+--------------+-------------------------------------------------+------+---------
+ id         | String PK    | PLAY_NURSERY|C1_5|C6_8|C9_10|C11_12            | no   | -
+ name       | LocalizedText| -                                               | no   | -
+ style      | Json         | object {companionRequired,tone,...}             | no   | -
+ order      | Int          | -                                               | no   | 0
+ isActive   | Boolean      | -                                               | no   | true
+ createdAt  | DateTime     | -                                               | no   | now()
+ updatedAt  | DateTime     | -                                               | no   | @updatedAt
+
+================================================================================
+ 3. CLASSLEVEL  ->  table "class_levels"
+================================================================================
+ Field      | Type         | Size/Char note                              | Null | Default
+ -----------+--------------+---------------------------------------------+------+---------
+ id         | String PK    | play|nursery|class-1...class-12 (~10)      | no   | -
+ bandId     | String       | id (~32)                                    | no   | -
+ name       | LocalizedText| -                                           | no   | -
+ order      | Int          | -                                           | no   | 0
+ isActive   | Boolean      | -                                           | no   | true
+ createdAt  | DateTime     | -                                           | no   | now()
+ updatedAt  | DateTime     | -                                           | no   | @updatedAt
+ IX: bandId
+
+================================================================================
+ 4. CATEGORY  ->  table "categories"
+================================================================================
+ Field         | Type          | Size/Char note              | Null | Default
+ --------------+---------------+-----------------------------+------+---------
+ id            | ObjectId PK   | 24 hex                      | no   | auto
+ classLevelId  | String        | id (~32)                   | no   | -
+ parentId      | String        | 24 hex                      | yes  | -
+ slug          | String        | ~1-80 kebab-case            | no   | -
+ title         | LocalizedText | -                           | no   | -
+ summary       | LocalizedText | -                           | yes  | -
+ icon          | String        | token id (~32)              | no   | ""
+ order         | Int           | -                           | no   | 0
+ isActive      | Boolean       | -                           | no   | true
+ createdAt     | DateTime      | -                           | no   | now()
+ updatedAt     | DateTime      | -                           | no   | @updatedAt
+ UQ: [classLevelId, slug]   IX: parentId
+
+================================================================================
+ 5. CHAPTER  ->  table "chapters"
+================================================================================
+ Field          | Type          | Size/Char note              | Null | Default
+ ---------------+---------------+-----------------------------+------+---------
+ id             | ObjectId PK   | 24 hex                      | no   | auto
+ categoryId     | String        | 24 hex                      | no   | -
+ classLevelId   | String        | id (~32)                    | no   | -
+ classBandId    | String        | id (~32)                    | no   | -
+ slug           | String        | ~1-80                       | no   | -
+ title          | LocalizedText | -                           | no   | -
+ summary        | LocalizedText | -                           | yes  | -
+ order          | Int           | -                           | no   | 0
+ prerequisites  | String[]      | array of ids                | no   | -
+ status         | ContentStatus | EN: DRAFT|REVIEW|PUBLISHED|ARCHIVED | no | DRAFT
+ createdAt      | DateTime      | -                           | no   | now()
+ updatedAt      | DateTime      | -                           | no   | @updatedAt
+ UQ: [categoryId, slug]   IX: classLevelId, classBandId
+
+================================================================================
+ 6. TOPIC  ->  table "topics"
+================================================================================
+ Field              | Type          | Size/Char note                  | Null | Default
+ -------------------+---------------+---------------------------------+------+-----------
+ id                 | ObjectId PK   | 24 hex                          | no   | auto
+ chapterId          | String        | 24 hex                          | no   | -
+ categoryId         | String        | 24 hex                          | no   | -
+ classLevelId       | String        | id (~32)                        | no   | -
+ classBandId        | String        | id (~32)                        | no   | -
+ slug               | String UQ     | ~1-120                          | no   | -
+ title              | LocalizedText | -                               | no   | -
+ summary            | LocalizedText | -                               | no   | -
+ lesson             | LessonBlock[] | EM array                        | no   | -
+ visualizationIds   | String[]      | array of vizId (~64)            | no   | -
+ knowledgeStatus    | String        | EN: PENDING|INDEXING|READY|FAILED | no | "PENDING"
+ difficulty         | Int           | 1-5                             | no   | 1
+ status             | ContentStatus | EN                              | no   | DRAFT
+ createdBy          | String        | 24 hex                          | yes  | -
+ updatedBy          | String        | 24 hex                          | yes  | -
+ createdAt          | DateTime      | -                               | no   | now()
+ updatedAt          | DateTime      | -                               | no   | @updatedAt
+ IX: chapterId, categoryId, classBandId, status
+
+================================================================================
+ 7. VISUALIZATION  ->  table "visualizations"
+================================================================================
+ Field          | Type              | Size/Char note                          | Null | Default
+ ---------------+-------------------+-----------------------------------------+------+-----------
+ id             | ObjectId PK       | 24 hex                                  | no   | auto
+ vizId          | String UQ         | ~64 viz.<band>.<subj>.<ch>.<tp>.<var>.vN | no  | -
+ kind           | VisualizationKind | EN: STATIC|ANIMATED|STEPPER|SLIDER_GRAPH|SCENE | no | -
+ renderer       | String            | short id (~32)                          | no   | -
+ engine         | String            | short id (~64)                          | no   | -
+ title          | LocalizedText     | -                                       | no   | -
+ summary        | LocalizedText     | -                                       | yes  | -
+ inputs         | Json              | object                                  | no   | -
+ spec           | Json              | object/array (frames/steps)             | no   | -
+ tags           | String[]          | short strings                           | no   | -
+ concepts       | String[]          | short strings                           | no   | -
+ prerequisites  | String[]          | ids                                     | no   | -
+ difficulty     | Int               | 1-5                                     | no   | 1
+ classBandIds   | String[]          | enum ids                                | no   | -
+ version        | Int               | >=1                                     | no   | 1
+ aiContext      | String            | text                                    | no   | ""
+ status         | ContentStatus     | EN                                      | no   | DRAFT
+ createdAt      | DateTime          | -                                       | no   | now()
+ updatedAt      | DateTime          | -                                       | no   | @updatedAt
+ IX: kind, status
+
+================================================================================
+ 8. LEARNCAROUSEL  ->  table "learn_carousels"
+================================================================================
+ Field          | Type              | Size/Char note                   | Null | Default
+ ---------------+-------------------+----------------------------------+------+---------
+ id             | ObjectId PK       | 24 hex                           | no   | auto
+ slug           | String UQ         | ~1-120                           | no   | -
+ kind           | LearnCarouselKind | EN: EXPLANATION|QUESTION         | no   | -
+ classLevelIds  | String[]          | ids or "all"                     | no   | -
+ classBandIds   | String[]          | enum ids                         | no   | -
+ title          | LocalizedText     | -                                | no   | -
+ summary        | LocalizedText     | -                                | yes  | -
+ html           | String            | large text (KB-MB)               | no   | -
+ source         | String            | path/text                        | no   | ""
+ contentHash    | String            | ~64 sha                          | no   | ""
+ order          | Int               | -                                | no   | 0
+ isActive       | Boolean           | -                                | no   | true
+ createdAt      | DateTime          | -                                | no   | now()
+ updatedAt      | DateTime          | -                                | no   | @updatedAt
+ IX: kind, isActive
+
+================================================================================
+ 9. LIBRARYCHAPTER  ->  table "library_chapters"
+================================================================================
+ Field              | Type      | Size/Char note                  | Null | Default
+ -------------------+-----------+---------------------------------+------+---------
+ id                 | ObjectId PK | 24 hex                        | no   | auto
+ chapterId          | String UQ | ~32 class-1.01 / class-11.p1.01 | no   | -
+ classLevelId       | String    | id (~32)                        | no   | -
+ classBandId        | String    | id (~32)                        | no   | -
+ classOrder         | Int       | -                               | no   | 0
+ chapterNo          | Int       | -                               | no   | -
+ paper              | String    | "p1"|"p2" (2)                   | yes  | -
+ titleEn            | String    | ~1-200                          | no   | -
+ titleBn            | String    | ~1-200                          | no   | ""
+ printedPages       | String    | page range (~20)                | no   | ""
+ pdfPages           | String    | page range (~20)                | no   | ""
+ ocrQuality         | String    | short label (~16)               | no   | ""
+ bookSlug           | String    | ~1-80                           | no   | ""
+ sourceMd           | String    | large text                      | no   | -
+ sourceQuestions    | String    | large text                      | no   | ""
+ setCount           | Int       | >=0                             | no   | 0
+ questionCount      | Int       | >=0                             | no   | 0
+ order              | Int       | -                               | no   | 0
+ visualizationSlug  | String    | ~1-120                          | no   | ""
+ contentHash        | String    | ~64                             | no   | ""
+ isActive           | Boolean   | -                               | no   | true
+ createdAt          | DateTime  | -                               | no   | now()
+ updatedAt          | DateTime  | -                               | no   | @updatedAt
+ IX: classLevelId, classBandId, [classOrder, order]
+
+================================================================================
+ 10. LIBRARYVISUALIZATION  ->  table "library_visualizations"
+================================================================================
+ Field         | Type          | Size/Char note     | Null | Default
+ --------------+---------------+--------------------+------+---------
+ id            | ObjectId PK   | 24 hex             | no   | auto
+ slug          | String UQ     | ~1-120             | no   | -
+ chapterId     | String UQ     | ~32                | no   | -
+ classLevelId  | String        | id (~32)           | no   | -
+ title         | LocalizedText | -                  | no   | -
+ html          | String        | large text (KB-MB) | no   | -
+ source        | String        | path/text          | no   | ""
+ contentHash   | String        | ~64                | no   | ""
+ isActive      | Boolean       | -                  | no   | true
+ createdAt     | DateTime      | -                  | no   | now()
+ updatedAt     | DateTime      | -                  | no   | @updatedAt
+ IX: classLevelId
+
+================================================================================
+ 11. KNOWLEDGECHUNK  ->  table "knowledge_chunks"
+================================================================================
+ Field           | Type          | Size/Char note              | Null | Default
+ ----------------+---------------+-----------------------------+------+---------
+ id              | ObjectId PK   | 24 hex                      | no   | auto
+ topicId         | String        | 24 hex                      | yes  | -
+ chapterId       | String        | 24 hex                      | yes  | -
+ categoryId      | String        | 24 hex                      | yes  | -
+ classBandId     | String        | id (~32)                    | yes  | -
+ vizId           | String        | ~64                         | yes  | -
+ stepIndex       | Int           | >=0                         | yes  | -
+ lang            | String        | "en"|"bn" (2)               | no   | "en"
+ text            | String        | chunk ~200-2000 chars       | no   | -
+ embedding       | Float[]       | vector 768/1536 dims        | no   | -
+ embeddingModel  | String        | model id (~64)              | no   | ""
+ kind            | KnowledgeKind | EN: CONCEPT|WORKED_EXAMPLE|MISCONCEPTION|FORMULA|HINT|GLOSSARY|STEP | no | CONCEPT
+ contentHash     | String        | ~64                         | no   | ""
+ isActive        | Boolean       | -                           | no   | true
+ createdAt       | DateTime      | -                           | no   | now()
+ updatedAt       | DateTime      | -                           | no   | @updatedAt
+ IX: topicId, chapterId, classBandId, kind
+
+================================================================================
+ 12. QUESTIONTEMPLATE  ->  table "question_templates"
+================================================================================
+ Field          | Type          | Size/Char note               | Null | Default
+ ---------------+---------------+------------------------------+------+---------
+ id             | ObjectId PK   | 24 hex                       | no   | auto
+ topicId        | String        | 24 hex                       | yes  | -
+ chapterId      | String        | 24 hex                       | yes  | -
+ classBandId    | String        | id (~32)                     | yes  | -
+ key            | String UQ     | ~1-120 e.g. addition.singleDigit | no | -
+ title          | LocalizedText | -                            | no   | -
+ generator      | String        | registry key (~64)           | no   | -
+ paramsSchema   | Json          | object                       | no   | -
+ numberRange    | Json          | object                       | no   | -
+ difficultyMin  | Int           | 1-5                          | no   | 1
+ difficultyMax  | Int           | 1-5                          | no   | 5
+ answerCheck    | Json          | object                       | no   | -
+ isActive       | Boolean       | -                            | no   | true
+ createdAt      | DateTime      | -                            | no   | now()
+ updatedAt      | DateTime      | -                            | no   | @updatedAt
+ IX: classBandId
+
+================================================================================
+ 13. QUESTION  ->  table "questions"
+================================================================================
+ Field        | Type          | Size/Char note                 | Null | Default
+ -------------+---------------+--------------------------------+------+---------
+ id           | ObjectId PK   | 24 hex                         | no   | auto
+ topicId      | String        | 24 hex                         | yes  | -
+ chapterId    | String        | 24 hex                         | yes  | -
+ templateId   | String        | 24 hex                         | yes  | -
+ difficulty   | Int           | 1-5                            | no   | 1
+ mode         | QuestionMode  | EN: MCQ|TYPED                  | no   | MCQ
+ prompt       | LocalizedText | -                              | no   | -
+ options      | Json          | [{id,label,correct}]           | no   | -
+ answer       | String        | text                           | no   | -
+ explanation  | LocalizedText | -                              | yes  | -
+ seed         | String        | ~1-64                          | no   | ""
+ status       | ContentStatus | EN                             | no   | DRAFT
+ createdAt    | DateTime      | -                              | no   | now()
+ updatedAt    | DateTime      | -                              | no   | @updatedAt
+ IX: topicId, chapterId
+
+================================================================================
+ 14. QUIZCONFIG  ->  table "quiz_configs"
+================================================================================
+ Field              | Type         | Size/Char note                     | Null | Default
+ -------------------+--------------+------------------------------------+------+-----------
+ id                 | ObjectId PK  | 24 hex                             | no   | auto
+ userId             | String       | 24 hex                             | no   | -
+ chapterId          | String       | 24 hex                             | no   | -
+ timeMode           | TimeMode     | EN: UNLIMITED|BASIC|MEDIUM|HARD|CUSTOM | no | UNLIMITED
+ customSeconds      | Int          | >=0                                | no   | 0
+ answerMode         | QuestionMode | EN: MCQ|TYPED                      | no   | MCQ
+ difficulty         | Int          | 1-5                                | no   | 1
+ numberRange        | Json         | object                             | yes  | -
+ companionSlapstick | Boolean      | -                                  | no   | false
+ createdAt          | DateTime     | -                                  | no   | now()
+ updatedAt          | DateTime     | -                                  | no   | @updatedAt
+ UQ: [userId, chapterId]
+
+================================================================================
+ 15. QUIZATTEMPT  ->  table "quiz_attempts"
+================================================================================
+ Field           | Type      | Size/Char note | Null | Default
+ ----------------+-----------+----------------+------+---------
+ id              | ObjectId PK | 24 hex       | no   | auto
+ userId          | String    | 24 hex         | no   | -
+ chapterId       | String    | 24 hex         | no   | -
+ configSnapshot  | Json      | object         | no   | -
+ answers         | Json      | array          | no   | -
+ score           | Int       | >=0            | no   | 0
+ total           | Int       | >=0            | no   | 0
+ durationSec     | Int       | >=0            | no   | 0
+ createdAt       | DateTime  | -              | no   | now()
+ IX: userId, chapterId
+
+================================================================================
+ 16. BOOKMARK  ->  table "bookmarks"
+================================================================================
+ Field      | Type       | Size/Char note | Null | Default
+ -----------+------------+----------------+------+---------
+ id         | ObjectId PK | 24 hex        | no   | auto
+ userId     | String     | 24 hex         | no   | -
+ topicId    | String     | 24 hex         | no   | -
+ createdAt  | DateTime   | -              | no   | now()
+ UQ: [userId, topicId]   IX: userId
+
+================================================================================
+ 17. PROGRESS  ->  table "progress"
+================================================================================
+ Field          | Type       | Size/Char note | Null | Default
+ ---------------+------------+----------------+------+---------
+ id             | ObjectId PK | 24 hex        | no   | auto
+ userId         | String     | 24 hex         | no   | -
+ topicId        | String     | 24 hex         | no   | -
+ isRead         | Boolean    | -              | no   | false
+ lastVizId      | String     | ~64            | yes  | -
+ lastStepIndex  | Int        | >=0            | no   | 0
+ updatedAt      | DateTime   | -              | no   | @updatedAt
+ createdAt      | DateTime   | -              | no   | now()
+ UQ: [userId, topicId]   IX: userId
+
+================================================================================
+ 18. CHATSESSION  ->  table "chat_sessions"
+================================================================================
+ Field      | Type       | Size/Char note       | Null | Default
+ -----------+------------+----------------------+------+---------
+ id         | ObjectId PK | 24 hex              | no   | auto
+ userId     | String     | 24 hex              | yes  | -
+ title      | String     | ~1-120              | no   | "New chat"
+ lang       | String     | "en"|"bn" (2)       | no   | "en"
+ createdAt  | DateTime   | -                   | no   | now()
+ updatedAt  | DateTime   | -                   | no   | @updatedAt
+ IX: userId
+
+================================================================================
+ 19. CHATMESSAGE  ->  table "chat_messages"
+================================================================================
+ Field      | Type       | Size/Char note | Null | Default
+ -----------+------------+----------------+------+---------
+ id         | ObjectId PK | 24 hex        | no   | auto
+ sessionId  | String     | 24 hex        | no   | -
+ role       | ChatRole   | EN: SYSTEM|USER|ASSISTANT | no | -
+ content    | String     | text          | no   | -
+ vizId      | String     | ~64           | yes  | -
+ stepIndex  | Int        | >=0           | yes  | -
+ imageUrl   | String     | URL ~2048     | yes  | -
+ createdAt  | DateTime   | -             | no   | now()
+ IX: sessionId
+
+================================================================================
+ 20. COMPANION  ->  table "companions"
+================================================================================
+ Field      | Type          | Size/Char note | Null | Default
+ -----------+---------------+----------------+------+---------
+ id         | ObjectId PK   | 24 hex        | no   | auto
+ key        | String UQ     | ~1-64         | no   | -
+ name       | LocalizedText | -             | no   | -
+ assets     | Json          | object        | no   | -
+ states     | String[]      | state names   | no   | -
+ isActive   | Boolean       | -             | no   | true
+ createdAt  | DateTime      | -             | no   | now()
+ updatedAt  | DateTime      | -             | no   | @updatedAt
+
+================================================================================
+ 21. FORUMPOST  ->  table "forum_posts"
+================================================================================
+ Field        | Type       | Size/Char note                   | Null | Default
+ -------------+------------+----------------------------------+------+-----------
+ id           | ObjectId PK | 24 hex                          | no   | auto
+ authorId     | String     | 24 hex                          | yes  | -
+ authorName   | String     | ~1-120                          | no   | "Anonymous"
+ isAnonymous  | Boolean    | -                               | no   | true
+ title        | String     | ~1-200                          | no   | -
+ body         | String     | text                            | no   | -
+ imageUrl     | String     | URL ~2048                       | no   | ""
+ tags         | String[]   | short strings                   | no   | -
+ status       | String     | EN: PUBLISHED|HIDDEN            | no   | "PUBLISHED"
+ createdAt    | DateTime   | -                               | no   | now()
+ updatedAt    | DateTime   | -                               | no   | @updatedAt
+ IX: createdAt, authorId
+
+================================================================================
+ 22. FORUMCOMMENT  ->  table "forum_comments"
+================================================================================
+ Field        | Type       | Size/Char note | Null | Default
+ -------------+------------+----------------+------+-----------
+ id           | ObjectId PK | 24 hex        | no   | auto
+ postId       | String     | 24 hex        | no   | -
+ authorId     | String     | 24 hex        | yes  | -
+ authorName   | String     | ~1-120        | no   | "Anonymous"
+ isAnonymous  | Boolean    | -             | no   | true
+ body         | String     | text          | no   | -
+ createdAt    | DateTime   | -             | no   | now()
+ IX: postId
+
+================================================================================
+ 23. MODERATIONREPORT  ->  table "moderation_reports"
+================================================================================
+ Field       | Type         | Size/Char note                          | Null | Default
+ ------------+--------------+-----------------------------------------+------+---------
+ id          | ObjectId PK  | 24 hex                                  | no   | auto
+ reportedBy  | String       | 24 hex                                  | yes  | -
+ targetType  | String       | EN: chat_message|topic|visualization|question | no | -
+ targetId    | String       | 24 hex or vizId                         | no   | -
+ reason      | String       | ~1-200                                  | no   | -
+ details     | String       | text                                    | no   | ""
+ status      | ReportStatus | EN: OPEN|REVIEWING|RESOLVED|DISMISSED   | no   | OPEN
+ reviewedBy  | String       | 24 hex                                  | yes  | -
+ createdAt   | DateTime     | -                                       | no   | now()
+ updatedAt   | DateTime     | -                                       | no   | @updatedAt
+ IX: status, targetType
+
+================================================================================
+ 24. VISIT  ->  table "visits"
+================================================================================
+ Field      | Type       | Size/Char note          | Null | Default
+ -----------+------------+-------------------------+------+---------
+ id         | ObjectId PK | 24 hex                 | no   | auto
+ visitorId  | String     | browser localStorage id (~36 UUID) | no | -
+ userId     | String     | 24 hex                 | yes  | -
+ path       | String     | route ~1-500           | no   | "/"
+ referrer   | String     | URL ~2048              | no   | ""
+ userAgent  | String     | text ~500              | no   | ""
+ ip         | String     | IPv4/IPv6 ~45          | no   | ""
+ createdAt  | DateTime   | -                      | no   | now()
+ IX: visitorId, createdAt, path
+
+================================================================================
+ RELATIONSHIP MAP (all string-id based, no Prisma @relation)
+================================================================================
+
+User
+ +--(1:N) QuizConfig    (userId)    --> Chapter
+ +--(1:N) QuizAttempt   (userId)    --> Chapter
+ +--(1:N) Bookmark      (userId)    --> Topic
+ +--(1:N) Progress      (userId)    --> Topic
+ +--(1:N) ChatSession --(1:N) ChatMessage
+ +--(1:N) ForumPost   --(1:N) ForumComment
+ +--(1:N) Visit  (optional)
+ +--(1:N) ModerationReport (reportedBy / reviewedBy)
+
+ClassBand (id) --(1:N)--> ClassLevel (bandId)
+ClassLevel (id) --(1:N)--> Category (classLevelId)
+                --(1:N)--> Chapter  (classLevelId, +classBandId)
+Category (id)   --(1:N self)--> Category (parentId)
+                --(1:N)--> Chapter (categoryId)
+                --(1:N)--> Topic   (categoryId)
+Chapter (id)    --(1:N)--> Topic (chapterId)
+                --(1:N)--> Question (chapterId)
+                --(1:N)--> QuizConfig / QuizAttempt (chapterId)
+                --(1:1)--> LibraryChapter (chapterId)
+                             +--(1:1)--> LibraryVisualization (chapterId)
+
+Topic (id)      --(1:N)--> LessonBlock[]  (EMBEDDED)
+                --(N:M)--> Visualization  (visualizationIds[])
+                --(1:N)--> Question        (topicId)
+                --(1:N)--> KnowledgeChunk  (topicId)
+                --(1:N)--> Bookmark / Progress (topicId)
+                --(N:M)--> QuestionTemplate (topicId)
+
+Visualization (vizId) --(1:N)--> KnowledgeChunk (vizId)
+                      <--(N:M)-- Topic.visualizationIds
+
+QuestionTemplate (id) --(1:N)--> Question (templateId)
+
+LearnCarousel   -- standalone, scoped by classLevelIds[] / classBandIds[]
+Companion       -- standalone lookup (LessonBlock.companion -> Companion.key)
+ChatSession     --(1:N)--> ChatMessage (sessionId)
+ForumPost       --(1:N)--> ForumComment (postId)
+ModerationReport -- polymorphic soft ref -> chat_message | topic | visualization | question
+Visit           --(N:1 optional)--> User (userId)
+KnowledgeChunk  -- soft refs -> topicId, chapterId, categoryId, classBandId, vizId, stepIndex
+
+================================================================================
+ END OF REFERENCE
+================================================================================

@@ -105,6 +105,7 @@ legacy-content/                   Archived old app content, old root HTML, old s
   old-resource/                   Archived standalone lesson carousels (Class 1–5, 6–8, 9–10, Nursery, differentiation)
 reference-data/                   Reference material only, never served at runtime
 docs/api/                         API reference
+docs/prisma-mongodb-schema-reference.txt  Entity, field, constraint and relationship reference
 ```
 
 ## Roles
