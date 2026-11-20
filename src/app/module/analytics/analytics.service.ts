@@ -59,22 +59,30 @@ const countDistinct = (visits: Array<{ visitorId: string }>) =>
 
 /** Public homepage metrics; expose aggregate counts only. */
 const getPublicStats = async () => {
-  const [
-    visitors,
-    publishedVisualizations,
-    chapterVisualizations,
-  ] = await Promise.all([
-    prisma.visit.findMany({
-      distinct: ["visitorId"],
-      select: { visitorId: true },
-    }),
-    prisma.visualization.count({ where: { status: "PUBLISHED" } }),
-    prisma.libraryVisualization.count({ where: { isActive: true } }),
-  ]);
+  const [visitors, publishedVisualizations, chapterVisualizations] =
+    await Promise.all([
+      prisma.visit.findMany({
+        distinct: ["visitorId"],
+        select: { visitorId: true },
+      }),
+      prisma.visualization.count({ where: { status: "PUBLISHED" } }),
+      prisma.libraryVisualization.findMany({
+        where: { isActive: true },
+        select: { html: true },
+      }),
+    ]);
+
+  // A chapter visualization is a multi-page lesson. Count its teachable pages
+  // so the homepage reflects the amount of learning content, not just files.
+  const chapterVisualizationPages = chapterVisualizations.reduce(
+    (total, visualization) =>
+      total + (visualization.html.match(/A\.page\(/g)?.length ?? 0),
+    0,
+  );
 
   return {
     uniqueVisitors: visitors.length,
-    visualizations: publishedVisualizations + chapterVisualizations,
+    visualizations: publishedVisualizations + chapterVisualizationPages,
   };
 };
 

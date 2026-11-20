@@ -102,6 +102,7 @@ content-library/
   art-rules/                      Mandatory RULES.md and Example.html authoring contract
   generated-visualizations/       Sole source for approved per-chapter HTML
 legacy-content/                   Archived old app content, old root HTML, old seeds and DB backup
+  old-resource/                   Archived standalone lesson carousels (Class 1–5, 6–8, 9–10, Nursery, differentiation)
 reference-data/                   Reference material only, never served at runtime
 docs/api/                         API reference
 ```
